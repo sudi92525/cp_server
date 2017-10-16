@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<game>
+	<ServerConfig>
+		<!-- desc:client will be closed when no data was read within a certain 
+			period of time unit: milliseconds -->
+		<ClientIdleTime>3600000</ClientIdleTime>
+        <BossThreadPoolSize>2</BossThreadPoolSize>
+        <WorkerThreadPoolSize>4</WorkerThreadPoolSize>
+        <HanlerThreadPoolSize>8</HanlerThreadPoolSize>
+	</ServerConfig>
+	<ClientPoolConfig>
+		<MaxTotal>200000</MaxTotal>
+		<ClientClass>com.huinan.server.net.handler.GameSvrHandler</ClientClass>
+	</ClientPoolConfig>
+	<TCPChannelOptions>
+		<!-- requested maximum length of the queue of incoming connection -->
+		<Option> 
+			<SO_BACKLOG type="int">20480</SO_BACKLOG>
+		</Option>
+		<ChildOption>
+			<SO_KEEPALIVE type="boolean">true</SO_KEEPALIVE>
+			<TCP_NODELAY type="boolean">true</TCP_NODELAY>
+			<SO_REUSEADDR type="boolean">true</SO_REUSEADDR>
+		</ChildOption>
+	</TCPChannelOptions>
+	<!-- game server自身的配置 -->
+	<GameServer>
+		<!-- 初始化玩家对象池 GameServer.PlayerPoolConfig.PlayerMaxTotal-->
+		<PlayerPoolConfig>
+			<PlayerMaxTotal>30000</PlayerMaxTotal>
+			<PlayerMaxIdle>20000</PlayerMaxIdle>
+			<PlayerMinIdle>5000</PlayerMinIdle>
+	<!-- <ClientClass>com.joker.game.player.GateClient</ClientClass> xiaonanqipai-->
+		</PlayerPoolConfig>
+		<GameCode>xiaonanqipai</GameCode>
+<!-- 		<GameCode>xnsccp</GameCode> -->
+<!-- 		<GameCode>xiaonanqipai_4567</GameCode> -->
+	</GameServer>
+</game>
