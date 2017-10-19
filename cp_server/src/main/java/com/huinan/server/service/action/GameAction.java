@@ -560,8 +560,9 @@ public class GameAction extends AbsAction {
 		    ENActionType.EN_ACTION_DAKAN, false);
 	}
 	if (user.isThisChuIsZhui()) {// 追完后重新显示其他牌
+		user.setThisChuIsZhui(false);
+		user.getNoChuZhuiCards().clear();
 	    NotifyHandler.notifyDeathCardList(user);
-	    user.setThisChuIsZhui(false);
 	}
 	if (user.isFive()) {
 	    user.getNoCheCards().clear();

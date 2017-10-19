@@ -26,16 +26,16 @@ import com.rabbitmq.client.Envelope;
  */
 public class RabbitMQManager {
 	private static final Logger LOGGER = LogManager.getLogger("rabbit_mq");
-//	private static final String QUEUE_NAME = "xnsccp";
+	private static final String QUEUE_NAME = "xnsccp";
 
-	 private static final String QUEUE_NAME = "xiaonanqipai";
+//	 private static final String QUEUE_NAME = "xiaonanqipai";
 	public static void init() {
 		ConnectionFactory factory = new ConnectionFactory();
 		factory.setHost("119.29.99.46");// localhost,10.186.38.34
 		factory.setUsername("huinankjmq");
 		factory.setPassword("huinankj2017");
-//		factory.setVirtualHost("xnsccp");// TODO xnsccp
-		 factory.setVirtualHost("xiaonanqipai");
+		factory.setVirtualHost("xnsccp");// TODO xnsccp
+//		 factory.setVirtualHost("xiaonanqipai");
 		factory.setPort(5672);
 		Connection connection;
 		try {

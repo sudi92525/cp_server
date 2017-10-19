@@ -210,7 +210,13 @@ public class ProtoBuilder {
 			tSeat.addAllTilesOnHand(user.getHold());// 手牌
 			tSeat.setTilesOnHandNum(user.getHold().size());// 初始化手牌数量
 			tSeat.addAllOutCol(user.getOpen()); // 吃扯牌
-			tSeat.addAllDeathCard(user.getNoChuCards());
+			List<Integer> deadCards = new ArrayList<>();
+			if (!user.getNoChuZhuiCards().isEmpty()) {
+				deadCards.addAll(user.getNoChuZhuiCards());
+			} else {
+				deadCards.addAll(user.getNoChuCards());
+			}
+			tSeat.addAllDeathCard(deadCards);// user.getNoChuCards()
 			tSeat.addAllOutCardsNo(user.getChuListCards());
 		}
 		tSeat.setFinalScore(user.getCurrency());

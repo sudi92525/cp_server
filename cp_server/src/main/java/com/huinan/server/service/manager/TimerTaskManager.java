@@ -57,15 +57,19 @@ public class TimerTaskManager {
 						int playRoomNum = 0;
 						int gyNum = 0;
 						int ncNum = 0;
+						int xcNum = 0;
 						int myNum = 0;
 						int gyPlayNum = 0;
 						int ncPlayNum = 0;
+						int xcPlayNum = 0;
 						int myPlayNum = 0;
 						for (Room room : RoomManager.rooms.values()) {
 							if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_GY_VALUE) {
 								gyNum++;
 							} else if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_NC_VALUE) {
 								ncNum++;
+							} else if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_XC_VALUE) {
+								xcNum++;
 							} else if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_MY_VALUE) {
 								myNum++;
 							}
@@ -76,6 +80,8 @@ public class TimerTaskManager {
 									gyPlayNum++;
 								} else if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_NC_VALUE) {
 									ncPlayNum++;
+								} else if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_XC_VALUE) {
+									xcPlayNum++;
 								} else if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_MY_VALUE) {
 									myPlayNum++;
 								}
@@ -89,9 +95,11 @@ public class TimerTaskManager {
 								+ ",all rooms=" + RoomManager.rooms.size()
 								+ ",playing rooms=" + playRoomNum);
 						LOGGER.info("------2---GY room:" + gyNum + ",NC room:"
-								+ ncNum + ",MY room:" + myNum);
+								+ ncNum + ",XC room:"
+										+ xcNum+ ",MY room:" + myNum);
 						LOGGER.info("------3---GY playing room:" + gyPlayNum
 								+ ",NC playing room:" + ncPlayNum
+								+ ",XC playing room:" + xcPlayNum
 								+ ",MY playing room:" + myPlayNum);
 						LogicQueueManager.getInstance().log();
 					}
