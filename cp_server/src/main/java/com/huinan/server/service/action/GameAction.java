@@ -448,6 +448,12 @@ public class GameAction extends AbsAction {
 			user.getNoChuCards().remove(Integer.valueOf(destCard.getNum()));
 			user.getNoChuCards().remove(Integer.valueOf(destCard.getNum()));
 			NotifyHandler.notifyDeathCardList(user);
+		}else if(user.getDoubleZhuiCards().contains(destCard.getNum())){
+			user.getDoubleZhuiCards().remove(Integer.valueOf(destCard.getNum()));
+			// 将一对七从死牌列表删除
+			user.getNoChuCards().remove(Integer.valueOf(destCard.getNum()));
+			user.getNoChuCards().remove(Integer.valueOf(destCard.getNum()));
+			NotifyHandler.notifyDeathCardList(user);
 		}
 		CardManager.removeDeathCard(destCard.getNum(), user);
 		CardManager.removeDeathCard(destCard.getNum(), user);
@@ -553,6 +559,7 @@ public class GameAction extends AbsAction {
 
 		NotifyHandler.notifyActionFlow(room, user, room.getCurrentCard(), null,
 				ENActionType.EN_ACTION_CHUPAI, true);
+		CardManager.noChuDouble7AndDiaoZhui(room, user, false);
 		// 通知所有玩家，该玩家出了一张牌
 		int count = CardManager.getCardCountOfChu(user, destCard.getNum());
 		if (!user.isFive() && count == 3) {// 打成坎

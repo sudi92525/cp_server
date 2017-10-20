@@ -240,6 +240,10 @@ public class User implements Serializable {
 	 */
 	public List<Integer> double7s = new ArrayList<>();
 	/**
+	 * 南充吊追单独一对天地，，不能拆开（吃）
+	 */
+	public List<Integer> doubleZhuiCards = new ArrayList<>();
+	/**
 	 * 自己出的或发的牌被下家吃了的牌集合
 	 */
 	public List<Integer> nextChiCards = new ArrayList<>();
@@ -297,7 +301,9 @@ public class User implements Serializable {
 		this.noCheCards.clear();
 		this.noChiCards.clear();
 		this.noChuCards.clear();
+		this.noChuZhuiCards.clear();
 		this.double7s.clear();
+		this.doubleZhuiCards.clear();
 		this.noHuCards.clear();
 		this.chiCards.clear();
 		this.chuCards.clear();
@@ -838,6 +844,14 @@ public class User implements Serializable {
 
 	public void setNoChuZhuiCards(List<Integer> noChuZhuiCards) {
 		this.noChuZhuiCards = noChuZhuiCards;
+	}
+
+	public List<Integer> getDoubleZhuiCards() {
+		return doubleZhuiCards;
+	}
+
+	public void setDoubleZhuiCards(List<Integer> doubleZhuiCards) {
+		this.doubleZhuiCards = doubleZhuiCards;
 	}
 
 }

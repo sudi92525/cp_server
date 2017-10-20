@@ -32,8 +32,8 @@
 			<PlayerMinIdle>5000</PlayerMinIdle>
 	<!-- <ClientClass>com.joker.game.player.GateClient</ClientClass> xiaonanqipai-->
 		</PlayerPoolConfig>
-		<!-- 		<GameCode>xiaonanqipai</GameCode> -->
-			<GameCode>xnsccp</GameCode>
+		<GameCode>xiaonanqipai</GameCode>
+			<!-- 		<GameCode>xnsccp</GameCode> -->
 <!-- 		<GameCode>xiaonanqipai_4567</GameCode> -->
 	</GameServer>
 </game>

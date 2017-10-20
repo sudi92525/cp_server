@@ -268,11 +268,22 @@ public class CardManager {
 				}
 			} else {// 多个斧头
 				if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_NC_VALUE
-						|| room.getRoomType() == ENRoomType.EN_ROOM_TYPE_XC_VALUE
 						|| room.getRoomType() == ENRoomType.EN_ROOM_TYPE_MY_VALUE) {
 					tuo = 0;
 					log.info("tuoNum,南充西充,MY，一对丁丁斧头不能割牌，tuo = 0");
-					return 0;
+					return tuo;
+				} else if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_XC_VALUE) {
+					if (tuo == 2) {// 2个丁丁，其他全黑
+						tuo = 6;
+						log.info("tuoNum,全黑:有丁丁甩两次，tuo = 6");
+					} else if (tuo == 3) {// 2个丁丁，一个红的
+						tuo = 0;
+						log.info("tuoNum,西充有两个丁丁，只能胡全红全黑，tuo=0");
+					} else if (tuo == 4) {// 2个丁丁，两个红的
+						tuo = 6;
+						log.info("tuoNum,全红:有斧头甩两次，tuo = 6");
+					}
+					return tuo;
 				}
 				if (room.isDingFuShuaiTimes()) {
 					// tuo += 2;// 随便甩
@@ -762,7 +773,8 @@ public class CardManager {
 		for (Integer integer : user.getHold()) {
 			if (getCardValue(integer) + card.getCardValue() == 14
 					&& !chiList.contains(integer)
-					&& !user.getDouble7s().contains(integer)) {
+					&& !user.getDouble7s().contains(integer)
+					&& !user.getDoubleZhuiCards().contains(integer)) {
 				chiList.add(integer);
 			}
 		}
@@ -826,7 +838,8 @@ public class CardManager {
 
 		for (Integer integer : user.getHold()) {
 			if (getCardValue(integer) + card.getCardValue() == 14
-					&& !user.getDouble7s().contains(integer)) {
+					&& !user.getDouble7s().contains(integer)
+					&& !user.getDoubleZhuiCards().contains(integer)) {
 				return true;
 			}
 		}
@@ -1231,35 +1244,37 @@ public class CardManager {
 		} else if (room.isCheZhui()) {
 			out: for (int i = 0; i < zhuiCards.size(); i++) {
 				int zhuiCard = zhuiCards.get(i);
-				for (PBColumnInfo col : user.getOpen()) {
-					if (col.getColType() == ENColType.EN_COL_TYPE_PENG
-							|| col.getColType() == ENColType.EN_COL_TYPE_TOU) {
-						Integer cardNum = col.getCardsList().get(0);
-						if (zhuiCard == cardNum) {// 扯了的
-							int otherCard = 0;
-							if (zhuiCard == 66) {
-								otherCard = 11;
-							} else if (zhuiCard == 11) {
-								otherCard = 66;
-							} else if (zhuiCard == 56) {
-								otherCard = 12;
-							} else if (zhuiCard == 12) {
-								otherCard = 56;
-							}
-							if (otherCard != 0) {
-								Integer card = Integer.valueOf(otherCard);
-								Integer count = holdMap.get(card);
+				for (User _user : room.getUsers().values()) {
+					for (PBColumnInfo col : _user.getOpen()) {
+						if (col.getColType() == ENColType.EN_COL_TYPE_PENG
+								|| col.getColType() == ENColType.EN_COL_TYPE_TOU) {
+							Integer cardNum = col.getCardsList().get(0);
+							if (zhuiCard == cardNum) {// 扯了的
+								int otherCard = 0;
+								if (zhuiCard == 66) {
+									otherCard = 11;
+								} else if (zhuiCard == 11) {
+									otherCard = 66;
+								} else if (zhuiCard == 56) {
+									otherCard = 12;
+								} else if (zhuiCard == 12) {
+									otherCard = 56;
+								}
+								if (otherCard != 0) {
+									Integer card = Integer.valueOf(otherCard);
+									Integer count = holdMap.get(card);
 
-								Integer _count = holdMap.get(cardNum);
-								if (count != null && count == 1
-										&& _count == null) {
-									deadCards.remove(card);
-									chuCard = card;
+									Integer _count = holdMap.get(cardNum);
+									if (count != null && count == 1
+											&& _count == null) {
+										deadCards.remove(card);
+										chuCard = card;
 
-									user.setThisChuIsZhui(true);
-									NotifyHandler.notifyDeathCardOfZhui(user,
-											deadCards);
-									break out;
+										user.setThisChuIsZhui(true);
+										NotifyHandler.notifyDeathCardOfZhui(
+												user, deadCards);
+										break out;
+									}
 								}
 							}
 						}
@@ -1267,7 +1282,7 @@ public class CardManager {
 				}
 			}
 		}
-		if(!deadCards.isEmpty()){
+		if (!deadCards.isEmpty()) {
 			user.setNoChuZhuiCards(deadCards);
 		}
 		// ----10.11加:南充追牌和死牌冲突,,,,包子----
@@ -1501,13 +1516,14 @@ public class CardManager {
 	}
 
 	/**
-	 * 不能出一对7
+	 * 不能出一对7,吊追单独一对不能拆开打
 	 * 
 	 * @param user
 	 * @param isDealCard
 	 *            是否是发牌,发牌时不在这里发推送,后面统一发
 	 */
-	public static void noChuDouble7(User user, boolean isDealCard) {
+	public static void noChuDouble7AndDiaoZhui(Room room, User user,
+			boolean isDealCard) {
 		if (user.isFive()) {
 			return;
 		}
@@ -1526,6 +1542,53 @@ public class CardManager {
 				user.getNoChuCards().add(card);
 				user.getNoChuCards().add(card);
 				user.getDouble7s().add(card);
+				send = true;
+			}
+		}
+
+		// 南充吊追：一对gua天牌不能拆开打
+		if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_NC_VALUE
+				&& room.isDiaoZhui()) {
+			Integer tpCount = holdMap.get(Integer.valueOf(66));
+			Integer dPCount = holdMap.get(Integer.valueOf(11));
+			Integer ftCount = holdMap.get(Integer.valueOf(56));
+			Integer ddCount = holdMap.get(Integer.valueOf(12));
+
+			user.getNoChuCards().remove(Integer.valueOf(66));
+			user.getNoChuCards().remove(Integer.valueOf(66));
+			user.getNoChuCards().remove(Integer.valueOf(11));
+			user.getNoChuCards().remove(Integer.valueOf(11));
+			user.getNoChuCards().remove(Integer.valueOf(56));
+			user.getNoChuCards().remove(Integer.valueOf(56));
+			user.getNoChuCards().remove(Integer.valueOf(12));
+			user.getNoChuCards().remove(Integer.valueOf(12));
+
+			if (tpCount != null && tpCount == 2 && dPCount == null) {
+				user.getNoChuCards().add(Integer.valueOf(66));
+				user.getNoChuCards().add(Integer.valueOf(66));
+
+				user.getDoubleZhuiCards().add(Integer.valueOf(66));
+				send = true;
+			}
+			if (dPCount != null && dPCount == 2 && tpCount == null) {
+				user.getNoChuCards().add(Integer.valueOf(11));
+				user.getNoChuCards().add(Integer.valueOf(11));
+
+				user.getDoubleZhuiCards().add(Integer.valueOf(11));
+				send = true;
+			}
+			if (ftCount != null && ftCount == 2 && ddCount == null) {
+				user.getNoChuCards().add(Integer.valueOf(56));
+				user.getNoChuCards().add(Integer.valueOf(56));
+
+				user.getDoubleZhuiCards().add(Integer.valueOf(56));
+				send = true;
+			}
+			if (ddCount != null && ddCount == 2 && ftCount == null) {
+				user.getNoChuCards().add(Integer.valueOf(12));
+				user.getNoChuCards().add(Integer.valueOf(12));
+
+				user.getDoubleZhuiCards().add(Integer.valueOf(12));
 				send = true;
 			}
 		}
