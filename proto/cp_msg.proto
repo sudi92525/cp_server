@@ -1,0 +1,94 @@
+//* ----------------------------------------------------------------------
+//*   Ver     Date       Who             Comments
+//*  ----- ----------  --------  ---------------------------------------
+//*   1.0  2017/04/28    陶施能         长牌proto协议初稿
+//* ----------------------------------------------------------------------
+package com.huinan.proto;
+import "cp_msg_cs.proto";
+
+//协议头数据
+message CpHead {
+	optional int32 main_version = 1;	//主版本号
+	optional int32 sub_version = 2;		//次版本号
+	optional int32 proto_version = 3;	//协议版本号
+	optional int32	channel_id = 4;		//渠道号
+	optional string	device_id = 5;		//设备标志
+	optional string device_name = 6;	//设备名称
+	optional string mac_addr = 7;		//mac地址
+	optional string os = 8;				//系统
+	optional string osv = 9;			//系统版本
+	optional string band = 10;			//品牌
+	optional string imei = 11;			//IMEI
+	optional int64 cmd = 12;			//
+	optional int32	json_msg_id = 13;	// json协议
+	optional string json_msg	= 14;
+	optional string	uid			= 15;
+}
+
+//协议请求具体数据
+message CpMsgData
+{
+	oneof msg_union
+	{
+		CSRequestLogin cs_request_login = 1;					//登录请求
+		CSResponseLogin cs_response_login = 2;					//登录响应
+		
+		CSRequestCreateTable cs_request_create_table = 3;		//创建房间请求
+		CSResponseCreateTable cs_response_create_table = 4;		//创建房间响应
+
+		CSRequestEnterTable cs_request_enter_table = 5;			//加入房间请求
+		CSResponseEnterTable cs_response_enter_table = 6;		//加入房间响应
+		CSNottifyEnterTable cs_notify_enter_table = 7;			//加入房间通知：即通知房间其他玩家--------
+
+		CSRequestLogoutTable cs_request_logout_table = 8;		//退出房间请求
+		CSResponseLogoutTable cs_response_logout_table = 9;		//退出房间响应
+		CSNotifyLogoutTable cs_notify_logout_table = 10;		//退出房间通知消息
+
+		CSRequestOwnerTiren cs_request_owner_tiren = 11;		//房主踢人请求
+		CSResponseOwnerTiren cs_response_owner_tiren = 12;		//房主踢人响应
+		CSNotifyOwnerTiren cs_notify_owner_tiren = 13;			//房主踢人通知
+
+		CSRequestDissolveTable cs_request_dissolve_table = 14;	//申请解散游戏请求
+		CSResponseDissolveTable cs_response_dissolve_table = 15;//申请解散游戏响应
+		CSNotifyDissolveTableOperation cs_notify_dissolve_table_operation = 16;//申请解散游戏通知
+		CSNotifyTableDissolved cs_notify_table_dissolved = 17;	//通知游戏已解散
+
+		CSRequestReadyForGame cs_request_ready_for_game = 18;	//准备游戏请求
+		CSResponseReadyForGame cs_response_ready_for_game = 19;	//准备游戏响应
+		CSNotifyReadyForGame cs_notify_ready_for_game = 20;		//准备游戏通知
+
+		CSNotifyGameStart cs_notify_game_start = 21;			//系统发牌
+
+		CSNotifySeatOperationChoice cs_notify_seat_operation_choice = 22;//该谁操作
+		CSRequestDoAction cs_request_do_action = 23;			//动作请求：胡牌、偷牌、碰牌、吃牌、出牌、过牌
+		CSResponseDoAction cs_response_do_action = 24;			//动作响应：胡牌、偷牌、碰牌、吃牌、出牌、过牌
+		CSNotifyActionFlow cs_notify_action_flow = 25;			//动作通知：胡牌、偷牌、碰牌、吃牌、出牌、过牌
+		
+		CSNotifyPlayerDealCard cs_notify_player_deal_card = 26;	//系统派发某一张牌
+		CSNotifyNextOperation cs_notify_next_operation = 27;	//下一个操作(闹钟位置提示)
+		
+		CSNotifyGameOver cs_notify_game_over = 28;				//推送胡牌信息，玩家积分增减情况，游戏结束
+		
+		CSRequestReconnect cs_request_reconnect = 29;			//服务重连请求
+		CSResponseReconnect cs_response_reconnect = 30;			//服务重连响应
+		
+		CSRequestHeartBeat cs_request_heart_beat = 31;			//心跳消息请求
+		CSResponseHeartBeat cs_response_heart_beat = 32;		//心跳消息响应
+		
+		CSRequestChat cs_request_chat = 33;						//聊天数据请求
+		CSResponseChat cs_response_chat = 34;					//聊天数据响应
+		CSNotifyChat cs_notify_chat = 35;						//聊天数据通知
+		
+		CSRequestIsOnline cs_request_is_online = 36;				//请求离开(切入后台发离线,切回游戏发上线)
+		CSResponseIsOnline cs_response_is_online = 37;				//请求离开响应
+		CSNotifyIsOnline cs_notify_is_online = 38;					//通知某玩家离线,上线状态
+		
+		CSNotifyRoomCardChange cs_notify_room_card_change = 39;		//通知房卡改变
+		
+		CSRequestPlayBack cs_request_paly_back = 40;				//回放请求
+		CSResponsePlayBack cs_response_paly_back = 41;				//回放响应
+		
+		CSNotifyNotice cs_notify_notice = 42;						//跑马灯，公告通知
+		CSNotifyOpenTouPai cs_notify_open_tou_pai = 43;				//推送翻开偷牌
+	}
+}

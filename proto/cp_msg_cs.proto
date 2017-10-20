@@ -1,0 +1,525 @@
+package com.huinan.proto;
+enum ENMessageError
+{
+	RESPONSE_SUCCESS = 1;							//成功
+	RESPONSE_FAIL = 2;								//失败
+	RESPONSE_SEATINDEX_ERROR = 3;					//座位信息错误
+	RESPONSE_ACTTYPE_ERROR = 4;						//动作类型错误
+	RESPONSE_DESTCARD_ERROR = 5;					//目标牌错误
+	RESPONSE_ROOM_FULL = 6;							//房间人员已满
+	RESPONSE_ROOM_INEXISTENCE = 7;					//该房间不存在
+	RESPONSE_ROOM_ID_ERROR = 8;						//房间id错误，找不到房间
+	RESPONSE_ROOMCARD_LIMIT = 9;					//房卡不足
+	RESPONSE_IN_OTHER_ROOM = 10;					//已经在另一个房间了
+	RESPONSE_PLAYING = 11;							//游戏过程中不能退出房间，只能发起解散房间
+	RESPONSE_DEALER_CAN_NOT_QUIT = 12;				//房主不能退出房间，只能发起解散房间
+	RESPONSE_FIRST_DISSOLVE_ROOM_CHOICE_ERROR = 13;	//第一个申请解散房间的人choice只能为true
+	RESPONSE_ALREADY_READY = 14;					//已经准备了
+	RESPONSE_IS_IN_ROOM = 15;						//已存在房间中
+}
+
+enum ENOperationType
+{
+	LOGOUT_TABLE = 1;								//退出房间操作
+	OWNER_TIREN = 2;								//踢出房间操作
+}
+
+enum ENColType
+{
+	EN_COL_TYPE_TOU = 1;							//偷牌		4张牌        不算番
+	EN_COL_TYPE_PENG = 2;							//碰		3张牌
+	EN_COL_TYPE_CHI = 3;							//吃		2张牌
+	EN_COL_TYPE_ZHAO = 4;							//吃		2张牌
+	EN_COL_TYPE_LONG = 5;							//龙(起手四根):红龙,黑龙		4张牌    算番
+}
+
+enum ENZhaoType
+{
+	EN_ZHAO_TYPE_CHI = 1;							//招吃,所有可招的牌
+	EN_ZHAO_TYPE_CHE = 2;							//招扯
+	EN_ZHAO_TYPE_ALL = 3;							//招吃招扯
+}
+
+enum ENActionType
+{
+	EN_ACTION_UNKNOWN = 1;							//不要		4张牌
+	EN_ACTION_NAPAI	= 2;							//拿牌		4张牌
+	EN_ACTION_CHUPAI = 3;							//出牌		4张牌
+	EN_ACTION_GUO = 4;								//过牌		4张牌
+	EN_ACTION_TOU = 5;								//偷牌		4张牌
+	EN_ACTION_PENG = 6;								//碰牌		4张牌
+	EN_ACTION_CHI = 7;								//吃牌		4张牌
+	EN_ACTION_HU = 8;								//胡拍		4张牌
+	EN_ACTION_ZHAO = 9;								//招牌		4张牌
+	EN_ACTION_SIGEN = 10;							//四根		4张牌
+	EN_ACTION_TUI = 11;								//报退		4张牌
+	EN_ACTION_NO_CHU = 12;							//不能出	4张牌
+	EN_ACTION_KAN = 13;								//吃成坎报牌	3张牌
+	EN_ACTION_XIATOU = 14;							//下偷
+	EN_ACTION_HUADUI = 15;							//花对
+	EN_ACTION_CHIKAN = 16;							//吃成坎
+	EN_ACTION_DAKAN = 17;							//打成坎
+	EN_ACTION_CHI_SIGEN = 18;						//吃四根
+	EN_ACTION_HU_SIGEN = 19;						//割四根
+
+	EN_ACTION_PIAO = 20;							//漂
+	EN_ACTION_NO_PIAO = 21;							//不漂
+	EN_ACTION_DANG = 22;							//当
+	EN_ACTION_NO_DANG = 23;							//不当
+	
+	EN_ACTION_NEXT = 24;							//位置（闹钟）
+	EN_ACTION_DEAL = 25;							//摸牌或翻牌
+}
+
+enum ENChatType
+{
+	EN_CHAT_TYPE_CHARACTER = 0;						//文字
+	EN_CHAT_TYPE_BIGFACE = 1;						//表情
+	EN_CHAT_TYPE_VOICE = 2;							//语音
+}
+
+enum ENRoomType
+{
+	EN_ROOM_TYPE_GY = 1;						//广元
+	EN_ROOM_TYPE_NC = 2;						//南充
+	EN_ROOM_TYPE_XC = 3;						//西充
+	EN_ROOM_TYPE_MY = 4;						//绵阳
+	EN_ROOM_TYPE_CX = 5;						//苍溪
+}
+
+//用户基本信息
+message UserInfo{
+	optional string uid = 1;						//用户唯一标识符
+	optional string nick = 2;						//用户昵称
+	optional int32 score = 3;						//用户积分
+	optional int32 change_score = 4;					//变化积分值
+	optional string	pic_url	= 5;						//用户头像
+	optional int32 seat_index = 6;						//位置信息
+	optional bool choice = 7;						//解散游戏状态
+	optional bool isReady = 8;						//准备游戏状态
+	optional int32 sex = 9;							//玩家性别
+	optional bool online = 10;						//是否在线
+	optional int32 room_card_num = 11;					//房卡数
+	optional string add_ip = 12;						//ip地址
+}
+
+// 一列牌 
+message PBColumnInfo
+{
+	repeated int32 cards = 1;						//具体牌信息
+	optional ENColType col_type = 2;					//偷牌 碰	吃	
+	optional int32 score = 3; 						//坨数
+	optional bool is_fan = 4;						//NC：偷拍时，除庄家外，其他的偷牌不翻开
+	optional bool is_qishou_tou = 5;						//是否起手偷
+}
+
+message PBAction
+{
+	optional int32 seat_index = 1;
+	optional ENActionType act_type = 2;				// 操作类型
+	optional int32 dest_card = 3; 					// 目标牌
+	repeated PBColumnInfo col_info = 4;				// 列组合
+	optional int32 dest_index = 5;					// 目标牌来自的座位号
+	optional bool is_fan = 6;						// 目标牌是否翻开
+	repeated int32 death_card = 7;					//死牌即不能出的牌
+	optional int32 hu_type = 8;						//胡牌类型：1自摸，2点炮，3别人翻开胡的
+	optional bool is_chu = 9;						//是否是出牌
+	optional ENZhaoType zhao_type = 10;				// 玩家点击招的类型
+	repeated ENZhaoType zhao_list = 11;				// 可招的类型列表
+	repeated int32 piao_list = 12;					// 漂了的玩家座位号
+	
+	optional int32 left_card_num = 13; 				//剩余牌数量
+	optional int32 tiles_on_hand_num = 14;				//当前手牌张数
+}
+
+//手牌信息
+message PBTableSeat{
+	optional UserInfo userInfo = 1;					//座位上玩家信息
+	optional int32 seat_index = 2;					//座位号
+	repeated int32 tiles_on_hand = 3;				//当前手牌组
+	repeated PBColumnInfo out_col = 4;				//打出去的组(吃碰杠等)
+	optional int32 final_score = 5;					//总分数
+	repeated int32 out_cards = 6;					//出牌列表 自己打出去的和自己摸了没人要的
+	optional int32 tiles_on_hand_num = 7;			//初始化手牌数量
+	repeated int32 death_card = 8;					//死牌即不能出的牌
+	repeated int32 out_cards_no = 9;				//自己打的或翻的没人要的牌，即展示在自己右下方的牌
+	optional bool is_piao = 10;						//是否漂
+}
+
+//登录请求
+message CSRequestLogin{
+	optional string token = 1;						//用户授权编码
+	optional string uid = 2;						//用户唯一编码
+	optional string nick = 3;						//昵称
+	optional string pic_url = 4;					//头像
+	optional string refreshToken = 5;				//登录验证码
+	optional int32 sex = 6;							//性别
+	optional int32 room_card_num = 7;				//房卡数
+	
+}
+
+//登录响应
+message CSResponseLogin{
+	optional bool state = 1;						//登录验证状态
+	optional string uid = 2;						//用户唯一编码
+	optional int32 pos_type = 3;					//1:大厅  2:游戏中
+	optional int32 table_id = 4;					//房间编号
+	optional int32 room_card_num = 5;				//房卡数
+}
+
+//创建房间请求
+message CSRequestCreateTable
+{
+	optional int32 tid = 1;						//房间编号
+	optional int32 game_num = 2;					//游戏局数
+	optional int32 room_card_num = 3;				//房间所需卡数量
+	optional int32 use_card_type = 4;				//房卡使用方式：0代理，1房主，2均摊
+	optional int32 play_type = 5;					//游戏类型
+	optional int32 high_times = 6;					//最高倍数
+	optional int32 name = 7;					//名称
+	optional int32 player_num = 8;					//玩家数量
+	optional string creator_uid = 9;				//房主
+	optional bool hei_two_fan = 10;					//全黑是否算2翻，否就算1翻
+	optional bool is_baofan = 11;					//是否包翻
+	optional bool is_piao = 12;					//是否漂
+	optional ENRoomType room_type = 13;			//房间类型：
+	optional bool is_chi_hong_da_hei = 14;				//GY:是否吃红打黑
+	optional bool is_wu_hei_yi_hong = 15;				//GY:是否五黑一红可以胡
+	
+	optional bool is_add_score = 16;					//是否是加法：true为加法，false为乘法
+	optional bool is_tou_dang = 17;					//NC:是否头当,false为推当
+	optional bool is_zi_mo_fan = 18;					//小家是否自摸加番
+	optional bool is_dingfu_shuai_any = 19;				//NC:丁丁斧头可以甩多次
+	optional bool is_che_zhui = 20;					//NC:扯追
+	optional bool is_diao_zhui = 21;					//吊追
+	optional bool is_34_fan = 22;					//34算番
+	optional int32 score = 23;					//底分：1-2-5等等，默认选1
+}
+
+//创建房间响应
+message CSResponseCreateTable
+{
+	optional ENMessageError result = 1; 				//结果
+	repeated UserInfo user_info = 2;				//房间其他用户信息
+	optional CSRequestCreateTable table_info = 3;			//房间信息
+}
+
+//加入房间请求
+message CSRequestEnterTable
+{
+	optional int32 tid = 1; 					//桌子（房间）ID
+}
+
+message ChoiceZhuang{
+	optional int32 fan_seat = 1;					//翻牌位置
+	optional int32 card = 2;						//翻的牌
+}
+
+//系统发牌
+message CSNotifyGameStart
+{
+	repeated PBTableSeat seats = 1;					//房间各用户系统分发手牌信息
+	optional int32 left_tile_num = 2;				//所剩手牌信息
+	optional int32 dealer = 3;					//庄家位置
+	optional int32 round = 4;					//局数
+	optional int32 dang_seat = 5;					//当家位置
+	optional ChoiceZhuang choice_zhuang = 6;			//随机庄家
+}
+
+//加入房间通知：即通知房间其他玩家--------
+message CSNottifyEnterTable
+{
+	optional UserInfo user_info = 1;				//房间新加入的用户信息
+}
+
+//退出房间请求
+message CSRequestLogoutTable
+{
+	optional int32 tid = 1; 						//桌子（房间）ID
+}
+
+//退出房间响应
+message CSResponseLogoutTable
+{
+	optional ENMessageError result = 1;
+}
+
+//退出房间通知消息
+message CSNotifyLogoutTable
+{
+	optional int32 seat_index = 1;
+}
+
+//房主踢人请求--------
+message CSRequestOwnerTiren
+{
+	optional int32 seat_index = 1;
+	optional string uid = 2;
+}
+
+//房主踢人响应--------
+message CSResponseOwnerTiren
+{
+	optional ENMessageError result = 1;
+}
+
+//房主踢人通知--------
+message CSNotifyOwnerTiren
+{
+	optional int32 seat_index = 1;
+	optional string uid = 2;
+}
+
+//申请解散游戏请求
+message CSRequestDissolveTable
+{
+	optional bool choice = 1;						//选项:true同意，false不同意
+}
+
+//申请解散游戏响应
+message CSResponseDissolveTable
+{
+	optional ENMessageError result = 1;
+}
+
+message DissolveList
+{
+	optional string uid = 1;					//此处有个问题要确认：只发当前更变人状态还是所有人状态
+	optional int32 state = 2;					//选项:1同意，0不同意,2未选择	
+}
+
+//申请解散游戏通知
+message CSNotifyDissolveTableOperation
+{
+	optional string uid = 1;					//此处有个问题要确认：只发当前更变人状态还是所有人状态
+	repeated DissolveList dis_list = 2;			//解散列表
+}
+
+//通知游戏已解散
+message CSNotifyTableDissolved
+{
+	optional int32 tid = 1;							//桌号（房间编号）
+	optional bool result = 2;						//游戏解散申请成功失败状态
+}
+
+//准备游戏请求
+message CSRequestReadyForGame
+{
+	optional bool state = 1;
+}
+
+//准备游戏响应
+message CSResponseReadyForGame
+{
+	optional ENMessageError result = 1;
+	optional bool state = 2;
+}
+
+//准备游戏通知
+message CSNotifyReadyForGame
+{
+	optional int32 seat_index = 1;
+	optional bool state = 2;
+}
+
+
+//动作请求：胡牌、偷牌、碰牌、吃牌、出牌、过牌
+message CSRequestDoAction
+{
+	optional int32 seat_index = 1;                 // 座位号
+	optional int32 act_type = 2;                   // 操作类型
+	optional int32 dest_card = 3;                  // 目标牌(做检验) 
+	repeated int32 cards = 4;                      // 吃的组合(吃可能有多吃法) 
+	optional ENZhaoType zhao_type = 5;             // 招的类型
+}
+
+//动作响应：胡牌、偷牌、碰牌、吃牌、出牌、过牌
+message CSResponseDoAction
+{
+	optional ENMessageError result = 1;
+	optional PBAction action = 2;
+	optional int32 tiles_on_hand_num = 3;			//当前手牌张数
+}
+
+// 通知该谁操作选择（当系统出现一张牌后，判断有谁可碰或吃等操作）
+message CSNotifySeatOperationChoice
+{
+	repeated PBAction choices = 1;					//玩家操作信息（碰、过；吃、过等）
+}
+
+//动作通知：胡牌、偷牌、碰牌、吃牌、出牌、过牌
+message CSNotifyActionFlow
+{
+	optional PBAction action = 1;
+}
+
+message CSRequestPlayBack
+{
+	optional int32 record_id = 1;
+}
+
+//当玩家无操作后，系统主动分发的牌
+message CSNotifyPlayerDealCard
+{
+	optional int32 seat_index = 1;					//座位信息
+	optional int32 value = 2;       				//牌编号
+	optional bool is_fan_pai = 3;					//牌是否翻开
+	optional int32 left_card_num = 4; 				//剩余牌数量
+	optional int32 tiles_on_hand_num = 5;				//当前手牌张数
+}
+
+message CSNotifyNextOperation
+{
+	optional int32 seat_index = 1;					//座位号
+	optional int32 left_card_num = 2; 				//剩余牌数量
+}
+
+//展示手牌
+message UserBrand{
+	optional int32 seat_index = 1;					//座位信息
+	repeated int32 tiles_on_hand = 2;				//手牌信息
+}
+
+message HuUserBrand{
+	optional int32 seat_index = 1;					//座位信息
+	optional int32 dest_card = 2; 					// 目标牌
+	repeated PBColumnInfo col_info = 3;				// 列组合
+	repeated int32 tiles_on_hand = 4;				//手牌信息
+	optional int32 dest_index = 5;					// 目标牌来自的座位号
+	optional int32 tuo_num = 6;					//坨数
+	optional int32 fan_num = 7;					//翻数
+}
+
+//小结算
+message SmallResult
+{
+	repeated int32 dipai_card = 1;					//底牌
+	repeated UserBrand user_brand = 2;				//其他三家手牌
+	optional HuUserBrand hu_brand = 3;				//胡家手牌
+}
+
+//大结算
+message BigResult
+{
+	optional string uid = 1;
+	optional int32 hu_num = 2;					//胡牌次数
+	optional int32 zimo_num = 3;					//自摸次数
+	optional int32 dianpao_num = 4;					//点炮次数
+	optional int32 sanfan_num = 5;					//三番次数
+}
+
+//推送胡牌信息，玩家积分增减情况，游戏结束
+message CSNotifyGameOver
+{
+	repeated UserInfo user_score_info = 1;				//各用户积分情况
+	optional SmallResult small_result = 2;				//小计算信息
+	repeated BigResult big_result = 3;				//大结算信息
+	optional bool ishuang = 4;					//是否慌庄
+}
+
+//加入房间响应
+message CSResponseEnterTable
+{
+	optional ENMessageError result = 1; 				//结果
+	repeated UserInfo user_info = 2;				//房间其他用户信息
+	optional CSNotifyGameStart gameStart = 3;			//房间其他用户信息
+	optional CSRequestCreateTable table_info = 4;			//房间信息
+	optional CSNotifyDissolveTableOperation dissolve_infos = 5;	//房间信息
+	repeated CSNotifyActionFlow flows = 6;				//执行动作
+	optional CSNotifySeatOperationChoice choice = 7;		//动作选择
+	optional CSNotifyNextOperation next = 8;			//闹钟指示位置
+	optional CSNotifyPlayerDealCard deal = 9;			//摸牌信息
+	optional CSNotifyGameOver gameOver = 10;			//游戏结束结算数据
+	optional int32 dest_card = 11;					//目标牌
+	optional int32 seat_index = 12;					//位置信息
+	optional bool is_mo = 13;					//是否摸牌
+	optional bool is_fan = 14;					//是否翻牌
+	optional int32 table_state = 15;				//房间状态:0等待，1开始
+}
+
+//服务重连请求
+message CSRequestReconnect
+{
+	optional string uid = 1;
+}
+
+//服务重连响应
+message CSResponseReconnect
+{
+    optional bool state = 1;
+}
+//心跳消息请求
+message CSRequestHeartBeat
+{
+	optional string uid = 1;
+}
+
+//心跳消息响应
+message CSResponseHeartBeat
+{
+    optional bool state = 1;
+}
+//聊天数据请求
+message CSRequestChat
+{
+	optional ENChatType ctype = 1;						//聊天类型
+	optional string message = 2;						//聊天内容
+	optional int32 BigFaceChannel = 3;					//表情页数
+	optional int32 BigFaceID = 4;						//表情编号
+}
+//聊天数据响应
+message CSResponseChat 
+{
+	optional ENMessageError result = 1;					//成功状态
+}
+//聊天数据通知
+message CSNotifyChat
+{
+	optional string uid = 1;							//用户唯一标识符
+	optional ENChatType ctype = 2;						//聊天类型
+	optional string message = 3;						//聊天内容
+	optional int32 BigFaceChannel = 4;					//表情页数
+	optional int32 BigFaceID = 5;						//表情编号
+}
+
+
+
+ //请求离开(切入后台发离线,切回游戏发上线)
+message CSRequestIsOnline{
+	optional bool online = 1;
+}
+
+//请求离开响应
+message	CSResponseIsOnline{
+	optional ENMessageError result = 1;
+	optional bool online = 2;							//是否在线
+}
+
+message	CSNotifyIsOnline{
+	optional int32 seat_index = 1;						//座位号
+	optional bool online = 2;							//是否在线
+}
+
+message CSNotifyRoomCardChange{
+	optional int32 room_card_num = 1;					//房卡数
+}
+
+message CSNotifyNotice{
+	optional string title = 1;							//标题
+	optional string msg = 2;							//消息描述
+	optional string data = 3;							//数据
+}
+
+message CSResponsePlayBack
+{
+	optional ENMessageError result = 1;
+	optional CSRequestCreateTable table = 2;			//房间创建
+	optional CSNotifyGameStart game_start = 3;			//开始
+	repeated CSNotifyActionFlow flows = 4;				//回放数据
+	optional CSNotifyGameOver game_over = 5;			//结算
+}
+
+//偷拍翻开的通知
+message CSNotifyOpenTouPai{
+	optional bool open = 1;
+}

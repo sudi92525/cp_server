@@ -346,7 +346,7 @@ public class CardManager {
 			} else if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_NC_VALUE) {
 				if (tuo >= Constant.TUO_XIAOJIA_4_FAN_NC) {
 					fan += 4;
-					log.info("五张大胡4翻，加34翻");
+					log.info("五张大胡4翻，加4翻");
 				} else if (tuo >= Constant.TUO_XIAOJIA_3_FAN_NC) {
 					fan += 3;
 					log.info("五张大胡3翻，加3翻");
@@ -1176,11 +1176,9 @@ public class CardManager {
 		boolean ncBaoZi = checkZhui(room, user);
 		if (baoZi || ncBaoZi) {
 			log.info("包子");
-			// for (Integer integer : user.getNoChuCards()) {
-			// log.info("nochu card:" + integer);
-			// }
 			room.getCurrentCard().setHuSeat(user.getSeatIndex());
 			user.setBaoZi(true);
+			user.setHuType(4);
 			room.setBaoZiSeat(user.getSeatIndex());
 			RoomManager.total(room);
 		} else {

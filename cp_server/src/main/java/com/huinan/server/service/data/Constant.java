@@ -96,7 +96,7 @@ public class Constant {
     public static final int TUO_XIAOJIA_1_FAN = 10;
     public static final int TUO_XIAOJIA_2_FAN = 12;
     public static final int TUO_XIAOJIA_3_FAN = 18;
-    public static final int TUO_XIAOJIA_3_FAN_NC = 12;
+    public static final int TUO_XIAOJIA_3_FAN_NC = 16;
     public static final int TUO_XIAOJIA_4_FAN_NC = 18;
 
     public static final int PLAYER_NUM = 4;

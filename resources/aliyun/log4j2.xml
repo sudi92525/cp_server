@@ -128,20 +128,20 @@
 		<Root level="info">
 			<!-- <AppenderRef ref="ONLINE" /> -->
 			<AppenderRef ref="DEVLOG" />
-			<AppenderRef ref="CONSOLE" />
+			<!-- <AppenderRef ref="CONSOLE" /> -->
 			<AppenderRef ref="ERROR" />
 		</Root>
 		<LOGGER name="online" level="info" additivity="false">
 			<AppenderRef ref="ONLINE" />
-			<AppenderRef ref="CONSOLE" />
+			<!-- <AppenderRef ref="CONSOLE" /> -->
 		</LOGGER>
 		<LOGGER name="queue" level="info" additivity="false">
 			<AppenderRef ref="QUEUE" />
-			<AppenderRef ref="CONSOLE" />
+			<!-- <AppenderRef ref="CONSOLE" /> -->
 		</LOGGER>
 		<LOGGER name="rabbit_mq" level="info" additivity="false">
 			<AppenderRef ref="RABBIT_MQ" />
-			<AppenderRef ref="CONSOLE" />
+			<!-- <AppenderRef ref="CONSOLE" /> -->
 		</LOGGER>
 	</Loggers>
 </Configuration>
