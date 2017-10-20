@@ -1,6 +1,7 @@
 package com.huinan.server.server;
 
 import java.io.IOException;
+import java.util.ResourceBundle;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -26,23 +27,41 @@ import com.rabbitmq.client.Envelope;
  */
 public class RabbitMQManager {
 	private static final Logger LOGGER = LogManager.getLogger("rabbit_mq");
-	private static final String QUEUE_NAME = "xnsccp";
+	private static String QUEUE_NAME;
 
-//	 private static final String QUEUE_NAME = "xiaonanqipai";
+	private static String host;
+	private static int port;
+	private static String user;
+	private static String password;
+	private static String virtual_host;
+
 	public static void init() {
+		ResourceBundle bundle = ResourceBundle.getBundle("rabbitmq");
+		if (bundle == null) {
+			String msg = "[rabbitmq.properties] is not found!";
+			LOGGER.error(msg);
+			throw new IllegalArgumentException(msg);
+		}
+		QUEUE_NAME = bundle.getString("rabbit.queuename");
+
+		host = bundle.getString("rabbit.host");
+		port = Integer.valueOf(bundle.getString("rabbit.port"));
+		user = bundle.getString("rabbit.user");
+		password = bundle.getString("rabbit.password");
+		virtual_host = bundle.getString("rabbit.virtualhost");
+
 		ConnectionFactory factory = new ConnectionFactory();
-		factory.setHost("119.29.99.46");// localhost,10.186.38.34
-		factory.setUsername("huinankjmq");
-		factory.setPassword("huinankj2017");
-		factory.setVirtualHost("xnsccp");// TODO xnsccp
-//		 factory.setVirtualHost("xiaonanqipai");
-		factory.setPort(5672);
+		factory.setHost(host);
+		factory.setUsername(user);
+		factory.setPassword(password);
+		factory.setVirtualHost(virtual_host);
+		factory.setPort(port);
+		
+		
 		Connection connection;
 		try {
 			connection = factory.newConnection();
-
 			Channel channel = connection.createChannel();
-
 			channel.queueDeclare(QUEUE_NAME, true, false, false, null);
 			LOGGER.info(" [*] RabbitMQ is running,Waiting for messages");
 
