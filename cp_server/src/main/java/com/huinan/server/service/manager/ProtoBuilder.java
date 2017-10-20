@@ -15,6 +15,7 @@ import com.huinan.proto.CpMsgCs.ChoiceZhuang;
 import com.huinan.proto.CpMsgCs.DissolveList;
 import com.huinan.proto.CpMsgCs.ENActionType;
 import com.huinan.proto.CpMsgCs.ENColType;
+import com.huinan.proto.CpMsgCs.ENRoomType;
 import com.huinan.proto.CpMsgCs.ENZhaoType;
 import com.huinan.proto.CpMsgCs.HuUserBrand;
 import com.huinan.proto.CpMsgCs.PBAction;
@@ -40,7 +41,8 @@ public class ProtoBuilder {
 		deal.setIsFanPai(destCard.isOpen());
 		deal.setValue(destCard.getNum());
 		deal.setLeftCardNum(resetCardCount);
-		if (resetCardCount == 0) {
+		if (room.getRoomType() != ENRoomType.EN_ROOM_TYPE_XC_VALUE
+				&& resetCardCount == 0) {
 			deal.setIsFanPai(true);
 		}
 		User destUser = room.getUsers()

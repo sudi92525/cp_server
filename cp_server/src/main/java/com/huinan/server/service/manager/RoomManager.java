@@ -833,37 +833,54 @@ public class RoomManager {
 
 	public static boolean checkHuang(Room room, User user, Card destCard,
 			int resetCardCount) {
-		// 黄了：其他人翻开最后一张
-		if (resetCardCount == 0) {
-			if (destCard.isCheMo()) {
-				// 胡?----------929加-----------
+		if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_XC_VALUE) {// ----10.20----
+			// 五张摸起来最后一张，没扯过牌就黄
+			if (user.isFive() && resetCardCount == 0
+					&& user.getOpen().isEmpty()) {
 				CardManager.logicUserActionList(room, destCard, user, true,
 						true);
 				if (!room.getCanHuSeat().contains(
 						Integer.valueOf(user.getSeatIndex()))) {
+					// 小家摸牌过后下面剩余一张,黄，不打了
+					RoomManager.total(room);
+					return true;
+				}
+			}
+		} else {
+			// 黄了：其他人翻开最后一张
+			if (resetCardCount == 0) {
+				if (destCard.isCheMo()) {
+					// 胡?----------929加-----------
+					CardManager.logicUserActionList(room, destCard, user, true,
+							true);
+					if (!room.getCanHuSeat().contains(
+							Integer.valueOf(user.getSeatIndex()))) {
+						destCard.setOpen(true);
+						log.info("所有人，扯起来最后一张，不割，剩余牌=" + resetCardCount
+								+ "张，黄了!");
+						// 黄了,结算
+						RoomManager.total(room);
+						return true;
+					}
+				} else {
 					destCard.setOpen(true);
-					log.info("所有人，扯起来最后一张，不割，剩余牌=" + resetCardCount + "张，黄了!");
+					log.info("所有人，翻开的最后一张牌，剩余牌=" + resetCardCount + "张，黄了!");
 					// 黄了,结算
 					RoomManager.total(room);
 					return true;
 				}
-			} else {
-				destCard.setOpen(true);
-				log.info("所有人，翻开的最后一张牌，剩余牌=" + resetCardCount + "张，黄了!");
-				// 黄了,结算
-				RoomManager.total(room);
-				return true;
-			}
-		} else if (user.isFive() && resetCardCount == 1) {
-			if (destCard.isCheMo()) {
-				return false;// ----------10.06加:-----------
-			}
-			CardManager.logicUserActionList(room, destCard, user, true, true);
-			if (!room.getCanHuSeat().contains(
-					Integer.valueOf(user.getSeatIndex()))) {
-				// 小家摸牌过后下面剩余一张,黄，不打了
-				fiveHuangTotal(room, resetCardCount);
-				return true;
+			} else if (user.isFive() && resetCardCount == 1) {
+				if (destCard.isCheMo()) {
+					return false;// ----------10.06加:-----------
+				}
+				CardManager.logicUserActionList(room, destCard, user, true,
+						true);
+				if (!room.getCanHuSeat().contains(
+						Integer.valueOf(user.getSeatIndex()))) {
+					// 小家摸牌过后下面剩余一张,黄，不打了
+					fiveHuangTotal(room, resetCardCount);
+					return true;
+				}
 			}
 		}
 		return false;
@@ -889,6 +906,10 @@ public class RoomManager {
 	 */
 	public static boolean touPai(Room room, User user, int touNum) {
 		boolean huang = false;
+		if (room.getResetCards().size() == 0) {// ----10.20----
+			total(room);
+			return true;
+		}
 		for (int i = 0; i < touNum; i++) {
 			int card = room.getFirstCard();
 			Card cardObj = new Card(card, user.getSeatIndex(), false, false,
