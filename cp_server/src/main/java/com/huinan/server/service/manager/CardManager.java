@@ -318,7 +318,13 @@ public class CardManager {
 		if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_MY_VALUE) {
 			return fanNumMY(user, room);
 		}
-		if (user.getSeatIndex() == room.getZhuangSeat()) {
+		if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_GY_VALUE
+				&& user.getSeatIndex() == room.getZhuangSeat()) {
+			if (tuo >= Constant.TUO_ZHUANG_FAN) {
+				fan++;
+				log.info("庄家大胡，加1翻");
+			}
+		} else if (user.getSeatIndex() == room.getDangSeat()) {
 			if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_XC_VALUE) {
 				if (tuo >= Constant.TUO_XIANJIA_FAN) {
 					fan++;
