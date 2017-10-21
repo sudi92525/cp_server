@@ -1208,6 +1208,7 @@ public class CardManager {
 		Map<Integer, Integer> holdMap = toMap(user.getHold());
 
 		boolean baoZi = false;
+		boolean zhui = false;
 		Integer chuCard = null;
 		if (room.isDiaoZhui()) {
 			for (int i = 0; i < zhuiCards.size(); i++) {
@@ -1229,6 +1230,7 @@ public class CardManager {
 					if (otherCard != 0) {
 						Integer other = holdMap.get(Integer.valueOf(otherCard));
 						if (other == null) {
+							zhui = true;
 							deadCards.remove(card);
 							chuCard = card;
 							user.setThisChuIsZhui(true);
@@ -1265,6 +1267,7 @@ public class CardManager {
 									Integer _count = holdMap.get(cardNum);
 									if (count != null && count == 1
 											&& _count == null) {
+										zhui = true;
 										deadCards.remove(card);
 										chuCard = card;
 
@@ -1280,7 +1283,7 @@ public class CardManager {
 				}
 			}
 		}
-		if (!deadCards.isEmpty()) {
+		if (zhui && !deadCards.isEmpty()) {
 			user.setNoChuZhuiCards(deadCards);
 		}
 		// ----10.11加:南充追牌和死牌冲突,,,,包子----
