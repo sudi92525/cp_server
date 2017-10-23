@@ -276,8 +276,11 @@ public class ProtoBuilder {
 	public static HuUserBrand buildHuUserBrand(Room room, User user) {
 		HuUserBrand.Builder huBrand = HuUserBrand.newBuilder();
 		huBrand.setSeatIndex(user.getSeatIndex());
-		huBrand.setDestCard(room.getCurrentCard().getNum());
-		huBrand.setDestIndex(room.getCurrentCard().getSeat());
+		if (room.getCurrentCard() != null) {
+			huBrand.setDestCard(room.getCurrentCard().getNum());
+			huBrand.setDestIndex(room.getCurrentCard().getSeat());
+		} else {
+		}
 		huBrand.addAllColInfo(user.getOpen());
 		huBrand.addAllTilesOnHand(user.getHold());
 		huBrand.setTuoNum(user.getHuTuoNum());

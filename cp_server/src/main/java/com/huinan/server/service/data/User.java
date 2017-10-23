@@ -258,7 +258,8 @@ public class User implements Serializable {
 
 	/** 是否过了飞天25 */
 	private boolean feiTian25Pass;
-
+	/** 是否拿过牌：南充小家没摸过牌可以割任何七点 */
+	private boolean moPai;
 	/**
 	 * 回访数据
 	 */
@@ -852,6 +853,14 @@ public class User implements Serializable {
 
 	public void setDoubleZhuiCards(List<Integer> doubleZhuiCards) {
 		this.doubleZhuiCards = doubleZhuiCards;
+	}
+
+	public boolean isMoPai() {
+		return moPai;
+	}
+
+	public void setMoPai(boolean moPai) {
+		this.moPai = moPai;
 	}
 
 }

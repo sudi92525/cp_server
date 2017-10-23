@@ -175,7 +175,9 @@ public class CardManager {
 					}
 				}
 			}
-			if (!room.isDingFuShuaiTimes() && dingFuTimes > 1) {
+			if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_XC_VALUE) {
+				return true;
+			} else if (!room.isDingFuShuaiTimes() && dingFuTimes > 1) {
 				return false;
 			}
 		}
@@ -302,6 +304,10 @@ public class CardManager {
 					tuo++;// 斧头个数大于1，甩一次，所以加一
 					log.info("tuoNum,丁斧对数大于1，甩一次+1");
 				}
+			}
+		} else if (user.isFive() && !open.isEmpty()) {// ----10.23--jia
+			if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_XC_VALUE) {
+				tuo += fuTouNum;
 			}
 		}
 		log.info("===========tuoNum===========");
@@ -1038,7 +1044,7 @@ public class CardManager {
 	private static boolean checkNCChiTui(Room room, User user, Integer card) {
 		boolean tui = false;
 		if (room.getRoomType() != ENRoomType.EN_ROOM_TYPE_NC_VALUE
-				&& room.getRoomType() != ENRoomType.EN_ROOM_TYPE_NC_VALUE) {
+				&& room.getRoomType() != ENRoomType.EN_ROOM_TYPE_XC_VALUE) {
 			return tui;
 		}
 		int cardValue = getCardValue(card);
@@ -1127,19 +1133,21 @@ public class CardManager {
 	 * @return
 	 */
 	private static boolean checkHu7(User user, Card card) {
-		if (user.getHold().size() == 1) {
-			return false;
-		}
+		// if (user.getHold().size() == 1) {
+		// return false;
+		// }
 		Room room = RoomManager.getInstance().getRoom(user.getRoomId());
 		if (user.isFive()) {
-			if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_GY_VALUE) {
-				if (isAllBlack(user, user.getHold(), user.getOpenList())
-						&& fuTouNum(user) == 0 && card.getNum() == 25) {// 飞天二五
-					return true;
-				}
-			} else if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_NC_VALUE
+			if (isAllBlack(user, user.getHold(), user.getOpenList())
+					&& fuTouNum(user) == 0 && card.getNum() == 25) {// 飞天二五：全黑，无丁斧
+				return true;
+			}
+			if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_NC_VALUE
 					|| room.getRoomType() == ENRoomType.EN_ROOM_TYPE_XC_VALUE) {
-				if (card.isFirstCard() && card.getNum() == 25) {// 头家第一手打出25
+				// if (card.isFirstCard() && card.getNum() == 25) {// 头家第一手打出25
+				// return true;
+				// }
+				if (!user.isMoPai()) {
 					return true;
 				}
 			}
@@ -1183,7 +1191,7 @@ public class CardManager {
 		boolean ncBaoZi = checkZhui(room, user);
 		if (baoZi || ncBaoZi) {
 			log.info("包子");
-			room.getCurrentCard().setHuSeat(user.getSeatIndex());
+			room.setHuSeat(user.getSeatIndex());
 			user.setBaoZi(true);
 			user.setHuType(4);
 			room.setBaoZiSeat(user.getSeatIndex());
@@ -1620,6 +1628,22 @@ public class CardManager {
 				cards.remove(i);
 				bool = true;
 				break;
+			}
+		}
+		if (bool) {
+			user.setNoChuCards(cards);
+			// 发送不能出牌的通知消息
+			NotifyHandler.notifyDeathCardList(user);
+		}
+	}
+
+	public static void removeDeathCardNCXC(int card, User user) {
+		List<Integer> cards = user.getNoChuCards();
+		boolean bool = false;
+		for (int i = 0; i < cards.size(); i++) {
+			if (card == cards.get(i)) {
+				cards.remove(i);
+				bool = true;
 			}
 		}
 		if (bool) {

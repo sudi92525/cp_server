@@ -1,11 +1,14 @@
 package com.huinan.server.service.manager;
 
+import java.util.List;
+
 import com.huinan.proto.CpMsgCs.CSNotifyActionFlow;
 import com.huinan.proto.CpMsgCs.CSNotifyNextOperation;
 import com.huinan.proto.CpMsgCs.CSNotifyPlayerDealCard;
 import com.huinan.proto.CpMsgCs.CSResponsePlayBack;
 import com.huinan.proto.CpMsgCs.ENActionType;
 import com.huinan.proto.CpMsgCs.PBAction;
+import com.huinan.proto.CpMsgCs.PBColumnInfo;
 import com.huinan.server.service.data.User;
 
 public class UserUtils {
@@ -18,6 +21,19 @@ public class UserUtils {
 	 */
 	public static void setPlayBackData(User user,
 			CSNotifyActionFlow.Builder flow) {
+		if (flow.getAction().getActType() == ENActionType.EN_ACTION_TOU) {
+			List<PBColumnInfo> cols = flow.getAction().getColInfoList();
+			if (cols != null && !cols.isEmpty()) {
+				for (int i = 0; i <= cols.size(); i++) {
+					PBColumnInfo pbColumnInfo = cols.get(i);
+					if (pbColumnInfo.getIsFan()) {
+						PBColumnInfo.Builder build = pbColumnInfo.toBuilder();
+						build.setIsFan(false);
+						cols.set(i, build.build());
+					}
+				}
+			}
+		}
 		if (user.getPlayBack() == null) {
 			CSResponsePlayBack.Builder playBack = CSResponsePlayBack
 					.newBuilder();

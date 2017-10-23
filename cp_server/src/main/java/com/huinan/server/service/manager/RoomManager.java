@@ -18,7 +18,6 @@ import com.huinan.proto.CpMsg.CpMsgData;
 import com.huinan.proto.CpMsgCs.BigResult;
 import com.huinan.proto.CpMsgCs.CSNotifyGameOver;
 import com.huinan.proto.CpMsgCs.CSNotifyGameStart;
-import com.huinan.proto.CpMsgCs.CSNotifyOpenTouPai;
 import com.huinan.proto.CpMsgCs.CSNotifySeatOperationChoice;
 import com.huinan.proto.CpMsgCs.CSNotifyTableDissolved;
 import com.huinan.proto.CpMsgCs.CSRequestCreateTable;
@@ -321,20 +320,20 @@ public class RoomManager {
 	 */
 	public static void shuffle(Room room) {
 		List<Integer> cards = new ArrayList<>();
-		for (int card : CardManager.allPais) {
-			for (int k = 0; k < 4; k++) {
-				cards.add(card);
-			}
-		}
-		// TODO 写死牌
-		// for (int i = 0; i < 84; i++) {
-		// cards.add(24);
-		// cards.add(15);
-		// cards.add(15);
-		// cards.add(15);
-		// cards.add(15);
-		// cards.add(15);
+		// for (int card : CardManager.allPais) {
+		// for (int k = 0; k < 4; k++) {
+		// cards.add(card);
 		// }
+		// }
+		// TODO 写死牌
+		for (int i = 0; i < 84; i++) {
+			cards.add(24);
+			// cards.add(15);
+			// cards.add(15);
+			// cards.add(15);
+			// cards.add(15);
+			// cards.add(15);
+		}
 		Collections.shuffle(cards);
 		Collections.shuffle(cards);
 		Collections.shuffle(cards);
@@ -388,23 +387,23 @@ public class RoomManager {
 
 		int zhuangSeat = room.getZhuangSeat();
 		int seat = zhuangSeat;
-		for (int i = 0; i < 4; i++) {
-			int num = CardManager.BRAND_NUMFOUR[i];
-			User user = room.getUsers().get(seat);
-			user.setReady(false);
-			for (int j = 0; j < num; j++) {
-				int card = room.getFirstCard();
-				user.getHold().add(card);
-			}
-			if (!user.isFive()) {
-				user.getCanChiHoldCards().clear();
-				user.getCanChiHoldCards().addAll(user.getHold());
-			}
-			CardManager.noChuDouble7AndDiaoZhui(room, user, true);
-			seat = RoomManager.getNextSeat(seat);
-		}
+		// for (int i = 0; i < 4; i++) {
+		// int num = CardManager.BRAND_NUMFOUR[i];
+		// User user = room.getUsers().get(seat);
+		// user.setReady(false);
+		// for (int j = 0; j < num; j++) {
+		// int card = room.getFirstCard();
+		// user.getHold().add(card);
+		// }
+		// if (!user.isFive()) {
+		// user.getCanChiHoldCards().clear();
+		// user.getCanChiHoldCards().addAll(user.getHold());
+		// }
+		// CardManager.noChuDouble7AndDiaoZhui(room, user, true);
+		// seat = RoomManager.getNextSeat(seat);
+		// }
 		// TODO 写死牌
-		// dealSiPai(room, seat);
+		dealSiPai(room, seat);
 
 		room.setFirstCard(true);
 		room.setStepIsPlay(true);
@@ -449,122 +448,122 @@ public class RoomManager {
 		for (int i = 0; i < 4; i++) {
 			User user = room.getUsers().get(seat);
 			if (i == 0) {
-				int card1 = 11;// room.getSiPai(25);
+				int card1 = 11;
 				user.getHold().add(card1);
-				int card2 = 11;// room.getSiPai(34);
+				int card2 = 11;
 				user.getHold().add(card2);
-				int card3 = 66;// room.getSiPai(11);
+				int card3 = 13;
 				user.getHold().add(card3);
-				int card4 = 14;// room.getSiPai(11);
+				int card4 = 14;
 				user.getHold().add(card4);
-				int card5 = 35;// room.getSiPai(11);
+				int card5 = 15;
 				user.getHold().add(card5);
-				int card6 = 56;// room.getSiPai(11);
+				int card6 = 16;
 				user.getHold().add(card6);
-				// int card7 = room.getSiPai(11);
-				// user.getHold().add(card7);
-				// int card8 = room.getSiPai(11);
-				// user.getHold().add(card8);
-				// int card9 = room.getSiPai(11);
-				// user.getHold().add(card9);
-				// int card10 = room.getSiPai(11);
-				// user.getHold().add(card10);
-				// int card11 = room.getSiPai(11);
-				// user.getHold().add(card11);
-				// int card12 = room.getSiPai(11);
-				// user.getHold().add(card12);
-				// int card13 = room.getSiPai(11);
-				// user.getHold().add(card13);
-				// int card14 = room.getSiPai(11);
-				// user.getHold().add(card14);
-				// int card15 = room.getSiPai(11);
-				// user.getHold().add(card15);
-				// int card16 = room.getSiPai(11);
-				// user.getHold().add(card16);
-				// int card17 = room.getSiPai(11);
-				// user.getHold().add(card17);
-				// int card18 = room.getSiPai(11);
-				// user.getHold().add(card18);
-			} else if (i == 1) {
-				// int card1 = 13;// room.getSiPai(25);
-				// user.getHold().add(card1);
-				int card2 = 11;// room.getSiPai(25);
-				user.getHold().add(card2);
-				int card3 = 66;// room.getSiPai(11);
-				user.getHold().add(card3);
-				int card4 = 66;// room.getSiPai(11);
-				user.getHold().add(card4);
-				int card5 = 14;// room.getSiPai(11);
-				user.getHold().add(card5);
-				int card6 = 44;// room.getSiPai(11);
-				user.getHold().add(card6);
-				int card7 = 44;// room.getSiPai(11);
+				int card7 = 22;
 				user.getHold().add(card7);
-				int card8 = 12;// room.getSiPai(11);
+				int card8 = 23;
 				user.getHold().add(card8);
-				int card9 = 26;// room.getSiPai(11);
+				int card9 = 24;
 				user.getHold().add(card9);
-				int card10 = 35;// room.getSiPai(11);
+				int card10 = 25;
 				user.getHold().add(card10);
-				// int card11 = room.getSiPai(11);
-				// user.getHold().add(card11);
-				// int card12 = room.getSiPai(11);
-				// user.getHold().add(card12);
-				// int card13 = room.getSiPai(11);
-				// user.getHold().add(card13);
-				// int card14 = room.getSiPai(11);
-				// user.getHold().add(card14);
-				// int card15 = room.getSiPai(11);
-				// user.getHold().add(card15);
-				// int card16 = room.getSiPai(11);
-				// user.getHold().add(card16);
-				// int card17 = room.getSiPai(11);
-				// user.getHold().add(card17);
-			} else if (i == 2) {
-				int card1 = 44;// room.getSiPai(11);
+				int card11 = 26;
+				user.getHold().add(card11);
+				int card12 = 33;
+				user.getHold().add(card12);
+				int card13 = 34;
+				user.getHold().add(card13);
+				int card14 = 35;
+				user.getHold().add(card14);
+				int card15 = 36;
+				user.getHold().add(card15);
+				int card16 = 44;
+				user.getHold().add(card16);
+				int card17 = 45;
+				user.getHold().add(card17);
+				int card18 = 46;
+				user.getHold().add(card18);
+			} else if (i == 1) {
+				int card1 = 11;
 				user.getHold().add(card1);
-				int card2 = 15;// room.getSiPai(11);
+				int card2 = 11;
 				user.getHold().add(card2);
-				int card3 = 24;// room.getSiPai(11);
+				int card3 = 13;
 				user.getHold().add(card3);
-				int card4 = 15;// room.getSiPai(11);
+				int card4 = 14;
 				user.getHold().add(card4);
-				int card5 = 11;// room.getSiPai(11);
+				int card5 = 15;
 				user.getHold().add(card5);
-				// int card6 = room.getSiPai(11);
-				// user.getHold().add(card6);
-				// int card7 = room.getSiPai(11);
-				// user.getHold().add(card7);
-				// int card8 = room.getSiPai(11);
-				// user.getHold().add(card8);
-				// int card9 = room.getSiPai(11);
-				// user.getHold().add(card9);
-				// int card10 = room.getSiPai(11);
-				// user.getHold().add(card10);
-				// int card11 = room.getSiPai(11);
-				// user.getHold().add(card11);
-				// int card12 = room.getSiPai(11);
-				// user.getHold().add(card12);
-				// int card13 = room.getSiPai(11);
-				// user.getHold().add(card13);
-				// int card14 = room.getSiPai(11);
-				// user.getHold().add(card14);
-				// int card15 = room.getSiPai(11);
-				// user.getHold().add(card15);
-				// int card16 = room.getSiPai(11);
-				// user.getHold().add(card16);
-				// int card17 = room.getSiPai(11);
-				// user.getHold().add(card17);
-			} else if (i == 3) {
-				int card1 = 24;// room.getSiPai(33);
+				int card6 = 16;
+				user.getHold().add(card6);
+				int card7 = 22;
+				user.getHold().add(card7);
+				int card8 = 23;
+				user.getHold().add(card8);
+				int card9 = 24;
+				user.getHold().add(card9);
+				int card10 = 25;
+				user.getHold().add(card10);
+				int card11 = 26;
+				user.getHold().add(card11);
+				int card12 = 33;
+				user.getHold().add(card12);
+				int card13 = 34;
+				user.getHold().add(card13);
+				int card14 = 35;
+				user.getHold().add(card14);
+				int card15 = 36;
+				user.getHold().add(card15);
+				int card16 = 44;
+				user.getHold().add(card16);
+				int card17 = 45;
+				user.getHold().add(card17);
+			} else if (i == 2) {
+				int card1 = 12;
 				user.getHold().add(card1);
-				int card2 = 24;// room.getSiPai(33);
+				int card2 = 12;
 				user.getHold().add(card2);
-				int card3 = 44;// room.getSiPai(35);
+				int card3 = 13;
 				user.getHold().add(card3);
-				int card4 = 13;// room.getSiPai(26);
+				int card4 = 14;
 				user.getHold().add(card4);
-				int card5 = 46;// room.getSiPai(35);
+				int card5 = 15;
+				user.getHold().add(card5);
+				int card6 = 16;
+				user.getHold().add(card6);
+				int card7 = 22;
+				user.getHold().add(card7);
+				int card8 = 23;
+				user.getHold().add(card8);
+				int card9 = 24;
+				user.getHold().add(card9);
+				int card10 = 25;
+				user.getHold().add(card10);
+				int card11 = 26;
+				user.getHold().add(card11);
+				int card12 = 33;
+				user.getHold().add(card12);
+				int card13 = 34;
+				user.getHold().add(card13);
+				int card14 = 35;
+				user.getHold().add(card14);
+				int card15 = 36;
+				user.getHold().add(card15);
+				int card16 = 44;
+				user.getHold().add(card16);
+				int card17 = 45;
+				user.getHold().add(card17);
+			} else if (i == 3) {
+				int card1 = 12;
+				user.getHold().add(card1);
+				int card2 = 12;
+				user.getHold().add(card2);
+				int card3 = 34;
+				user.getHold().add(card3);
+				int card4 = 56;
+				user.getHold().add(card4);
+				int card5 = 56;
 				user.getHold().add(card5);
 			}
 			CardManager.noChuDouble7AndDiaoZhui(room, user, true);
@@ -723,41 +722,62 @@ public class RoomManager {
 		// 当判断到尾家没有偷牌情况，直接通知庄家开始出牌，发送一个位置通知，再发送给庄家一个choice
 		if (!room.isStartChu() && user.isFive()) {
 			room.getCanActionSeat().clear();
-			// 位置信息通知
-			User zhuang = RoomManager.getZhuangJia(room);
-			room.setActionSeat(zhuang.getSeatIndex());
-			room.getCanActionSeat().add(zhuang.getSeatIndex());
-			// 天胡
-			boolean tianHu = CardManager.checkTianHu(room, zhuang);
-			if (!tianHu) {
-				NotifyHandler.notifyNextOperation(room, zhuang);
-				// 庄家choice信息通知
-				CardManager.checkBaoZiOrChuPai(room, zhuang);
+			boolean lan18 = xc18lan(room);
+			if (!lan18) {
+				// 位置信息通知
+				User zhuang = RoomManager.getZhuangJia(room);
+				room.setActionSeat(zhuang.getSeatIndex());
+				room.getCanActionSeat().add(zhuang.getSeatIndex());
+				// 天胡
+				boolean tianHu = CardManager.checkTianHu(room, zhuang);
+				if (!tianHu) {
+					NotifyHandler.notifyNextOperation(room, zhuang);
+					// 庄家choice信息通知
+					CardManager.checkBaoZiOrChuPai(room, zhuang);
+				}
+				room.setStartChu(true);
 			}
-			room.setStartChu(true);
 		}
 		return false;
 	}
 
 	/**
-	 * 偷牌亮起的推送
+	 * 西充烂18：一个对子都没有的直接赢一番
 	 * 
 	 * @param room
+	 * @return
 	 */
-	public static void openTouPai1(Room room) {
-		for (User user : room.getUsers().values()) {
-			for (PBColumnInfo info : user.getOpen()) {
-				if (!info.getIsFan()) {
-					info.toBuilder().setIsFan(true);
+	public static boolean xc18lan(Room room) {
+		if (room.getRoomType() != ENRoomType.EN_ROOM_TYPE_XC_VALUE) {
+			return false;
+		}
+		boolean lan18 = false;
+		int zhuangSeat = room.getZhuangSeat();
+		int seat = zhuangSeat;
+		for (int i = 1; i <= 3; i++) {
+			boolean lan = true;
+			User user = room.getUsers().get(seat);
+			if (!user.getOpen().isEmpty()) {
+				continue;
+			}
+			Map<Integer, Integer> map = CardManager.toMap(user.getHold());
+			for (Integer count : map.values()) {
+				if (count > 1) {
+					lan = false;
 				}
 			}
+			if (lan) {
+				log.info("西充18烂");
+				room.setHuSeat(user.getSeatIndex());
+				room.setLan18Seat(user.getSeatIndex());
+				user.setHuType(5);// 烂18
+				RoomManager.total(room);
+				lan18 = true;
+				break;
+			}
+			seat = RoomManager.getNextSeat(seat);
 		}
-		CpMsgData.Builder msg = CpMsgData.newBuilder();
-		CSNotifyOpenTouPai.Builder onlineNotify = CSNotifyOpenTouPai
-				.newBuilder();
-		msg.setCsNotifyOpenTouPai(onlineNotify);
-		NotifyHandler.notifyAll(room,
-				CpMsgData.CS_NOTIFY_OPEN_TOU_PAI_FIELD_NUMBER, msg.build());
+		return lan18;
 	}
 
 	/**
@@ -789,6 +809,7 @@ public class RoomManager {
 		} else {
 			user.getGuoShouCards().add(destCard.getNum());
 		}
+		user.setMoPai(true);
 		// 发送位置通知
 		NotifyHandler.notifyNextOperation(room, nextActionSeat);
 
@@ -915,6 +936,7 @@ public class RoomManager {
 			Card cardObj = new Card(card, user.getSeatIndex(), false, false,
 					true, false);
 			room.setCurrentCard(cardObj);
+			user.setMoPai(true);
 			int resetCardCount = room.getResetCards().size();
 			NotifyHandler.notifyDealCard(room, cardObj, resetCardCount);
 
@@ -993,7 +1015,7 @@ public class RoomManager {
 	 */
 	public static void total(Room room) {
 		boolean isHuang = false;
-		int huSeat = room.getCurrentCard().getHuSeat();
+		int huSeat = room.getHuSeat();
 		if (huSeat == 0) {
 			isHuang = true;
 		}
@@ -1031,6 +1053,23 @@ public class RoomManager {
 			baoZiUser.setHuFanNum(0);
 			baoZiUser.setChangeCurrency(0 - allScore);
 			baoZiUser.setCurrency(baoZiUser.getCurrency() - allScore);
+		} else if (room.getLan18Seat() != 0) {// 包子:一番
+			log.info("---xc lan 18----seat=" + room.getBaoZiSeat());
+			int allScore = 0;
+			User lan18User = room.getUsers().get(room.getLan18Seat());
+			for (User _user : room.getUsers().values()) {
+				if (!_user.getUuid().equals(lan18User.getUuid())) {
+					int score = CardManager.getScoreByFan(
+							getDiFen(_user, room, lan18User), room.isAddFan(),
+							1);
+					_user.setChangeCurrency(0 - score);
+					_user.setCurrency(_user.getCurrency() - score);
+					allScore += score;
+				}
+			}
+			lan18User.setHuFanNum(1);
+			lan18User.setChangeCurrency(allScore);
+			lan18User.setCurrency(lan18User.getCurrency() + allScore);
 		} else if (!isHuang) {
 			int allScore = 0;
 			User huUser = room.getUsers().get(huSeat);
@@ -1318,10 +1357,8 @@ public class RoomManager {
 				SmallResult.Builder roundResult = SmallResult.newBuilder();
 				roundResult.addAllDipaiCard(room.getResetCards());
 				if (!huang) {
-					roundResult.setHuBrand(ProtoBuilder.buildHuUserBrand(
-							room,
-							room.getUsers().get(
-									room.getCurrentCard().getHuSeat())));
+					roundResult.setHuBrand(ProtoBuilder.buildHuUserBrand(room,
+							room.getUsers().get(room.getHuSeat())));
 				}
 				for (User _user : room.getUsers().values()) {
 					if (!_user.getUuid().equals(user.getUuid())) {

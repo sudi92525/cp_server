@@ -88,7 +88,7 @@ public class Room implements Serializable {
 	private boolean zhaoHu;
 	/** 是否头当 */
 	private boolean touDang;
-	/**  difen  */
+	/** difen */
 	private int diFen = 1;
 	// ---------------西充规则--------------------
 	/** 自摸加番 */
@@ -99,6 +99,8 @@ public class Room implements Serializable {
 	private boolean cheAll7Fan;
 	/** 是否三四算番 */
 	private boolean jiaFan34;
+
+	private int huSeat;
 
 	// -------------------------------南充版本-----------------------------------
 	private List<Integer> fanPais = new ArrayList<>();
@@ -159,6 +161,8 @@ public class Room implements Serializable {
 	private int choiceZhuangCard;
 	/** 上一次出牌作为 */
 	private int lastChuSeat;
+	/** 西充烂18座位 */
+	private int lan18Seat;
 
 	public Room(int tid, int roomType, boolean dingFuColor,
 			boolean dingFu34IsFan, boolean jiaFan34) {
@@ -820,6 +824,22 @@ public class Room implements Serializable {
 
 	public void setDiFen(int diFen) {
 		this.diFen = diFen;
+	}
+
+	public int getHuSeat() {
+		return huSeat;
+	}
+
+	public void setHuSeat(int huSeat) {
+		this.huSeat = huSeat;
+	}
+
+	public int getLan18Seat() {
+		return lan18Seat;
+	}
+
+	public void setLan18Seat(int lan18Seat) {
+		this.lan18Seat = lan18Seat;
 	}
 
 }

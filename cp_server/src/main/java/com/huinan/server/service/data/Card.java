@@ -6,110 +6,101 @@ import java.io.Serializable;
  *
  * renchao
  */
-public class Card implements Serializable{
+public class Card implements Serializable {
 
-    /**
+	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1576136289744526484L;
 	private int num;
-    /**
-     * 牌的位置
-     */
-    private int seat;
-    /**
-     * 是否翻开
-     */
-    private boolean open = true;
-    /**
-     * 是否是出牌(手里打出去的,不然就是翻开的)
-     */
-    private boolean chu;
-    /**
-     * 是否是庄家打出的第一张牌
-     */
-    private boolean firstCard;
-    /**
-     * 是否是扯了摸起来的牌
-     */
-    private boolean cheMo;
-    private int huSeat;
-    
-    private boolean feiTian25;
+	/**
+	 * 牌的位置
+	 */
+	private int seat;
+	/**
+	 * 是否翻开
+	 */
+	private boolean open = true;
+	/**
+	 * 是否是出牌(手里打出去的,不然就是翻开的)
+	 */
+	private boolean chu;
+	/**
+	 * 是否是庄家打出的第一张牌
+	 */
+	private boolean firstCard;
+	/**
+	 * 是否是扯了摸起来的牌
+	 */
+	private boolean cheMo;
 
-    public Card(int num) {
-	this.num = num;
-    }
+	private boolean feiTian25;
 
-    public Card(int num, int seat, boolean open, boolean chu, boolean cheMo,
-	    boolean firstCard) {
-	this.num = num;
-	this.seat = seat;
-	this.open = open;
-	this.chu = chu;
-	this.cheMo = cheMo;
-	this.firstCard = firstCard;
-    }
+	public Card(int num) {
+		this.num = num;
+	}
 
-    public int getCardValue() {
-	return num / 10 + num % 10;
-    }
+	public Card(int num, int seat, boolean open, boolean chu, boolean cheMo,
+			boolean firstCard) {
+		this.num = num;
+		this.seat = seat;
+		this.open = open;
+		this.chu = chu;
+		this.cheMo = cheMo;
+		this.firstCard = firstCard;
+	}
 
-    public int getNum() {
-	return num;
-    }
+	public int getCardValue() {
+		return num / 10 + num % 10;
+	}
 
-    public void setNum(int num) {
-	this.num = num;
-    }
+	public int getNum() {
+		return num;
+	}
 
-    public boolean isOpen() {
-	return open;
-    }
+	public void setNum(int num) {
+		this.num = num;
+	}
 
-    public void setOpen(boolean open) {
-	this.open = open;
-    }
+	public boolean isOpen() {
+		return open;
+	}
 
-    public int getSeat() {
-	return seat;
-    }
+	public void setOpen(boolean open) {
+		this.open = open;
+	}
 
-    public void setSeat(int seat) {
-	this.seat = seat;
-    }
+	public int getSeat() {
+		return seat;
+	}
 
-    public boolean isFirstCard() {
-	return firstCard;
-    }
+	public void setSeat(int seat) {
+		this.seat = seat;
+	}
 
-    public void setFirstCard(boolean firstCard) {
-	this.firstCard = firstCard;
-    }
+	public boolean isFirstCard() {
+		return firstCard;
+	}
 
-    public boolean isCheMo() {
-	return cheMo;
-    }
+	public void setFirstCard(boolean firstCard) {
+		this.firstCard = firstCard;
+	}
 
-    public void setCheMo(boolean cheMo) {
-	this.cheMo = cheMo;
-    }
+	public boolean isCheMo() {
+		return cheMo;
+	}
 
-    public boolean isChu() {
-	return chu;
-    }
+	public void setCheMo(boolean cheMo) {
+		this.cheMo = cheMo;
+	}
 
-    public void setChu(boolean chu) {
-	this.chu = chu;
-    }
+	public boolean isChu() {
+		return chu;
+	}
 
-    public int getHuSeat() {
-	return huSeat;
-    }
-
-    public void setHuSeat(int huSeat) {
-	this.huSeat = huSeat;
-    }
+	public void setChu(boolean chu) {
+		this.chu = chu;
+	}
 
 	public boolean isFeiTian25() {
 		return feiTian25;

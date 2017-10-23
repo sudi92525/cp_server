@@ -186,7 +186,19 @@ public class GameAction extends AbsAction {
 		user.getActions().clear();
 		room.getCanActionSeat().clear();
 		Card destCard = room.getCurrentCard();
-		CardManager.removeDeathCard(destCard.getNum(), user);
+
+		// ---10.23----jia:西充南充同点数吃退
+		if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_NC_VALUE
+				|| room.getRoomType() == ENRoomType.EN_ROOM_TYPE_XC_VALUE) {
+			List<Integer> sameList = CardManager.getSameCards(destCard
+					.getCardValue());
+			for (Integer integer : sameList) {
+				CardManager.removeDeathCardNCXC(integer, user);
+			}
+		} else {
+			CardManager.removeDeathCard(destCard.getNum(), user);
+		}
+		// CardManager.removeDeathCard(destCard.getNum(), user);
 
 		NotifyHandler.notifyActionFlow(room, user, destCard, null,
 				ENActionType.EN_ACTION_TUI, false);
@@ -254,12 +266,15 @@ public class GameAction extends AbsAction {
 				// 出牌推送
 				CardManager.checkBaoZiOrChuPai(room, user);
 			} else {
-				User zhuang = RoomManager.getZhuangJia(room);
-				boolean tianHu = CardManager.checkTianHu(room, zhuang);
-				if (!tianHu) {
-					NotifyHandler.notifyNextOperation(room, zhuang);
-					// 出牌推送
-					CardManager.checkBaoZiOrChuPai(room, zhuang);
+				boolean lan18 = RoomManager.xc18lan(room);
+				if (!lan18) {
+					User zhuang = RoomManager.getZhuangJia(room);
+					boolean tianHu = CardManager.checkTianHu(room, zhuang);
+					if (!tianHu) {
+						NotifyHandler.notifyNextOperation(room, zhuang);
+						// 出牌推送
+						CardManager.checkBaoZiOrChuPai(room, zhuang);
+					}
 				}
 			}
 		}
@@ -448,8 +463,9 @@ public class GameAction extends AbsAction {
 			user.getNoChuCards().remove(Integer.valueOf(destCard.getNum()));
 			user.getNoChuCards().remove(Integer.valueOf(destCard.getNum()));
 			NotifyHandler.notifyDeathCardList(user);
-		}else if(user.getDoubleZhuiCards().contains(destCard.getNum())){
-			user.getDoubleZhuiCards().remove(Integer.valueOf(destCard.getNum()));
+		} else if (user.getDoubleZhuiCards().contains(destCard.getNum())) {
+			user.getDoubleZhuiCards()
+					.remove(Integer.valueOf(destCard.getNum()));
 			// 将一对七从死牌列表删除
 			user.getNoChuCards().remove(Integer.valueOf(destCard.getNum()));
 			user.getNoChuCards().remove(Integer.valueOf(destCard.getNum()));
@@ -505,7 +521,7 @@ public class GameAction extends AbsAction {
 
 	private static void hu(User user, Room room) {
 		Card destCard = room.getCurrentCard();
-		destCard.setHuSeat(user.getSeatIndex());
+		room.setHuSeat(user.getSeatIndex());
 		user.setHuCard(destCard);
 		user.setHu(true);
 		if (destCard.isOpen()) {
@@ -611,16 +627,19 @@ public class GameAction extends AbsAction {
 		Card currentCard = room.getCurrentCard();
 		if (!room.isStartChu() && user.getTouCard() != 0) {
 			user.getActions().clear();
-			// 1.小家不偷,点过,庄家开始出牌
-			room.setStartChu(true);
-			room.getCanActionSeat().clear();
-			room.getActionRecord().clear();
-			User zhuang = RoomManager.getZhuangJia(room);
-			// 1.1 判断天胡
-			boolean tianHu = CardManager.checkTianHu(room, zhuang);
-			if (!tianHu) {
-				NotifyHandler.notifyNextOperation(room, zhuang);
-				CardManager.checkBaoZiOrChuPai(room, zhuang);
+			boolean lan18 = RoomManager.xc18lan(room);
+			if (!lan18) {
+				// 1.小家不偷,点过,庄家开始出牌
+				room.setStartChu(true);
+				room.getCanActionSeat().clear();
+				room.getActionRecord().clear();
+				User zhuang = RoomManager.getZhuangJia(room);
+				// 1.1 判断天胡
+				boolean tianHu = CardManager.checkTianHu(room, zhuang);
+				if (!tianHu) {
+					NotifyHandler.notifyNextOperation(room, zhuang);
+					CardManager.checkBaoZiOrChuPai(room, zhuang);
+				}
 			}
 		} else if (!room.isStartChu() && user.isCanTianHu()) {
 			user.getActions().clear();
