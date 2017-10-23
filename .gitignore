@@ -4,5 +4,6 @@
 *.class
 target/*
 /target/
-/maven_rep/*
-/maven_rep/
+*/mavenrep/*
+/mavenrep/*
+/mavenrep/
