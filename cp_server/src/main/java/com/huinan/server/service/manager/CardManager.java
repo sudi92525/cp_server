@@ -143,7 +143,8 @@ public class CardManager {
 					}
 				}
 			}
-			if (dingFuTimes > 1) {
+			if (room.getRoomType() != ENRoomType.EN_ROOM_TYPE_XC_VALUE
+					&& dingFuTimes > 1) {
 				return false;
 			}
 		}
