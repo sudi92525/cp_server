@@ -106,7 +106,7 @@ public class Room implements Serializable {
 	// -------------------------------苍溪版本-----------------------------------
 	/** 是否小家有斧头的全红全黑算番 */
 	private boolean fanFiveHave56;
-	
+
 	// -------------------------------南充版本-----------------------------------
 	private List<Integer> fanPais = new ArrayList<>();
 	private List<Integer> allPais = new ArrayList<>();
@@ -853,6 +853,14 @@ public class Room implements Serializable {
 
 	public void setLan18(boolean lan18) {
 		this.lan18 = lan18;
+	}
+
+	public boolean isFanFiveHave56() {
+		return fanFiveHave56;
+	}
+
+	public void setFanFiveHave56(boolean fanFiveHave56) {
+		this.fanFiveHave56 = fanFiveHave56;
 	}
 
 }

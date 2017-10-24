@@ -99,6 +99,8 @@ public class RoomManager {
 			room.setDiFen(requestBody.getScore());
 		}
 		room.setLan18(requestBody.getIs18Lan());
+		room.setCheAll7Fan(requestBody.getIsFanSan7());
+		
 		rooms.put(tid, room);// 存放游戏房间信息
 		return room;
 	}
@@ -321,20 +323,20 @@ public class RoomManager {
 	 */
 	public static void shuffle(Room room) {
 		List<Integer> cards = new ArrayList<>();
-		// for (int card : CardManager.allPais) {
-		// for (int k = 0; k < 4; k++) {
-		// cards.add(card);
-		// }
-		// }
-		// TODO 写死牌
-		for (int i = 0; i < 84; i++) {
-			cards.add(34);
-			// cards.add(15);
-			// cards.add(15);
-			// cards.add(15);
-			// cards.add(15);
-			// cards.add(15);
+		for (int card : CardManager.allPais) {
+			for (int k = 0; k < 4; k++) {
+				cards.add(card);
+			}
 		}
+		// TODO 写死牌
+		// for (int i = 0; i < 84; i++) {
+		// cards.add(34);
+		// cards.add(15);
+		// cards.add(15);
+		// cards.add(15);
+		// cards.add(15);
+		// cards.add(15);
+		// }
 		Collections.shuffle(cards);
 		Collections.shuffle(cards);
 		Collections.shuffle(cards);
@@ -388,23 +390,23 @@ public class RoomManager {
 
 		int zhuangSeat = room.getZhuangSeat();
 		int seat = zhuangSeat;
-		// for (int i = 0; i < 4; i++) {
-		// int num = CardManager.BRAND_NUMFOUR[i];
-		// User user = room.getUsers().get(seat);
-		// user.setReady(false);
-		// for (int j = 0; j < num; j++) {
-		// int card = room.getFirstCard();
-		// user.getHold().add(card);
-		// }
-		// if (!user.isFive()) {
-		// user.getCanChiHoldCards().clear();
-		// user.getCanChiHoldCards().addAll(user.getHold());
-		// }
-		// CardManager.noChuDouble7AndDiaoZhui(room, user, true);
-		// seat = RoomManager.getNextSeat(seat);
-		// }
+		for (int i = 0; i < 4; i++) {
+			int num = CardManager.BRAND_NUMFOUR[i];
+			User user = room.getUsers().get(seat);
+			user.setReady(false);
+			for (int j = 0; j < num; j++) {
+				int card = room.getFirstCard();
+				user.getHold().add(card);
+			}
+			if (!user.isFive()) {
+				user.getCanChiHoldCards().clear();
+				user.getCanChiHoldCards().addAll(user.getHold());
+			}
+			CardManager.noChuDouble7AndDiaoZhui(room, user, true);
+			seat = RoomManager.getNextSeat(seat);
+		}
 		// TODO 写死牌
-		dealSiPai(room, seat);
+		// dealSiPai(room, seat);
 
 		room.setFirstCard(true);
 		room.setStepIsPlay(true);

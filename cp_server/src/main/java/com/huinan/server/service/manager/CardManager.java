@@ -569,12 +569,9 @@ public class CardManager {
 			}
 			fan += siGenNum;
 		}
-		if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_NC_VALUE
-				|| room.getRoomType() == ENRoomType.EN_ROOM_TYPE_XC_VALUE) {
-			if (room.isCheAll7Fan() && che7Num == 3) {
-				fan++;
-				log.info("南充扯了全部7点,加" + 1 + "翻");
-			}
+		if (room.isCheAll7Fan() && che7Num == 3) {
+			fan++;
+			log.info("扯了全部7点,加" + 1 + "翻");
 		}
 		log.info("总番=" + fan);
 		// 限番
