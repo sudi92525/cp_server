@@ -343,14 +343,14 @@ public class GameAction extends AbsAction {
 	private static void chi(User user, Room room) {
 		List<Integer> chiCards = user.getChoiceChiCards();
 		Card destCard = room.getCurrentCard();
-		int chiCard = 0;// 自己手里的牌
+		Integer chiCard = null;// 自己手里的牌
 		for (Integer integer : chiCards) {
 			if (integer != destCard.getNum()) {
 				chiCard = integer;
 				break;
 			}
 		}
-		if (chiCard == 0) {
+		if (chiCard == null) {
 			chiCard = destCard.getNum();
 		}
 		user.getChiCards().add(destCard.getNum());
@@ -387,9 +387,35 @@ public class GameAction extends AbsAction {
 			NotifyHandler.notifyActionFlow(room, user, destCard,
 					columnInfo.build(), ENActionType.EN_ACTION_CHI, false);
 		}
-		if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_GY_VALUE) {
+		isBaoFan(user, room, destCard, chiCard, count);
+		// 为上家记录记过上家的牌被自己吃了
+		if (destCard.getSeat() != user.getSeatIndex()) {
+			User chuUser = room.getUsers().get(destCard.getSeat());
+			chuUser.getNextChiCards().add(destCard.getNum());
+		}
+		// 计算并设置该目标牌是否可以出、之后是否可以碰
+		CardManager.setDeathCardChi(room, user, destCard.getNum());
+		// 通知出牌
+		CardManager.checkBaoZiOrChuPai(room, user);
+	}
+
+	/**
+	 * 检查是否包翻
+	 * 
+	 * @param user
+	 * @param room
+	 * @param destCard
+	 * @param chiCard
+	 * @param count
+	 */
+	private static void isBaoFan(User user, Room room, Card destCard,
+			Integer chiCard, int count) {
+		if (!room.isBaoFan()) {
+			return;
+		}
+		if (chiCard != null) {// 吃成四个
 			int myCardCount = CardManager.getCardCountOfAll(user, chiCard);
-			// GY 包翻:扯/偷过,又吃一个
+			// 包翻:扯/偷过,又吃一个
 			if (count == 4 && CardManager.getCardIsChe(user, destCard.getNum())) {
 				if (destCard.isChu()) {
 					// 打出牌的包翻
@@ -409,7 +435,7 @@ public class GameAction extends AbsAction {
 					}
 				}
 			}
-			// 自己手裏的四根，自己包煩
+			// 自己手里的四根，自己包番
 			if (myCardCount == 4 && CardManager.getCardIsChe(user, chiCard)) {
 				if (user.getBaoFans().get(user.getSeatIndex()) != null) {
 					user.getBaoFans().put(user.getSeatIndex(),
@@ -418,19 +444,12 @@ public class GameAction extends AbsAction {
 					user.getBaoFans().put(user.getSeatIndex(), 1);
 				}
 			}
+		} else {// 扯后对成四个：苍溪
+			if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX_VALUE) {
+				// TODO
+			}
 		}
 
-		// 为上家记录记过上家的牌被自己吃了
-		if (destCard.getSeat() != user.getSeatIndex()) {
-			User chuUser = room.getUsers().get(destCard.getSeat());
-			chuUser.getNextChiCards().add(destCard.getNum());
-		}
-		// 更新处理不能出牌的消息
-		// CardManager.removeDeathCard(destCard.getNum(), user);
-		// 计算并设置该目标牌是否可以出、之后是否可以碰
-		CardManager.setDeathCardChi(room, user, destCard.getNum());
-		// 通知出牌
-		CardManager.checkBaoZiOrChuPai(room, user);
 	}
 
 	/**
