@@ -1073,7 +1073,8 @@ public class CardManager {
 		}
 		int cardValue = getCardValue(card);
 		for (Integer integer : user.getNoChuCards()) {
-			if (getCardValue(integer) == cardValue) {
+			if (getCardValue(integer) == cardValue
+					&& !user.getDouble7s().contains(integer)) {
 				tui = true;
 				break;
 			}

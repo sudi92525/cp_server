@@ -193,13 +193,13 @@ public class GameAction extends AbsAction {
 			List<Integer> sameList = CardManager.getSameCards(destCard
 					.getCardValue());
 			for (Integer integer : sameList) {
-				CardManager.removeDeathCardNCXC(integer, user);
+				if (!user.getDouble7s().contains(integer)) {
+					CardManager.removeDeathCardNCXC(integer, user);
+				}
 			}
 		} else {
 			CardManager.removeDeathCard(destCard.getNum(), user);
 		}
-		// CardManager.removeDeathCard(destCard.getNum(), user);
-
 		NotifyHandler.notifyActionFlow(room, user, destCard, null,
 				ENActionType.EN_ACTION_TUI, false);
 
