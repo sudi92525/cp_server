@@ -99,6 +99,8 @@ public class RoomManager {
 			room.setDiFen(requestBody.getScore());
 		}
 		room.setLan18(requestBody.getIs18Lan());
+		room.setFanFiveHave56(requestBody.getIsFanXjHave56());
+
 		rooms.put(tid, room);// 存放游戏房间信息
 		return room;
 	}
@@ -300,15 +302,26 @@ public class RoomManager {
 		List<Integer> hold = user.getHold();
 		Map<Integer, Integer> holdMap = CardManager.toMap(hold);
 		Iterator<Integer> iterator = holdMap.keySet().iterator();
+		int heiKanNum = 0;
 		while (iterator.hasNext()) {
 			Integer card = (Integer) iterator.next();
 			int num = holdMap.get(card);
-			if (num >= 3 && CardManager.colorIsRed(card)) {
-				room.setDangSeat(user.getSeatIndex());
-				// 当-notify
-				NotifyHandler.notifyActionFlow(room, user, null, null,
-						ENActionType.EN_ACTION_DANG, false);
-				return true;
+			if (num >= 3) {
+				if (CardManager.colorIsRed(card)) {
+					room.setDangSeat(user.getSeatIndex());
+					NotifyHandler.notifyActionFlow(room, user, null, null,
+							ENActionType.EN_ACTION_DANG, false);
+					return true;
+				} else {
+					heiKanNum++;
+					if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX_VALUE
+							&& heiKanNum == 2) {
+						room.setDangSeat(user.getSeatIndex());
+						NotifyHandler.notifyActionFlow(room, user, null, null,
+								ENActionType.EN_ACTION_DANG, false);
+						return true;
+					}
+				}
 			}
 		}
 		return false;
@@ -424,7 +437,8 @@ public class RoomManager {
 		}
 		if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_NC_VALUE
 				|| room.getRoomType() == ENRoomType.EN_ROOM_TYPE_XC_VALUE
-				|| room.getRoomType() == ENRoomType.EN_ROOM_TYPE_MY_VALUE) {
+				|| room.getRoomType() == ENRoomType.EN_ROOM_TYPE_MY_VALUE
+				|| room.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX_VALUE) {
 			// 开始选当
 			startChoiceDang(room);
 		} else {

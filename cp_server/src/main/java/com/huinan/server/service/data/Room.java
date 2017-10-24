@@ -74,8 +74,6 @@ public class Room implements Serializable {
 	private boolean piao;
 	/** 是否丁斧两边甩 */
 	private boolean dingFuColor = true;
-	/** 34,丁斧算番 */
-	private boolean dingFu34IsFan = false;
 	/** 算分类型:加番,乘番 */
 	private boolean addFan = false;
 	/** 是否五黑一红可以割 */
@@ -106,7 +104,7 @@ public class Room implements Serializable {
 	// -------------------------------苍溪版本-----------------------------------
 	/** 是否小家有斧头的全红全黑算番 */
 	private boolean fanFiveHave56;
-	
+
 	// -------------------------------南充版本-----------------------------------
 	private List<Integer> fanPais = new ArrayList<>();
 	private List<Integer> allPais = new ArrayList<>();
@@ -506,14 +504,6 @@ public class Room implements Serializable {
 		this.dingFuColor = dingFuColor;
 	}
 
-	public boolean isDingFu34IsFan() {
-		return dingFu34IsFan;
-	}
-
-	public void setDingFu34IsFan(boolean dingFu34IsFan) {
-		this.dingFu34IsFan = dingFu34IsFan;
-	}
-
 	public List<Integer> getFanPais() {
 		return fanPais;
 	}
@@ -853,6 +843,14 @@ public class Room implements Serializable {
 
 	public void setLan18(boolean lan18) {
 		this.lan18 = lan18;
+	}
+
+	public boolean isFanFiveHave56() {
+		return fanFiveHave56;
+	}
+
+	public void setFanFiveHave56(boolean fanFiveHave56) {
+		this.fanFiveHave56 = fanFiveHave56;
 	}
 
 }

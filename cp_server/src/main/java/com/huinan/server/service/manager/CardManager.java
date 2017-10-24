@@ -261,7 +261,7 @@ public class CardManager {
 						log.info("tuoNum,五黑一红(包含丁斧)，tuo = 5");
 					} else {
 						log.info("tuoNum,五红六黑，tuo = 2");
-					} 
+					}
 				} else if (tuo == 4) {
 					tuo = 5;
 					log.info("tuoNum,五红一黑:有斧头甩一次，tuo = 5");
@@ -370,6 +370,18 @@ public class CardManager {
 				} else if (tuo >= Constant.TUO_XIAOJIA_1_FAN) {
 					fan++;
 					log.info("五张大胡1翻，加1翻");
+				}
+			} else if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX_VALUE) {
+				if (user.getSeatIndex() == room.getDangSeat()) {
+					if (tuo >= Constant.TUO_XIAOJIA_2_FAN) {
+						fan++;
+						log.info("苍溪当家五张大胡1翻，加1翻");
+					}
+				} else {
+					if (tuo >= Constant.TUO_XIAOJIA_1_FAN) {
+						fan++;
+						log.info("苍溪五张大胡1翻，加1翻");
+					}
 				}
 			}
 		} else {
@@ -508,6 +520,10 @@ public class CardManager {
 							|| room.getRoomType() == ENRoomType.EN_ROOM_TYPE_XC_VALUE) {
 						fan = 1;
 						log.info("小家全红（包含丁斧），南充西充算1番");
+					} else if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX_VALUE
+							&& room.isFanFiveHave56()) {
+						fan = 1;
+						log.info("小家全红（包含丁斧），苍溪算1番");
 					} else {
 						fan = 0;
 						log.info("小家全红（包含丁斧），不算番");
@@ -522,6 +538,10 @@ public class CardManager {
 							|| room.getRoomType() == ENRoomType.EN_ROOM_TYPE_XC_VALUE) {
 						fan = 1;
 						log.info("小家全黑（包含丁斧），南充西充算1番");
+					} else if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX_VALUE
+							&& room.isFanFiveHave56()) {
+						fan = 1;
+						log.info("小家全黑（包含丁斧），苍溪算1番");
 					} else {
 						fan = 0;
 						log.info("小家全黑（包含丁斧），不算番");
@@ -1101,15 +1121,16 @@ public class CardManager {
 			}
 		} else {
 			if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_NC_VALUE
-					|| room.getRoomType() == ENRoomType.EN_ROOM_TYPE_XC_VALUE) {
+					|| room.getRoomType() == ENRoomType.EN_ROOM_TYPE_XC_VALUE
+					|| room.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX_VALUE) {
 				if (user.getSeatIndex() == room.getDangSeat()) {// 当家20坨
 					if (tuo < Constant.hu_zj_score) {
-						log.info("isHu,false:NC当家坨数不够20");
+						log.info("isHu,false:NC/XC/CX当家坨数不够20");
 						return false;
 					}
 				} else {
 					if (tuo < Constant.hu_xj_score) {
-						log.info("isHu,false:NC普通家坨数不够18");
+						log.info("isHu,false:NC/XC/CX普通家坨数不够18");
 						return false;
 					}
 				}
