@@ -261,7 +261,7 @@ public class CardManager {
 						log.info("tuoNum,五黑一红(包含丁斧)，tuo = 5");
 					} else {
 						log.info("tuoNum,五红六黑，tuo = 2");
-					}
+					} 
 				} else if (tuo == 4) {
 					tuo = 5;
 					log.info("tuoNum,五红一黑:有斧头甩一次，tuo = 5");
@@ -271,9 +271,10 @@ public class CardManager {
 				}
 			} else {// 多个斧头
 				if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_NC_VALUE
-						|| room.getRoomType() == ENRoomType.EN_ROOM_TYPE_MY_VALUE) {
+						|| room.getRoomType() == ENRoomType.EN_ROOM_TYPE_MY_VALUE
+						|| room.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX_VALUE) {
 					tuo = 0;
-					log.info("tuoNum,南充西充,MY，一对丁丁斧头不能割牌，tuo = 0");
+					log.info("tuoNum,南充/西充/MY/苍溪，一对丁丁斧头不能割牌，tuo = 0");
 					return tuo;
 				} else if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_XC_VALUE) {
 					if (tuo == 2) {// 2个丁丁，其他全黑
@@ -1021,9 +1022,12 @@ public class CardManager {
 			}
 		}
 		boolean chdhTui = isChiSameValueRedCard(room, user, card.getNum());
-		// boolean ncChiTui = checkNCChiTui(room, user, card.getNum());
-
-		if (chdhTui || (card.isCheMo() && countOfChi > 0)) {
+		boolean ncChiTui = checkNCChiTui(room, user, card.getNum());
+		if (ncChiTui) {
+			user.getActions().add(ENActionType.EN_ACTION_TUI);
+			room.getCanActionSeat().add(user.getSeatIndex());
+			return true;
+		} else if (chdhTui || (card.isCheMo() && countOfChi > 0)) {
 			// 别人打得我吃了的牌
 			CardManager.addToDeathCard(card.getNum(), user);
 			user.getActions().add(ENActionType.EN_ACTION_TUI);

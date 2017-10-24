@@ -74,6 +74,7 @@ public class RoomCreate extends AbsAction {
 			creator.setIsCheZhui(requestBody.getIsCheZhui());
 			creator.setIsDiaoZhui(room.isDiaoZhui());
 			creator.setScore(room.getDiFen());
+			creator.setIs18Lan(room.isLan18());
 			
 			response.setTableInfo(creator);
 			room.setRoomTable(creator.build());

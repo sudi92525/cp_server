@@ -1,5 +1,6 @@
 package com.huinan.server.service.manager;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.huinan.proto.CpMsgCs.CSNotifyActionFlow;
@@ -21,17 +22,22 @@ public class UserUtils {
 	 */
 	public static void setPlayBackData(User user,
 			CSNotifyActionFlow.Builder flow) {
-		if (flow.getAction().getActType() == ENActionType.EN_ACTION_TOU) {
-			List<PBColumnInfo> cols = flow.getAction().getColInfoList();
+		PBAction action = flow.getAction();
+		if (action.getActType() == ENActionType.EN_ACTION_TOU) {
+			List<PBColumnInfo> cols = action.getColInfoList();
 			if (cols != null && !cols.isEmpty()) {
-				for (int i = 0; i <= cols.size(); i++) {
-					PBColumnInfo pbColumnInfo = cols.get(i);
+				List<PBColumnInfo> newCols = new ArrayList<>();
+				newCols.addAll(cols);
+				for (int i = 0; i < newCols.size(); i++) {
+					PBColumnInfo pbColumnInfo = newCols.get(i);
 					if (pbColumnInfo.getIsFan()) {
 						PBColumnInfo.Builder build = pbColumnInfo.toBuilder();
 						build.setIsFan(false);
-						cols.set(i, build.build());
+						newCols.set(i, build.build());
 					}
 				}
+				action.toBuilder().clearColInfo();
+				action.toBuilder().addAllColInfo(newCols);
 			}
 		}
 		if (user.getPlayBack() == null) {

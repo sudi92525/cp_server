@@ -90,18 +90,23 @@ public class Room implements Serializable {
 	private boolean touDang;
 	/** difen */
 	private int diFen = 1;
+
+	private int huSeat;
 	// ---------------西充规则--------------------
 	/** 自摸加番 */
-	private boolean ziMoJiaFan = true;// TODO
+	private boolean ziMoJiaFan = true;
 	/** 丁丁斧头随便甩 */
-	private boolean dingFuShuaiTimes = true;// TODO
+	private boolean dingFuShuaiTimes = true;
 	/** 是否扯了所有六点加番 */
 	private boolean cheAll7Fan;
 	/** 是否三四算番 */
 	private boolean jiaFan34;
-
-	private int huSeat;
-
+	/** 是否18烂 */
+	private boolean lan18;
+	// -------------------------------苍溪版本-----------------------------------
+	/** 是否小家有斧头的全红全黑算番 */
+	private boolean fanFiveHave56;
+	
 	// -------------------------------南充版本-----------------------------------
 	private List<Integer> fanPais = new ArrayList<>();
 	private List<Integer> allPais = new ArrayList<>();
@@ -840,6 +845,14 @@ public class Room implements Serializable {
 
 	public void setLan18Seat(int lan18Seat) {
 		this.lan18Seat = lan18Seat;
+	}
+
+	public boolean isLan18() {
+		return lan18;
+	}
+
+	public void setLan18(boolean lan18) {
+		this.lan18 = lan18;
 	}
 
 }

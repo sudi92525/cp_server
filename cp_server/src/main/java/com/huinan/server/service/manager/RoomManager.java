@@ -98,6 +98,7 @@ public class RoomManager {
 		if (requestBody.hasScore() && requestBody.getScore() > 0) {
 			room.setDiFen(requestBody.getScore());
 		}
+		room.setLan18(requestBody.getIs18Lan());
 		rooms.put(tid, room);// 存放游戏房间信息
 		return room;
 	}
@@ -450,7 +451,7 @@ public class RoomManager {
 			if (i == 0) {
 				int card1 = 11;
 				user.getHold().add(card1);
-				int card2 = 11;
+				int card2 = 12;
 				user.getHold().add(card2);
 				int card3 = 13;
 				user.getHold().add(card3);
@@ -478,9 +479,9 @@ public class RoomManager {
 				user.getHold().add(card14);
 				int card15 = 36;
 				user.getHold().add(card15);
-				int card16 = 44;
+				int card16 = 56;
 				user.getHold().add(card16);
-				int card17 = 45;
+				int card17 = 46;
 				user.getHold().add(card17);
 				int card18 = 46;
 				user.getHold().add(card18);
@@ -489,13 +490,13 @@ public class RoomManager {
 				user.getHold().add(card1);
 				int card2 = 11;
 				user.getHold().add(card2);
-				int card3 = 13;
+				int card3 = 11;
 				user.getHold().add(card3);
-				int card4 = 14;
+				int card4 = 66;
 				user.getHold().add(card4);
-				int card5 = 15;
+				int card5 = 12;
 				user.getHold().add(card5);
-				int card6 = 16;
+				int card6 = 12;
 				user.getHold().add(card6);
 				int card7 = 22;
 				user.getHold().add(card7);
@@ -520,7 +521,7 @@ public class RoomManager {
 				int card17 = 45;
 				user.getHold().add(card17);
 			} else if (i == 2) {
-				int card1 = 12;
+				int card1 = 11;
 				user.getHold().add(card1);
 				int card2 = 12;
 				user.getHold().add(card2);
@@ -538,7 +539,7 @@ public class RoomManager {
 				user.getHold().add(card8);
 				int card9 = 24;
 				user.getHold().add(card9);
-				int card10 = 25;
+				int card10 = 24;
 				user.getHold().add(card10);
 				int card11 = 26;
 				user.getHold().add(card11);
@@ -557,11 +558,11 @@ public class RoomManager {
 			} else if (i == 3) {
 				int card1 = 12;
 				user.getHold().add(card1);
-				int card2 = 12;
+				int card2 = 34;
 				user.getHold().add(card2);
 				int card3 = 34;
 				user.getHold().add(card3);
-				int card4 = 56;
+				int card4 = 44;
 				user.getHold().add(card4);
 				int card5 = 56;
 				user.getHold().add(card5);
@@ -749,6 +750,9 @@ public class RoomManager {
 	 */
 	public static boolean xc18lan(Room room) {
 		if (room.getRoomType() != ENRoomType.EN_ROOM_TYPE_XC_VALUE) {
+			return false;
+		}
+		if (!room.isLan18()) {
 			return false;
 		}
 		boolean lan18 = false;
