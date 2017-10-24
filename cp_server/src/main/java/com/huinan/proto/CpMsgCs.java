@@ -4603,24 +4603,7 @@ public final class CpMsgCs {
     int getDeathCard(int index);
 
     /**
-     * <code>optional int32 hu_type = 8;</code>
-     *
-     * <pre>
-     *胡牌类型：1自摸，2点炮，3别人翻开胡的
-     * </pre>
-     */
-    boolean hasHuType();
-    /**
-     * <code>optional int32 hu_type = 8;</code>
-     *
-     * <pre>
-     *胡牌类型：1自摸，2点炮，3别人翻开胡的
-     * </pre>
-     */
-    int getHuType();
-
-    /**
-     * <code>optional bool is_chu = 9;</code>
+     * <code>optional bool is_chu = 8;</code>
      *
      * <pre>
      *是否是出牌
@@ -4628,7 +4611,7 @@ public final class CpMsgCs {
      */
     boolean hasIsChu();
     /**
-     * <code>optional bool is_chu = 9;</code>
+     * <code>optional bool is_chu = 8;</code>
      *
      * <pre>
      *是否是出牌
@@ -4637,7 +4620,7 @@ public final class CpMsgCs {
     boolean getIsChu();
 
     /**
-     * <code>optional .com.huinan.proto.ENZhaoType zhao_type = 10;</code>
+     * <code>optional .com.huinan.proto.ENZhaoType zhao_type = 9;</code>
      *
      * <pre>
      * 玩家点击招的类型
@@ -4645,7 +4628,7 @@ public final class CpMsgCs {
      */
     boolean hasZhaoType();
     /**
-     * <code>optional .com.huinan.proto.ENZhaoType zhao_type = 10;</code>
+     * <code>optional .com.huinan.proto.ENZhaoType zhao_type = 9;</code>
      *
      * <pre>
      * 玩家点击招的类型
@@ -4654,7 +4637,7 @@ public final class CpMsgCs {
     com.huinan.proto.CpMsgCs.ENZhaoType getZhaoType();
 
     /**
-     * <code>repeated .com.huinan.proto.ENZhaoType zhao_list = 11;</code>
+     * <code>repeated .com.huinan.proto.ENZhaoType zhao_list = 10;</code>
      *
      * <pre>
      * 可招的类型列表
@@ -4662,7 +4645,7 @@ public final class CpMsgCs {
      */
     java.util.List<com.huinan.proto.CpMsgCs.ENZhaoType> getZhaoListList();
     /**
-     * <code>repeated .com.huinan.proto.ENZhaoType zhao_list = 11;</code>
+     * <code>repeated .com.huinan.proto.ENZhaoType zhao_list = 10;</code>
      *
      * <pre>
      * 可招的类型列表
@@ -4670,7 +4653,7 @@ public final class CpMsgCs {
      */
     int getZhaoListCount();
     /**
-     * <code>repeated .com.huinan.proto.ENZhaoType zhao_list = 11;</code>
+     * <code>repeated .com.huinan.proto.ENZhaoType zhao_list = 10;</code>
      *
      * <pre>
      * 可招的类型列表
@@ -4679,7 +4662,7 @@ public final class CpMsgCs {
     com.huinan.proto.CpMsgCs.ENZhaoType getZhaoList(int index);
 
     /**
-     * <code>repeated int32 piao_list = 12;</code>
+     * <code>repeated int32 piao_list = 11;</code>
      *
      * <pre>
      * 漂了的玩家座位号
@@ -4687,7 +4670,7 @@ public final class CpMsgCs {
      */
     java.util.List<java.lang.Integer> getPiaoListList();
     /**
-     * <code>repeated int32 piao_list = 12;</code>
+     * <code>repeated int32 piao_list = 11;</code>
      *
      * <pre>
      * 漂了的玩家座位号
@@ -4695,7 +4678,7 @@ public final class CpMsgCs {
      */
     int getPiaoListCount();
     /**
-     * <code>repeated int32 piao_list = 12;</code>
+     * <code>repeated int32 piao_list = 11;</code>
      *
      * <pre>
      * 漂了的玩家座位号
@@ -4704,7 +4687,7 @@ public final class CpMsgCs {
     int getPiaoList(int index);
 
     /**
-     * <code>optional int32 left_card_num = 13;</code>
+     * <code>optional int32 left_card_num = 12;</code>
      *
      * <pre>
      *剩余牌数量
@@ -4712,7 +4695,7 @@ public final class CpMsgCs {
      */
     boolean hasLeftCardNum();
     /**
-     * <code>optional int32 left_card_num = 13;</code>
+     * <code>optional int32 left_card_num = 12;</code>
      *
      * <pre>
      *剩余牌数量
@@ -4721,7 +4704,7 @@ public final class CpMsgCs {
     int getLeftCardNum();
 
     /**
-     * <code>optional int32 tiles_on_hand_num = 14;</code>
+     * <code>optional int32 tiles_on_hand_num = 13;</code>
      *
      * <pre>
      *当前手牌张数
@@ -4729,7 +4712,7 @@ public final class CpMsgCs {
      */
     boolean hasTilesOnHandNum();
     /**
-     * <code>optional int32 tiles_on_hand_num = 14;</code>
+     * <code>optional int32 tiles_on_hand_num = 13;</code>
      *
      * <pre>
      *当前手牌张数
@@ -4851,12 +4834,18 @@ public final class CpMsgCs {
             }
             case 64: {
               bitField0_ |= 0x00000020;
-              huType_ = input.readInt32();
+              isChu_ = input.readBool();
               break;
             }
             case 72: {
-              bitField0_ |= 0x00000040;
-              isChu_ = input.readBool();
+              int rawValue = input.readEnum();
+              com.huinan.proto.CpMsgCs.ENZhaoType value = com.huinan.proto.CpMsgCs.ENZhaoType.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(9, rawValue);
+              } else {
+                bitField0_ |= 0x00000040;
+                zhaoType_ = value;
+              }
               break;
             }
             case 80: {
@@ -4864,38 +4853,27 @@ public final class CpMsgCs {
               com.huinan.proto.CpMsgCs.ENZhaoType value = com.huinan.proto.CpMsgCs.ENZhaoType.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(10, rawValue);
-              } else {
-                bitField0_ |= 0x00000080;
-                zhaoType_ = value;
-              }
-              break;
-            }
-            case 88: {
-              int rawValue = input.readEnum();
-              com.huinan.proto.CpMsgCs.ENZhaoType value = com.huinan.proto.CpMsgCs.ENZhaoType.valueOf(rawValue);
-              if (value == null) {
-                unknownFields.mergeVarintField(11, rawValue);
                 } else {
-                if (!((mutable_bitField0_ & 0x00000400) == 0x00000400)) {
+                if (!((mutable_bitField0_ & 0x00000200) == 0x00000200)) {
                   zhaoList_ = new java.util.ArrayList<com.huinan.proto.CpMsgCs.ENZhaoType>();
-                  mutable_bitField0_ |= 0x00000400;
+                  mutable_bitField0_ |= 0x00000200;
                 }
                 zhaoList_.add(value);
               }
               break;
             }
-            case 90: {
+            case 82: {
               int length = input.readRawVarint32();
               int oldLimit = input.pushLimit(length);
               while(input.getBytesUntilLimit() > 0) {
                 int rawValue = input.readEnum();
                 com.huinan.proto.CpMsgCs.ENZhaoType value = com.huinan.proto.CpMsgCs.ENZhaoType.valueOf(rawValue);
                 if (value == null) {
-                  unknownFields.mergeVarintField(11, rawValue);
+                  unknownFields.mergeVarintField(10, rawValue);
                   } else {
-                  if (!((mutable_bitField0_ & 0x00000400) == 0x00000400)) {
+                  if (!((mutable_bitField0_ & 0x00000200) == 0x00000200)) {
                     zhaoList_ = new java.util.ArrayList<com.huinan.proto.CpMsgCs.ENZhaoType>();
-                    mutable_bitField0_ |= 0x00000400;
+                    mutable_bitField0_ |= 0x00000200;
                   }
                   zhaoList_.add(value);
                 }
@@ -4903,20 +4881,20 @@ public final class CpMsgCs {
               input.popLimit(oldLimit);
               break;
             }
-            case 96: {
-              if (!((mutable_bitField0_ & 0x00000800) == 0x00000800)) {
+            case 88: {
+              if (!((mutable_bitField0_ & 0x00000400) == 0x00000400)) {
                 piaoList_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000800;
+                mutable_bitField0_ |= 0x00000400;
               }
               piaoList_.add(input.readInt32());
               break;
             }
-            case 98: {
+            case 90: {
               int length = input.readRawVarint32();
               int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000800) == 0x00000800) && input.getBytesUntilLimit() > 0) {
+              if (!((mutable_bitField0_ & 0x00000400) == 0x00000400) && input.getBytesUntilLimit() > 0) {
                 piaoList_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000800;
+                mutable_bitField0_ |= 0x00000400;
               }
               while (input.getBytesUntilLimit() > 0) {
                 piaoList_.add(input.readInt32());
@@ -4924,13 +4902,13 @@ public final class CpMsgCs {
               input.popLimit(limit);
               break;
             }
-            case 104: {
-              bitField0_ |= 0x00000100;
+            case 96: {
+              bitField0_ |= 0x00000080;
               leftCardNum_ = input.readInt32();
               break;
             }
-            case 112: {
-              bitField0_ |= 0x00000200;
+            case 104: {
+              bitField0_ |= 0x00000100;
               tilesOnHandNum_ = input.readInt32();
               break;
             }
@@ -4948,10 +4926,10 @@ public final class CpMsgCs {
         if (((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
           deathCard_ = java.util.Collections.unmodifiableList(deathCard_);
         }
-        if (((mutable_bitField0_ & 0x00000400) == 0x00000400)) {
+        if (((mutable_bitField0_ & 0x00000200) == 0x00000200)) {
           zhaoList_ = java.util.Collections.unmodifiableList(zhaoList_);
         }
-        if (((mutable_bitField0_ & 0x00000800) == 0x00000800)) {
+        if (((mutable_bitField0_ & 0x00000400) == 0x00000400)) {
           piaoList_ = java.util.Collections.unmodifiableList(piaoList_);
         }
         this.unknownFields = unknownFields.build();
@@ -5182,43 +5160,20 @@ public final class CpMsgCs {
       return deathCard_.get(index);
     }
 
-    public static final int HU_TYPE_FIELD_NUMBER = 8;
-    private int huType_;
-    /**
-     * <code>optional int32 hu_type = 8;</code>
-     *
-     * <pre>
-     *胡牌类型：1自摸，2点炮，3别人翻开胡的
-     * </pre>
-     */
-    public boolean hasHuType() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
-    }
-    /**
-     * <code>optional int32 hu_type = 8;</code>
-     *
-     * <pre>
-     *胡牌类型：1自摸，2点炮，3别人翻开胡的
-     * </pre>
-     */
-    public int getHuType() {
-      return huType_;
-    }
-
-    public static final int IS_CHU_FIELD_NUMBER = 9;
+    public static final int IS_CHU_FIELD_NUMBER = 8;
     private boolean isChu_;
     /**
-     * <code>optional bool is_chu = 9;</code>
+     * <code>optional bool is_chu = 8;</code>
      *
      * <pre>
      *是否是出牌
      * </pre>
      */
     public boolean hasIsChu() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
+      return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     /**
-     * <code>optional bool is_chu = 9;</code>
+     * <code>optional bool is_chu = 8;</code>
      *
      * <pre>
      *是否是出牌
@@ -5228,20 +5183,20 @@ public final class CpMsgCs {
       return isChu_;
     }
 
-    public static final int ZHAO_TYPE_FIELD_NUMBER = 10;
+    public static final int ZHAO_TYPE_FIELD_NUMBER = 9;
     private com.huinan.proto.CpMsgCs.ENZhaoType zhaoType_;
     /**
-     * <code>optional .com.huinan.proto.ENZhaoType zhao_type = 10;</code>
+     * <code>optional .com.huinan.proto.ENZhaoType zhao_type = 9;</code>
      *
      * <pre>
      * 玩家点击招的类型
      * </pre>
      */
     public boolean hasZhaoType() {
-      return ((bitField0_ & 0x00000080) == 0x00000080);
+      return ((bitField0_ & 0x00000040) == 0x00000040);
     }
     /**
-     * <code>optional .com.huinan.proto.ENZhaoType zhao_type = 10;</code>
+     * <code>optional .com.huinan.proto.ENZhaoType zhao_type = 9;</code>
      *
      * <pre>
      * 玩家点击招的类型
@@ -5251,10 +5206,10 @@ public final class CpMsgCs {
       return zhaoType_;
     }
 
-    public static final int ZHAO_LIST_FIELD_NUMBER = 11;
+    public static final int ZHAO_LIST_FIELD_NUMBER = 10;
     private java.util.List<com.huinan.proto.CpMsgCs.ENZhaoType> zhaoList_;
     /**
-     * <code>repeated .com.huinan.proto.ENZhaoType zhao_list = 11;</code>
+     * <code>repeated .com.huinan.proto.ENZhaoType zhao_list = 10;</code>
      *
      * <pre>
      * 可招的类型列表
@@ -5264,7 +5219,7 @@ public final class CpMsgCs {
       return zhaoList_;
     }
     /**
-     * <code>repeated .com.huinan.proto.ENZhaoType zhao_list = 11;</code>
+     * <code>repeated .com.huinan.proto.ENZhaoType zhao_list = 10;</code>
      *
      * <pre>
      * 可招的类型列表
@@ -5274,7 +5229,7 @@ public final class CpMsgCs {
       return zhaoList_.size();
     }
     /**
-     * <code>repeated .com.huinan.proto.ENZhaoType zhao_list = 11;</code>
+     * <code>repeated .com.huinan.proto.ENZhaoType zhao_list = 10;</code>
      *
      * <pre>
      * 可招的类型列表
@@ -5284,10 +5239,10 @@ public final class CpMsgCs {
       return zhaoList_.get(index);
     }
 
-    public static final int PIAO_LIST_FIELD_NUMBER = 12;
+    public static final int PIAO_LIST_FIELD_NUMBER = 11;
     private java.util.List<java.lang.Integer> piaoList_;
     /**
-     * <code>repeated int32 piao_list = 12;</code>
+     * <code>repeated int32 piao_list = 11;</code>
      *
      * <pre>
      * 漂了的玩家座位号
@@ -5298,7 +5253,7 @@ public final class CpMsgCs {
       return piaoList_;
     }
     /**
-     * <code>repeated int32 piao_list = 12;</code>
+     * <code>repeated int32 piao_list = 11;</code>
      *
      * <pre>
      * 漂了的玩家座位号
@@ -5308,7 +5263,7 @@ public final class CpMsgCs {
       return piaoList_.size();
     }
     /**
-     * <code>repeated int32 piao_list = 12;</code>
+     * <code>repeated int32 piao_list = 11;</code>
      *
      * <pre>
      * 漂了的玩家座位号
@@ -5318,20 +5273,20 @@ public final class CpMsgCs {
       return piaoList_.get(index);
     }
 
-    public static final int LEFT_CARD_NUM_FIELD_NUMBER = 13;
+    public static final int LEFT_CARD_NUM_FIELD_NUMBER = 12;
     private int leftCardNum_;
     /**
-     * <code>optional int32 left_card_num = 13;</code>
+     * <code>optional int32 left_card_num = 12;</code>
      *
      * <pre>
      *剩余牌数量
      * </pre>
      */
     public boolean hasLeftCardNum() {
-      return ((bitField0_ & 0x00000100) == 0x00000100);
+      return ((bitField0_ & 0x00000080) == 0x00000080);
     }
     /**
-     * <code>optional int32 left_card_num = 13;</code>
+     * <code>optional int32 left_card_num = 12;</code>
      *
      * <pre>
      *剩余牌数量
@@ -5341,20 +5296,20 @@ public final class CpMsgCs {
       return leftCardNum_;
     }
 
-    public static final int TILES_ON_HAND_NUM_FIELD_NUMBER = 14;
+    public static final int TILES_ON_HAND_NUM_FIELD_NUMBER = 13;
     private int tilesOnHandNum_;
     /**
-     * <code>optional int32 tiles_on_hand_num = 14;</code>
+     * <code>optional int32 tiles_on_hand_num = 13;</code>
      *
      * <pre>
      *当前手牌张数
      * </pre>
      */
     public boolean hasTilesOnHandNum() {
-      return ((bitField0_ & 0x00000200) == 0x00000200);
+      return ((bitField0_ & 0x00000100) == 0x00000100);
     }
     /**
-     * <code>optional int32 tiles_on_hand_num = 14;</code>
+     * <code>optional int32 tiles_on_hand_num = 13;</code>
      *
      * <pre>
      *当前手牌张数
@@ -5372,7 +5327,6 @@ public final class CpMsgCs {
       destIndex_ = 0;
       isFan_ = false;
       deathCard_ = java.util.Collections.emptyList();
-      huType_ = 0;
       isChu_ = false;
       zhaoType_ = com.huinan.proto.CpMsgCs.ENZhaoType.EN_ZHAO_TYPE_CHI;
       zhaoList_ = java.util.Collections.emptyList();
@@ -5415,25 +5369,22 @@ public final class CpMsgCs {
         output.writeInt32(7, deathCard_.get(i));
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeInt32(8, huType_);
+        output.writeBool(8, isChu_);
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        output.writeBool(9, isChu_);
-      }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        output.writeEnum(10, zhaoType_.getNumber());
+        output.writeEnum(9, zhaoType_.getNumber());
       }
       for (int i = 0; i < zhaoList_.size(); i++) {
-        output.writeEnum(11, zhaoList_.get(i).getNumber());
+        output.writeEnum(10, zhaoList_.get(i).getNumber());
       }
       for (int i = 0; i < piaoList_.size(); i++) {
-        output.writeInt32(12, piaoList_.get(i));
+        output.writeInt32(11, piaoList_.get(i));
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeInt32(12, leftCardNum_);
       }
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
-        output.writeInt32(13, leftCardNum_);
-      }
-      if (((bitField0_ & 0x00000200) == 0x00000200)) {
-        output.writeInt32(14, tilesOnHandNum_);
+        output.writeInt32(13, tilesOnHandNum_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -5479,15 +5430,11 @@ public final class CpMsgCs {
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(8, huType_);
+          .computeBoolSize(8, isChu_);
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(9, isChu_);
-      }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(10, zhaoType_.getNumber());
+          .computeEnumSize(9, zhaoType_.getNumber());
       }
       {
         int dataSize = 0;
@@ -5507,13 +5454,13 @@ public final class CpMsgCs {
         size += dataSize;
         size += 1 * getPiaoListList().size();
       }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(12, leftCardNum_);
+      }
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(13, leftCardNum_);
-      }
-      if (((bitField0_ & 0x00000200) == 0x00000200)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(14, tilesOnHandNum_);
+          .computeInt32Size(13, tilesOnHandNum_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -5651,20 +5598,18 @@ public final class CpMsgCs {
         bitField0_ = (bitField0_ & ~0x00000020);
         deathCard_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000040);
-        huType_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000080);
         isChu_ = false;
-        bitField0_ = (bitField0_ & ~0x00000100);
+        bitField0_ = (bitField0_ & ~0x00000080);
         zhaoType_ = com.huinan.proto.CpMsgCs.ENZhaoType.EN_ZHAO_TYPE_CHI;
-        bitField0_ = (bitField0_ & ~0x00000200);
+        bitField0_ = (bitField0_ & ~0x00000100);
         zhaoList_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000400);
+        bitField0_ = (bitField0_ & ~0x00000200);
         piaoList_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000800);
+        bitField0_ = (bitField0_ & ~0x00000400);
         leftCardNum_ = 0;
-        bitField0_ = (bitField0_ & ~0x00001000);
+        bitField0_ = (bitField0_ & ~0x00000800);
         tilesOnHandNum_ = 0;
-        bitField0_ = (bitField0_ & ~0x00002000);
+        bitField0_ = (bitField0_ & ~0x00001000);
         return this;
       }
 
@@ -5730,31 +5675,27 @@ public final class CpMsgCs {
         if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
           to_bitField0_ |= 0x00000020;
         }
-        result.huType_ = huType_;
+        result.isChu_ = isChu_;
         if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
           to_bitField0_ |= 0x00000040;
         }
-        result.isChu_ = isChu_;
-        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
-          to_bitField0_ |= 0x00000080;
-        }
         result.zhaoType_ = zhaoType_;
-        if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        if (((bitField0_ & 0x00000200) == 0x00000200)) {
           zhaoList_ = java.util.Collections.unmodifiableList(zhaoList_);
-          bitField0_ = (bitField0_ & ~0x00000400);
+          bitField0_ = (bitField0_ & ~0x00000200);
         }
         result.zhaoList_ = zhaoList_;
-        if (((bitField0_ & 0x00000800) == 0x00000800)) {
+        if (((bitField0_ & 0x00000400) == 0x00000400)) {
           piaoList_ = java.util.Collections.unmodifiableList(piaoList_);
-          bitField0_ = (bitField0_ & ~0x00000800);
+          bitField0_ = (bitField0_ & ~0x00000400);
         }
         result.piaoList_ = piaoList_;
-        if (((from_bitField0_ & 0x00001000) == 0x00001000)) {
-          to_bitField0_ |= 0x00000100;
+        if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
+          to_bitField0_ |= 0x00000080;
         }
         result.leftCardNum_ = leftCardNum_;
-        if (((from_bitField0_ & 0x00002000) == 0x00002000)) {
-          to_bitField0_ |= 0x00000200;
+        if (((from_bitField0_ & 0x00001000) == 0x00001000)) {
+          to_bitField0_ |= 0x00000100;
         }
         result.tilesOnHandNum_ = tilesOnHandNum_;
         result.bitField0_ = to_bitField0_;
@@ -5824,9 +5765,6 @@ public final class CpMsgCs {
           }
           onChanged();
         }
-        if (other.hasHuType()) {
-          setHuType(other.getHuType());
-        }
         if (other.hasIsChu()) {
           setIsChu(other.getIsChu());
         }
@@ -5836,7 +5774,7 @@ public final class CpMsgCs {
         if (!other.zhaoList_.isEmpty()) {
           if (zhaoList_.isEmpty()) {
             zhaoList_ = other.zhaoList_;
-            bitField0_ = (bitField0_ & ~0x00000400);
+            bitField0_ = (bitField0_ & ~0x00000200);
           } else {
             ensureZhaoListIsMutable();
             zhaoList_.addAll(other.zhaoList_);
@@ -5846,7 +5784,7 @@ public final class CpMsgCs {
         if (!other.piaoList_.isEmpty()) {
           if (piaoList_.isEmpty()) {
             piaoList_ = other.piaoList_;
-            bitField0_ = (bitField0_ & ~0x00000800);
+            bitField0_ = (bitField0_ & ~0x00000400);
           } else {
             ensurePiaoListIsMutable();
             piaoList_.addAll(other.piaoList_);
@@ -6519,67 +6457,19 @@ public final class CpMsgCs {
         return this;
       }
 
-      private int huType_ ;
-      /**
-       * <code>optional int32 hu_type = 8;</code>
-       *
-       * <pre>
-       *胡牌类型：1自摸，2点炮，3别人翻开胡的
-       * </pre>
-       */
-      public boolean hasHuType() {
-        return ((bitField0_ & 0x00000080) == 0x00000080);
-      }
-      /**
-       * <code>optional int32 hu_type = 8;</code>
-       *
-       * <pre>
-       *胡牌类型：1自摸，2点炮，3别人翻开胡的
-       * </pre>
-       */
-      public int getHuType() {
-        return huType_;
-      }
-      /**
-       * <code>optional int32 hu_type = 8;</code>
-       *
-       * <pre>
-       *胡牌类型：1自摸，2点炮，3别人翻开胡的
-       * </pre>
-       */
-      public Builder setHuType(int value) {
-        bitField0_ |= 0x00000080;
-        huType_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 hu_type = 8;</code>
-       *
-       * <pre>
-       *胡牌类型：1自摸，2点炮，3别人翻开胡的
-       * </pre>
-       */
-      public Builder clearHuType() {
-        bitField0_ = (bitField0_ & ~0x00000080);
-        huType_ = 0;
-        onChanged();
-        return this;
-      }
-
       private boolean isChu_ ;
       /**
-       * <code>optional bool is_chu = 9;</code>
+       * <code>optional bool is_chu = 8;</code>
        *
        * <pre>
        *是否是出牌
        * </pre>
        */
       public boolean hasIsChu() {
-        return ((bitField0_ & 0x00000100) == 0x00000100);
+        return ((bitField0_ & 0x00000080) == 0x00000080);
       }
       /**
-       * <code>optional bool is_chu = 9;</code>
+       * <code>optional bool is_chu = 8;</code>
        *
        * <pre>
        *是否是出牌
@@ -6589,27 +6479,27 @@ public final class CpMsgCs {
         return isChu_;
       }
       /**
-       * <code>optional bool is_chu = 9;</code>
+       * <code>optional bool is_chu = 8;</code>
        *
        * <pre>
        *是否是出牌
        * </pre>
        */
       public Builder setIsChu(boolean value) {
-        bitField0_ |= 0x00000100;
+        bitField0_ |= 0x00000080;
         isChu_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional bool is_chu = 9;</code>
+       * <code>optional bool is_chu = 8;</code>
        *
        * <pre>
        *是否是出牌
        * </pre>
        */
       public Builder clearIsChu() {
-        bitField0_ = (bitField0_ & ~0x00000100);
+        bitField0_ = (bitField0_ & ~0x00000080);
         isChu_ = false;
         onChanged();
         return this;
@@ -6617,17 +6507,17 @@ public final class CpMsgCs {
 
       private com.huinan.proto.CpMsgCs.ENZhaoType zhaoType_ = com.huinan.proto.CpMsgCs.ENZhaoType.EN_ZHAO_TYPE_CHI;
       /**
-       * <code>optional .com.huinan.proto.ENZhaoType zhao_type = 10;</code>
+       * <code>optional .com.huinan.proto.ENZhaoType zhao_type = 9;</code>
        *
        * <pre>
        * 玩家点击招的类型
        * </pre>
        */
       public boolean hasZhaoType() {
-        return ((bitField0_ & 0x00000200) == 0x00000200);
+        return ((bitField0_ & 0x00000100) == 0x00000100);
       }
       /**
-       * <code>optional .com.huinan.proto.ENZhaoType zhao_type = 10;</code>
+       * <code>optional .com.huinan.proto.ENZhaoType zhao_type = 9;</code>
        *
        * <pre>
        * 玩家点击招的类型
@@ -6637,7 +6527,7 @@ public final class CpMsgCs {
         return zhaoType_;
       }
       /**
-       * <code>optional .com.huinan.proto.ENZhaoType zhao_type = 10;</code>
+       * <code>optional .com.huinan.proto.ENZhaoType zhao_type = 9;</code>
        *
        * <pre>
        * 玩家点击招的类型
@@ -6647,20 +6537,20 @@ public final class CpMsgCs {
         if (value == null) {
           throw new NullPointerException();
         }
-        bitField0_ |= 0x00000200;
+        bitField0_ |= 0x00000100;
         zhaoType_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional .com.huinan.proto.ENZhaoType zhao_type = 10;</code>
+       * <code>optional .com.huinan.proto.ENZhaoType zhao_type = 9;</code>
        *
        * <pre>
        * 玩家点击招的类型
        * </pre>
        */
       public Builder clearZhaoType() {
-        bitField0_ = (bitField0_ & ~0x00000200);
+        bitField0_ = (bitField0_ & ~0x00000100);
         zhaoType_ = com.huinan.proto.CpMsgCs.ENZhaoType.EN_ZHAO_TYPE_CHI;
         onChanged();
         return this;
@@ -6669,13 +6559,13 @@ public final class CpMsgCs {
       private java.util.List<com.huinan.proto.CpMsgCs.ENZhaoType> zhaoList_ =
         java.util.Collections.emptyList();
       private void ensureZhaoListIsMutable() {
-        if (!((bitField0_ & 0x00000400) == 0x00000400)) {
+        if (!((bitField0_ & 0x00000200) == 0x00000200)) {
           zhaoList_ = new java.util.ArrayList<com.huinan.proto.CpMsgCs.ENZhaoType>(zhaoList_);
-          bitField0_ |= 0x00000400;
+          bitField0_ |= 0x00000200;
         }
       }
       /**
-       * <code>repeated .com.huinan.proto.ENZhaoType zhao_list = 11;</code>
+       * <code>repeated .com.huinan.proto.ENZhaoType zhao_list = 10;</code>
        *
        * <pre>
        * 可招的类型列表
@@ -6685,7 +6575,7 @@ public final class CpMsgCs {
         return java.util.Collections.unmodifiableList(zhaoList_);
       }
       /**
-       * <code>repeated .com.huinan.proto.ENZhaoType zhao_list = 11;</code>
+       * <code>repeated .com.huinan.proto.ENZhaoType zhao_list = 10;</code>
        *
        * <pre>
        * 可招的类型列表
@@ -6695,7 +6585,7 @@ public final class CpMsgCs {
         return zhaoList_.size();
       }
       /**
-       * <code>repeated .com.huinan.proto.ENZhaoType zhao_list = 11;</code>
+       * <code>repeated .com.huinan.proto.ENZhaoType zhao_list = 10;</code>
        *
        * <pre>
        * 可招的类型列表
@@ -6705,7 +6595,7 @@ public final class CpMsgCs {
         return zhaoList_.get(index);
       }
       /**
-       * <code>repeated .com.huinan.proto.ENZhaoType zhao_list = 11;</code>
+       * <code>repeated .com.huinan.proto.ENZhaoType zhao_list = 10;</code>
        *
        * <pre>
        * 可招的类型列表
@@ -6722,7 +6612,7 @@ public final class CpMsgCs {
         return this;
       }
       /**
-       * <code>repeated .com.huinan.proto.ENZhaoType zhao_list = 11;</code>
+       * <code>repeated .com.huinan.proto.ENZhaoType zhao_list = 10;</code>
        *
        * <pre>
        * 可招的类型列表
@@ -6738,7 +6628,7 @@ public final class CpMsgCs {
         return this;
       }
       /**
-       * <code>repeated .com.huinan.proto.ENZhaoType zhao_list = 11;</code>
+       * <code>repeated .com.huinan.proto.ENZhaoType zhao_list = 10;</code>
        *
        * <pre>
        * 可招的类型列表
@@ -6753,7 +6643,7 @@ public final class CpMsgCs {
         return this;
       }
       /**
-       * <code>repeated .com.huinan.proto.ENZhaoType zhao_list = 11;</code>
+       * <code>repeated .com.huinan.proto.ENZhaoType zhao_list = 10;</code>
        *
        * <pre>
        * 可招的类型列表
@@ -6761,20 +6651,20 @@ public final class CpMsgCs {
        */
       public Builder clearZhaoList() {
         zhaoList_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000400);
+        bitField0_ = (bitField0_ & ~0x00000200);
         onChanged();
         return this;
       }
 
       private java.util.List<java.lang.Integer> piaoList_ = java.util.Collections.emptyList();
       private void ensurePiaoListIsMutable() {
-        if (!((bitField0_ & 0x00000800) == 0x00000800)) {
+        if (!((bitField0_ & 0x00000400) == 0x00000400)) {
           piaoList_ = new java.util.ArrayList<java.lang.Integer>(piaoList_);
-          bitField0_ |= 0x00000800;
+          bitField0_ |= 0x00000400;
          }
       }
       /**
-       * <code>repeated int32 piao_list = 12;</code>
+       * <code>repeated int32 piao_list = 11;</code>
        *
        * <pre>
        * 漂了的玩家座位号
@@ -6785,7 +6675,7 @@ public final class CpMsgCs {
         return java.util.Collections.unmodifiableList(piaoList_);
       }
       /**
-       * <code>repeated int32 piao_list = 12;</code>
+       * <code>repeated int32 piao_list = 11;</code>
        *
        * <pre>
        * 漂了的玩家座位号
@@ -6795,7 +6685,7 @@ public final class CpMsgCs {
         return piaoList_.size();
       }
       /**
-       * <code>repeated int32 piao_list = 12;</code>
+       * <code>repeated int32 piao_list = 11;</code>
        *
        * <pre>
        * 漂了的玩家座位号
@@ -6805,7 +6695,7 @@ public final class CpMsgCs {
         return piaoList_.get(index);
       }
       /**
-       * <code>repeated int32 piao_list = 12;</code>
+       * <code>repeated int32 piao_list = 11;</code>
        *
        * <pre>
        * 漂了的玩家座位号
@@ -6819,7 +6709,7 @@ public final class CpMsgCs {
         return this;
       }
       /**
-       * <code>repeated int32 piao_list = 12;</code>
+       * <code>repeated int32 piao_list = 11;</code>
        *
        * <pre>
        * 漂了的玩家座位号
@@ -6832,7 +6722,7 @@ public final class CpMsgCs {
         return this;
       }
       /**
-       * <code>repeated int32 piao_list = 12;</code>
+       * <code>repeated int32 piao_list = 11;</code>
        *
        * <pre>
        * 漂了的玩家座位号
@@ -6847,7 +6737,7 @@ public final class CpMsgCs {
         return this;
       }
       /**
-       * <code>repeated int32 piao_list = 12;</code>
+       * <code>repeated int32 piao_list = 11;</code>
        *
        * <pre>
        * 漂了的玩家座位号
@@ -6855,24 +6745,24 @@ public final class CpMsgCs {
        */
       public Builder clearPiaoList() {
         piaoList_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000800);
+        bitField0_ = (bitField0_ & ~0x00000400);
         onChanged();
         return this;
       }
 
       private int leftCardNum_ ;
       /**
-       * <code>optional int32 left_card_num = 13;</code>
+       * <code>optional int32 left_card_num = 12;</code>
        *
        * <pre>
        *剩余牌数量
        * </pre>
        */
       public boolean hasLeftCardNum() {
-        return ((bitField0_ & 0x00001000) == 0x00001000);
+        return ((bitField0_ & 0x00000800) == 0x00000800);
       }
       /**
-       * <code>optional int32 left_card_num = 13;</code>
+       * <code>optional int32 left_card_num = 12;</code>
        *
        * <pre>
        *剩余牌数量
@@ -6882,27 +6772,27 @@ public final class CpMsgCs {
         return leftCardNum_;
       }
       /**
-       * <code>optional int32 left_card_num = 13;</code>
+       * <code>optional int32 left_card_num = 12;</code>
        *
        * <pre>
        *剩余牌数量
        * </pre>
        */
       public Builder setLeftCardNum(int value) {
-        bitField0_ |= 0x00001000;
+        bitField0_ |= 0x00000800;
         leftCardNum_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 left_card_num = 13;</code>
+       * <code>optional int32 left_card_num = 12;</code>
        *
        * <pre>
        *剩余牌数量
        * </pre>
        */
       public Builder clearLeftCardNum() {
-        bitField0_ = (bitField0_ & ~0x00001000);
+        bitField0_ = (bitField0_ & ~0x00000800);
         leftCardNum_ = 0;
         onChanged();
         return this;
@@ -6910,17 +6800,17 @@ public final class CpMsgCs {
 
       private int tilesOnHandNum_ ;
       /**
-       * <code>optional int32 tiles_on_hand_num = 14;</code>
+       * <code>optional int32 tiles_on_hand_num = 13;</code>
        *
        * <pre>
        *当前手牌张数
        * </pre>
        */
       public boolean hasTilesOnHandNum() {
-        return ((bitField0_ & 0x00002000) == 0x00002000);
+        return ((bitField0_ & 0x00001000) == 0x00001000);
       }
       /**
-       * <code>optional int32 tiles_on_hand_num = 14;</code>
+       * <code>optional int32 tiles_on_hand_num = 13;</code>
        *
        * <pre>
        *当前手牌张数
@@ -6930,27 +6820,27 @@ public final class CpMsgCs {
         return tilesOnHandNum_;
       }
       /**
-       * <code>optional int32 tiles_on_hand_num = 14;</code>
+       * <code>optional int32 tiles_on_hand_num = 13;</code>
        *
        * <pre>
        *当前手牌张数
        * </pre>
        */
       public Builder setTilesOnHandNum(int value) {
-        bitField0_ |= 0x00002000;
+        bitField0_ |= 0x00001000;
         tilesOnHandNum_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 tiles_on_hand_num = 14;</code>
+       * <code>optional int32 tiles_on_hand_num = 13;</code>
        *
        * <pre>
        *当前手牌张数
        * </pre>
        */
       public Builder clearTilesOnHandNum() {
-        bitField0_ = (bitField0_ & ~0x00002000);
+        bitField0_ = (bitField0_ & ~0x00001000);
         tilesOnHandNum_ = 0;
         onChanged();
         return this;
@@ -32025,7 +31915,7 @@ public final class CpMsgCs {
      * <code>optional int32 dest_card = 2;</code>
      *
      * <pre>
-     * 目标牌
+     *目标牌
      * </pre>
      */
     boolean hasDestCard();
@@ -32033,7 +31923,7 @@ public final class CpMsgCs {
      * <code>optional int32 dest_card = 2;</code>
      *
      * <pre>
-     * 目标牌
+     *目标牌
      * </pre>
      */
     int getDestCard();
@@ -32042,7 +31932,7 @@ public final class CpMsgCs {
      * <code>repeated .com.huinan.proto.PBColumnInfo col_info = 3;</code>
      *
      * <pre>
-     * 列组合
+     *列组合
      * </pre>
      */
     java.util.List<com.huinan.proto.CpMsgCs.PBColumnInfo> 
@@ -32051,7 +31941,7 @@ public final class CpMsgCs {
      * <code>repeated .com.huinan.proto.PBColumnInfo col_info = 3;</code>
      *
      * <pre>
-     * 列组合
+     *列组合
      * </pre>
      */
     com.huinan.proto.CpMsgCs.PBColumnInfo getColInfo(int index);
@@ -32059,7 +31949,7 @@ public final class CpMsgCs {
      * <code>repeated .com.huinan.proto.PBColumnInfo col_info = 3;</code>
      *
      * <pre>
-     * 列组合
+     *列组合
      * </pre>
      */
     int getColInfoCount();
@@ -32067,7 +31957,7 @@ public final class CpMsgCs {
      * <code>repeated .com.huinan.proto.PBColumnInfo col_info = 3;</code>
      *
      * <pre>
-     * 列组合
+     *列组合
      * </pre>
      */
     java.util.List<? extends com.huinan.proto.CpMsgCs.PBColumnInfoOrBuilder> 
@@ -32076,7 +31966,7 @@ public final class CpMsgCs {
      * <code>repeated .com.huinan.proto.PBColumnInfo col_info = 3;</code>
      *
      * <pre>
-     * 列组合
+     *列组合
      * </pre>
      */
     com.huinan.proto.CpMsgCs.PBColumnInfoOrBuilder getColInfoOrBuilder(
@@ -32111,7 +32001,7 @@ public final class CpMsgCs {
      * <code>optional int32 dest_index = 5;</code>
      *
      * <pre>
-     * 目标牌来自的座位号
+     *目标牌来自的座位号
      * </pre>
      */
     boolean hasDestIndex();
@@ -32119,7 +32009,7 @@ public final class CpMsgCs {
      * <code>optional int32 dest_index = 5;</code>
      *
      * <pre>
-     * 目标牌来自的座位号
+     *目标牌来自的座位号
      * </pre>
      */
     int getDestIndex();
@@ -32339,7 +32229,7 @@ public final class CpMsgCs {
      * <code>optional int32 dest_card = 2;</code>
      *
      * <pre>
-     * 目标牌
+     *目标牌
      * </pre>
      */
     public boolean hasDestCard() {
@@ -32349,7 +32239,7 @@ public final class CpMsgCs {
      * <code>optional int32 dest_card = 2;</code>
      *
      * <pre>
-     * 目标牌
+     *目标牌
      * </pre>
      */
     public int getDestCard() {
@@ -32362,7 +32252,7 @@ public final class CpMsgCs {
      * <code>repeated .com.huinan.proto.PBColumnInfo col_info = 3;</code>
      *
      * <pre>
-     * 列组合
+     *列组合
      * </pre>
      */
     public java.util.List<com.huinan.proto.CpMsgCs.PBColumnInfo> getColInfoList() {
@@ -32372,7 +32262,7 @@ public final class CpMsgCs {
      * <code>repeated .com.huinan.proto.PBColumnInfo col_info = 3;</code>
      *
      * <pre>
-     * 列组合
+     *列组合
      * </pre>
      */
     public java.util.List<? extends com.huinan.proto.CpMsgCs.PBColumnInfoOrBuilder> 
@@ -32383,7 +32273,7 @@ public final class CpMsgCs {
      * <code>repeated .com.huinan.proto.PBColumnInfo col_info = 3;</code>
      *
      * <pre>
-     * 列组合
+     *列组合
      * </pre>
      */
     public int getColInfoCount() {
@@ -32393,7 +32283,7 @@ public final class CpMsgCs {
      * <code>repeated .com.huinan.proto.PBColumnInfo col_info = 3;</code>
      *
      * <pre>
-     * 列组合
+     *列组合
      * </pre>
      */
     public com.huinan.proto.CpMsgCs.PBColumnInfo getColInfo(int index) {
@@ -32403,7 +32293,7 @@ public final class CpMsgCs {
      * <code>repeated .com.huinan.proto.PBColumnInfo col_info = 3;</code>
      *
      * <pre>
-     * 列组合
+     *列组合
      * </pre>
      */
     public com.huinan.proto.CpMsgCs.PBColumnInfoOrBuilder getColInfoOrBuilder(
@@ -32451,7 +32341,7 @@ public final class CpMsgCs {
      * <code>optional int32 dest_index = 5;</code>
      *
      * <pre>
-     * 目标牌来自的座位号
+     *目标牌来自的座位号
      * </pre>
      */
     public boolean hasDestIndex() {
@@ -32461,7 +32351,7 @@ public final class CpMsgCs {
      * <code>optional int32 dest_index = 5;</code>
      *
      * <pre>
-     * 目标牌来自的座位号
+     *目标牌来自的座位号
      * </pre>
      */
     public int getDestIndex() {
@@ -32944,7 +32834,7 @@ public final class CpMsgCs {
        * <code>optional int32 dest_card = 2;</code>
        *
        * <pre>
-       * 目标牌
+       *目标牌
        * </pre>
        */
       public boolean hasDestCard() {
@@ -32954,7 +32844,7 @@ public final class CpMsgCs {
        * <code>optional int32 dest_card = 2;</code>
        *
        * <pre>
-       * 目标牌
+       *目标牌
        * </pre>
        */
       public int getDestCard() {
@@ -32964,7 +32854,7 @@ public final class CpMsgCs {
        * <code>optional int32 dest_card = 2;</code>
        *
        * <pre>
-       * 目标牌
+       *目标牌
        * </pre>
        */
       public Builder setDestCard(int value) {
@@ -32977,7 +32867,7 @@ public final class CpMsgCs {
        * <code>optional int32 dest_card = 2;</code>
        *
        * <pre>
-       * 目标牌
+       *目标牌
        * </pre>
        */
       public Builder clearDestCard() {
@@ -33003,7 +32893,7 @@ public final class CpMsgCs {
        * <code>repeated .com.huinan.proto.PBColumnInfo col_info = 3;</code>
        *
        * <pre>
-       * 列组合
+       *列组合
        * </pre>
        */
       public java.util.List<com.huinan.proto.CpMsgCs.PBColumnInfo> getColInfoList() {
@@ -33017,7 +32907,7 @@ public final class CpMsgCs {
        * <code>repeated .com.huinan.proto.PBColumnInfo col_info = 3;</code>
        *
        * <pre>
-       * 列组合
+       *列组合
        * </pre>
        */
       public int getColInfoCount() {
@@ -33031,7 +32921,7 @@ public final class CpMsgCs {
        * <code>repeated .com.huinan.proto.PBColumnInfo col_info = 3;</code>
        *
        * <pre>
-       * 列组合
+       *列组合
        * </pre>
        */
       public com.huinan.proto.CpMsgCs.PBColumnInfo getColInfo(int index) {
@@ -33045,7 +32935,7 @@ public final class CpMsgCs {
        * <code>repeated .com.huinan.proto.PBColumnInfo col_info = 3;</code>
        *
        * <pre>
-       * 列组合
+       *列组合
        * </pre>
        */
       public Builder setColInfo(
@@ -33066,7 +32956,7 @@ public final class CpMsgCs {
        * <code>repeated .com.huinan.proto.PBColumnInfo col_info = 3;</code>
        *
        * <pre>
-       * 列组合
+       *列组合
        * </pre>
        */
       public Builder setColInfo(
@@ -33084,7 +32974,7 @@ public final class CpMsgCs {
        * <code>repeated .com.huinan.proto.PBColumnInfo col_info = 3;</code>
        *
        * <pre>
-       * 列组合
+       *列组合
        * </pre>
        */
       public Builder addColInfo(com.huinan.proto.CpMsgCs.PBColumnInfo value) {
@@ -33104,7 +32994,7 @@ public final class CpMsgCs {
        * <code>repeated .com.huinan.proto.PBColumnInfo col_info = 3;</code>
        *
        * <pre>
-       * 列组合
+       *列组合
        * </pre>
        */
       public Builder addColInfo(
@@ -33125,7 +33015,7 @@ public final class CpMsgCs {
        * <code>repeated .com.huinan.proto.PBColumnInfo col_info = 3;</code>
        *
        * <pre>
-       * 列组合
+       *列组合
        * </pre>
        */
       public Builder addColInfo(
@@ -33143,7 +33033,7 @@ public final class CpMsgCs {
        * <code>repeated .com.huinan.proto.PBColumnInfo col_info = 3;</code>
        *
        * <pre>
-       * 列组合
+       *列组合
        * </pre>
        */
       public Builder addColInfo(
@@ -33161,7 +33051,7 @@ public final class CpMsgCs {
        * <code>repeated .com.huinan.proto.PBColumnInfo col_info = 3;</code>
        *
        * <pre>
-       * 列组合
+       *列组合
        * </pre>
        */
       public Builder addAllColInfo(
@@ -33180,7 +33070,7 @@ public final class CpMsgCs {
        * <code>repeated .com.huinan.proto.PBColumnInfo col_info = 3;</code>
        *
        * <pre>
-       * 列组合
+       *列组合
        * </pre>
        */
       public Builder clearColInfo() {
@@ -33197,7 +33087,7 @@ public final class CpMsgCs {
        * <code>repeated .com.huinan.proto.PBColumnInfo col_info = 3;</code>
        *
        * <pre>
-       * 列组合
+       *列组合
        * </pre>
        */
       public Builder removeColInfo(int index) {
@@ -33214,7 +33104,7 @@ public final class CpMsgCs {
        * <code>repeated .com.huinan.proto.PBColumnInfo col_info = 3;</code>
        *
        * <pre>
-       * 列组合
+       *列组合
        * </pre>
        */
       public com.huinan.proto.CpMsgCs.PBColumnInfo.Builder getColInfoBuilder(
@@ -33225,7 +33115,7 @@ public final class CpMsgCs {
        * <code>repeated .com.huinan.proto.PBColumnInfo col_info = 3;</code>
        *
        * <pre>
-       * 列组合
+       *列组合
        * </pre>
        */
       public com.huinan.proto.CpMsgCs.PBColumnInfoOrBuilder getColInfoOrBuilder(
@@ -33239,7 +33129,7 @@ public final class CpMsgCs {
        * <code>repeated .com.huinan.proto.PBColumnInfo col_info = 3;</code>
        *
        * <pre>
-       * 列组合
+       *列组合
        * </pre>
        */
       public java.util.List<? extends com.huinan.proto.CpMsgCs.PBColumnInfoOrBuilder> 
@@ -33254,7 +33144,7 @@ public final class CpMsgCs {
        * <code>repeated .com.huinan.proto.PBColumnInfo col_info = 3;</code>
        *
        * <pre>
-       * 列组合
+       *列组合
        * </pre>
        */
       public com.huinan.proto.CpMsgCs.PBColumnInfo.Builder addColInfoBuilder() {
@@ -33265,7 +33155,7 @@ public final class CpMsgCs {
        * <code>repeated .com.huinan.proto.PBColumnInfo col_info = 3;</code>
        *
        * <pre>
-       * 列组合
+       *列组合
        * </pre>
        */
       public com.huinan.proto.CpMsgCs.PBColumnInfo.Builder addColInfoBuilder(
@@ -33277,7 +33167,7 @@ public final class CpMsgCs {
        * <code>repeated .com.huinan.proto.PBColumnInfo col_info = 3;</code>
        *
        * <pre>
-       * 列组合
+       *列组合
        * </pre>
        */
       public java.util.List<com.huinan.proto.CpMsgCs.PBColumnInfo.Builder> 
@@ -33398,7 +33288,7 @@ public final class CpMsgCs {
        * <code>optional int32 dest_index = 5;</code>
        *
        * <pre>
-       * 目标牌来自的座位号
+       *目标牌来自的座位号
        * </pre>
        */
       public boolean hasDestIndex() {
@@ -33408,7 +33298,7 @@ public final class CpMsgCs {
        * <code>optional int32 dest_index = 5;</code>
        *
        * <pre>
-       * 目标牌来自的座位号
+       *目标牌来自的座位号
        * </pre>
        */
       public int getDestIndex() {
@@ -33418,7 +33308,7 @@ public final class CpMsgCs {
        * <code>optional int32 dest_index = 5;</code>
        *
        * <pre>
-       * 目标牌来自的座位号
+       *目标牌来自的座位号
        * </pre>
        */
       public Builder setDestIndex(int value) {
@@ -33431,7 +33321,7 @@ public final class CpMsgCs {
        * <code>optional int32 dest_index = 5;</code>
        *
        * <pre>
-       * 目标牌来自的座位号
+       *目标牌来自的座位号
        * </pre>
        */
       public Builder clearDestIndex() {
@@ -33645,6 +33535,23 @@ public final class CpMsgCs {
      * </pre>
      */
     com.huinan.proto.CpMsgCs.HuUserBrandOrBuilder getHuBrandOrBuilder();
+
+    /**
+     * <code>optional int32 hu_type = 4;</code>
+     *
+     * <pre>
+     *结算类型：1=自摸，2=点炮，3=翻开，4=包子，5=十八烂
+     * </pre>
+     */
+    boolean hasHuType();
+    /**
+     * <code>optional int32 hu_type = 4;</code>
+     *
+     * <pre>
+     *结算类型：1=自摸，2=点炮，3=翻开，4=包子，5=十八烂
+     * </pre>
+     */
+    int getHuType();
   }
   /**
    * Protobuf type {@code com.huinan.proto.SmallResult}
@@ -33742,6 +33649,11 @@ public final class CpMsgCs {
                 huBrand_ = subBuilder.buildPartial();
               }
               bitField0_ |= 0x00000001;
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000002;
+              huType_ = input.readInt32();
               break;
             }
           }
@@ -33912,10 +33824,34 @@ public final class CpMsgCs {
       return huBrand_;
     }
 
+    public static final int HU_TYPE_FIELD_NUMBER = 4;
+    private int huType_;
+    /**
+     * <code>optional int32 hu_type = 4;</code>
+     *
+     * <pre>
+     *结算类型：1=自摸，2=点炮，3=翻开，4=包子，5=十八烂
+     * </pre>
+     */
+    public boolean hasHuType() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional int32 hu_type = 4;</code>
+     *
+     * <pre>
+     *结算类型：1=自摸，2=点炮，3=翻开，4=包子，5=十八烂
+     * </pre>
+     */
+    public int getHuType() {
+      return huType_;
+    }
+
     private void initFields() {
       dipaiCard_ = java.util.Collections.emptyList();
       userBrand_ = java.util.Collections.emptyList();
       huBrand_ = com.huinan.proto.CpMsgCs.HuUserBrand.getDefaultInstance();
+      huType_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -33938,6 +33874,9 @@ public final class CpMsgCs {
       }
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeMessage(3, huBrand_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(4, huType_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -33964,6 +33903,10 @@ public final class CpMsgCs {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(3, huBrand_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, huType_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -34102,6 +34045,8 @@ public final class CpMsgCs {
           huBrandBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000004);
+        huType_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
 
@@ -34152,6 +34097,10 @@ public final class CpMsgCs {
         } else {
           result.huBrand_ = huBrandBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.huType_ = huType_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -34206,6 +34155,9 @@ public final class CpMsgCs {
         }
         if (other.hasHuBrand()) {
           mergeHuBrand(other.getHuBrand());
+        }
+        if (other.hasHuType()) {
+          setHuType(other.getHuType());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -34790,6 +34742,54 @@ public final class CpMsgCs {
           huBrand_ = null;
         }
         return huBrandBuilder_;
+      }
+
+      private int huType_ ;
+      /**
+       * <code>optional int32 hu_type = 4;</code>
+       *
+       * <pre>
+       *结算类型：1=自摸，2=点炮，3=翻开，4=包子，5=十八烂
+       * </pre>
+       */
+      public boolean hasHuType() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional int32 hu_type = 4;</code>
+       *
+       * <pre>
+       *结算类型：1=自摸，2=点炮，3=翻开，4=包子，5=十八烂
+       * </pre>
+       */
+      public int getHuType() {
+        return huType_;
+      }
+      /**
+       * <code>optional int32 hu_type = 4;</code>
+       *
+       * <pre>
+       *结算类型：1=自摸，2=点炮，3=翻开，4=包子，5=十八烂
+       * </pre>
+       */
+      public Builder setHuType(int value) {
+        bitField0_ |= 0x00000008;
+        huType_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 hu_type = 4;</code>
+       *
+       * <pre>
+       *结算类型：1=自摸，2=点炮，3=翻开，4=包子，5=十八烂
+       * </pre>
+       */
+      public Builder clearHuType() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        huType_ = 0;
+        onChanged();
+        return this;
       }
 
       // @@protoc_insertion_point(builder_scope:com.huinan.proto.SmallResult)
@@ -50355,106 +50355,106 @@ public final class CpMsgCs {
       "d_ip\030\014 \001(\t\"\202\001\n\014PBColumnInfo\022\r\n\005cards\030\001 \003" +
       "(\005\022-\n\010col_type\030\002 \001(\0162\033.com.huinan.proto." +
       "ENColType\022\r\n\005score\030\003 \001(\005\022\016\n\006is_fan\030\004 \001(\010" +
-      "\022\025\n\ris_qishou_tou\030\005 \001(\010\"\225\003\n\010PBAction\022\022\n\n",
+      "\022\025\n\ris_qishou_tou\030\005 \001(\010\"\204\003\n\010PBAction\022\022\n\n",
       "seat_index\030\001 \001(\005\0220\n\010act_type\030\002 \001(\0162\036.com" +
       ".huinan.proto.ENActionType\022\021\n\tdest_card\030" +
       "\003 \001(\005\0220\n\010col_info\030\004 \003(\0132\036.com.huinan.pro" +
       "to.PBColumnInfo\022\022\n\ndest_index\030\005 \001(\005\022\016\n\006i" +
-      "s_fan\030\006 \001(\010\022\022\n\ndeath_card\030\007 \003(\005\022\017\n\007hu_ty" +
-      "pe\030\010 \001(\005\022\016\n\006is_chu\030\t \001(\010\022/\n\tzhao_type\030\n " +
-      "\001(\0162\034.com.huinan.proto.ENZhaoType\022/\n\tzha" +
-      "o_list\030\013 \003(\0162\034.com.huinan.proto.ENZhaoTy" +
-      "pe\022\021\n\tpiao_list\030\014 \003(\005\022\025\n\rleft_card_num\030\r" +
-      " \001(\005\022\031\n\021tiles_on_hand_num\030\016 \001(\005\"\225\002\n\013PBTa",
-      "bleSeat\022,\n\010userInfo\030\001 \001(\0132\032.com.huinan.p" +
-      "roto.UserInfo\022\022\n\nseat_index\030\002 \001(\005\022\025\n\rtil" +
-      "es_on_hand\030\003 \003(\005\022/\n\007out_col\030\004 \003(\0132\036.com." +
-      "huinan.proto.PBColumnInfo\022\023\n\013final_score" +
-      "\030\005 \001(\005\022\021\n\tout_cards\030\006 \003(\005\022\031\n\021tiles_on_ha" +
-      "nd_num\030\007 \001(\005\022\022\n\ndeath_card\030\010 \003(\005\022\024\n\014out_" +
-      "cards_no\030\t \003(\005\022\017\n\007is_piao\030\n \001(\010\"\205\001\n\016CSRe" +
-      "questLogin\022\r\n\005token\030\001 \001(\t\022\013\n\003uid\030\002 \001(\t\022\014" +
-      "\n\004nick\030\003 \001(\t\022\017\n\007pic_url\030\004 \001(\t\022\024\n\014refresh" +
-      "Token\030\005 \001(\t\022\013\n\003sex\030\006 \001(\005\022\025\n\rroom_card_nu",
-      "m\030\007 \001(\005\"h\n\017CSResponseLogin\022\r\n\005state\030\001 \001(" +
-      "\010\022\013\n\003uid\030\002 \001(\t\022\020\n\010pos_type\030\003 \001(\005\022\020\n\010tabl" +
-      "e_id\030\004 \001(\005\022\025\n\rroom_card_num\030\005 \001(\005\"\320\004\n\024CS" +
-      "RequestCreateTable\022\013\n\003tid\030\001 \001(\005\022\020\n\010game_" +
-      "num\030\002 \001(\005\022\025\n\rroom_card_num\030\003 \001(\005\022\025\n\ruse_" +
-      "card_type\030\004 \001(\005\022\021\n\tplay_type\030\005 \001(\005\022\022\n\nhi" +
-      "gh_times\030\006 \001(\005\022\014\n\004name\030\007 \001(\005\022\022\n\nplayer_n" +
-      "um\030\010 \001(\005\022\023\n\013creator_uid\030\t \001(\t\022\023\n\013hei_two" +
-      "_fan\030\n \001(\010\022\021\n\tis_baofan\030\013 \001(\010\022\017\n\007is_piao" +
-      "\030\014 \001(\010\022/\n\troom_type\030\r \001(\0162\034.com.huinan.p",
-      "roto.ENRoomType\022\032\n\022is_chi_hong_da_hei\030\016 " +
-      "\001(\010\022\031\n\021is_wu_hei_yi_hong\030\017 \001(\010\022\024\n\014is_add" +
-      "_score\030\020 \001(\010\022\023\n\013is_tou_dang\030\021 \001(\010\022\024\n\014is_" +
-      "zi_mo_fan\030\022 \001(\010\022\033\n\023is_dingfu_shuai_any\030\023" +
-      " \001(\010\022\023\n\013is_che_zhui\030\024 \001(\010\022\024\n\014is_diao_zhu" +
-      "i\030\025 \001(\010\022\021\n\tis_34_fan\030\026 \001(\010\022\r\n\005score\030\027 \001(" +
-      "\005\022\021\n\tis_18_lan\030\030 \001(\010\022\023\n\013is_fan_san7\030\031 \001(" +
-      "\010\022\031\n\021is_fan_xj_have_56\030\032 \001(\010\"\264\001\n\025CSRespo" +
-      "nseCreateTable\0220\n\006result\030\001 \001(\0162 .com.hui" +
-      "nan.proto.ENMessageError\022-\n\tuser_info\030\002 ",
-      "\003(\0132\032.com.huinan.proto.UserInfo\022:\n\ntable" +
-      "_info\030\003 \001(\0132&.com.huinan.proto.CSRequest" +
-      "CreateTable\"\"\n\023CSRequestEnterTable\022\013\n\003ti" +
-      "d\030\001 \001(\005\".\n\014ChoiceZhuang\022\020\n\010fan_seat\030\001 \001(" +
-      "\005\022\014\n\004card\030\002 \001(\005\"\301\001\n\021CSNotifyGameStart\022,\n" +
-      "\005seats\030\001 \003(\0132\035.com.huinan.proto.PBTableS" +
-      "eat\022\025\n\rleft_tile_num\030\002 \001(\005\022\016\n\006dealer\030\003 \001" +
-      "(\005\022\r\n\005round\030\004 \001(\005\022\021\n\tdang_seat\030\005 \001(\005\0225\n\r" +
-      "choice_zhuang\030\006 \001(\0132\036.com.huinan.proto.C" +
-      "hoiceZhuang\"D\n\023CSNottifyEnterTable\022-\n\tus",
-      "er_info\030\001 \001(\0132\032.com.huinan.proto.UserInf" +
-      "o\"#\n\024CSRequestLogoutTable\022\013\n\003tid\030\001 \001(\005\"I" +
-      "\n\025CSResponseLogoutTable\0220\n\006result\030\001 \001(\0162" +
-      " .com.huinan.proto.ENMessageError\")\n\023CSN" +
-      "otifyLogoutTable\022\022\n\nseat_index\030\001 \001(\005\"6\n\023" +
-      "CSRequestOwnerTiren\022\022\n\nseat_index\030\001 \001(\005\022" +
-      "\013\n\003uid\030\002 \001(\t\"H\n\024CSResponseOwnerTiren\0220\n\006" +
-      "result\030\001 \001(\0162 .com.huinan.proto.ENMessag" +
-      "eError\"5\n\022CSNotifyOwnerTiren\022\022\n\nseat_ind" +
-      "ex\030\001 \001(\005\022\013\n\003uid\030\002 \001(\t\"(\n\026CSRequestDissol",
-      "veTable\022\016\n\006choice\030\001 \001(\010\"K\n\027CSResponseDis" +
-      "solveTable\0220\n\006result\030\001 \001(\0162 .com.huinan." +
-      "proto.ENMessageError\"*\n\014DissolveList\022\013\n\003" +
-      "uid\030\001 \001(\t\022\r\n\005state\030\002 \001(\005\"_\n\036CSNotifyDiss" +
-      "olveTableOperation\022\013\n\003uid\030\001 \001(\t\0220\n\010dis_l" +
-      "ist\030\002 \003(\0132\036.com.huinan.proto.DissolveLis" +
-      "t\"5\n\026CSNotifyTableDissolved\022\013\n\003tid\030\001 \001(\005" +
-      "\022\016\n\006result\030\002 \001(\010\"&\n\025CSRequestReadyForGam" +
-      "e\022\r\n\005state\030\001 \001(\010\"Y\n\026CSResponseReadyForGa" +
-      "me\0220\n\006result\030\001 \001(\0162 .com.huinan.proto.EN",
-      "MessageError\022\r\n\005state\030\002 \001(\010\"9\n\024CSNotifyR" +
-      "eadyForGame\022\022\n\nseat_index\030\001 \001(\005\022\r\n\005state" +
-      "\030\002 \001(\010\"\214\001\n\021CSRequestDoAction\022\022\n\nseat_ind" +
-      "ex\030\001 \001(\005\022\020\n\010act_type\030\002 \001(\005\022\021\n\tdest_card\030" +
-      "\003 \001(\005\022\r\n\005cards\030\004 \003(\005\022/\n\tzhao_type\030\005 \001(\0162" +
-      "\034.com.huinan.proto.ENZhaoType\"\215\001\n\022CSResp" +
-      "onseDoAction\0220\n\006result\030\001 \001(\0162 .com.huina" +
-      "n.proto.ENMessageError\022*\n\006action\030\002 \001(\0132\032" +
-      ".com.huinan.proto.PBAction\022\031\n\021tiles_on_h" +
-      "and_num\030\003 \001(\005\"J\n\033CSNotifySeatOperationCh",
-      "oice\022+\n\007choices\030\001 \003(\0132\032.com.huinan.proto" +
-      ".PBAction\"@\n\022CSNotifyActionFlow\022*\n\006actio" +
-      "n\030\001 \001(\0132\032.com.huinan.proto.PBAction\"&\n\021C" +
-      "SRequestPlayBack\022\021\n\trecord_id\030\001 \001(\005\"\201\001\n\026" +
-      "CSNotifyPlayerDealCard\022\022\n\nseat_index\030\001 \001" +
-      "(\005\022\r\n\005value\030\002 \001(\005\022\022\n\nis_fan_pai\030\003 \001(\010\022\025\n" +
-      "\rleft_card_num\030\004 \001(\005\022\031\n\021tiles_on_hand_nu" +
-      "m\030\005 \001(\005\"B\n\025CSNotifyNextOperation\022\022\n\nseat" +
-      "_index\030\001 \001(\005\022\025\n\rleft_card_num\030\002 \001(\005\"6\n\tU" +
-      "serBrand\022\022\n\nseat_index\030\001 \001(\005\022\025\n\rtiles_on",
-      "_hand\030\002 \003(\005\"\263\001\n\013HuUserBrand\022\022\n\nseat_inde" +
-      "x\030\001 \001(\005\022\021\n\tdest_card\030\002 \001(\005\0220\n\010col_info\030\003" +
-      " \003(\0132\036.com.huinan.proto.PBColumnInfo\022\025\n\r" +
-      "tiles_on_hand\030\004 \003(\005\022\022\n\ndest_index\030\005 \001(\005\022" +
-      "\017\n\007tuo_num\030\006 \001(\005\022\017\n\007fan_num\030\007 \001(\005\"\203\001\n\013Sm" +
-      "allResult\022\022\n\ndipai_card\030\001 \003(\005\022/\n\nuser_br" +
-      "and\030\002 \003(\0132\033.com.huinan.proto.UserBrand\022/" +
-      "\n\010hu_brand\030\003 \001(\0132\035.com.huinan.proto.HuUs" +
-      "erBrand\"c\n\tBigResult\022\013\n\003uid\030\001 \001(\t\022\016\n\006hu_" +
+      "s_fan\030\006 \001(\010\022\022\n\ndeath_card\030\007 \003(\005\022\016\n\006is_ch" +
+      "u\030\010 \001(\010\022/\n\tzhao_type\030\t \001(\0162\034.com.huinan." +
+      "proto.ENZhaoType\022/\n\tzhao_list\030\n \003(\0162\034.co" +
+      "m.huinan.proto.ENZhaoType\022\021\n\tpiao_list\030\013" +
+      " \003(\005\022\025\n\rleft_card_num\030\014 \001(\005\022\031\n\021tiles_on_" +
+      "hand_num\030\r \001(\005\"\225\002\n\013PBTableSeat\022,\n\010userIn",
+      "fo\030\001 \001(\0132\032.com.huinan.proto.UserInfo\022\022\n\n" +
+      "seat_index\030\002 \001(\005\022\025\n\rtiles_on_hand\030\003 \003(\005\022" +
+      "/\n\007out_col\030\004 \003(\0132\036.com.huinan.proto.PBCo" +
+      "lumnInfo\022\023\n\013final_score\030\005 \001(\005\022\021\n\tout_car" +
+      "ds\030\006 \003(\005\022\031\n\021tiles_on_hand_num\030\007 \001(\005\022\022\n\nd" +
+      "eath_card\030\010 \003(\005\022\024\n\014out_cards_no\030\t \003(\005\022\017\n" +
+      "\007is_piao\030\n \001(\010\"\205\001\n\016CSRequestLogin\022\r\n\005tok" +
+      "en\030\001 \001(\t\022\013\n\003uid\030\002 \001(\t\022\014\n\004nick\030\003 \001(\t\022\017\n\007p" +
+      "ic_url\030\004 \001(\t\022\024\n\014refreshToken\030\005 \001(\t\022\013\n\003se" +
+      "x\030\006 \001(\005\022\025\n\rroom_card_num\030\007 \001(\005\"h\n\017CSResp",
+      "onseLogin\022\r\n\005state\030\001 \001(\010\022\013\n\003uid\030\002 \001(\t\022\020\n" +
+      "\010pos_type\030\003 \001(\005\022\020\n\010table_id\030\004 \001(\005\022\025\n\rroo" +
+      "m_card_num\030\005 \001(\005\"\320\004\n\024CSRequestCreateTabl" +
+      "e\022\013\n\003tid\030\001 \001(\005\022\020\n\010game_num\030\002 \001(\005\022\025\n\rroom" +
+      "_card_num\030\003 \001(\005\022\025\n\ruse_card_type\030\004 \001(\005\022\021" +
+      "\n\tplay_type\030\005 \001(\005\022\022\n\nhigh_times\030\006 \001(\005\022\014\n" +
+      "\004name\030\007 \001(\005\022\022\n\nplayer_num\030\010 \001(\005\022\023\n\013creat" +
+      "or_uid\030\t \001(\t\022\023\n\013hei_two_fan\030\n \001(\010\022\021\n\tis_" +
+      "baofan\030\013 \001(\010\022\017\n\007is_piao\030\014 \001(\010\022/\n\troom_ty" +
+      "pe\030\r \001(\0162\034.com.huinan.proto.ENRoomType\022\032",
+      "\n\022is_chi_hong_da_hei\030\016 \001(\010\022\031\n\021is_wu_hei_" +
+      "yi_hong\030\017 \001(\010\022\024\n\014is_add_score\030\020 \001(\010\022\023\n\013i" +
+      "s_tou_dang\030\021 \001(\010\022\024\n\014is_zi_mo_fan\030\022 \001(\010\022\033" +
+      "\n\023is_dingfu_shuai_any\030\023 \001(\010\022\023\n\013is_che_zh" +
+      "ui\030\024 \001(\010\022\024\n\014is_diao_zhui\030\025 \001(\010\022\021\n\tis_34_" +
+      "fan\030\026 \001(\010\022\r\n\005score\030\027 \001(\005\022\021\n\tis_18_lan\030\030 " +
+      "\001(\010\022\023\n\013is_fan_san7\030\031 \001(\010\022\031\n\021is_fan_xj_ha" +
+      "ve_56\030\032 \001(\010\"\264\001\n\025CSResponseCreateTable\0220\n" +
+      "\006result\030\001 \001(\0162 .com.huinan.proto.ENMessa" +
+      "geError\022-\n\tuser_info\030\002 \003(\0132\032.com.huinan.",
+      "proto.UserInfo\022:\n\ntable_info\030\003 \001(\0132&.com" +
+      ".huinan.proto.CSRequestCreateTable\"\"\n\023CS" +
+      "RequestEnterTable\022\013\n\003tid\030\001 \001(\005\".\n\014Choice" +
+      "Zhuang\022\020\n\010fan_seat\030\001 \001(\005\022\014\n\004card\030\002 \001(\005\"\301" +
+      "\001\n\021CSNotifyGameStart\022,\n\005seats\030\001 \003(\0132\035.co" +
+      "m.huinan.proto.PBTableSeat\022\025\n\rleft_tile_" +
+      "num\030\002 \001(\005\022\016\n\006dealer\030\003 \001(\005\022\r\n\005round\030\004 \001(\005" +
+      "\022\021\n\tdang_seat\030\005 \001(\005\0225\n\rchoice_zhuang\030\006 \001" +
+      "(\0132\036.com.huinan.proto.ChoiceZhuang\"D\n\023CS" +
+      "NottifyEnterTable\022-\n\tuser_info\030\001 \001(\0132\032.c",
+      "om.huinan.proto.UserInfo\"#\n\024CSRequestLog" +
+      "outTable\022\013\n\003tid\030\001 \001(\005\"I\n\025CSResponseLogou" +
+      "tTable\0220\n\006result\030\001 \001(\0162 .com.huinan.prot" +
+      "o.ENMessageError\")\n\023CSNotifyLogoutTable\022" +
+      "\022\n\nseat_index\030\001 \001(\005\"6\n\023CSRequestOwnerTir" +
+      "en\022\022\n\nseat_index\030\001 \001(\005\022\013\n\003uid\030\002 \001(\t\"H\n\024C" +
+      "SResponseOwnerTiren\0220\n\006result\030\001 \001(\0162 .co" +
+      "m.huinan.proto.ENMessageError\"5\n\022CSNotif" +
+      "yOwnerTiren\022\022\n\nseat_index\030\001 \001(\005\022\013\n\003uid\030\002" +
+      " \001(\t\"(\n\026CSRequestDissolveTable\022\016\n\006choice",
+      "\030\001 \001(\010\"K\n\027CSResponseDissolveTable\0220\n\006res" +
+      "ult\030\001 \001(\0162 .com.huinan.proto.ENMessageEr" +
+      "ror\"*\n\014DissolveList\022\013\n\003uid\030\001 \001(\t\022\r\n\005stat" +
+      "e\030\002 \001(\005\"_\n\036CSNotifyDissolveTableOperatio" +
+      "n\022\013\n\003uid\030\001 \001(\t\0220\n\010dis_list\030\002 \003(\0132\036.com.h" +
+      "uinan.proto.DissolveList\"5\n\026CSNotifyTabl" +
+      "eDissolved\022\013\n\003tid\030\001 \001(\005\022\016\n\006result\030\002 \001(\010\"" +
+      "&\n\025CSRequestReadyForGame\022\r\n\005state\030\001 \001(\010\"" +
+      "Y\n\026CSResponseReadyForGame\0220\n\006result\030\001 \001(" +
+      "\0162 .com.huinan.proto.ENMessageError\022\r\n\005s",
+      "tate\030\002 \001(\010\"9\n\024CSNotifyReadyForGame\022\022\n\nse" +
+      "at_index\030\001 \001(\005\022\r\n\005state\030\002 \001(\010\"\214\001\n\021CSRequ" +
+      "estDoAction\022\022\n\nseat_index\030\001 \001(\005\022\020\n\010act_t" +
+      "ype\030\002 \001(\005\022\021\n\tdest_card\030\003 \001(\005\022\r\n\005cards\030\004 " +
+      "\003(\005\022/\n\tzhao_type\030\005 \001(\0162\034.com.huinan.prot" +
+      "o.ENZhaoType\"\215\001\n\022CSResponseDoAction\0220\n\006r" +
+      "esult\030\001 \001(\0162 .com.huinan.proto.ENMessage" +
+      "Error\022*\n\006action\030\002 \001(\0132\032.com.huinan.proto" +
+      ".PBAction\022\031\n\021tiles_on_hand_num\030\003 \001(\005\"J\n\033" +
+      "CSNotifySeatOperationChoice\022+\n\007choices\030\001",
+      " \003(\0132\032.com.huinan.proto.PBAction\"@\n\022CSNo" +
+      "tifyActionFlow\022*\n\006action\030\001 \001(\0132\032.com.hui" +
+      "nan.proto.PBAction\"&\n\021CSRequestPlayBack\022" +
+      "\021\n\trecord_id\030\001 \001(\005\"\201\001\n\026CSNotifyPlayerDea" +
+      "lCard\022\022\n\nseat_index\030\001 \001(\005\022\r\n\005value\030\002 \001(\005" +
+      "\022\022\n\nis_fan_pai\030\003 \001(\010\022\025\n\rleft_card_num\030\004 " +
+      "\001(\005\022\031\n\021tiles_on_hand_num\030\005 \001(\005\"B\n\025CSNoti" +
+      "fyNextOperation\022\022\n\nseat_index\030\001 \001(\005\022\025\n\rl" +
+      "eft_card_num\030\002 \001(\005\"6\n\tUserBrand\022\022\n\nseat_" +
+      "index\030\001 \001(\005\022\025\n\rtiles_on_hand\030\002 \003(\005\"\263\001\n\013H",
+      "uUserBrand\022\022\n\nseat_index\030\001 \001(\005\022\021\n\tdest_c" +
+      "ard\030\002 \001(\005\0220\n\010col_info\030\003 \003(\0132\036.com.huinan" +
+      ".proto.PBColumnInfo\022\025\n\rtiles_on_hand\030\004 \003" +
+      "(\005\022\022\n\ndest_index\030\005 \001(\005\022\017\n\007tuo_num\030\006 \001(\005\022" +
+      "\017\n\007fan_num\030\007 \001(\005\"\224\001\n\013SmallResult\022\022\n\ndipa" +
+      "i_card\030\001 \003(\005\022/\n\nuser_brand\030\002 \003(\0132\033.com.h" +
+      "uinan.proto.UserBrand\022/\n\010hu_brand\030\003 \001(\0132" +
+      "\035.com.huinan.proto.HuUserBrand\022\017\n\007hu_typ" +
+      "e\030\004 \001(\005\"c\n\tBigResult\022\013\n\003uid\030\001 \001(\t\022\016\n\006hu_" +
       "num\030\002 \001(\005\022\020\n\010zimo_num\030\003 \001(\005\022\023\n\013dianpao_n",
       "um\030\004 \001(\005\022\022\n\nsanfan_num\030\005 \001(\005\"\276\001\n\020CSNotif" +
       "yGameOver\0223\n\017user_score_info\030\001 \003(\0132\032.com" +
@@ -50573,7 +50573,7 @@ public final class CpMsgCs {
     internal_static_com_huinan_proto_PBAction_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_huinan_proto_PBAction_descriptor,
-        new java.lang.String[] { "SeatIndex", "ActType", "DestCard", "ColInfo", "DestIndex", "IsFan", "DeathCard", "HuType", "IsChu", "ZhaoType", "ZhaoList", "PiaoList", "LeftCardNum", "TilesOnHandNum", });
+        new java.lang.String[] { "SeatIndex", "ActType", "DestCard", "ColInfo", "DestIndex", "IsFan", "DeathCard", "IsChu", "ZhaoType", "ZhaoList", "PiaoList", "LeftCardNum", "TilesOnHandNum", });
     internal_static_com_huinan_proto_PBTableSeat_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_com_huinan_proto_PBTableSeat_fieldAccessorTable = new
@@ -50771,7 +50771,7 @@ public final class CpMsgCs {
     internal_static_com_huinan_proto_SmallResult_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_huinan_proto_SmallResult_descriptor,
-        new java.lang.String[] { "DipaiCard", "UserBrand", "HuBrand", });
+        new java.lang.String[] { "DipaiCard", "UserBrand", "HuBrand", "HuType", });
     internal_static_com_huinan_proto_BigResult_descriptor =
       getDescriptor().getMessageTypes().get(36);
     internal_static_com_huinan_proto_BigResult_fieldAccessorTable = new

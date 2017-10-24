@@ -100,7 +100,7 @@ public class RoomManager {
 		}
 		room.setLan18(requestBody.getIs18Lan());
 		room.setCheAll7Fan(requestBody.getIsFanSan7());
-		
+
 		rooms.put(tid, room);// 存放游戏房间信息
 		return room;
 	}
@@ -1363,6 +1363,8 @@ public class RoomManager {
 				SmallResult.Builder roundResult = SmallResult.newBuilder();
 				roundResult.addAllDipaiCard(room.getResetCards());
 				if (!huang) {
+					User huUser = room.getUsers().get(room.getHuSeat());
+					roundResult.setHuType(huUser.getHuType());
 					roundResult.setHuBrand(ProtoBuilder.buildHuUserBrand(room,
 							room.getUsers().get(room.getHuSeat())));
 				}
