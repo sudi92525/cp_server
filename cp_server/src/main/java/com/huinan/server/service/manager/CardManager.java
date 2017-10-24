@@ -261,7 +261,7 @@ public class CardManager {
 						log.info("tuoNum,五黑一红(包含丁斧)，tuo = 5");
 					} else {
 						log.info("tuoNum,五红六黑，tuo = 2");
-					} 
+					}
 				} else if (tuo == 4) {
 					tuo = 5;
 					log.info("tuoNum,五红一黑:有斧头甩一次，tuo = 5");
@@ -1053,7 +1053,8 @@ public class CardManager {
 		}
 		int cardValue = getCardValue(card);
 		for (Integer integer : user.getNoChuCards()) {
-			if (getCardValue(integer) == cardValue) {
+			if (getCardValue(integer) == cardValue
+					&& !user.getDouble7s().contains(integer)) {
 				tui = true;
 				break;
 			}
