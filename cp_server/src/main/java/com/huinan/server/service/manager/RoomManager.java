@@ -174,7 +174,9 @@ public class RoomManager {
 	}
 
 	public static void openTouPai(Room room) {
-		if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_GY_VALUE) {
+		if (room.getRoomType() != ENRoomType.EN_ROOM_TYPE_NC_VALUE
+				&& room.getRoomType() != ENRoomType.EN_ROOM_TYPE_XC_VALUE
+				&& room.getRoomType() != ENRoomType.EN_ROOM_TYPE_CX_VALUE) {
 			return;
 		}
 		for (User user : room.getUsers().values()) {
@@ -633,7 +635,8 @@ public class RoomManager {
 				Builder columuInfo = ProtoBuilder.buildPBColumnInfo(user,
 						cards, ENColType.EN_COL_TYPE_TOU, false);
 				if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_NC_VALUE
-						|| room.getRoomType() == ENRoomType.EN_ROOM_TYPE_XC_VALUE) {
+						|| room.getRoomType() == ENRoomType.EN_ROOM_TYPE_XC_VALUE
+						|| room.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX_VALUE) {
 					if (faPai && user.getSeatIndex() != room.getZhuangSeat()) {
 						columuInfo.setIsFan(true);
 					}
@@ -727,7 +730,8 @@ public class RoomManager {
 					if (num == 3) {// 偷一张
 						Card destCard = new Card(card, user.getSeatIndex(),
 								false, false, false, false);
-						int count = CardManager.getCardCountOfAll(user, destCard.getNum());
+						int count = CardManager.getCardCountOfAll(user,
+								destCard.getNum());
 						RoomManager.isBaoFan(user, room, destCard, null, count);
 						// 通知发一张牌
 						touPai(room, user, 1);

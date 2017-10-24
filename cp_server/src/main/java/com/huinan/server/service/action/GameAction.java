@@ -709,8 +709,8 @@ public class GameAction extends AbsAction {
 				RoomManager.naPai(room);
 			}
 		} else {
-			user.getActions().clear();
 			// 4.打牌流程中的过
+			user.getActions().clear();
 			// addNoChiList(user, room, currentCard);
 			if (room.getCanCheSeat() == user.getSeatIndex()) {
 				user.getNoCheCards().add(currentCard.getNum());

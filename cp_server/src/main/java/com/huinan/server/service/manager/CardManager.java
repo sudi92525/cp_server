@@ -644,7 +644,6 @@ public class CardManager {
 			logicUserActionList(room, card, users.get(card.getSeat()),
 					isFiveMo, true);
 		} else {
-			// 飞天二五
 			boolean isFeiTian25 = feiTian25(room, chuUser, isFiveMo, card,
 					users);
 			if (isFeiTian25) {
@@ -1156,9 +1155,6 @@ public class CardManager {
 	 * @return
 	 */
 	private static boolean checkHu7(User user, Card card) {
-		// if (user.getHold().size() == 1) {
-		// return false;
-		// }
 		Room room = RoomManager.getInstance().getRoom(user.getRoomId());
 		if (user.isFive()) {
 			if (isAllBlack(user, user.getHold(), user.getOpenList())
@@ -1167,9 +1163,6 @@ public class CardManager {
 			}
 			if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_NC_VALUE
 					|| room.getRoomType() == ENRoomType.EN_ROOM_TYPE_XC_VALUE) {
-				// if (card.isFirstCard() && card.getNum() == 25) {// 头家第一手打出25
-				// return true;
-				// }
 				if (!user.isMoPai()) {
 					return true;
 				}
@@ -1695,7 +1688,6 @@ public class CardManager {
 	public static void setDeathCardChi(Room room, User user, int card) {
 		Map<Integer, Integer> tempCard = toMap(user.getHold());
 		// 如果玩家手中有目标牌，则不能出，有两张，则既不能出，还不能再碰此目标牌
-		// boolean change = false;
 		if (tempCard.get(card) != null) {
 			List<Integer> dcList = new ArrayList<Integer>();
 			for (Integer dc : user.getNoChuCards()) {
@@ -1707,7 +1699,6 @@ public class CardManager {
 				dcList.add(card);
 			}
 			user.setNoChuCards(dcList);
-			// change = true;
 		}
 		Iterator<Integer> it = tempCard.keySet().iterator();
 		while (it.hasNext()) {
@@ -1715,7 +1706,6 @@ public class CardManager {
 			int count = tempCard.get(integer);
 			if (integer == card && count == 2) {
 				user.getNoCheCards().add(card);// 吃了不能扯
-				// break;
 			}
 			if (room.isChiHongDaHei()) {// 吃红打黑:
 				if (colorIsRed(card)) {
@@ -1727,7 +1717,6 @@ public class CardManager {
 						for (int i = 0; i < count; i++) {
 							user.getNoChuCards().add(integer);
 						}
-						// change = true;
 					}
 				} else {
 					if (getCardValue(card) == getCardValue(integer)) {
@@ -1737,15 +1726,12 @@ public class CardManager {
 						for (int i = 0; i < count; i++) {
 							user.getNoChuCards().add(integer);
 						}
-						// change = true;
 					}
 				}
 			}
 		}
-		// if (change) {
 		// 发送该目标牌不能出的通知
 		NotifyHandler.notifyDeathCardList(user);
-		// }
 	}
 
 	/**
