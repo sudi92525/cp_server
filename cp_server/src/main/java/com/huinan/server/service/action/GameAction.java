@@ -399,8 +399,6 @@ public class GameAction extends AbsAction {
 		CardManager.checkBaoZiOrChuPai(room, user);
 	}
 
-	
-
 	/**
 	 * 流程:扯-偷牌-是否继续偷-是否招-是否吃退-是否胡-出牌
 	 * 
@@ -501,9 +499,18 @@ public class GameAction extends AbsAction {
 		room.setLastHuSeat(user.getSeatIndex());
 		// 位置推送
 		NotifyHandler.notifyNextOperation(room, user);
-		// 胡牌推送
-		NotifyHandler.notifyActionFlow(room, user, destCard, null,
-				ENActionType.EN_ACTION_HU, false);
+		int count = CardManager.getCardCountOfAll(user, destCard.getNum());
+		if (count == 3) {
+			// NotifyHandler.notifyActionFlow(room, user, destCard, null,
+			// ENActionType.EN_ACTION_CHIKAN, false);
+		} else if (count == 4) {
+			NotifyHandler.notifyActionFlow(room, user, destCard, null,
+					ENActionType.EN_ACTION_HU_SIGEN, false);
+		} else {
+			// 胡牌推送
+			NotifyHandler.notifyActionFlow(room, user, destCard, null,
+					ENActionType.EN_ACTION_HU, false);
+		}
 		// 结算
 		RoomManager.total(room);
 	}
