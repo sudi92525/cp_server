@@ -724,6 +724,10 @@ public class RoomManager {
 						CardManager.removeDeathCard(card, user);
 					}
 					if (num == 3) {// 偷一张
+						Card destCard = new Card(card, user.getSeatIndex(),
+								false, false, false, false);
+						int count = CardManager.getCardCountOfAll(user, destCard.getNum());
+						RoomManager.isBaoFan(user, room, destCard, null, count);
 						// 通知发一张牌
 						touPai(room, user, 1);
 						return true;
@@ -754,6 +758,80 @@ public class RoomManager {
 			}
 		}
 		return false;
+	}
+
+	/**
+	 * 检查是否包翻
+	 * 
+	 * @param user
+	 * @param room
+	 * @param destCard
+	 * @param chiCard
+	 * @param count
+	 */
+	public static void isBaoFan(User user, Room room, Card destCard,
+			Integer chiCard, int count) {
+		if (!room.isBaoFan()) {
+			return;
+		}
+		if (chiCard != null) {// 吃成四个
+			int myCardCount = CardManager.getCardCountOfAll(user, chiCard);
+			// 包翻:扯/偷过,又吃一个
+			if (count == 4 && CardManager.getCardIsChe(user, destCard.getNum())) {
+				if (destCard.isChu()) {
+					// 打出牌的包翻
+					if (user.getBaoFans().get(destCard.getSeat()) != null) {
+						user.getBaoFans().put(destCard.getSeat(),
+								user.getBaoFans().get(destCard.getSeat()) + 1);
+					} else {
+						user.getBaoFans().put(destCard.getSeat(), 1);
+					}
+				} else if (destCard.isOpen()) {
+					// 翻開的，自己包煩
+					if (user.getBaoFans().get(user.getSeatIndex()) != null) {
+						user.getBaoFans().put(user.getSeatIndex(),
+								user.getBaoFans().get(user.getSeatIndex()) + 1);
+					} else {
+						user.getBaoFans().put(user.getSeatIndex(), 1);
+					}
+				}
+			}
+			// 自己手里的四根，自己包番
+			if (myCardCount == 4 && CardManager.getCardIsChe(user, chiCard)) {
+				if (user.getBaoFans().get(user.getSeatIndex()) != null) {
+					user.getBaoFans().put(user.getSeatIndex(),
+							user.getBaoFans().get(user.getSeatIndex()) + 1);
+				} else {
+					user.getBaoFans().put(user.getSeatIndex(), 1);
+				}
+			}
+		} else {// 扯后对成四个：苍溪
+			if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX_VALUE) {
+				if (count == 4) {
+					if (destCard.isChu()) {
+						// 打出牌的包翻
+						if (user.getBaoFans().get(destCard.getSeat()) != null) {
+							user.getBaoFans()
+									.put(destCard.getSeat(),
+											user.getBaoFans().get(
+													destCard.getSeat()) + 1);
+						} else {
+							user.getBaoFans().put(destCard.getSeat(), 1);
+						}
+					} else if (destCard.isOpen()) {
+						// 翻開的，自己包煩
+						if (user.getBaoFans().get(user.getSeatIndex()) != null) {
+							user.getBaoFans()
+									.put(user.getSeatIndex(),
+											user.getBaoFans().get(
+													user.getSeatIndex()) + 1);
+						} else {
+							user.getBaoFans().put(user.getSeatIndex(), 1);
+						}
+					}
+				}
+			}
+		}
 	}
 
 	/**

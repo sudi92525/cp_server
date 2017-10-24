@@ -387,7 +387,7 @@ public class GameAction extends AbsAction {
 			NotifyHandler.notifyActionFlow(room, user, destCard,
 					columnInfo.build(), ENActionType.EN_ACTION_CHI, false);
 		}
-		isBaoFan(user, room, destCard, chiCard, count);
+		RoomManager.isBaoFan(user, room, destCard, chiCard, count);
 		// 为上家记录记过上家的牌被自己吃了
 		if (destCard.getSeat() != user.getSeatIndex()) {
 			User chuUser = room.getUsers().get(destCard.getSeat());
@@ -399,80 +399,7 @@ public class GameAction extends AbsAction {
 		CardManager.checkBaoZiOrChuPai(room, user);
 	}
 
-	/**
-	 * 检查是否包翻
-	 * 
-	 * @param user
-	 * @param room
-	 * @param destCard
-	 * @param chiCard
-	 * @param count
-	 */
-	private static void isBaoFan(User user, Room room, Card destCard,
-			Integer chiCard, int count) {
-		if (!room.isBaoFan()) {
-			return;
-		}
-		if (chiCard != null) {// 吃成四个
-			int myCardCount = CardManager.getCardCountOfAll(user, chiCard);
-			// 包翻:扯/偷过,又吃一个
-			if (count == 4 && CardManager.getCardIsChe(user, destCard.getNum())) {
-				if (destCard.isChu()) {
-					// 打出牌的包翻
-					if (user.getBaoFans().get(destCard.getSeat()) != null) {
-						user.getBaoFans().put(destCard.getSeat(),
-								user.getBaoFans().get(destCard.getSeat()) + 1);
-					} else {
-						user.getBaoFans().put(destCard.getSeat(), 1);
-					}
-				} else if (destCard.isOpen()) {
-					// 翻開的，自己包煩
-					if (user.getBaoFans().get(user.getSeatIndex()) != null) {
-						user.getBaoFans().put(user.getSeatIndex(),
-								user.getBaoFans().get(user.getSeatIndex()) + 1);
-					} else {
-						user.getBaoFans().put(user.getSeatIndex(), 1);
-					}
-				}
-			}
-			// 自己手里的四根，自己包番
-			if (myCardCount == 4 && CardManager.getCardIsChe(user, chiCard)) {
-				if (user.getBaoFans().get(user.getSeatIndex()) != null) {
-					user.getBaoFans().put(user.getSeatIndex(),
-							user.getBaoFans().get(user.getSeatIndex()) + 1);
-				} else {
-					user.getBaoFans().put(user.getSeatIndex(), 1);
-				}
-			}
-		} else {// 扯后对成四个：苍溪
-			if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX_VALUE) {
-				if (count == 4) {
-					if (destCard.isChu()) {
-						// 打出牌的包翻
-						if (user.getBaoFans().get(destCard.getSeat()) != null) {
-							user.getBaoFans()
-									.put(destCard.getSeat(),
-											user.getBaoFans().get(
-													destCard.getSeat()) + 1);
-						} else {
-							user.getBaoFans().put(destCard.getSeat(), 1);
-						}
-					} else if (destCard.isOpen()) {
-						// 翻開的，自己包煩
-						if (user.getBaoFans().get(user.getSeatIndex()) != null) {
-							user.getBaoFans()
-									.put(user.getSeatIndex(),
-											user.getBaoFans().get(
-													user.getSeatIndex()) + 1);
-						} else {
-							user.getBaoFans().put(user.getSeatIndex(), 1);
-						}
-					}
-				}
-			}
-		}
-
-	}
+	
 
 	/**
 	 * 流程:扯-偷牌-是否继续偷-是否招-是否吃退-是否胡-出牌
@@ -527,7 +454,7 @@ public class GameAction extends AbsAction {
 				columnInfo.build(), type, false);
 
 		int count = CardManager.getCardCountOfAll(user, destCard.getNum());
-		isBaoFan(user, room, destCard, null, count);
+		RoomManager.isBaoFan(user, room, destCard, null, count);
 		// 偷牌推送
 		boolean huang = RoomManager.touPai(room, user, 1);
 		if (huang) {
