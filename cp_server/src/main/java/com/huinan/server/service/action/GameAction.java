@@ -446,7 +446,29 @@ public class GameAction extends AbsAction {
 			}
 		} else {// 扯后对成四个：苍溪
 			if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX_VALUE) {
-				// TODO
+				if (count == 4) {
+					if (destCard.isChu()) {
+						// 打出牌的包翻
+						if (user.getBaoFans().get(destCard.getSeat()) != null) {
+							user.getBaoFans()
+									.put(destCard.getSeat(),
+											user.getBaoFans().get(
+													destCard.getSeat()) + 1);
+						} else {
+							user.getBaoFans().put(destCard.getSeat(), 1);
+						}
+					} else if (destCard.isOpen()) {
+						// 翻開的，自己包煩
+						if (user.getBaoFans().get(user.getSeatIndex()) != null) {
+							user.getBaoFans()
+									.put(user.getSeatIndex(),
+											user.getBaoFans().get(
+													user.getSeatIndex()) + 1);
+						} else {
+							user.getBaoFans().put(user.getSeatIndex(), 1);
+						}
+					}
+				}
 			}
 		}
 
@@ -503,6 +525,9 @@ public class GameAction extends AbsAction {
 		// 扯牌推送
 		NotifyHandler.notifyActionFlow(room, user, destCard,
 				columnInfo.build(), type, false);
+
+		int count = CardManager.getCardCountOfAll(user, destCard.getNum());
+		isBaoFan(user, room, destCard, null, count);
 		// 偷牌推送
 		boolean huang = RoomManager.touPai(room, user, 1);
 		if (huang) {
