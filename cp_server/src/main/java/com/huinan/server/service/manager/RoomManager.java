@@ -100,6 +100,7 @@ public class RoomManager {
 		}
 		room.setLan18(requestBody.getIs18Lan());
 		room.setFanFiveHave56(requestBody.getIsFanXjHave56());
+		room.setCheAll7Fan(requestBody.getIsFanSan7());
 
 		rooms.put(tid, room);// 存放游戏房间信息
 		return room;
@@ -341,7 +342,7 @@ public class RoomManager {
 		}
 		// TODO 写死牌
 		// for (int i = 0; i < 84; i++) {
-		// cards.add(24);
+		// cards.add(34);
 		// cards.add(15);
 		// cards.add(15);
 		// cards.add(15);
@@ -520,7 +521,7 @@ public class RoomManager {
 				user.getHold().add(card9);
 				int card10 = 25;
 				user.getHold().add(card10);
-				int card11 = 26;
+				int card11 = 25;
 				user.getHold().add(card11);
 				int card12 = 33;
 				user.getHold().add(card12);
@@ -1453,6 +1454,8 @@ public class RoomManager {
 				SmallResult.Builder roundResult = SmallResult.newBuilder();
 				roundResult.addAllDipaiCard(room.getResetCards());
 				if (!huang) {
+					User huUser = room.getUsers().get(room.getHuSeat());
+					roundResult.setHuType(huUser.getHuType());
 					roundResult.setHuBrand(ProtoBuilder.buildHuUserBrand(room,
 							room.getUsers().get(room.getHuSeat())));
 				}

@@ -241,9 +241,7 @@ public class ProtoBuilder {
 		if (cols != null && !cols.isEmpty()) {
 			action.addAllColInfo(cols);
 		}
-		if (type.getNumber() == ENActionType.EN_ACTION_HU_VALUE) {
-			action.setHuType(user.getHuType());
-		} else if (type.getNumber() == ENActionType.EN_ACTION_NO_CHU_VALUE) {
+		if (type.getNumber() == ENActionType.EN_ACTION_NO_CHU_VALUE) {
 			action.addAllDeathCard(user.getNoChuCards());
 		}
 		action.setIsChu(isChuPai);
