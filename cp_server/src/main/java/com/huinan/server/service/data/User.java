@@ -198,6 +198,10 @@ public class User implements Serializable {
 	 */
 	private List<Integer> hold = new ArrayList<>();
 	/**
+	 * 扣得牌
+	 */
+	private List<Integer> kou = new ArrayList<>();
+	/**
 	 * 扯吃牌堆<PBColumnInfo>
 	 */
 	private List<PBColumnInfo> open = new ArrayList<>();
@@ -861,6 +865,14 @@ public class User implements Serializable {
 
 	public void setMoPai(boolean moPai) {
 		this.moPai = moPai;
+	}
+
+	public List<Integer> getKou() {
+		return kou;
+	}
+
+	public void setKou(List<Integer> kou) {
+		this.kou = kou;
 	}
 
 }

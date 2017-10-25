@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
@@ -187,10 +189,75 @@ public class UserManager {
 		});
 	}
 
+	/**
+	 * 更新排行榜数据
+	 * 
+	 * @param room
+	 */
+	public void updateRankData(Room room) {
+		EXECUTOR.execute(() -> {
+			Connection conn = null;
+			PreparedStatement sta = null;
+			ResultSet rs = null;
+			try {
+				Calendar c = Calendar.getInstance();
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				String dateStr = sdf.format(c.getTime());
+
+				conn = DBManager.getInstance().getConnection();
+				for (User user : room.getUsers().values()) {
+
+					sta = conn.prepareStatement(SELECT_RANK_SQL_BY_UID);
+					sta.setInt(1, Integer.valueOf(user.getUuid()));//
+					sta.setString(2, ServerConfig.getInstance().getGameCode());//
+					sta.setInt(3, room.getRoomType());//
+					sta.setString(4, dateStr);
+
+					rs = sta.executeQuery();
+					if (rs.next()) {
+						sta = conn.prepareStatement(UPDATE_RANK_SQL);
+						sta.setInt(1, room.getRoomTable().getGameNum());// 局数
+						sta.setInt(2, user.getCurrency());// 积分变化
+
+						// where
+						sta.setInt(3, Integer.valueOf(user.getUuid()));//
+						sta.setString(4, ServerConfig.getInstance()
+								.getGameCode());//
+						sta.setInt(5, room.getRoomType());//
+						sta.setString(6, dateStr);
+						sta.executeUpdate();
+					} else {
+						sta = conn.prepareStatement(INSERT_RANK_SQL);
+						sta.setInt(1, room.getRoomTable().getGameNum());// 局数
+						sta.setInt(2, user.getCurrency());// 积分变化
+						sta.setInt(3, Integer.valueOf(user.getUuid()));//
+						sta.setString(4, ServerConfig.getInstance()
+								.getGameCode());//
+						sta.setInt(5, room.getRoomType());//
+						sta.setString(6, dateStr);
+
+						sta.executeUpdate();
+					}
+				}
+			} catch (SQLException e) {
+				LOGGER.error("user db error:", e);
+			} finally {
+				DBManager.getInstance().closeConnection(conn);
+				DBManager.getInstance().closeStatement(sta);
+				DBManager.getInstance().closeResultSet(rs);
+			}
+		});
+	}
+
 	private static final String SELECT_SQL_BY_UID = "SELECT * FROM `sys_players` WHERE `PId`=?";
-
 	public static final String UPDATE_SQL = "UPDATE `sys_players` SET RoomCardCount=RoomCardCount-? WHERE PId=?";
-
 	private static final String INSERT_SQL = "INSERT INTO `sys_roomcard_record`(GameCode,PId,RoomCardNum,AfterRoomCardNum,RecordType,RoomNum,CreateDate,Remark,RegionType)"
 			+ " VALUES(?,?,?,?,?,?,?,?,?)";
+
+	/** 更新玩家排行榜数据 */
+	private static final String SELECT_RANK_SQL_BY_UID = "SELECT * FROM `sys_player_game_data` WHERE `PId`=? AND `GameCode`=? AND `GameRegion`=? AND `GameDate`=?";
+	public static final String UPDATE_RANK_SQL = "UPDATE `sys_player_game_data` SET GameNum=GameNum+?,GameScore=GameScore+? WHERE `PId`=? AND `GameCode`=? AND `GameRegion`=? AND `GameDate`=?";
+	private static final String INSERT_RANK_SQL = "INSERT INTO `sys_player_game_data`(GameNum,GameScore,PId,GameCode,GameRegion,GameDate)"
+			+ " VALUES(?,?,?,?,?,?)";
+
 }

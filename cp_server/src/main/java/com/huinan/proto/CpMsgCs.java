@@ -133,6 +133,14 @@ public final class CpMsgCs {
      * </pre>
      */
     RESPONSE_IS_IN_ROOM(14, 15),
+    /**
+     * <code>RESPONSE_NOT_CAN_XIA_JIAO_7 = 16;</code>
+     *
+     * <pre>
+     *不能在七点上转叫
+     * </pre>
+     */
+    RESPONSE_NOT_CAN_XIA_JIAO_7(15, 16),
     ;
 
     /**
@@ -255,6 +263,14 @@ public final class CpMsgCs {
      * </pre>
      */
     public static final int RESPONSE_IS_IN_ROOM_VALUE = 15;
+    /**
+     * <code>RESPONSE_NOT_CAN_XIA_JIAO_7 = 16;</code>
+     *
+     * <pre>
+     *不能在七点上转叫
+     * </pre>
+     */
+    public static final int RESPONSE_NOT_CAN_XIA_JIAO_7_VALUE = 16;
 
 
     public final int getNumber() { return value; }
@@ -276,6 +292,7 @@ public final class CpMsgCs {
         case 13: return RESPONSE_FIRST_DISSOLVE_ROOM_CHOICE_ERROR;
         case 14: return RESPONSE_ALREADY_READY;
         case 15: return RESPONSE_IS_IN_ROOM;
+        case 16: return RESPONSE_NOT_CAN_XIA_JIAO_7;
         default: return null;
       }
     }
@@ -894,6 +911,14 @@ public final class CpMsgCs {
      * </pre>
      */
     EN_ACTION_DEAL(24, 25),
+    /**
+     * <code>EN_ACTION_KOU = 26;</code>
+     *
+     * <pre>
+     *扣一个（苍溪招的牌和吃退的牌）
+     * </pre>
+     */
+    EN_ACTION_KOU(25, 26),
     ;
 
     /**
@@ -1096,6 +1121,14 @@ public final class CpMsgCs {
      * </pre>
      */
     public static final int EN_ACTION_DEAL_VALUE = 25;
+    /**
+     * <code>EN_ACTION_KOU = 26;</code>
+     *
+     * <pre>
+     *扣一个（苍溪招的牌和吃退的牌）
+     * </pre>
+     */
+    public static final int EN_ACTION_KOU_VALUE = 26;
 
 
     public final int getNumber() { return value; }
@@ -1127,6 +1160,7 @@ public final class CpMsgCs {
         case 23: return EN_ACTION_NO_DANG;
         case 24: return EN_ACTION_NEXT;
         case 25: return EN_ACTION_DEAL;
+        case 26: return EN_ACTION_KOU;
         default: return null;
       }
     }
@@ -7097,6 +7131,31 @@ public final class CpMsgCs {
      * </pre>
      */
     boolean getIsPiao();
+
+    /**
+     * <code>repeated int32 kou_card_list = 11;</code>
+     *
+     * <pre>
+     *扣得牌列表
+     * </pre>
+     */
+    java.util.List<java.lang.Integer> getKouCardListList();
+    /**
+     * <code>repeated int32 kou_card_list = 11;</code>
+     *
+     * <pre>
+     *扣得牌列表
+     * </pre>
+     */
+    int getKouCardListCount();
+    /**
+     * <code>repeated int32 kou_card_list = 11;</code>
+     *
+     * <pre>
+     *扣得牌列表
+     * </pre>
+     */
+    int getKouCardList(int index);
   }
   /**
    * Protobuf type {@code com.huinan.proto.PBTableSeat}
@@ -7279,6 +7338,27 @@ public final class CpMsgCs {
               isPiao_ = input.readBool();
               break;
             }
+            case 88: {
+              if (!((mutable_bitField0_ & 0x00000400) == 0x00000400)) {
+                kouCardList_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000400;
+              }
+              kouCardList_.add(input.readInt32());
+              break;
+            }
+            case 90: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              if (!((mutable_bitField0_ & 0x00000400) == 0x00000400) && input.getBytesUntilLimit() > 0) {
+                kouCardList_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000400;
+              }
+              while (input.getBytesUntilLimit() > 0) {
+                kouCardList_.add(input.readInt32());
+              }
+              input.popLimit(limit);
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -7301,6 +7381,9 @@ public final class CpMsgCs {
         }
         if (((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
           outCardsNo_ = java.util.Collections.unmodifiableList(outCardsNo_);
+        }
+        if (((mutable_bitField0_ & 0x00000400) == 0x00000400)) {
+          kouCardList_ = java.util.Collections.unmodifiableList(kouCardList_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -7650,6 +7733,40 @@ public final class CpMsgCs {
       return isPiao_;
     }
 
+    public static final int KOU_CARD_LIST_FIELD_NUMBER = 11;
+    private java.util.List<java.lang.Integer> kouCardList_;
+    /**
+     * <code>repeated int32 kou_card_list = 11;</code>
+     *
+     * <pre>
+     *扣得牌列表
+     * </pre>
+     */
+    public java.util.List<java.lang.Integer>
+        getKouCardListList() {
+      return kouCardList_;
+    }
+    /**
+     * <code>repeated int32 kou_card_list = 11;</code>
+     *
+     * <pre>
+     *扣得牌列表
+     * </pre>
+     */
+    public int getKouCardListCount() {
+      return kouCardList_.size();
+    }
+    /**
+     * <code>repeated int32 kou_card_list = 11;</code>
+     *
+     * <pre>
+     *扣得牌列表
+     * </pre>
+     */
+    public int getKouCardList(int index) {
+      return kouCardList_.get(index);
+    }
+
     private void initFields() {
       userInfo_ = com.huinan.proto.CpMsgCs.UserInfo.getDefaultInstance();
       seatIndex_ = 0;
@@ -7661,6 +7778,7 @@ public final class CpMsgCs {
       deathCard_ = java.util.Collections.emptyList();
       outCardsNo_ = java.util.Collections.emptyList();
       isPiao_ = false;
+      kouCardList_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -7704,6 +7822,9 @@ public final class CpMsgCs {
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeBool(10, isPiao_);
+      }
+      for (int i = 0; i < kouCardList_.size(); i++) {
+        output.writeInt32(11, kouCardList_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -7773,6 +7894,15 @@ public final class CpMsgCs {
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(10, isPiao_);
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < kouCardList_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeInt32SizeNoTag(kouCardList_.get(i));
+        }
+        size += dataSize;
+        size += 1 * getKouCardListList().size();
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -7925,6 +8055,8 @@ public final class CpMsgCs {
         bitField0_ = (bitField0_ & ~0x00000100);
         isPiao_ = false;
         bitField0_ = (bitField0_ & ~0x00000200);
+        kouCardList_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000400);
         return this;
       }
 
@@ -8006,6 +8138,11 @@ public final class CpMsgCs {
           to_bitField0_ |= 0x00000010;
         }
         result.isPiao_ = isPiao_;
+        if (((bitField0_ & 0x00000400) == 0x00000400)) {
+          kouCardList_ = java.util.Collections.unmodifiableList(kouCardList_);
+          bitField0_ = (bitField0_ & ~0x00000400);
+        }
+        result.kouCardList_ = kouCardList_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -8102,6 +8239,16 @@ public final class CpMsgCs {
         }
         if (other.hasIsPiao()) {
           setIsPiao(other.getIsPiao());
+        }
+        if (!other.kouCardList_.isEmpty()) {
+          if (kouCardList_.isEmpty()) {
+            kouCardList_ = other.kouCardList_;
+            bitField0_ = (bitField0_ & ~0x00000400);
+          } else {
+            ensureKouCardListIsMutable();
+            kouCardList_.addAll(other.kouCardList_);
+          }
+          onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -9158,6 +9305,100 @@ public final class CpMsgCs {
       public Builder clearIsPiao() {
         bitField0_ = (bitField0_ & ~0x00000200);
         isPiao_ = false;
+        onChanged();
+        return this;
+      }
+
+      private java.util.List<java.lang.Integer> kouCardList_ = java.util.Collections.emptyList();
+      private void ensureKouCardListIsMutable() {
+        if (!((bitField0_ & 0x00000400) == 0x00000400)) {
+          kouCardList_ = new java.util.ArrayList<java.lang.Integer>(kouCardList_);
+          bitField0_ |= 0x00000400;
+         }
+      }
+      /**
+       * <code>repeated int32 kou_card_list = 11;</code>
+       *
+       * <pre>
+       *扣得牌列表
+       * </pre>
+       */
+      public java.util.List<java.lang.Integer>
+          getKouCardListList() {
+        return java.util.Collections.unmodifiableList(kouCardList_);
+      }
+      /**
+       * <code>repeated int32 kou_card_list = 11;</code>
+       *
+       * <pre>
+       *扣得牌列表
+       * </pre>
+       */
+      public int getKouCardListCount() {
+        return kouCardList_.size();
+      }
+      /**
+       * <code>repeated int32 kou_card_list = 11;</code>
+       *
+       * <pre>
+       *扣得牌列表
+       * </pre>
+       */
+      public int getKouCardList(int index) {
+        return kouCardList_.get(index);
+      }
+      /**
+       * <code>repeated int32 kou_card_list = 11;</code>
+       *
+       * <pre>
+       *扣得牌列表
+       * </pre>
+       */
+      public Builder setKouCardList(
+          int index, int value) {
+        ensureKouCardListIsMutable();
+        kouCardList_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated int32 kou_card_list = 11;</code>
+       *
+       * <pre>
+       *扣得牌列表
+       * </pre>
+       */
+      public Builder addKouCardList(int value) {
+        ensureKouCardListIsMutable();
+        kouCardList_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated int32 kou_card_list = 11;</code>
+       *
+       * <pre>
+       *扣得牌列表
+       * </pre>
+       */
+      public Builder addAllKouCardList(
+          java.lang.Iterable<? extends java.lang.Integer> values) {
+        ensureKouCardListIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, kouCardList_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated int32 kou_card_list = 11;</code>
+       *
+       * <pre>
+       *扣得牌列表
+       * </pre>
+       */
+      public Builder clearKouCardList() {
+        kouCardList_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000400);
         onChanged();
         return this;
       }
@@ -26521,6 +26762,23 @@ public final class CpMsgCs {
      * </pre>
      */
     com.huinan.proto.CpMsgCs.ENZhaoType getZhaoType();
+
+    /**
+     * <code>optional bool chu_card_is_kou = 6;</code>
+     *
+     * <pre>
+     *出的牌是扣得(false=手里的，true=扣得)
+     * </pre>
+     */
+    boolean hasChuCardIsKou();
+    /**
+     * <code>optional bool chu_card_is_kou = 6;</code>
+     *
+     * <pre>
+     *出的牌是扣得(false=手里的，true=扣得)
+     * </pre>
+     */
+    boolean getChuCardIsKou();
   }
   /**
    * Protobuf type {@code com.huinan.proto.CSRequestDoAction}
@@ -26623,6 +26881,11 @@ public final class CpMsgCs {
                 bitField0_ |= 0x00000008;
                 zhaoType_ = value;
               }
+              break;
+            }
+            case 48: {
+              bitField0_ |= 0x00000010;
+              chuCardIsKou_ = input.readBool();
               break;
             }
           }
@@ -26794,12 +27057,36 @@ public final class CpMsgCs {
       return zhaoType_;
     }
 
+    public static final int CHU_CARD_IS_KOU_FIELD_NUMBER = 6;
+    private boolean chuCardIsKou_;
+    /**
+     * <code>optional bool chu_card_is_kou = 6;</code>
+     *
+     * <pre>
+     *出的牌是扣得(false=手里的，true=扣得)
+     * </pre>
+     */
+    public boolean hasChuCardIsKou() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional bool chu_card_is_kou = 6;</code>
+     *
+     * <pre>
+     *出的牌是扣得(false=手里的，true=扣得)
+     * </pre>
+     */
+    public boolean getChuCardIsKou() {
+      return chuCardIsKou_;
+    }
+
     private void initFields() {
       seatIndex_ = 0;
       actType_ = 0;
       destCard_ = 0;
       cards_ = java.util.Collections.emptyList();
       zhaoType_ = com.huinan.proto.CpMsgCs.ENZhaoType.EN_ZHAO_TYPE_CHI;
+      chuCardIsKou_ = false;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -26828,6 +27115,9 @@ public final class CpMsgCs {
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeEnum(5, zhaoType_.getNumber());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeBool(6, chuCardIsKou_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -26862,6 +27152,10 @@ public final class CpMsgCs {
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(5, zhaoType_.getNumber());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(6, chuCardIsKou_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -26994,6 +27288,8 @@ public final class CpMsgCs {
         bitField0_ = (bitField0_ & ~0x00000008);
         zhaoType_ = com.huinan.proto.CpMsgCs.ENZhaoType.EN_ZHAO_TYPE_CHI;
         bitField0_ = (bitField0_ & ~0x00000010);
+        chuCardIsKou_ = false;
+        bitField0_ = (bitField0_ & ~0x00000020);
         return this;
       }
 
@@ -27043,6 +27339,10 @@ public final class CpMsgCs {
           to_bitField0_ |= 0x00000008;
         }
         result.zhaoType_ = zhaoType_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.chuCardIsKou_ = chuCardIsKou_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -27080,6 +27380,9 @@ public final class CpMsgCs {
         }
         if (other.hasZhaoType()) {
           setZhaoType(other.getZhaoType());
+        }
+        if (other.hasChuCardIsKou()) {
+          setChuCardIsKou(other.getChuCardIsKou());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -27393,6 +27696,54 @@ public final class CpMsgCs {
       public Builder clearZhaoType() {
         bitField0_ = (bitField0_ & ~0x00000010);
         zhaoType_ = com.huinan.proto.CpMsgCs.ENZhaoType.EN_ZHAO_TYPE_CHI;
+        onChanged();
+        return this;
+      }
+
+      private boolean chuCardIsKou_ ;
+      /**
+       * <code>optional bool chu_card_is_kou = 6;</code>
+       *
+       * <pre>
+       *出的牌是扣得(false=手里的，true=扣得)
+       * </pre>
+       */
+      public boolean hasChuCardIsKou() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>optional bool chu_card_is_kou = 6;</code>
+       *
+       * <pre>
+       *出的牌是扣得(false=手里的，true=扣得)
+       * </pre>
+       */
+      public boolean getChuCardIsKou() {
+        return chuCardIsKou_;
+      }
+      /**
+       * <code>optional bool chu_card_is_kou = 6;</code>
+       *
+       * <pre>
+       *出的牌是扣得(false=手里的，true=扣得)
+       * </pre>
+       */
+      public Builder setChuCardIsKou(boolean value) {
+        bitField0_ |= 0x00000020;
+        chuCardIsKou_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bool chu_card_is_kou = 6;</code>
+       *
+       * <pre>
+       *出的牌是扣得(false=手里的，true=扣得)
+       * </pre>
+       */
+      public Builder clearChuCardIsKou() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        chuCardIsKou_ = false;
         onChanged();
         return this;
       }
@@ -50365,184 +50716,186 @@ public final class CpMsgCs {
       "proto.ENZhaoType\022/\n\tzhao_list\030\n \003(\0162\034.co" +
       "m.huinan.proto.ENZhaoType\022\021\n\tpiao_list\030\013" +
       " \003(\005\022\025\n\rleft_card_num\030\014 \001(\005\022\031\n\021tiles_on_" +
-      "hand_num\030\r \001(\005\"\225\002\n\013PBTableSeat\022,\n\010userIn",
+      "hand_num\030\r \001(\005\"\254\002\n\013PBTableSeat\022,\n\010userIn",
       "fo\030\001 \001(\0132\032.com.huinan.proto.UserInfo\022\022\n\n" +
       "seat_index\030\002 \001(\005\022\025\n\rtiles_on_hand\030\003 \003(\005\022" +
       "/\n\007out_col\030\004 \003(\0132\036.com.huinan.proto.PBCo" +
       "lumnInfo\022\023\n\013final_score\030\005 \001(\005\022\021\n\tout_car" +
       "ds\030\006 \003(\005\022\031\n\021tiles_on_hand_num\030\007 \001(\005\022\022\n\nd" +
       "eath_card\030\010 \003(\005\022\024\n\014out_cards_no\030\t \003(\005\022\017\n" +
-      "\007is_piao\030\n \001(\010\"\205\001\n\016CSRequestLogin\022\r\n\005tok" +
-      "en\030\001 \001(\t\022\013\n\003uid\030\002 \001(\t\022\014\n\004nick\030\003 \001(\t\022\017\n\007p" +
-      "ic_url\030\004 \001(\t\022\024\n\014refreshToken\030\005 \001(\t\022\013\n\003se" +
-      "x\030\006 \001(\005\022\025\n\rroom_card_num\030\007 \001(\005\"h\n\017CSResp",
-      "onseLogin\022\r\n\005state\030\001 \001(\010\022\013\n\003uid\030\002 \001(\t\022\020\n" +
-      "\010pos_type\030\003 \001(\005\022\020\n\010table_id\030\004 \001(\005\022\025\n\rroo" +
-      "m_card_num\030\005 \001(\005\"\320\004\n\024CSRequestCreateTabl" +
-      "e\022\013\n\003tid\030\001 \001(\005\022\020\n\010game_num\030\002 \001(\005\022\025\n\rroom" +
-      "_card_num\030\003 \001(\005\022\025\n\ruse_card_type\030\004 \001(\005\022\021" +
-      "\n\tplay_type\030\005 \001(\005\022\022\n\nhigh_times\030\006 \001(\005\022\014\n" +
-      "\004name\030\007 \001(\005\022\022\n\nplayer_num\030\010 \001(\005\022\023\n\013creat" +
-      "or_uid\030\t \001(\t\022\023\n\013hei_two_fan\030\n \001(\010\022\021\n\tis_" +
-      "baofan\030\013 \001(\010\022\017\n\007is_piao\030\014 \001(\010\022/\n\troom_ty" +
-      "pe\030\r \001(\0162\034.com.huinan.proto.ENRoomType\022\032",
-      "\n\022is_chi_hong_da_hei\030\016 \001(\010\022\031\n\021is_wu_hei_" +
-      "yi_hong\030\017 \001(\010\022\024\n\014is_add_score\030\020 \001(\010\022\023\n\013i" +
-      "s_tou_dang\030\021 \001(\010\022\024\n\014is_zi_mo_fan\030\022 \001(\010\022\033" +
-      "\n\023is_dingfu_shuai_any\030\023 \001(\010\022\023\n\013is_che_zh" +
-      "ui\030\024 \001(\010\022\024\n\014is_diao_zhui\030\025 \001(\010\022\021\n\tis_34_" +
-      "fan\030\026 \001(\010\022\r\n\005score\030\027 \001(\005\022\021\n\tis_18_lan\030\030 " +
-      "\001(\010\022\023\n\013is_fan_san7\030\031 \001(\010\022\031\n\021is_fan_xj_ha" +
-      "ve_56\030\032 \001(\010\"\264\001\n\025CSResponseCreateTable\0220\n" +
-      "\006result\030\001 \001(\0162 .com.huinan.proto.ENMessa" +
-      "geError\022-\n\tuser_info\030\002 \003(\0132\032.com.huinan.",
-      "proto.UserInfo\022:\n\ntable_info\030\003 \001(\0132&.com" +
-      ".huinan.proto.CSRequestCreateTable\"\"\n\023CS" +
-      "RequestEnterTable\022\013\n\003tid\030\001 \001(\005\".\n\014Choice" +
-      "Zhuang\022\020\n\010fan_seat\030\001 \001(\005\022\014\n\004card\030\002 \001(\005\"\301" +
-      "\001\n\021CSNotifyGameStart\022,\n\005seats\030\001 \003(\0132\035.co" +
-      "m.huinan.proto.PBTableSeat\022\025\n\rleft_tile_" +
-      "num\030\002 \001(\005\022\016\n\006dealer\030\003 \001(\005\022\r\n\005round\030\004 \001(\005" +
-      "\022\021\n\tdang_seat\030\005 \001(\005\0225\n\rchoice_zhuang\030\006 \001" +
-      "(\0132\036.com.huinan.proto.ChoiceZhuang\"D\n\023CS" +
-      "NottifyEnterTable\022-\n\tuser_info\030\001 \001(\0132\032.c",
-      "om.huinan.proto.UserInfo\"#\n\024CSRequestLog" +
-      "outTable\022\013\n\003tid\030\001 \001(\005\"I\n\025CSResponseLogou" +
-      "tTable\0220\n\006result\030\001 \001(\0162 .com.huinan.prot" +
-      "o.ENMessageError\")\n\023CSNotifyLogoutTable\022" +
-      "\022\n\nseat_index\030\001 \001(\005\"6\n\023CSRequestOwnerTir" +
-      "en\022\022\n\nseat_index\030\001 \001(\005\022\013\n\003uid\030\002 \001(\t\"H\n\024C" +
-      "SResponseOwnerTiren\0220\n\006result\030\001 \001(\0162 .co" +
-      "m.huinan.proto.ENMessageError\"5\n\022CSNotif" +
-      "yOwnerTiren\022\022\n\nseat_index\030\001 \001(\005\022\013\n\003uid\030\002" +
-      " \001(\t\"(\n\026CSRequestDissolveTable\022\016\n\006choice",
-      "\030\001 \001(\010\"K\n\027CSResponseDissolveTable\0220\n\006res" +
-      "ult\030\001 \001(\0162 .com.huinan.proto.ENMessageEr" +
-      "ror\"*\n\014DissolveList\022\013\n\003uid\030\001 \001(\t\022\r\n\005stat" +
-      "e\030\002 \001(\005\"_\n\036CSNotifyDissolveTableOperatio" +
-      "n\022\013\n\003uid\030\001 \001(\t\0220\n\010dis_list\030\002 \003(\0132\036.com.h" +
-      "uinan.proto.DissolveList\"5\n\026CSNotifyTabl" +
-      "eDissolved\022\013\n\003tid\030\001 \001(\005\022\016\n\006result\030\002 \001(\010\"" +
-      "&\n\025CSRequestReadyForGame\022\r\n\005state\030\001 \001(\010\"" +
-      "Y\n\026CSResponseReadyForGame\0220\n\006result\030\001 \001(" +
-      "\0162 .com.huinan.proto.ENMessageError\022\r\n\005s",
-      "tate\030\002 \001(\010\"9\n\024CSNotifyReadyForGame\022\022\n\nse" +
-      "at_index\030\001 \001(\005\022\r\n\005state\030\002 \001(\010\"\214\001\n\021CSRequ" +
-      "estDoAction\022\022\n\nseat_index\030\001 \001(\005\022\020\n\010act_t" +
-      "ype\030\002 \001(\005\022\021\n\tdest_card\030\003 \001(\005\022\r\n\005cards\030\004 " +
-      "\003(\005\022/\n\tzhao_type\030\005 \001(\0162\034.com.huinan.prot" +
-      "o.ENZhaoType\"\215\001\n\022CSResponseDoAction\0220\n\006r" +
-      "esult\030\001 \001(\0162 .com.huinan.proto.ENMessage" +
-      "Error\022*\n\006action\030\002 \001(\0132\032.com.huinan.proto" +
-      ".PBAction\022\031\n\021tiles_on_hand_num\030\003 \001(\005\"J\n\033" +
-      "CSNotifySeatOperationChoice\022+\n\007choices\030\001",
-      " \003(\0132\032.com.huinan.proto.PBAction\"@\n\022CSNo" +
-      "tifyActionFlow\022*\n\006action\030\001 \001(\0132\032.com.hui" +
-      "nan.proto.PBAction\"&\n\021CSRequestPlayBack\022" +
-      "\021\n\trecord_id\030\001 \001(\005\"\201\001\n\026CSNotifyPlayerDea" +
-      "lCard\022\022\n\nseat_index\030\001 \001(\005\022\r\n\005value\030\002 \001(\005" +
-      "\022\022\n\nis_fan_pai\030\003 \001(\010\022\025\n\rleft_card_num\030\004 " +
-      "\001(\005\022\031\n\021tiles_on_hand_num\030\005 \001(\005\"B\n\025CSNoti" +
-      "fyNextOperation\022\022\n\nseat_index\030\001 \001(\005\022\025\n\rl" +
-      "eft_card_num\030\002 \001(\005\"6\n\tUserBrand\022\022\n\nseat_" +
-      "index\030\001 \001(\005\022\025\n\rtiles_on_hand\030\002 \003(\005\"\263\001\n\013H",
-      "uUserBrand\022\022\n\nseat_index\030\001 \001(\005\022\021\n\tdest_c" +
-      "ard\030\002 \001(\005\0220\n\010col_info\030\003 \003(\0132\036.com.huinan" +
-      ".proto.PBColumnInfo\022\025\n\rtiles_on_hand\030\004 \003" +
-      "(\005\022\022\n\ndest_index\030\005 \001(\005\022\017\n\007tuo_num\030\006 \001(\005\022" +
-      "\017\n\007fan_num\030\007 \001(\005\"\224\001\n\013SmallResult\022\022\n\ndipa" +
-      "i_card\030\001 \003(\005\022/\n\nuser_brand\030\002 \003(\0132\033.com.h" +
-      "uinan.proto.UserBrand\022/\n\010hu_brand\030\003 \001(\0132" +
-      "\035.com.huinan.proto.HuUserBrand\022\017\n\007hu_typ" +
-      "e\030\004 \001(\005\"c\n\tBigResult\022\013\n\003uid\030\001 \001(\t\022\016\n\006hu_" +
-      "num\030\002 \001(\005\022\020\n\010zimo_num\030\003 \001(\005\022\023\n\013dianpao_n",
-      "um\030\004 \001(\005\022\022\n\nsanfan_num\030\005 \001(\005\"\276\001\n\020CSNotif" +
-      "yGameOver\0223\n\017user_score_info\030\001 \003(\0132\032.com" +
-      ".huinan.proto.UserInfo\0223\n\014small_result\030\002" +
-      " \001(\0132\035.com.huinan.proto.SmallResult\022/\n\nb" +
-      "ig_result\030\003 \003(\0132\033.com.huinan.proto.BigRe" +
-      "sult\022\017\n\007ishuang\030\004 \001(\010\"\251\005\n\024CSResponseEnte" +
-      "rTable\0220\n\006result\030\001 \001(\0162 .com.huinan.prot" +
-      "o.ENMessageError\022-\n\tuser_info\030\002 \003(\0132\032.co" +
-      "m.huinan.proto.UserInfo\0226\n\tgameStart\030\003 \001" +
-      "(\0132#.com.huinan.proto.CSNotifyGameStart\022",
-      ":\n\ntable_info\030\004 \001(\0132&.com.huinan.proto.C" +
-      "SRequestCreateTable\022H\n\016dissolve_infos\030\005 " +
-      "\001(\01320.com.huinan.proto.CSNotifyDissolveT" +
-      "ableOperation\0223\n\005flows\030\006 \003(\0132$.com.huina" +
-      "n.proto.CSNotifyActionFlow\022=\n\006choice\030\007 \001" +
-      "(\0132-.com.huinan.proto.CSNotifySeatOperat" +
-      "ionChoice\0225\n\004next\030\010 \001(\0132\'.com.huinan.pro" +
-      "to.CSNotifyNextOperation\0226\n\004deal\030\t \001(\0132(" +
-      ".com.huinan.proto.CSNotifyPlayerDealCard" +
-      "\0224\n\010gameOver\030\n \001(\0132\".com.huinan.proto.CS",
-      "NotifyGameOver\022\021\n\tdest_card\030\013 \001(\005\022\022\n\nsea" +
-      "t_index\030\014 \001(\005\022\r\n\005is_mo\030\r \001(\010\022\016\n\006is_fan\030\016" +
-      " \001(\010\022\023\n\013table_state\030\017 \001(\005\"!\n\022CSRequestRe" +
-      "connect\022\013\n\003uid\030\001 \001(\t\"$\n\023CSResponseReconn" +
-      "ect\022\r\n\005state\030\001 \001(\010\"!\n\022CSRequestHeartBeat" +
-      "\022\013\n\003uid\030\001 \001(\t\"$\n\023CSResponseHeartBeat\022\r\n\005" +
-      "state\030\001 \001(\010\"x\n\rCSRequestChat\022+\n\005ctype\030\001 " +
-      "\001(\0162\034.com.huinan.proto.ENChatType\022\017\n\007mes" +
-      "sage\030\002 \001(\t\022\026\n\016BigFaceChannel\030\003 \001(\005\022\021\n\tBi" +
-      "gFaceID\030\004 \001(\005\"B\n\016CSResponseChat\0220\n\006resul",
-      "t\030\001 \001(\0162 .com.huinan.proto.ENMessageErro" +
-      "r\"\204\001\n\014CSNotifyChat\022\013\n\003uid\030\001 \001(\t\022+\n\005ctype" +
-      "\030\002 \001(\0162\034.com.huinan.proto.ENChatType\022\017\n\007" +
-      "message\030\003 \001(\t\022\026\n\016BigFaceChannel\030\004 \001(\005\022\021\n" +
-      "\tBigFaceID\030\005 \001(\005\"#\n\021CSRequestIsOnline\022\016\n" +
-      "\006online\030\001 \001(\010\"V\n\022CSResponseIsOnline\0220\n\006r" +
-      "esult\030\001 \001(\0162 .com.huinan.proto.ENMessage" +
-      "Error\022\016\n\006online\030\002 \001(\010\"6\n\020CSNotifyIsOnlin" +
-      "e\022\022\n\nseat_index\030\001 \001(\005\022\016\n\006online\030\002 \001(\010\"/\n" +
-      "\026CSNotifyRoomCardChange\022\025\n\rroom_card_num",
-      "\030\001 \001(\005\":\n\016CSNotifyNotice\022\r\n\005title\030\001 \001(\t\022" +
-      "\013\n\003msg\030\002 \001(\t\022\014\n\004data\030\003 \001(\t\"\242\002\n\022CSRespons" +
-      "ePlayBack\0220\n\006result\030\001 \001(\0162 .com.huinan.p" +
-      "roto.ENMessageError\0225\n\005table\030\002 \001(\0132&.com" +
-      ".huinan.proto.CSRequestCreateTable\0227\n\nga" +
-      "me_start\030\003 \001(\0132#.com.huinan.proto.CSNoti" +
-      "fyGameStart\0223\n\005flows\030\004 \003(\0132$.com.huinan." +
-      "proto.CSNotifyActionFlow\0225\n\tgame_over\030\005 " +
-      "\001(\0132\".com.huinan.proto.CSNotifyGameOver\"" +
-      "\"\n\022CSNotifyOpenTouPai\022\014\n\004open\030\001 \001(\010*\270\003\n\016",
-      "ENMessageError\022\024\n\020RESPONSE_SUCCESS\020\001\022\021\n\r" +
-      "RESPONSE_FAIL\020\002\022\034\n\030RESPONSE_SEATINDEX_ER" +
-      "ROR\020\003\022\032\n\026RESPONSE_ACTTYPE_ERROR\020\004\022\033\n\027RES" +
-      "PONSE_DESTCARD_ERROR\020\005\022\026\n\022RESPONSE_ROOM_" +
-      "FULL\020\006\022\035\n\031RESPONSE_ROOM_INEXISTENCE\020\007\022\032\n" +
-      "\026RESPONSE_ROOM_ID_ERROR\020\010\022\033\n\027RESPONSE_RO" +
-      "OMCARD_LIMIT\020\t\022\032\n\026RESPONSE_IN_OTHER_ROOM" +
-      "\020\n\022\024\n\020RESPONSE_PLAYING\020\013\022 \n\034RESPONSE_DEA" +
-      "LER_CAN_NOT_QUIT\020\014\022-\n)RESPONSE_FIRST_DIS" +
-      "SOLVE_ROOM_CHOICE_ERROR\020\r\022\032\n\026RESPONSE_AL",
-      "READY_READY\020\016\022\027\n\023RESPONSE_IS_IN_ROOM\020\017*4" +
-      "\n\017ENOperationType\022\020\n\014LOGOUT_TABLE\020\001\022\017\n\013O" +
-      "WNER_TIREN\020\002*w\n\tENColType\022\023\n\017EN_COL_TYPE" +
-      "_TOU\020\001\022\024\n\020EN_COL_TYPE_PENG\020\002\022\023\n\017EN_COL_T" +
-      "YPE_CHI\020\003\022\024\n\020EN_COL_TYPE_ZHAO\020\004\022\024\n\020EN_CO" +
-      "L_TYPE_LONG\020\005*N\n\nENZhaoType\022\024\n\020EN_ZHAO_T" +
-      "YPE_CHI\020\001\022\024\n\020EN_ZHAO_TYPE_CHE\020\002\022\024\n\020EN_ZH" +
-      "AO_TYPE_ALL\020\003*\232\004\n\014ENActionType\022\025\n\021EN_ACT" +
-      "ION_UNKNOWN\020\001\022\023\n\017EN_ACTION_NAPAI\020\002\022\024\n\020EN" +
-      "_ACTION_CHUPAI\020\003\022\021\n\rEN_ACTION_GUO\020\004\022\021\n\rE",
-      "N_ACTION_TOU\020\005\022\022\n\016EN_ACTION_PENG\020\006\022\021\n\rEN" +
-      "_ACTION_CHI\020\007\022\020\n\014EN_ACTION_HU\020\010\022\022\n\016EN_AC" +
-      "TION_ZHAO\020\t\022\023\n\017EN_ACTION_SIGEN\020\n\022\021\n\rEN_A" +
-      "CTION_TUI\020\013\022\024\n\020EN_ACTION_NO_CHU\020\014\022\021\n\rEN_" +
-      "ACTION_KAN\020\r\022\024\n\020EN_ACTION_XIATOU\020\016\022\024\n\020EN" +
-      "_ACTION_HUADUI\020\017\022\024\n\020EN_ACTION_CHIKAN\020\020\022\023" +
-      "\n\017EN_ACTION_DAKAN\020\021\022\027\n\023EN_ACTION_CHI_SIG" +
-      "EN\020\022\022\026\n\022EN_ACTION_HU_SIGEN\020\023\022\022\n\016EN_ACTIO" +
-      "N_PIAO\020\024\022\025\n\021EN_ACTION_NO_PIAO\020\025\022\022\n\016EN_AC" +
-      "TION_DANG\020\026\022\025\n\021EN_ACTION_NO_DANG\020\027\022\022\n\016EN",
-      "_ACTION_NEXT\020\030\022\022\n\016EN_ACTION_DEAL\020\031*Z\n\nEN" +
-      "ChatType\022\032\n\026EN_CHAT_TYPE_CHARACTER\020\000\022\030\n\024" +
-      "EN_CHAT_TYPE_BIGFACE\020\001\022\026\n\022EN_CHAT_TYPE_V" +
-      "OICE\020\002*u\n\nENRoomType\022\023\n\017EN_ROOM_TYPE_GY\020" +
-      "\001\022\023\n\017EN_ROOM_TYPE_NC\020\002\022\023\n\017EN_ROOM_TYPE_X" +
-      "C\020\003\022\023\n\017EN_ROOM_TYPE_MY\020\004\022\023\n\017EN_ROOM_TYPE" +
-      "_CX\020\005"
+      "\007is_piao\030\n \001(\010\022\025\n\rkou_card_list\030\013 \003(\005\"\205\001" +
+      "\n\016CSRequestLogin\022\r\n\005token\030\001 \001(\t\022\013\n\003uid\030\002" +
+      " \001(\t\022\014\n\004nick\030\003 \001(\t\022\017\n\007pic_url\030\004 \001(\t\022\024\n\014r" +
+      "efreshToken\030\005 \001(\t\022\013\n\003sex\030\006 \001(\005\022\025\n\rroom_c",
+      "ard_num\030\007 \001(\005\"h\n\017CSResponseLogin\022\r\n\005stat" +
+      "e\030\001 \001(\010\022\013\n\003uid\030\002 \001(\t\022\020\n\010pos_type\030\003 \001(\005\022\020" +
+      "\n\010table_id\030\004 \001(\005\022\025\n\rroom_card_num\030\005 \001(\005\"" +
+      "\320\004\n\024CSRequestCreateTable\022\013\n\003tid\030\001 \001(\005\022\020\n" +
+      "\010game_num\030\002 \001(\005\022\025\n\rroom_card_num\030\003 \001(\005\022\025" +
+      "\n\ruse_card_type\030\004 \001(\005\022\021\n\tplay_type\030\005 \001(\005" +
+      "\022\022\n\nhigh_times\030\006 \001(\005\022\014\n\004name\030\007 \001(\005\022\022\n\npl" +
+      "ayer_num\030\010 \001(\005\022\023\n\013creator_uid\030\t \001(\t\022\023\n\013h" +
+      "ei_two_fan\030\n \001(\010\022\021\n\tis_baofan\030\013 \001(\010\022\017\n\007i" +
+      "s_piao\030\014 \001(\010\022/\n\troom_type\030\r \001(\0162\034.com.hu",
+      "inan.proto.ENRoomType\022\032\n\022is_chi_hong_da_" +
+      "hei\030\016 \001(\010\022\031\n\021is_wu_hei_yi_hong\030\017 \001(\010\022\024\n\014" +
+      "is_add_score\030\020 \001(\010\022\023\n\013is_tou_dang\030\021 \001(\010\022" +
+      "\024\n\014is_zi_mo_fan\030\022 \001(\010\022\033\n\023is_dingfu_shuai" +
+      "_any\030\023 \001(\010\022\023\n\013is_che_zhui\030\024 \001(\010\022\024\n\014is_di" +
+      "ao_zhui\030\025 \001(\010\022\021\n\tis_34_fan\030\026 \001(\010\022\r\n\005scor" +
+      "e\030\027 \001(\005\022\021\n\tis_18_lan\030\030 \001(\010\022\023\n\013is_fan_san" +
+      "7\030\031 \001(\010\022\031\n\021is_fan_xj_have_56\030\032 \001(\010\"\264\001\n\025C" +
+      "SResponseCreateTable\0220\n\006result\030\001 \001(\0162 .c" +
+      "om.huinan.proto.ENMessageError\022-\n\tuser_i",
+      "nfo\030\002 \003(\0132\032.com.huinan.proto.UserInfo\022:\n" +
+      "\ntable_info\030\003 \001(\0132&.com.huinan.proto.CSR" +
+      "equestCreateTable\"\"\n\023CSRequestEnterTable" +
+      "\022\013\n\003tid\030\001 \001(\005\".\n\014ChoiceZhuang\022\020\n\010fan_sea" +
+      "t\030\001 \001(\005\022\014\n\004card\030\002 \001(\005\"\301\001\n\021CSNotifyGameSt" +
+      "art\022,\n\005seats\030\001 \003(\0132\035.com.huinan.proto.PB" +
+      "TableSeat\022\025\n\rleft_tile_num\030\002 \001(\005\022\016\n\006deal" +
+      "er\030\003 \001(\005\022\r\n\005round\030\004 \001(\005\022\021\n\tdang_seat\030\005 \001" +
+      "(\005\0225\n\rchoice_zhuang\030\006 \001(\0132\036.com.huinan.p" +
+      "roto.ChoiceZhuang\"D\n\023CSNottifyEnterTable",
+      "\022-\n\tuser_info\030\001 \001(\0132\032.com.huinan.proto.U" +
+      "serInfo\"#\n\024CSRequestLogoutTable\022\013\n\003tid\030\001" +
+      " \001(\005\"I\n\025CSResponseLogoutTable\0220\n\006result\030" +
+      "\001 \001(\0162 .com.huinan.proto.ENMessageError\"" +
+      ")\n\023CSNotifyLogoutTable\022\022\n\nseat_index\030\001 \001" +
+      "(\005\"6\n\023CSRequestOwnerTiren\022\022\n\nseat_index\030" +
+      "\001 \001(\005\022\013\n\003uid\030\002 \001(\t\"H\n\024CSResponseOwnerTir" +
+      "en\0220\n\006result\030\001 \001(\0162 .com.huinan.proto.EN" +
+      "MessageError\"5\n\022CSNotifyOwnerTiren\022\022\n\nse" +
+      "at_index\030\001 \001(\005\022\013\n\003uid\030\002 \001(\t\"(\n\026CSRequest",
+      "DissolveTable\022\016\n\006choice\030\001 \001(\010\"K\n\027CSRespo" +
+      "nseDissolveTable\0220\n\006result\030\001 \001(\0162 .com.h" +
+      "uinan.proto.ENMessageError\"*\n\014DissolveLi" +
+      "st\022\013\n\003uid\030\001 \001(\t\022\r\n\005state\030\002 \001(\005\"_\n\036CSNoti" +
+      "fyDissolveTableOperation\022\013\n\003uid\030\001 \001(\t\0220\n" +
+      "\010dis_list\030\002 \003(\0132\036.com.huinan.proto.Disso" +
+      "lveList\"5\n\026CSNotifyTableDissolved\022\013\n\003tid" +
+      "\030\001 \001(\005\022\016\n\006result\030\002 \001(\010\"&\n\025CSRequestReady" +
+      "ForGame\022\r\n\005state\030\001 \001(\010\"Y\n\026CSResponseRead" +
+      "yForGame\0220\n\006result\030\001 \001(\0162 .com.huinan.pr",
+      "oto.ENMessageError\022\r\n\005state\030\002 \001(\010\"9\n\024CSN" +
+      "otifyReadyForGame\022\022\n\nseat_index\030\001 \001(\005\022\r\n" +
+      "\005state\030\002 \001(\010\"\245\001\n\021CSRequestDoAction\022\022\n\nse" +
+      "at_index\030\001 \001(\005\022\020\n\010act_type\030\002 \001(\005\022\021\n\tdest" +
+      "_card\030\003 \001(\005\022\r\n\005cards\030\004 \003(\005\022/\n\tzhao_type\030" +
+      "\005 \001(\0162\034.com.huinan.proto.ENZhaoType\022\027\n\017c" +
+      "hu_card_is_kou\030\006 \001(\010\"\215\001\n\022CSResponseDoAct" +
+      "ion\0220\n\006result\030\001 \001(\0162 .com.huinan.proto.E" +
+      "NMessageError\022*\n\006action\030\002 \001(\0132\032.com.huin" +
+      "an.proto.PBAction\022\031\n\021tiles_on_hand_num\030\003",
+      " \001(\005\"J\n\033CSNotifySeatOperationChoice\022+\n\007c" +
+      "hoices\030\001 \003(\0132\032.com.huinan.proto.PBAction" +
+      "\"@\n\022CSNotifyActionFlow\022*\n\006action\030\001 \001(\0132\032" +
+      ".com.huinan.proto.PBAction\"&\n\021CSRequestP" +
+      "layBack\022\021\n\trecord_id\030\001 \001(\005\"\201\001\n\026CSNotifyP" +
+      "layerDealCard\022\022\n\nseat_index\030\001 \001(\005\022\r\n\005val" +
+      "ue\030\002 \001(\005\022\022\n\nis_fan_pai\030\003 \001(\010\022\025\n\rleft_car" +
+      "d_num\030\004 \001(\005\022\031\n\021tiles_on_hand_num\030\005 \001(\005\"B" +
+      "\n\025CSNotifyNextOperation\022\022\n\nseat_index\030\001 " +
+      "\001(\005\022\025\n\rleft_card_num\030\002 \001(\005\"6\n\tUserBrand\022",
+      "\022\n\nseat_index\030\001 \001(\005\022\025\n\rtiles_on_hand\030\002 \003" +
+      "(\005\"\263\001\n\013HuUserBrand\022\022\n\nseat_index\030\001 \001(\005\022\021" +
+      "\n\tdest_card\030\002 \001(\005\0220\n\010col_info\030\003 \003(\0132\036.co" +
+      "m.huinan.proto.PBColumnInfo\022\025\n\rtiles_on_" +
+      "hand\030\004 \003(\005\022\022\n\ndest_index\030\005 \001(\005\022\017\n\007tuo_nu" +
+      "m\030\006 \001(\005\022\017\n\007fan_num\030\007 \001(\005\"\224\001\n\013SmallResult" +
+      "\022\022\n\ndipai_card\030\001 \003(\005\022/\n\nuser_brand\030\002 \003(\013" +
+      "2\033.com.huinan.proto.UserBrand\022/\n\010hu_bran" +
+      "d\030\003 \001(\0132\035.com.huinan.proto.HuUserBrand\022\017" +
+      "\n\007hu_type\030\004 \001(\005\"c\n\tBigResult\022\013\n\003uid\030\001 \001(",
+      "\t\022\016\n\006hu_num\030\002 \001(\005\022\020\n\010zimo_num\030\003 \001(\005\022\023\n\013d" +
+      "ianpao_num\030\004 \001(\005\022\022\n\nsanfan_num\030\005 \001(\005\"\276\001\n" +
+      "\020CSNotifyGameOver\0223\n\017user_score_info\030\001 \003" +
+      "(\0132\032.com.huinan.proto.UserInfo\0223\n\014small_" +
+      "result\030\002 \001(\0132\035.com.huinan.proto.SmallRes" +
+      "ult\022/\n\nbig_result\030\003 \003(\0132\033.com.huinan.pro" +
+      "to.BigResult\022\017\n\007ishuang\030\004 \001(\010\"\251\005\n\024CSResp" +
+      "onseEnterTable\0220\n\006result\030\001 \001(\0162 .com.hui" +
+      "nan.proto.ENMessageError\022-\n\tuser_info\030\002 " +
+      "\003(\0132\032.com.huinan.proto.UserInfo\0226\n\tgameS",
+      "tart\030\003 \001(\0132#.com.huinan.proto.CSNotifyGa" +
+      "meStart\022:\n\ntable_info\030\004 \001(\0132&.com.huinan" +
+      ".proto.CSRequestCreateTable\022H\n\016dissolve_" +
+      "infos\030\005 \001(\01320.com.huinan.proto.CSNotifyD" +
+      "issolveTableOperation\0223\n\005flows\030\006 \003(\0132$.c" +
+      "om.huinan.proto.CSNotifyActionFlow\022=\n\006ch" +
+      "oice\030\007 \001(\0132-.com.huinan.proto.CSNotifySe" +
+      "atOperationChoice\0225\n\004next\030\010 \001(\0132\'.com.hu" +
+      "inan.proto.CSNotifyNextOperation\0226\n\004deal" +
+      "\030\t \001(\0132(.com.huinan.proto.CSNotifyPlayer",
+      "DealCard\0224\n\010gameOver\030\n \001(\0132\".com.huinan." +
+      "proto.CSNotifyGameOver\022\021\n\tdest_card\030\013 \001(" +
+      "\005\022\022\n\nseat_index\030\014 \001(\005\022\r\n\005is_mo\030\r \001(\010\022\016\n\006" +
+      "is_fan\030\016 \001(\010\022\023\n\013table_state\030\017 \001(\005\"!\n\022CSR" +
+      "equestReconnect\022\013\n\003uid\030\001 \001(\t\"$\n\023CSRespon" +
+      "seReconnect\022\r\n\005state\030\001 \001(\010\"!\n\022CSRequestH" +
+      "eartBeat\022\013\n\003uid\030\001 \001(\t\"$\n\023CSResponseHeart" +
+      "Beat\022\r\n\005state\030\001 \001(\010\"x\n\rCSRequestChat\022+\n\005" +
+      "ctype\030\001 \001(\0162\034.com.huinan.proto.ENChatTyp" +
+      "e\022\017\n\007message\030\002 \001(\t\022\026\n\016BigFaceChannel\030\003 \001",
+      "(\005\022\021\n\tBigFaceID\030\004 \001(\005\"B\n\016CSResponseChat\022" +
+      "0\n\006result\030\001 \001(\0162 .com.huinan.proto.ENMes" +
+      "sageError\"\204\001\n\014CSNotifyChat\022\013\n\003uid\030\001 \001(\t\022" +
+      "+\n\005ctype\030\002 \001(\0162\034.com.huinan.proto.ENChat" +
+      "Type\022\017\n\007message\030\003 \001(\t\022\026\n\016BigFaceChannel\030" +
+      "\004 \001(\005\022\021\n\tBigFaceID\030\005 \001(\005\"#\n\021CSRequestIsO" +
+      "nline\022\016\n\006online\030\001 \001(\010\"V\n\022CSResponseIsOnl" +
+      "ine\0220\n\006result\030\001 \001(\0162 .com.huinan.proto.E" +
+      "NMessageError\022\016\n\006online\030\002 \001(\010\"6\n\020CSNotif" +
+      "yIsOnline\022\022\n\nseat_index\030\001 \001(\005\022\016\n\006online\030",
+      "\002 \001(\010\"/\n\026CSNotifyRoomCardChange\022\025\n\rroom_" +
+      "card_num\030\001 \001(\005\":\n\016CSNotifyNotice\022\r\n\005titl" +
+      "e\030\001 \001(\t\022\013\n\003msg\030\002 \001(\t\022\014\n\004data\030\003 \001(\t\"\242\002\n\022C" +
+      "SResponsePlayBack\0220\n\006result\030\001 \001(\0162 .com." +
+      "huinan.proto.ENMessageError\0225\n\005table\030\002 \001" +
+      "(\0132&.com.huinan.proto.CSRequestCreateTab" +
+      "le\0227\n\ngame_start\030\003 \001(\0132#.com.huinan.prot" +
+      "o.CSNotifyGameStart\0223\n\005flows\030\004 \003(\0132$.com" +
+      ".huinan.proto.CSNotifyActionFlow\0225\n\tgame" +
+      "_over\030\005 \001(\0132\".com.huinan.proto.CSNotifyG",
+      "ameOver\"\"\n\022CSNotifyOpenTouPai\022\014\n\004open\030\001 " +
+      "\001(\010*\331\003\n\016ENMessageError\022\024\n\020RESPONSE_SUCCE" +
+      "SS\020\001\022\021\n\rRESPONSE_FAIL\020\002\022\034\n\030RESPONSE_SEAT" +
+      "INDEX_ERROR\020\003\022\032\n\026RESPONSE_ACTTYPE_ERROR\020" +
+      "\004\022\033\n\027RESPONSE_DESTCARD_ERROR\020\005\022\026\n\022RESPON" +
+      "SE_ROOM_FULL\020\006\022\035\n\031RESPONSE_ROOM_INEXISTE" +
+      "NCE\020\007\022\032\n\026RESPONSE_ROOM_ID_ERROR\020\010\022\033\n\027RES" +
+      "PONSE_ROOMCARD_LIMIT\020\t\022\032\n\026RESPONSE_IN_OT" +
+      "HER_ROOM\020\n\022\024\n\020RESPONSE_PLAYING\020\013\022 \n\034RESP" +
+      "ONSE_DEALER_CAN_NOT_QUIT\020\014\022-\n)RESPONSE_F",
+      "IRST_DISSOLVE_ROOM_CHOICE_ERROR\020\r\022\032\n\026RES" +
+      "PONSE_ALREADY_READY\020\016\022\027\n\023RESPONSE_IS_IN_" +
+      "ROOM\020\017\022\037\n\033RESPONSE_NOT_CAN_XIA_JIAO_7\020\020*" +
+      "4\n\017ENOperationType\022\020\n\014LOGOUT_TABLE\020\001\022\017\n\013" +
+      "OWNER_TIREN\020\002*w\n\tENColType\022\023\n\017EN_COL_TYP" +
+      "E_TOU\020\001\022\024\n\020EN_COL_TYPE_PENG\020\002\022\023\n\017EN_COL_" +
+      "TYPE_CHI\020\003\022\024\n\020EN_COL_TYPE_ZHAO\020\004\022\024\n\020EN_C" +
+      "OL_TYPE_LONG\020\005*N\n\nENZhaoType\022\024\n\020EN_ZHAO_" +
+      "TYPE_CHI\020\001\022\024\n\020EN_ZHAO_TYPE_CHE\020\002\022\024\n\020EN_Z" +
+      "HAO_TYPE_ALL\020\003*\255\004\n\014ENActionType\022\025\n\021EN_AC",
+      "TION_UNKNOWN\020\001\022\023\n\017EN_ACTION_NAPAI\020\002\022\024\n\020E" +
+      "N_ACTION_CHUPAI\020\003\022\021\n\rEN_ACTION_GUO\020\004\022\021\n\r" +
+      "EN_ACTION_TOU\020\005\022\022\n\016EN_ACTION_PENG\020\006\022\021\n\rE" +
+      "N_ACTION_CHI\020\007\022\020\n\014EN_ACTION_HU\020\010\022\022\n\016EN_A" +
+      "CTION_ZHAO\020\t\022\023\n\017EN_ACTION_SIGEN\020\n\022\021\n\rEN_" +
+      "ACTION_TUI\020\013\022\024\n\020EN_ACTION_NO_CHU\020\014\022\021\n\rEN" +
+      "_ACTION_KAN\020\r\022\024\n\020EN_ACTION_XIATOU\020\016\022\024\n\020E" +
+      "N_ACTION_HUADUI\020\017\022\024\n\020EN_ACTION_CHIKAN\020\020\022" +
+      "\023\n\017EN_ACTION_DAKAN\020\021\022\027\n\023EN_ACTION_CHI_SI" +
+      "GEN\020\022\022\026\n\022EN_ACTION_HU_SIGEN\020\023\022\022\n\016EN_ACTI",
+      "ON_PIAO\020\024\022\025\n\021EN_ACTION_NO_PIAO\020\025\022\022\n\016EN_A" +
+      "CTION_DANG\020\026\022\025\n\021EN_ACTION_NO_DANG\020\027\022\022\n\016E" +
+      "N_ACTION_NEXT\020\030\022\022\n\016EN_ACTION_DEAL\020\031\022\021\n\rE" +
+      "N_ACTION_KOU\020\032*Z\n\nENChatType\022\032\n\026EN_CHAT_" +
+      "TYPE_CHARACTER\020\000\022\030\n\024EN_CHAT_TYPE_BIGFACE" +
+      "\020\001\022\026\n\022EN_CHAT_TYPE_VOICE\020\002*u\n\nENRoomType" +
+      "\022\023\n\017EN_ROOM_TYPE_GY\020\001\022\023\n\017EN_ROOM_TYPE_NC" +
+      "\020\002\022\023\n\017EN_ROOM_TYPE_XC\020\003\022\023\n\017EN_ROOM_TYPE_" +
+      "MY\020\004\022\023\n\017EN_ROOM_TYPE_CX\020\005"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -50579,7 +50932,7 @@ public final class CpMsgCs {
     internal_static_com_huinan_proto_PBTableSeat_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_huinan_proto_PBTableSeat_descriptor,
-        new java.lang.String[] { "UserInfo", "SeatIndex", "TilesOnHand", "OutCol", "FinalScore", "OutCards", "TilesOnHandNum", "DeathCard", "OutCardsNo", "IsPiao", });
+        new java.lang.String[] { "UserInfo", "SeatIndex", "TilesOnHand", "OutCol", "FinalScore", "OutCards", "TilesOnHandNum", "DeathCard", "OutCardsNo", "IsPiao", "KouCardList", });
     internal_static_com_huinan_proto_CSRequestLogin_descriptor =
       getDescriptor().getMessageTypes().get(4);
     internal_static_com_huinan_proto_CSRequestLogin_fieldAccessorTable = new
@@ -50717,7 +51070,7 @@ public final class CpMsgCs {
     internal_static_com_huinan_proto_CSRequestDoAction_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_huinan_proto_CSRequestDoAction_descriptor,
-        new java.lang.String[] { "SeatIndex", "ActType", "DestCard", "Cards", "ZhaoType", });
+        new java.lang.String[] { "SeatIndex", "ActType", "DestCard", "Cards", "ZhaoType", "ChuCardIsKou", });
     internal_static_com_huinan_proto_CSResponseDoAction_descriptor =
       getDescriptor().getMessageTypes().get(27);
     internal_static_com_huinan_proto_CSResponseDoAction_fieldAccessorTable = new

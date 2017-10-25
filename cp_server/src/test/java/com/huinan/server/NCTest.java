@@ -1,6 +1,8 @@
 package com.huinan.server;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 
@@ -74,18 +76,18 @@ public class NCTest extends TestCase {
 
 		boolean isRed = CardManager.colorIsRed(12);
 		System.out.println("red:" + isRed);
-		
+
 		System.out.println("true----------:" + isTrue());
 	}
-	
-	private boolean isTrue(){
-	    for (int i = 0; i < 4; i++) {
-		if(i==2){
-		    return true;
+
+	private boolean isTrue() {
+		for (int i = 0; i < 4; i++) {
+			if (i == 2) {
+				return true;
+			}
 		}
-	    }
-	    
-	    return false;
+
+		return false;
 	}
 
 	public void testHu() {
@@ -200,5 +202,12 @@ public class NCTest extends TestCase {
 		String str = new String(by);
 		int hh2 = Integer.valueOf(str);
 		System.out.println("byte to int:" + hh2);
+	}
+
+	public void testDate() {
+		Calendar c = Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String dateStr = sdf.format(c.getTime());
+		System.out.println("date string=" + dateStr);
 	}
 }

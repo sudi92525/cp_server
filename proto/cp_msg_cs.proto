@@ -16,6 +16,7 @@ enum ENMessageError
 	RESPONSE_FIRST_DISSOLVE_ROOM_CHOICE_ERROR = 13;	//第一个申请解散房间的人choice只能为true
 	RESPONSE_ALREADY_READY = 14;					//已经准备了
 	RESPONSE_IS_IN_ROOM = 15;						//已存在房间中
+	RESPONSE_NOT_CAN_XIA_JIAO_7 = 16;				//不能在七点上转叫
 }
 
 enum ENOperationType
@@ -69,6 +70,7 @@ enum ENActionType
 	
 	EN_ACTION_NEXT = 24;							//位置（闹钟）
 	EN_ACTION_DEAL = 25;							//摸牌或翻牌
+	EN_ACTION_KOU = 26;								//扣一个（苍溪招的牌和吃退的牌）
 }
 
 enum ENChatType
@@ -122,14 +124,13 @@ message PBAction
 	optional int32 dest_index = 5;					// 目标牌来自的座位号
 	optional bool is_fan = 6;						// 目标牌是否翻开
 	repeated int32 death_card = 7;					//死牌即不能出的牌
-	optional int32 hu_type = 8;						//胡牌类型：1自摸，2点炮，3别人翻开胡的
-	optional bool is_chu = 9;						//是否是出牌
-	optional ENZhaoType zhao_type = 10;				// 玩家点击招的类型
-	repeated ENZhaoType zhao_list = 11;				// 可招的类型列表
-	repeated int32 piao_list = 12;					// 漂了的玩家座位号
+	optional bool is_chu = 8;						//是否是出牌
+	optional ENZhaoType zhao_type = 9;				// 玩家点击招的类型
+	repeated ENZhaoType zhao_list = 10;				// 可招的类型列表
+	repeated int32 piao_list = 11;					// 漂了的玩家座位号
 	
-	optional int32 left_card_num = 13; 				//剩余牌数量
-	optional int32 tiles_on_hand_num = 14;				//当前手牌张数
+	optional int32 left_card_num = 12; 				//剩余牌数量
+	optional int32 tiles_on_hand_num = 13;				//当前手牌张数
 }
 
 //手牌信息
@@ -144,6 +145,7 @@ message PBTableSeat{
 	repeated int32 death_card = 8;					//死牌即不能出的牌
 	repeated int32 out_cards_no = 9;				//自己打的或翻的没人要的牌，即展示在自己右下方的牌
 	optional bool is_piao = 10;						//是否漂
+	repeated int32 kou_card_list = 11;				//扣得牌列表
 }
 
 //登录请求
@@ -170,30 +172,33 @@ message CSResponseLogin{
 //创建房间请求
 message CSRequestCreateTable
 {
-	optional int32 tid = 1;						//房间编号
+	optional int32 tid = 1;							//房间编号
 	optional int32 game_num = 2;					//游戏局数
 	optional int32 room_card_num = 3;				//房间所需卡数量
 	optional int32 use_card_type = 4;				//房卡使用方式：0代理，1房主，2均摊
 	optional int32 play_type = 5;					//游戏类型
 	optional int32 high_times = 6;					//最高倍数
-	optional int32 name = 7;					//名称
+	optional int32 name = 7;						//名称
 	optional int32 player_num = 8;					//玩家数量
 	optional string creator_uid = 9;				//房主
 	optional bool hei_two_fan = 10;					//全黑是否算2翻，否就算1翻
 	optional bool is_baofan = 11;					//是否包翻
-	optional bool is_piao = 12;					//是否漂
-	optional ENRoomType room_type = 13;			//房间类型：
-	optional bool is_chi_hong_da_hei = 14;				//GY:是否吃红打黑
-	optional bool is_wu_hei_yi_hong = 15;				//GY:是否五黑一红可以胡
-	
-	optional bool is_add_score = 16;					//是否是加法：true为加法，false为乘法
+	optional bool is_piao = 12;						//是否漂
+	optional ENRoomType room_type = 13;				//房间类型：
+	optional bool is_chi_hong_da_hei = 14;			//GY:是否吃红打黑
+	optional bool is_wu_hei_yi_hong = 15;			//GY:是否五黑一红可以胡
+	optional bool is_add_score = 16;				//是否是加法：true为加法，false为乘法
 	optional bool is_tou_dang = 17;					//NC:是否头当,false为推当
-	optional bool is_zi_mo_fan = 18;					//小家是否自摸加番
-	optional bool is_dingfu_shuai_any = 19;				//NC:丁丁斧头可以甩多次
+	optional bool is_zi_mo_fan = 18;				//小家是否自摸加番
+	optional bool is_dingfu_shuai_any = 19;			//NC:丁丁斧头可以甩多次
 	optional bool is_che_zhui = 20;					//NC:扯追
-	optional bool is_diao_zhui = 21;					//吊追
+	optional bool is_diao_zhui = 21;				//吊追
 	optional bool is_34_fan = 22;					//34算番
-	optional int32 score = 23;					//底分：1-2-5等等，默认选1
+	optional int32 score = 23;						//底分：1-2-5等等，默认选1
+	optional bool is_18_lan = 24;					//18烂（西充）
+	optional bool is_fan_san7 = 25;					//三砍七算番（苍溪）
+	optional bool is_fan_xj_have_56 = 26;			//小家有丁斧全红全黑算番（苍溪）
+	
 }
 
 //创建房间响应
@@ -331,6 +336,7 @@ message CSRequestDoAction
 	optional int32 dest_card = 3;                  // 目标牌(做检验) 
 	repeated int32 cards = 4;                      // 吃的组合(吃可能有多吃法) 
 	optional ENZhaoType zhao_type = 5;             // 招的类型
+	optional bool chu_card_is_kou = 6;		   		//出的牌是扣得(false=手里的，true=扣得)
 }
 
 //动作响应：胡牌、偷牌、碰牌、吃牌、出牌、过牌
@@ -382,12 +388,12 @@ message UserBrand{
 
 message HuUserBrand{
 	optional int32 seat_index = 1;					//座位信息
-	optional int32 dest_card = 2; 					// 目标牌
-	repeated PBColumnInfo col_info = 3;				// 列组合
+	optional int32 dest_card = 2; 					//目标牌
+	repeated PBColumnInfo col_info = 3;				//列组合
 	repeated int32 tiles_on_hand = 4;				//手牌信息
-	optional int32 dest_index = 5;					// 目标牌来自的座位号
-	optional int32 tuo_num = 6;					//坨数
-	optional int32 fan_num = 7;					//翻数
+	optional int32 dest_index = 5;					//目标牌来自的座位号
+	optional int32 tuo_num = 6;						//坨数
+	optional int32 fan_num = 7;						//翻数
 }
 
 //小结算
@@ -396,6 +402,7 @@ message SmallResult
 	repeated int32 dipai_card = 1;					//底牌
 	repeated UserBrand user_brand = 2;				//其他三家手牌
 	optional HuUserBrand hu_brand = 3;				//胡家手牌
+	optional int32 hu_type = 4;						//结算类型：1=自摸，2=点炮，3=翻开，4=包子，5=十八烂
 }
 
 //大结算

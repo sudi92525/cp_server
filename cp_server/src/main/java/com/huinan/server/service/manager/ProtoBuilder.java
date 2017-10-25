@@ -210,6 +210,7 @@ public class ProtoBuilder {
 		tSeat.setUserInfo(buildUserInfo(user));
 		if (room.isStepIsPlay()) {
 			tSeat.addAllTilesOnHand(user.getHold());// 手牌
+			tSeat.addAllKouCardList(user.getKou());
 			tSeat.setTilesOnHandNum(user.getHold().size());// 初始化手牌数量
 			tSeat.addAllOutCol(user.getOpen()); // 吃扯牌
 			List<Integer> deadCards = new ArrayList<>();

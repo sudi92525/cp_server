@@ -91,7 +91,7 @@ public class GameSvrPlayerManager {
 			try {
 				User user = UserManager.getInstance().getUser(obj.getUid());
 				if (user != null && user.getRoomId() != 0) {
-					Room room = RoomManager.rooms.get(Integer.valueOf(user
+					Room room = RoomManager.getRooms().get(Integer.valueOf(user
 							.getRoomId()));
 					if (room != null) {
 						room.setLastEnterTime(System.currentTimeMillis());

@@ -58,7 +58,11 @@ public class RoomManager {
 	/**
 	 * 房间信息缓存，临时存储，届时会切入redis
 	 */
-	public static Map<Integer, Room> rooms = new ConcurrentHashMap<>();
+	public Map<Integer, Room> rooms = new ConcurrentHashMap<>();
+
+	public static Map<Integer, Room> getRooms() {
+		return getInstance().rooms;
+	}
 
 	public Room getRoom(int tid) {
 		return rooms.get(tid);
@@ -102,7 +106,7 @@ public class RoomManager {
 		room.setFanFiveHave56(requestBody.getIsFanXjHave56());
 		room.setCheAll7Fan(requestBody.getIsFanSan7());
 
-		rooms.put(tid, room);// 存放游戏房间信息
+		getRooms().put(tid, room);// 存放游戏房间信息
 		return room;
 	}
 
@@ -115,7 +119,7 @@ public class RoomManager {
 		int codeNumber = 0;
 		while (true) {
 			codeNumber = (int) ((Math.random() * 9 + 1) * 100000);
-			if (rooms.get(codeNumber) == null) {
+			if (getRooms().get(codeNumber) == null) {
 				break;
 			}
 		}
@@ -621,8 +625,9 @@ public class RoomManager {
 		if (room.getResetCards().isEmpty()) {
 			return false;
 		}
-		List<Integer> hold = user.getHold();
-		Map<Integer, Integer> holdMap = CardManager.toMap(hold);
+		List<Integer> allCards = new ArrayList<>();
+		allCards.addAll(user.getHold());
+		Map<Integer, Integer> holdMap = CardManager.toMap(allCards);
 		Iterator<Integer> iterator = holdMap.keySet().iterator();
 		while (iterator.hasNext()) {
 			Integer card = (Integer) iterator.next();
@@ -723,7 +728,11 @@ public class RoomManager {
 					NotifyHandler.notifyActionFlow(room, user, null,
 							columuInfo.build(), ENActionType.EN_ACTION_TOU,
 							false);
-					hold.removeAll(cards);
+					if (user.getKou().contains(card)) {
+						user.getKou().remove(card);
+						user.getKou().remove(card);
+					}
+					user.getHold().removeAll(cards);
 					for (int i = 0; i < cards.size() - 1; i++) {
 						CardManager.removeDeathCard(card, user);
 					}
@@ -1485,6 +1494,7 @@ public class RoomManager {
 				addFightRecord(false, room);
 			}
 			addFightRecord(bigTotal, room);
+			UserManager.getInstance().updateRankData(room);
 			removeRoom(room);
 		} else {
 			addFightRecord(bigTotal, room);
@@ -1542,7 +1552,8 @@ public class RoomManager {
 		for (User user : room.getUsers().values()) {
 			user.clear();
 		}
-		rooms.remove(Integer.valueOf(room.getTid()));
+		getRooms().remove(Integer.valueOf(room.getTid()));
+		room = null;
 	}
 
 	/**

@@ -63,7 +63,7 @@ public class TimerTaskManager {
 						int ncPlayNum = 0;
 						int xcPlayNum = 0;
 						int myPlayNum = 0;
-						for (Room room : RoomManager.rooms.values()) {
+						for (Room room : RoomManager.getRooms().values()) {
 							if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_GY_VALUE) {
 								gyNum++;
 							} else if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_NC_VALUE) {
@@ -92,7 +92,7 @@ public class TimerTaskManager {
 										.getCurrentClientsNum()
 								+ ",online players="
 								+ GameSvrPlayerManager.getPlayers().size()
-								+ ",all rooms=" + RoomManager.rooms.size()
+								+ ",all rooms=" + RoomManager.getRooms().size()
 								+ ",playing rooms=" + playRoomNum);
 						LOGGER.info("------2---GY room:" + gyNum + ",NC room:"
 								+ ncNum + ",XC room:"
@@ -105,7 +105,7 @@ public class TimerTaskManager {
 					}
 
 					List<Room> allRooms = new ArrayList<>();
-					allRooms.addAll(RoomManager.rooms.values());
+					allRooms.addAll(RoomManager.getRooms().values());
 					for (Room room : allRooms) {
 						long startDissolveTime = room.getStartDissolveTime();
 						if (startDissolveTime != 0) {

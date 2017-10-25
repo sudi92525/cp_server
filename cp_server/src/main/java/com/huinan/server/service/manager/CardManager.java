@@ -784,7 +784,9 @@ public class CardManager {
 	}
 
 	public static void notifyChoice(Room room, Card card, User user) {
-		user.getActions().add(ENActionType.EN_ACTION_GUO);
+		if (!user.getActions().contains(ENRoomType.EN_ROOM_TYPE_CX)) {
+			user.getActions().add(ENActionType.EN_ACTION_GUO);
+		}
 		room.getCanActionSeat().add(user.getSeatIndex());
 
 		// 可操作列表推送
@@ -824,7 +826,9 @@ public class CardManager {
 		if (user.getNoCheCards().contains(Integer.valueOf(card.getNum()))) {
 			return false;
 		}
-		Map<Integer, Integer> map = toMap(user.getHold());
+		List<Integer> allCards = new ArrayList<>();
+		allCards.addAll(user.getHold());
+		Map<Integer, Integer> map = toMap(allCards);
 		Integer num = map.get(Integer.valueOf(card.getNum()));
 		int needNum = 2;
 		if (!card.isChu()) {// 翻开的
@@ -860,6 +864,12 @@ public class CardManager {
 			if (user.getSeatIndex() != card.getSeat()
 					&& user.getSeatIndex() != nextSeat) {
 				return false;
+			}
+		}
+		// 苍溪扣牌列表
+		for (Integer integer : user.getKou()) {
+			if (getCardValue(integer) + card.getCardValue() == 14) {
+				return true;
 			}
 		}
 		if (user.getNoChiCards().contains(card.getNum())) {
@@ -1012,7 +1022,11 @@ public class CardManager {
 			}
 		}
 		if (zhao) {
-			user.getActions().add(ENActionType.EN_ACTION_ZHAO);
+			if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX_VALUE) {
+				user.getActions().add(ENActionType.EN_ACTION_KOU);
+			} else {
+				user.getActions().add(ENActionType.EN_ACTION_ZHAO);
+			}
 		}
 		return zhao;
 	}
@@ -1025,8 +1039,9 @@ public class CardManager {
 	 * @return
 	 */
 	public static boolean isChiTui(Room room, User user) {
+		boolean tui = false;
 		if (user.isFive()) {
-			return false;
+			return tui;
 		}
 		Card card = room.getCurrentCard();
 		// 如果该牌是红色,判断是否吃过该点数的红色牌,吃过则需要吃退这一张牌
@@ -1034,23 +1049,29 @@ public class CardManager {
 		if (card.getCardValue() == 7) {// 920晚上：一对七，不用吃退
 			int countOf7 = getCardCountOfHold(user, card.getNum());
 			if (countOf7 == 2) {
-				return false;
+				return tui;
 			}
 		}
 		boolean chdhTui = isChiSameValueRedCard(room, user, card.getNum());
 		boolean ncChiTui = checkNCChiTui(room, user, card.getNum());
 		if (ncChiTui) {
-			user.getActions().add(ENActionType.EN_ACTION_TUI);
-			room.getCanActionSeat().add(user.getSeatIndex());
-			return true;
+			tui = true;
 		} else if (chdhTui || (card.isCheMo() && countOfChi > 0)) {
 			// 别人打得我吃了的牌
-			CardManager.addToDeathCard(card.getNum(), user);
-			user.getActions().add(ENActionType.EN_ACTION_TUI);
-			room.getCanActionSeat().add(user.getSeatIndex());
-			return true;
+			if (room.getRoomType() != ENRoomType.EN_ROOM_TYPE_CX_VALUE) {
+				CardManager.addToDeathCard(card.getNum(), user);
+			}
+			tui = true;
 		}
-		return false;
+		if (tui) {
+			room.getCanActionSeat().add(user.getSeatIndex());
+			if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX_VALUE) {
+				user.getActions().add(ENActionType.EN_ACTION_KOU);
+			} else {
+				user.getActions().add(ENActionType.EN_ACTION_TUI);
+			}
+		}
+		return tui;
 	}
 
 	/**
