@@ -127,8 +127,10 @@ public class GameSvrHandler extends ProtoHandler {
 		request.setHeadLite(headLite);
 
 		if (cpHead.getCmd() == CpMsgData.CS_REQUEST_HEART_BEAT_FIELD_NUMBER) {
-			//LOGGER.info("----BOOM-----------");
-			new HeartBeat().Action(request);
+			// LOGGER.info("----BOOM-----------");
+			HeartBeat heartActor = new HeartBeat();
+			heartActor.Action(request);
+			heartActor = null;
 			return;
 		} else {
 			int index = 0;
@@ -228,7 +230,7 @@ public class GameSvrHandler extends ProtoHandler {
 			LOGGER.info("reSet-----------not null=:");
 			gamePlayer.logout();
 			GameSvrPlayerManager.deletePlayer(gamePlayer);
-			//gamePlayer = null;
+			// gamePlayer = null;
 		}
 		GameSvrHandlerMgr.getInstance().deleteClient(this);
 	}
