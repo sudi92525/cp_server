@@ -1142,7 +1142,11 @@ public class CardManager {
 		if (user.isFive()) {
 			if (isAllBlack(user, user.getHold(), user.getOpenList())
 					&& fuTouNum(user) == 0 && card.getNum() == 25) {// 飞天二五：全黑，无丁斧
-				return true;
+				if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_XC_VALUE) {
+					return true;
+				} else if (fuTouNum(user) == 0) {
+					return true;
+				}
 			}
 			if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_NC_VALUE
 					|| room.getRoomType() == ENRoomType.EN_ROOM_TYPE_XC_VALUE) {
@@ -1265,6 +1269,10 @@ public class CardManager {
 					for (PBColumnInfo col : _user.getOpen()) {
 						if (col.getColType() == ENColType.EN_COL_TYPE_PENG
 								|| col.getColType() == ENColType.EN_COL_TYPE_TOU) {
+							if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_XC_VALUE
+									&& col.getIsFan()) {
+								continue;
+							}
 							Integer cardNum = col.getCardsList().get(0);
 							if (zhuiCard == cardNum) {// 扯了的
 								int otherCard = 0;

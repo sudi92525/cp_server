@@ -330,6 +330,7 @@ public class User implements Serializable {
 		this.guoShouCards.clear();
 		this.playBack = null;
 		this.zhaoChiNoGe = false;
+		// this.feiTian25Pass=false;
 		clearCurrentInfo();
 	}
 

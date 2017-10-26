@@ -451,13 +451,13 @@ public class RoomManager {
 		for (int i = 0; i < 4; i++) {
 			User user = room.getUsers().get(seat);
 			if (i == 0) {
-				int card1 = 11;
+				int card1 = 66;
 				user.getHold().add(card1);
-				int card2 = 11;
+				int card2 = 13;
 				user.getHold().add(card2);
 				int card3 = 13;
 				user.getHold().add(card3);
-				int card4 = 14;
+				int card4 = 12;
 				user.getHold().add(card4);
 				int card5 = 15;
 				user.getHold().add(card5);
@@ -492,7 +492,7 @@ public class RoomManager {
 				user.getHold().add(card1);
 				int card2 = 11;
 				user.getHold().add(card2);
-				int card3 = 66;
+				int card3 = 11;
 				user.getHold().add(card3);
 				int card4 = 66;
 				user.getHold().add(card4);
@@ -560,13 +560,13 @@ public class RoomManager {
 			} else if (i == 3) {
 				int card1 = 12;
 				user.getHold().add(card1);
-				int card2 = 34;
+				int card2 = 56;
 				user.getHold().add(card2);
 				int card3 = 34;
 				user.getHold().add(card3);
 				int card4 = 44;
 				user.getHold().add(card4);
-				int card5 = 56;
+				int card5 = 24;
 				user.getHold().add(card5);
 			}
 			CardManager.noChuDouble7AndDiaoZhui(room, user, true);
