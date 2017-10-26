@@ -190,8 +190,8 @@ public class GameAction extends AbsAction {
 		// ---10.23----jia:西充南充同点数吃退
 		if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_NC_VALUE
 				|| room.getRoomType() == ENRoomType.EN_ROOM_TYPE_XC_VALUE) {
-			List<Integer> sameList = CardManager.getSameCards(destCard
-					.getCardValue());
+			List<Integer> sameList = CardManager
+					.getSameCards(destCard.getNum());
 			for (Integer integer : sameList) {
 				if (!user.getDouble7s().contains(integer)) {
 					CardManager.removeDeathCardNCXC(integer, user);

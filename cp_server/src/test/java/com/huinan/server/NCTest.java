@@ -40,14 +40,14 @@ public class NCTest extends TestCase {
 		}
 		RoomManager.shuffle(room);
 		for (Integer card : room.getResetCards()) {
-			System.out.println("card:" + card);
+			// System.out.println("card:" + card);
 		}
 		System.out.println("card size=" + room.getResetCards().size());
 
 		for (User user : room.getUsers().values()) {
-			System.out.println("user hold:");
+			// System.out.println("user hold:");
 			for (Integer card : user.getHold()) {
-				System.out.println("card:" + card);
+				// System.out.println("card:" + card);
 			}
 		}
 		int fan = (int) Math.pow(2, 0);
@@ -74,18 +74,18 @@ public class NCTest extends TestCase {
 
 		boolean isRed = CardManager.colorIsRed(12);
 		System.out.println("red:" + isRed);
-		
+
 		System.out.println("true----------:" + isTrue());
 	}
-	
-	private boolean isTrue(){
-	    for (int i = 0; i < 4; i++) {
-		if(i==2){
-		    return true;
+
+	private boolean isTrue() {
+		for (int i = 0; i < 4; i++) {
+			if (i == 2) {
+				return true;
+			}
 		}
-	    }
-	    
-	    return false;
+
+		return false;
 	}
 
 	public void testHu() {
@@ -200,5 +200,17 @@ public class NCTest extends TestCase {
 		String str = new String(by);
 		int hh2 = Integer.valueOf(str);
 		System.out.println("byte to int:" + hh2);
+	}
+	
+	public void testList(){
+		List<Integer> list = new ArrayList<>();
+		list.add(5);
+		list.add(2);
+		for (int i = 0; i < list.size(); i++) {
+			if(list.get(i)==5){
+				list.remove(i);
+			}
+		}
+		System.out.println("list size:" + list.size());
 	}
 }

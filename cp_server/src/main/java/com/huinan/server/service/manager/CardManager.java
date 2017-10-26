@@ -1624,32 +1624,42 @@ public class CardManager {
 	 */
 	public static void removeDeathCard(int card, User user) {
 		List<Integer> cards = user.getNoChuCards();
+		List<Integer> newCards = new ArrayList<>();
+		newCards.addAll(cards);
 		boolean bool = false;
 		for (int i = 0; i < cards.size(); i++) {
 			if (card == cards.get(i)) {
-				cards.remove(i);
+				newCards.remove(i);
 				bool = true;
 				break;
 			}
 		}
 		if (bool) {
-			user.setNoChuCards(cards);
+			user.setNoChuCards(newCards);
 			// 发送不能出牌的通知消息
 			NotifyHandler.notifyDeathCardList(user);
 		}
 	}
 
+	/**
+	 * 南充西充同点数吃退
+	 * 
+	 * @param card
+	 * @param user
+	 */
 	public static void removeDeathCardNCXC(int card, User user) {
 		List<Integer> cards = user.getNoChuCards();
+		List<Integer> newCards = new ArrayList<>();
+		newCards.addAll(cards);
 		boolean bool = false;
 		for (int i = 0; i < cards.size(); i++) {
 			if (card == cards.get(i)) {
-				cards.remove(i);
+				newCards.remove(i);
 				bool = true;
 			}
 		}
 		if (bool) {
-			user.setNoChuCards(cards);
+			user.setNoChuCards(newCards);
 			// 发送不能出牌的通知消息
 			NotifyHandler.notifyDeathCardList(user);
 		}

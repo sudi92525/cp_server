@@ -323,20 +323,20 @@ public class RoomManager {
 	 */
 	public static void shuffle(Room room) {
 		List<Integer> cards = new ArrayList<>();
-		for (int card : CardManager.allPais) {
-			for (int k = 0; k < 4; k++) {
-				cards.add(card);
-			}
-		}
+//		for (int card : CardManager.allPais) {
+//			for (int k = 0; k < 4; k++) {
+//				cards.add(card);
+//			}
+//		}
 		// TODO 写死牌
-		// for (int i = 0; i < 84; i++) {
-		// cards.add(34);
+		 for (int i = 0; i < 84; i++) {
+		 cards.add(56);
 		// cards.add(15);
 		// cards.add(15);
 		// cards.add(15);
 		// cards.add(15);
 		// cards.add(15);
-		// }
+		 }
 		Collections.shuffle(cards);
 		Collections.shuffle(cards);
 		Collections.shuffle(cards);
@@ -390,23 +390,23 @@ public class RoomManager {
 
 		int zhuangSeat = room.getZhuangSeat();
 		int seat = zhuangSeat;
-		for (int i = 0; i < 4; i++) {
-			int num = CardManager.BRAND_NUMFOUR[i];
-			User user = room.getUsers().get(seat);
-			user.setReady(false);
-			for (int j = 0; j < num; j++) {
-				int card = room.getFirstCard();
-				user.getHold().add(card);
-			}
-			if (!user.isFive()) {
-				user.getCanChiHoldCards().clear();
-				user.getCanChiHoldCards().addAll(user.getHold());
-			}
-			CardManager.noChuDouble7AndDiaoZhui(room, user, true);
-			seat = RoomManager.getNextSeat(seat);
-		}
+//		for (int i = 0; i < 4; i++) {
+//			int num = CardManager.BRAND_NUMFOUR[i];
+//			User user = room.getUsers().get(seat);
+//			user.setReady(false);
+//			for (int j = 0; j < num; j++) {
+//				int card = room.getFirstCard();
+//				user.getHold().add(card);
+//			}
+//			if (!user.isFive()) {
+//				user.getCanChiHoldCards().clear();
+//				user.getCanChiHoldCards().addAll(user.getHold());
+//			}
+//			CardManager.noChuDouble7AndDiaoZhui(room, user, true);
+//			seat = RoomManager.getNextSeat(seat);
+//		}
 		// TODO 写死牌
-		// dealSiPai(room, seat);
+		 dealSiPai(room, seat);
 
 		room.setFirstCard(true);
 		room.setStepIsPlay(true);
@@ -453,7 +453,7 @@ public class RoomManager {
 			if (i == 0) {
 				int card1 = 11;
 				user.getHold().add(card1);
-				int card2 = 12;
+				int card2 = 11;
 				user.getHold().add(card2);
 				int card3 = 13;
 				user.getHold().add(card3);
@@ -492,13 +492,13 @@ public class RoomManager {
 				user.getHold().add(card1);
 				int card2 = 11;
 				user.getHold().add(card2);
-				int card3 = 11;
+				int card3 = 66;
 				user.getHold().add(card3);
 				int card4 = 66;
 				user.getHold().add(card4);
 				int card5 = 12;
 				user.getHold().add(card5);
-				int card6 = 12;
+				int card6 = 22;
 				user.getHold().add(card6);
 				int card7 = 22;
 				user.getHold().add(card7);
@@ -520,7 +520,7 @@ public class RoomManager {
 				user.getHold().add(card15);
 				int card16 = 44;
 				user.getHold().add(card16);
-				int card17 = 45;
+				int card17 = 46;
 				user.getHold().add(card17);
 			} else if (i == 2) {
 				int card1 = 11;
