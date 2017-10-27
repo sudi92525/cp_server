@@ -1051,7 +1051,8 @@ public class CardManager {
 		int cardValue = getCardValue(card);
 		for (Integer integer : user.getNoChuCards()) {
 			if (getCardValue(integer) == cardValue
-					&& !user.getDouble7s().contains(integer)) {
+					&& !user.getDouble7s().contains(integer)
+					&& !user.getDoubleZhuiCards().contains(integer)) {
 				tui = true;
 				break;
 			}
@@ -1637,7 +1638,7 @@ public class CardManager {
 		boolean bool = false;
 		for (int i = 0; i < cards.size(); i++) {
 			if (card == cards.get(i)) {
-				newCards.remove(i);
+				newCards.remove(Integer.valueOf(card));
 				bool = true;
 				break;
 			}
@@ -1662,7 +1663,7 @@ public class CardManager {
 		boolean bool = false;
 		for (int i = 0; i < cards.size(); i++) {
 			if (card == cards.get(i)) {
-				newCards.remove(i);
+				newCards.remove(Integer.valueOf(card));
 				bool = true;
 			}
 		}
