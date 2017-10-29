@@ -220,7 +220,6 @@ public class RoomManager {
 	}
 
 	// -----------------------------------牌局流程型关键逻辑-----------------------------------------
-	// TODO
 
 	/**
 	 * 开始选择漂
@@ -333,7 +332,7 @@ public class RoomManager {
 		// TODO 写死牌
 		// if (room.getRound() == 1) {
 		// for (int i = 0; i < 84; i++) {
-		// cards.add(66);
+		// cards.add(12);
 		// cards.add(15);
 		// cards.add(15);
 		// cards.add(15);
@@ -360,7 +359,7 @@ public class RoomManager {
 		}
 		room.setJiaoPaiSeat(seatDuiMen);
 		// 随机一张牌
-		int index = new Random().nextInt(84);// TODO
+		int index = new Random().nextInt(84);
 		int zhuangCard = room.getResetCards().get(index);
 		room.setChoiceZhuangCard(zhuangCard);
 
@@ -394,6 +393,8 @@ public class RoomManager {
 
 		int zhuangSeat = room.getZhuangSeat();
 		int seat = zhuangSeat;
+		
+		// TODO 写死牌
 		// if (room.getRound() > 1) {
 		for (int i = 0; i < 4; i++) {
 			int num = CardManager.BRAND_NUMFOUR[i];
@@ -496,21 +497,21 @@ public class RoomManager {
 				int card18 = 44;
 				user.getHold().add(card18);
 			} else if (i == 1) {
-				int card1 = 11;
+				int card1 = 56;
 				user.getHold().add(card1);
-				int card2 = 11;
+				int card2 = 56;
 				user.getHold().add(card2);
-				int card3 = 23;
+				int card3 = 44;
 				user.getHold().add(card3);
 				int card4 = 24;
 				user.getHold().add(card4);
-				int card5 = 12;
+				int card5 = 33;
 				user.getHold().add(card5);
-				int card6 = 22;
+				int card6 = 46;
 				user.getHold().add(card6);
 				int card7 = 22;
 				user.getHold().add(card7);
-				int card8 = 23;
+				int card8 = 44;
 				user.getHold().add(card8);
 				int card9 = 24;
 				user.getHold().add(card9);
@@ -518,59 +519,59 @@ public class RoomManager {
 				user.getHold().add(card10);
 				int card11 = 25;
 				user.getHold().add(card11);
-				int card12 = 33;
+				int card12 = 25;
 				user.getHold().add(card12);
 				int card13 = 34;
 				user.getHold().add(card13);
-				int card14 = 35;
+				int card14 = 14;
 				user.getHold().add(card14);
 				int card15 = 36;
 				user.getHold().add(card15);
-				int card16 = 44;
+				int card16 = 22;
 				user.getHold().add(card16);
 				int card17 = 46;
 				user.getHold().add(card17);
 			} else if (i == 2) {
-				int card1 = 11;
+				int card1 = 33;
 				user.getHold().add(card1);
-				int card2 = 12;
+				int card2 = 11;
 				user.getHold().add(card2);
-				int card3 = 13;
+				int card3 = 66;
 				user.getHold().add(card3);
-				int card4 = 14;
+				int card4 = 24;
 				user.getHold().add(card4);
-				int card5 = 15;
+				int card5 = 35;
 				user.getHold().add(card5);
-				int card6 = 16;
+				int card6 = 46;
 				user.getHold().add(card6);
 				int card7 = 22;
 				user.getHold().add(card7);
-				int card8 = 23;
+				int card8 = 44;
 				user.getHold().add(card8);
 				int card9 = 24;
 				user.getHold().add(card9);
-				int card10 = 24;
+				int card10 = 25;
 				user.getHold().add(card10);
-				int card11 = 26;
+				int card11 = 25;
 				user.getHold().add(card11);
-				int card12 = 33;
+				int card12 = 34;
 				user.getHold().add(card12);
 				int card13 = 34;
 				user.getHold().add(card13);
-				int card14 = 35;
+				int card14 = 14;
 				user.getHold().add(card14);
 				int card15 = 36;
 				user.getHold().add(card15);
-				int card16 = 44;
+				int card16 = 22;
 				user.getHold().add(card16);
-				int card17 = 45;
+				int card17 = 46;
 				user.getHold().add(card17);
 			} else if (i == 3) {
 				int card1 = 12;
 				user.getHold().add(card1);
 				int card2 = 56;
 				user.getHold().add(card2);
-				int card3 = 34;
+				int card3 = 24;
 				user.getHold().add(card3);
 				int card4 = 44;
 				user.getHold().add(card4);
@@ -719,6 +720,21 @@ public class RoomManager {
 					for (int i = 0; i < cards.size() - 1; i++) {
 						CardManager.removeDeathCard(card, user);
 					}
+					if (user.getDouble7s().contains(card)) {
+						user.getDouble7s().remove(card);
+						// 将一对七从死牌列表删除
+						user.getNoChuCards().remove(Integer.valueOf(card));
+						user.getNoChuCards().remove(Integer.valueOf(card));
+						NotifyHandler.notifyDeathCardList(user);
+					} else if (user.getDoubleZhuiCards().contains(card)) {
+						user.getDoubleZhuiCards().remove(card);
+						// 将一对七从死牌列表删除
+						user.getNoChuCards().remove(card);
+						user.getNoChuCards().remove(card);
+						NotifyHandler.notifyDeathCardList(user);
+					}
+					CardManager.noChuDouble7AndDiaoZhui(room, user, false);
+
 					if (num == 3) {// 偷一张
 						// 通知发一张牌
 						touPai(room, user, 1);
@@ -989,7 +1005,7 @@ public class RoomManager {
 			}
 		}
 
-		// TODO 内滑???
+		//  内滑???
 
 		// 花对：之前打过7，又扯起来了一个7
 		if (CardManager.getCardValue(card) == 7
@@ -1308,7 +1324,6 @@ public class RoomManager {
 				allRoomCardNum = ERoomCardCost.getRoomCardCost(room
 						.getRoomTable().getGameNum());
 			}
-			// TODO 扣房卡
 			int beforeRoomCard = 0;
 			if (userType == ERoomCardType.CREATOR.getValue()) {
 				String creatorUid = room.getRoomTable().getCreatorUid();

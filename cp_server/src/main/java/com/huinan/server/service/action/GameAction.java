@@ -461,13 +461,13 @@ public class GameAction extends AbsAction {
 		CardManager.removeCardOfHold(user, destCard.getNum());
 		CardManager.removeCardOfHold(user, destCard.getNum());
 
-		if (user.getDouble7s().contains(destCard.getNum())) {
+		if (user.getDouble7s().contains(Integer.valueOf(destCard.getNum()))) {
 			user.getDouble7s().remove(Integer.valueOf(destCard.getNum()));
 			// 将一对七从死牌列表删除
 			user.getNoChuCards().remove(Integer.valueOf(destCard.getNum()));
 			user.getNoChuCards().remove(Integer.valueOf(destCard.getNum()));
 			NotifyHandler.notifyDeathCardList(user);
-		} else if (user.getDoubleZhuiCards().contains(destCard.getNum())) {
+		} else if (user.getDoubleZhuiCards().contains(Integer.valueOf(destCard.getNum()))) {
 			user.getDoubleZhuiCards()
 					.remove(Integer.valueOf(destCard.getNum()));
 			// 将一对七从死牌列表删除

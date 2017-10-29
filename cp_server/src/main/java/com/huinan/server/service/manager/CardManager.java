@@ -1557,7 +1557,7 @@ public class CardManager {
 		// Map<Integer, Integer> noChuMap = toMap(user.getNoChuCards());
 		Map<Integer, Integer> holdMap = toMap(user.getHold());
 		Iterator<Integer> it = holdMap.keySet().iterator();
-		boolean send = false;
+		// boolean send = false;
 		while (it.hasNext()) {
 			Integer card = (Integer) it.next();
 			int count = holdMap.get(card);
@@ -1568,8 +1568,11 @@ public class CardManager {
 
 				user.getNoChuCards().add(card);
 				user.getNoChuCards().add(card);
+
+				user.getDouble7s().remove(card);
+				user.getDouble7s().remove(card);
 				user.getDouble7s().add(card);
-				send = true;
+				// send = true;
 			}
 		}
 
@@ -1595,31 +1598,31 @@ public class CardManager {
 				user.getNoChuCards().add(Integer.valueOf(66));
 
 				user.getDoubleZhuiCards().add(Integer.valueOf(66));
-				send = true;
+				// send = true;
 			}
 			if (dPCount != null && dPCount == 2 && tpCount == null) {
 				user.getNoChuCards().add(Integer.valueOf(11));
 				user.getNoChuCards().add(Integer.valueOf(11));
 
 				user.getDoubleZhuiCards().add(Integer.valueOf(11));
-				send = true;
+				// send = true;
 			}
 			if (ftCount != null && ftCount == 2 && ddCount == null) {
 				user.getNoChuCards().add(Integer.valueOf(56));
 				user.getNoChuCards().add(Integer.valueOf(56));
 
 				user.getDoubleZhuiCards().add(Integer.valueOf(56));
-				send = true;
+				// send = true;
 			}
 			if (ddCount != null && ddCount == 2 && ftCount == null) {
 				user.getNoChuCards().add(Integer.valueOf(12));
 				user.getNoChuCards().add(Integer.valueOf(12));
 
 				user.getDoubleZhuiCards().add(Integer.valueOf(12));
-				send = true;
+				// send = true;
 			}
 		}
-		if (send && !isDealCard) {// 发牌先不发该通知，发完后再通知
+		if (!isDealCard) {// send && 发牌先不发该通知，发完后再通知
 			// 发送不能出牌的通知消息
 			NotifyHandler.notifyDeathCardList(user);
 		}
