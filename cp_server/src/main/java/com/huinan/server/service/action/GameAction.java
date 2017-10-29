@@ -96,11 +96,15 @@ public class GameAction extends AbsAction {
 				} else if (actionType == ENActionType.EN_ACTION_PENG_VALUE) {
 					room.setChe(true);
 					room.setChoiceChe(true);
-					room.getCanHuSeat().remove(
-							Integer.valueOf(user.getSeatIndex()));
+					if (room.getCanHuSeat().contains(user.getSeatIndex())) {
+						room.getCanHuSeat().remove(
+								Integer.valueOf(user.getSeatIndex()));
+					}
 					if (room.canCheNow()) {
 						// 无人胡了,也无人将要胡: 执行扯
 						che(user, room);
+					} else {
+						maxPriority(room, room.getCurrentCard());
 					}
 				} else if (actionType == ENActionType.EN_ACTION_CHI_VALUE) {// 杠,碰(只可能在一家)
 					room.getChiChoices().put(user.getSeatIndex(), true);
@@ -787,7 +791,7 @@ public class GameAction extends AbsAction {
 		if (room.getActionRecord().size() == room.getCanActionSeat().size()) {
 			boolean have = false;// 过了后有其他人执行
 			Map<Integer, Boolean> huChoices = room.getHuChoices();
-			if (!room.getHuChoices().isEmpty()) {
+			if (!huChoices.isEmpty()) {
 				for (int i = 0; i < 4; i++) {
 					int seat = currentCard.getSeat() + i;
 					if (seat > 4) {
