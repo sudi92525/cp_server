@@ -203,14 +203,13 @@ public class NCTest extends TestCase {
 		int hh2 = Integer.valueOf(str);
 		System.out.println("byte to int:" + hh2);
 	}
-<<<<<<< HEAD
 
 	public void testDate() {
 		Calendar c = Calendar.getInstance();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String dateStr = sdf.format(c.getTime());
 		System.out.println("date string=" + dateStr);
-=======
+	}
 	
 	public void testList(){
 		List<Integer> list = new ArrayList<>();
@@ -222,6 +221,5 @@ public class NCTest extends TestCase {
 			}
 		}
 		System.out.println("list size:" + list.size());
->>>>>>> aliyun
 	}
 }
