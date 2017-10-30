@@ -418,25 +418,25 @@ public class RoomManager {
 
 		// TODO 写死牌
 		// if (room.getRound() > 1) {
-		for (int i = 0; i < 4; i++) {
-			int num = CardManager.BRAND_NUMFOUR[i];
-			User user = room.getUsers().get(seat);
-			user.setReady(false);
-			for (int j = 0; j < num; j++) {
-				int card = room.getFirstCard();
-				user.getHold().add(card);
-			}
-			if (!user.isFive()) {
-				user.getCanChiHoldCards().clear();
-				user.getCanChiHoldCards().addAll(user.getHold());
-			}
-			CardManager.noChuDouble7AndDiaoZhui(room, user, true);
-			seat = RoomManager.getNextSeat(seat);
-		}
+//		for (int i = 0; i < 4; i++) {
+//			int num = CardManager.BRAND_NUMFOUR[i];
+//			User user = room.getUsers().get(seat);
+//			user.setReady(false);
+//			for (int j = 0; j < num; j++) {
+//				int card = room.getFirstCard();
+//				user.getHold().add(card);
+//			}
+//			if (!user.isFive()) {
+//				user.getCanChiHoldCards().clear();
+//				user.getCanChiHoldCards().addAll(user.getHold());
+//			}
+//			CardManager.noChuDouble7AndDiaoZhui(room, user, true);
+//			seat = RoomManager.getNextSeat(seat);
+//		}
 		// }
 		// TODO 写死牌
 		// if (room.getRound() == 1) {
-		// dealSiPai(room, seat);
+		 dealSiPai(room, seat);
 		// }
 
 		room.setFirstCard(true);
@@ -487,9 +487,9 @@ public class RoomManager {
 				user.getHold().add(card1);
 				int card2 = 11;
 				user.getHold().add(card2);
-				int card3 = 13;
+				int card3 = 56;
 				user.getHold().add(card3);
-				int card4 = 12;
+				int card4 = 11;
 				user.getHold().add(card4);
 				int card5 = 15;
 				user.getHold().add(card5);
@@ -524,7 +524,7 @@ public class RoomManager {
 				user.getHold().add(card1);
 				int card2 = 56;
 				user.getHold().add(card2);
-				int card3 = 44;
+				int card3 = 66;
 				user.getHold().add(card3);
 				int card4 = 24;
 				user.getHold().add(card4);

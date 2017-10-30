@@ -3,8 +3,6 @@ package com.huinan.server.service.manager;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.logging.log4j.LogManager;
-
 import com.huinan.proto.CpMsg.CpHead;
 import com.huinan.proto.CpMsgCs.CSNotifyDissolveTableOperation;
 import com.huinan.proto.CpMsgCs.CSNotifyGameStart;
@@ -268,11 +266,11 @@ public class ProtoBuilder {
 			List<Integer> cards, ENColType type, boolean isFan) {
 		PBColumnInfo.Builder col = PBColumnInfo.newBuilder();
 		col.setScore(CardManager.getScore(user, cards));
-		if (type == ENColType.EN_COL_TYPE_TOU && cards.isEmpty()) {
-			LogManager.getLogger("queue").info(
-					"偷，cardslist is empty,roomId:" + user.getRoomId()
-							+ ",user id=" + user.getUuid());
-		}
+		// if (type == ENColType.EN_COL_TYPE_TOU && cards.isEmpty()) {
+		// LogManager.getLogger("queue").info(
+		// "偷，cardslist is empty,roomId:" + user.getRoomId()
+		// + ",user id=" + user.getUuid());
+		// }
 		col.addAllCards(cards);
 		col.setColType(type);
 		col.setIsFan(isFan);

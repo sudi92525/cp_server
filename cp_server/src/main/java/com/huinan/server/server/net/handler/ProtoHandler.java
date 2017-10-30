@@ -113,8 +113,7 @@ public abstract class ProtoHandler extends BaseHandler {
 			Object protoData) {
 		CpHead responseHead = ProtoBuilder.buildHead(cmd, uid, requestHead);
 		if (responseHead.getCmd() != CpMsgData.CS_RESPONSE_HEART_BEAT_FIELD_NUMBER) {
-			LOGGER.info("send message:cmd=" + cmd + "head:"
-					+ responseHead.toString() + ",response:"
+			LOGGER.info("uid:" + responseHead.getUid() + ",response:"
 					+ protoData.toString());
 		}
 		return send(channel, (MessageLite) responseHead,
