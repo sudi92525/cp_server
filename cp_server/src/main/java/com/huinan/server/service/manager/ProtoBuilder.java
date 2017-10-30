@@ -209,7 +209,14 @@ public class ProtoBuilder {
 		tSeat.setSeatIndex(user.getSeatIndex());
 		tSeat.setUserInfo(buildUserInfo(user));
 		if (room.isStepIsPlay()) {
-			tSeat.addAllTilesOnHand(user.getHold());// 手牌
+			List<Integer> list = new ArrayList<>();
+			list.addAll(user.getHold());
+			for (Integer integer : user.getKou()) {
+				if (list.contains(integer)) {
+					list.remove(integer);
+				}
+			}
+			tSeat.addAllTilesOnHand(list);// 手牌
 			tSeat.addAllKouCardList(user.getKou());
 			tSeat.setTilesOnHandNum(user.getHold().size());// 初始化手牌数量
 			tSeat.addAllOutCol(user.getOpen()); // 吃扯牌

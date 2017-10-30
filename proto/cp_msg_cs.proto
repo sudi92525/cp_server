@@ -30,8 +30,9 @@ enum ENColType
 	EN_COL_TYPE_TOU = 1;							//偷牌		4张牌        不算番
 	EN_COL_TYPE_PENG = 2;							//碰		3张牌
 	EN_COL_TYPE_CHI = 3;							//吃		2张牌
-	EN_COL_TYPE_ZHAO = 4;							//吃		2张牌
+	EN_COL_TYPE_ZHAO = 4;							//招		2张牌
 	EN_COL_TYPE_LONG = 5;							//龙(起手四根):红龙,黑龙		4张牌    算番
+	EN_COL_TYPE_KOU = 6;							//扣
 }
 
 enum ENZhaoType
@@ -109,10 +110,10 @@ message UserInfo{
 message PBColumnInfo
 {
 	repeated int32 cards = 1;						//具体牌信息
-	optional ENColType col_type = 2;					//偷牌 碰	吃	
+	optional ENColType col_type = 2;				//偷牌 碰	吃	
 	optional int32 score = 3; 						//坨数
 	optional bool is_fan = 4;						//NC：偷拍时，除庄家外，其他的偷牌不翻开
-	optional bool is_qishou_tou = 5;						//是否起手偷
+	optional bool is_qishou_tou = 5;				//是否起手偷
 }
 
 message PBAction
@@ -371,7 +372,8 @@ message CSNotifyPlayerDealCard
 	optional int32 value = 2;       				//牌编号
 	optional bool is_fan_pai = 3;					//牌是否翻开
 	optional int32 left_card_num = 4; 				//剩余牌数量
-	optional int32 tiles_on_hand_num = 5;				//当前手牌张数
+	optional int32 tiles_on_hand_num = 5;			//当前手牌张数
+	optional bool is_kou = 6;						//牌是否可以扣
 }
 
 message CSNotifyNextOperation

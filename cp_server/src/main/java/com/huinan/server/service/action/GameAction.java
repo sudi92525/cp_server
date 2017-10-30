@@ -140,11 +140,13 @@ public class GameAction extends AbsAction {
 	 * @param req
 	 */
 	private void kou(User user, Room room, CSRequestDoAction req) {
-		// TODO 不加入手牌，
+		// TODO 扯牌时已经加入了手牌列表了
 		user.getKou().add(room.getCurrentCard().getNum());
 
+		Builder columnInfo = ProtoBuilder.buildPBColumnInfo(user,
+				user.getKou(), ENColType.EN_COL_TYPE_KOU, false);
 		// 通知其他玩家
-		NotifyHandler.notifyActionFlow(room, user, null, null,
+		NotifyHandler.notifyActionFlow(room, user, null, columnInfo.build(),
 				ENActionType.EN_ACTION_KOU, false);
 
 		// 计算可操作的玩家操作列表
@@ -461,7 +463,8 @@ public class GameAction extends AbsAction {
 			user.getNoChuCards().remove(Integer.valueOf(destCard.getNum()));
 			user.getNoChuCards().remove(Integer.valueOf(destCard.getNum()));
 			NotifyHandler.notifyDeathCardList(user);
-		} else if (user.getDoubleZhuiCards().contains(Integer.valueOf(destCard.getNum()))) {
+		} else if (user.getDoubleZhuiCards().contains(
+				Integer.valueOf(destCard.getNum()))) {
 			user.getDoubleZhuiCards()
 					.remove(Integer.valueOf(destCard.getNum()));
 			// 将一对七从死牌列表删除
@@ -717,6 +720,10 @@ public class GameAction extends AbsAction {
 					}
 				}
 			} else if (user.getActions().contains(ENActionType.EN_ACTION_TUI)) {
+				user.getActions().clear();
+				// 出牌推送
+				CardManager.checkBaoZiOrChuPai(room, user);
+			} else if (user.getActions().contains(ENActionType.EN_ACTION_KOU)) {
 				user.getActions().clear();
 				// 出牌推送
 				CardManager.checkBaoZiOrChuPai(room, user);

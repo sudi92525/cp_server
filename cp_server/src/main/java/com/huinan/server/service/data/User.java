@@ -301,6 +301,7 @@ public class User implements Serializable {
 		this.agreeDissolve = false;
 		this.changeCurrency = 0;
 		this.hold.clear();
+		this.kou.clear();
 		this.canChiHoldCards.clear();
 		this.open.clear();
 		this.noCheCards.clear();

@@ -214,12 +214,21 @@ public class NCTest extends TestCase {
 	public void testList(){
 		List<Integer> list = new ArrayList<>();
 		list.add(5);
+		list.add(5);
 		list.add(2);
+		
+		List<Integer> list2 = new ArrayList<>();
+		list2.add(5);
+		list2.add(2);
+		
+		list.removeAll(list2);
+		
 		for (int i = 0; i < list.size(); i++) {
-			if(list.get(i)==5){
-				list.remove(i);
-			}
+//			if(list.get(i)==5){
+//				list.remove(i);
+//			}
+			System.out.println("remove all :" + list.get(i));
 		}
-		System.out.println("list size:" + list.size());
+		System.out.println("list size :" + list.size());
 	}
 }

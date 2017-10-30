@@ -96,7 +96,11 @@ public class RoomManager {
 		}
 		room.setZiMoJiaFan(requestBody.getIsZiMoFan());
 		room.setDingFuShuaiTimes(requestBody.getIsDingfuShuaiAny());
-		room.setTouDang(requestBody.getIsTouDang());
+		if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX_VALUE) {
+			room.setTouDang(false);
+		} else {
+			room.setTouDang(requestBody.getIsTouDang());
+		}
 		room.setCheZhui(requestBody.getIsCheZhui());
 		room.setDiaoZhui(requestBody.getIsDiaoZhui());
 		if (requestBody.hasScore() && requestBody.getScore() > 0) {
@@ -411,7 +415,7 @@ public class RoomManager {
 
 		int zhuangSeat = room.getZhuangSeat();
 		int seat = zhuangSeat;
-		
+
 		// TODO 写死牌
 		// if (room.getRound() > 1) {
 		for (int i = 0; i < 4; i++) {
@@ -1109,7 +1113,7 @@ public class RoomManager {
 			}
 		}
 
-		//  内滑???
+		// 内滑???
 
 		// 花对：之前打过7，又扯起来了一个7
 		if (CardManager.getCardValue(card) == 7
