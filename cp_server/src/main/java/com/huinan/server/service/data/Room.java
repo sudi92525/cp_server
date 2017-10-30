@@ -322,6 +322,7 @@ public class Room implements Serializable {
 		return true;
 	}
 
+	// TODO 新增属性时记得结算清理
 	public void clearRound() {
 		this.startChu = false;
 		this.dangSeat = 0;
@@ -329,6 +330,8 @@ public class Room implements Serializable {
 		this.stepIsPlay = false;
 		this.firstCard = true;
 		this.lastChuSeat = 0;
+		this.huSeat = 0;
+		this.lan18Seat = 0;
 		clearCurrentInfo();
 		for (User user : users.values()) {
 			user.clearRoundData();

@@ -1091,7 +1091,8 @@ public class CardManager {
 		int cardValue = getCardValue(card);
 		for (Integer integer : user.getNoChuCards()) {
 			if (getCardValue(integer) == cardValue
-					&& !user.getDouble7s().contains(integer)) {
+					&& !user.getDouble7s().contains(integer)
+					&& !user.getDoubleZhuiCards().contains(integer)) {
 				tui = true;
 				break;
 			}
@@ -1180,7 +1181,11 @@ public class CardManager {
 		if (user.isFive()) {
 			if (isAllBlack(user, user.getHold(), user.getOpenList())
 					&& fuTouNum(user) == 0 && card.getNum() == 25) {// 飞天二五：全黑，无丁斧
-				return true;
+				if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_XC_VALUE) {
+					return true;
+				} else if (fuTouNum(user) == 0) {
+					return true;
+				}
 			}
 			if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_NC_VALUE
 					|| room.getRoomType() == ENRoomType.EN_ROOM_TYPE_XC_VALUE) {
@@ -1300,6 +1305,10 @@ public class CardManager {
 					for (PBColumnInfo col : _user.getOpen()) {
 						if (col.getColType() == ENColType.EN_COL_TYPE_PENG
 								|| col.getColType() == ENColType.EN_COL_TYPE_TOU) {
+							if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_XC_VALUE
+									&& col.getIsFan()) {
+								continue;
+							}
 							Integer cardNum = col.getCardsList().get(0);
 							if (zhuiCard == cardNum) {// 扯了的
 								int otherCard = 0;
@@ -1583,7 +1592,7 @@ public class CardManager {
 		// Map<Integer, Integer> noChuMap = toMap(user.getNoChuCards());
 		Map<Integer, Integer> holdMap = toMap(user.getHold());
 		Iterator<Integer> it = holdMap.keySet().iterator();
-		boolean send = false;
+		// boolean send = false;
 		while (it.hasNext()) {
 			Integer card = (Integer) it.next();
 			int count = holdMap.get(card);
@@ -1594,8 +1603,11 @@ public class CardManager {
 
 				user.getNoChuCards().add(card);
 				user.getNoChuCards().add(card);
+
+				user.getDouble7s().remove(card);
+				user.getDouble7s().remove(card);
 				user.getDouble7s().add(card);
-				send = true;
+				// send = true;
 			}
 		}
 
@@ -1621,31 +1633,31 @@ public class CardManager {
 				user.getNoChuCards().add(Integer.valueOf(66));
 
 				user.getDoubleZhuiCards().add(Integer.valueOf(66));
-				send = true;
+				// send = true;
 			}
 			if (dPCount != null && dPCount == 2 && tpCount == null) {
 				user.getNoChuCards().add(Integer.valueOf(11));
 				user.getNoChuCards().add(Integer.valueOf(11));
 
 				user.getDoubleZhuiCards().add(Integer.valueOf(11));
-				send = true;
+				// send = true;
 			}
 			if (ftCount != null && ftCount == 2 && ddCount == null) {
 				user.getNoChuCards().add(Integer.valueOf(56));
 				user.getNoChuCards().add(Integer.valueOf(56));
 
 				user.getDoubleZhuiCards().add(Integer.valueOf(56));
-				send = true;
+				// send = true;
 			}
 			if (ddCount != null && ddCount == 2 && ftCount == null) {
 				user.getNoChuCards().add(Integer.valueOf(12));
 				user.getNoChuCards().add(Integer.valueOf(12));
 
 				user.getDoubleZhuiCards().add(Integer.valueOf(12));
-				send = true;
+				// send = true;
 			}
 		}
-		if (send && !isDealCard) {// 发牌先不发该通知，发完后再通知
+		if (!isDealCard) {// send && 发牌先不发该通知，发完后再通知
 			// 发送不能出牌的通知消息
 			NotifyHandler.notifyDeathCardList(user);
 		}
@@ -1659,32 +1671,42 @@ public class CardManager {
 	 */
 	public static void removeDeathCard(int card, User user) {
 		List<Integer> cards = user.getNoChuCards();
+		List<Integer> newCards = new ArrayList<>();
+		newCards.addAll(cards);
 		boolean bool = false;
 		for (int i = 0; i < cards.size(); i++) {
 			if (card == cards.get(i)) {
-				cards.remove(i);
+				newCards.remove(Integer.valueOf(card));
 				bool = true;
 				break;
 			}
 		}
 		if (bool) {
-			user.setNoChuCards(cards);
+			user.setNoChuCards(newCards);
 			// 发送不能出牌的通知消息
 			NotifyHandler.notifyDeathCardList(user);
 		}
 	}
 
+	/**
+	 * 南充西充同点数吃退
+	 * 
+	 * @param card
+	 * @param user
+	 */
 	public static void removeDeathCardNCXC(int card, User user) {
 		List<Integer> cards = user.getNoChuCards();
+		List<Integer> newCards = new ArrayList<>();
+		newCards.addAll(cards);
 		boolean bool = false;
 		for (int i = 0; i < cards.size(); i++) {
 			if (card == cards.get(i)) {
-				cards.remove(i);
+				newCards.remove(Integer.valueOf(card));
 				bool = true;
 			}
 		}
 		if (bool) {
-			user.setNoChuCards(cards);
+			user.setNoChuCards(newCards);
 			// 发送不能出牌的通知消息
 			NotifyHandler.notifyDeathCardList(user);
 		}

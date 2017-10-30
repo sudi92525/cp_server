@@ -99,11 +99,15 @@ public class GameAction extends AbsAction {
 				} else if (actionType == ENActionType.EN_ACTION_PENG_VALUE) {
 					room.setChe(true);
 					room.setChoiceChe(true);
-					room.getCanHuSeat().remove(
-							Integer.valueOf(user.getSeatIndex()));
+					if (room.getCanHuSeat().contains(user.getSeatIndex())) {
+						room.getCanHuSeat().remove(
+								Integer.valueOf(user.getSeatIndex()));
+					}
 					if (room.canCheNow()) {
 						// 无人胡了,也无人将要胡: 执行扯
 						che(user, room);
+					} else {
+						maxPriority(room, room.getCurrentCard());
 					}
 				} else if (actionType == ENActionType.EN_ACTION_CHI_VALUE) {// 杠,碰(只可能在一家)
 					room.getChiChoices().put(user.getSeatIndex(), true);
@@ -218,8 +222,8 @@ public class GameAction extends AbsAction {
 		// ---10.23----jia:西充南充同点数吃退
 		if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_NC_VALUE
 				|| room.getRoomType() == ENRoomType.EN_ROOM_TYPE_XC_VALUE) {
-			List<Integer> sameList = CardManager.getSameCards(destCard
-					.getCardValue());
+			List<Integer> sameList = CardManager
+					.getSameCards(destCard.getNum());
 			for (Integer integer : sameList) {
 				if (!user.getDouble7s().contains(integer)) {
 					CardManager.removeDeathCardNCXC(integer, user);
@@ -451,13 +455,13 @@ public class GameAction extends AbsAction {
 		CardManager.removeCardOfHold(user, destCard.getNum());
 		CardManager.removeCardOfHold(user, destCard.getNum());
 
-		if (user.getDouble7s().contains(destCard.getNum())) {
+		if (user.getDouble7s().contains(Integer.valueOf(destCard.getNum()))) {
 			user.getDouble7s().remove(Integer.valueOf(destCard.getNum()));
 			// 将一对七从死牌列表删除
 			user.getNoChuCards().remove(Integer.valueOf(destCard.getNum()));
 			user.getNoChuCards().remove(Integer.valueOf(destCard.getNum()));
 			NotifyHandler.notifyDeathCardList(user);
-		} else if (user.getDoubleZhuiCards().contains(destCard.getNum())) {
+		} else if (user.getDoubleZhuiCards().contains(Integer.valueOf(destCard.getNum()))) {
 			user.getDoubleZhuiCards()
 					.remove(Integer.valueOf(destCard.getNum()));
 			// 将一对七从死牌列表删除
@@ -784,7 +788,7 @@ public class GameAction extends AbsAction {
 		if (room.getActionRecord().size() == room.getCanActionSeat().size()) {
 			boolean have = false;// 过了后有其他人执行
 			Map<Integer, Boolean> huChoices = room.getHuChoices();
-			if (!room.getHuChoices().isEmpty()) {
+			if (!huChoices.isEmpty()) {
 				for (int i = 0; i < 4; i++) {
 					int seat = currentCard.getSeat() + i;
 					if (seat > 4) {

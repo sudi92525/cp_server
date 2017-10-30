@@ -42,14 +42,14 @@ public class NCTest extends TestCase {
 		}
 		RoomManager.shuffle(room);
 		for (Integer card : room.getResetCards()) {
-			System.out.println("card:" + card);
+			// System.out.println("card:" + card);
 		}
 		System.out.println("card size=" + room.getResetCards().size());
 
 		for (User user : room.getUsers().values()) {
-			System.out.println("user hold:");
+			// System.out.println("user hold:");
 			for (Integer card : user.getHold()) {
-				System.out.println("card:" + card);
+				// System.out.println("card:" + card);
 			}
 		}
 		int fan = (int) Math.pow(2, 0);
@@ -203,11 +203,25 @@ public class NCTest extends TestCase {
 		int hh2 = Integer.valueOf(str);
 		System.out.println("byte to int:" + hh2);
 	}
+<<<<<<< HEAD
 
 	public void testDate() {
 		Calendar c = Calendar.getInstance();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String dateStr = sdf.format(c.getTime());
 		System.out.println("date string=" + dateStr);
+=======
+	
+	public void testList(){
+		List<Integer> list = new ArrayList<>();
+		list.add(5);
+		list.add(2);
+		for (int i = 0; i < list.size(); i++) {
+			if(list.get(i)==5){
+				list.remove(i);
+			}
+		}
+		System.out.println("list size:" + list.size());
+>>>>>>> aliyun
 	}
 }
