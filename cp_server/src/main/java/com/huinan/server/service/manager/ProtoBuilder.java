@@ -47,6 +47,10 @@ public class ProtoBuilder {
 				.get(Integer.valueOf(destCard.getSeat()));
 		if (destUser != null) {
 			deal.setTilesOnHandNum(destUser.getHold().size());
+			boolean kou = CardManager.isKou(room, destUser);
+			if (kou) {
+				deal.setIsKou(kou);
+			}
 		}
 		return deal;
 	}
@@ -249,7 +253,10 @@ public class ProtoBuilder {
 		}
 		if (type.getNumber() == ENActionType.EN_ACTION_NO_CHU_VALUE) {
 			action.addAllDeathCard(user.getNoChuCards());
+		} else if (type.getNumber() == ENActionType.EN_ACTION_KOU_LIST_VALUE) {
+			action.addAllKouCardList(user.getKou());
 		}
+
 		action.setIsChu(isChuPai);
 
 		if (zhaoType != null) {
@@ -286,7 +293,15 @@ public class ProtoBuilder {
 		} else {
 		}
 		huBrand.addAllColInfo(user.getOpen());
+		// List<Integer> list = new ArrayList<>();
+		// list.addAll(user.getHold());
+		// for (Integer integer : user.getKou()) {
+		// if (list.contains(integer)) {
+		// list.remove(integer);
+		// }
+		// }
 		huBrand.addAllTilesOnHand(user.getHold());
+		huBrand.addAllKouList(user.getKou());
 		huBrand.setTuoNum(user.getHuTuoNum());
 		huBrand.setFanNum(user.getHuFanNum());
 		return huBrand.build();

@@ -79,12 +79,15 @@ public class GameAction extends AbsAction {
 				dang(user, room, actionType);
 				sendResponse(user, msg, response);
 			} else if (actionType == ENActionType.EN_ACTION_KOU_VALUE) {// 偷牌
-				kou(user, room, req);
+				kou(user, room, false);
 				sendResponse(user, msg, response);
 			} else {// 打牌操作:胡,扯,吃,过
 				response.setAction(ProtoBuilder.buildPBAction(user,
 						ENActionType.valueOf(actionType),
 						room.getCurrentCard(), null, false, null, null));
+				if (user.getActions().contains(ENActionType.EN_ACTION_KOU)) {
+					response.setGuoType(ENActionType.EN_ACTION_KOU);
+				}
 				sendResponse(user, msg, response);
 				// 记录玩家操作,等待所有可胡玩家操作
 				room.getActionRecord().put(user.getSeatIndex(), actionType);
@@ -137,25 +140,36 @@ public class GameAction extends AbsAction {
 	 * 
 	 * @param user
 	 * @param room
-	 * @param req
 	 */
-	private void kou(User user, Room room, CSRequestDoAction req) {
+	public static void kou(User user, Room room, boolean isAnto) {
 		// TODO 扯牌时已经加入了手牌列表了
 		user.getKou().add(room.getCurrentCard().getNum());
-
+		if (user.getNoCheCards().contains(
+				Integer.valueOf(room.getCurrentCard().getNum()))) {
+			user.getNoCheCards().remove(
+					Integer.valueOf(room.getCurrentCard().getNum()));
+		}
+		if (user.getNoChiCards().contains(room.getCurrentCard().getNum())) {
+			user.getNoChiCards().remove(
+					Integer.valueOf(room.getCurrentCard().getNum()));
+		}
 		Builder columnInfo = ProtoBuilder.buildPBColumnInfo(user,
 				user.getKou(), ENColType.EN_COL_TYPE_KOU, false);
 		// 通知其他玩家
-		NotifyHandler.notifyActionFlow(room, user, null, columnInfo.build(),
-				ENActionType.EN_ACTION_KOU, false);
+		NotifyHandler.notifyActionFlow(room, user, room.getCurrentCard(),
+				columnInfo.build(), ENActionType.EN_ACTION_KOU, false);
 
-		// 计算可操作的玩家操作列表
-		CardManager.logicUserActionList(room, room.getCurrentCard(), user,
-				user.isFive(), true);
-		// 无人操作,则出牌
-		if (room.getCanActionSeat().isEmpty()) {
-			// 出牌推送
-			CardManager.checkBaoZiOrChuPai(room, user);
+		if (!isAnto) {
+			user.getActions().clear();
+			room.getCanActionSeat().clear();
+			// 计算可操作的玩家操作列表
+			CardManager.logicUserActionList(room, room.getCurrentCard(), user,
+					user.isFive(), true);
+			// 无人操作,则出牌
+			if (room.getCanActionSeat().isEmpty()) {
+				// 出牌推送
+				CardManager.checkBaoZiOrChuPai(room, user);
+			}
 		}
 	}
 
@@ -535,10 +549,11 @@ public class GameAction extends AbsAction {
 		// 位置推送
 		NotifyHandler.notifyNextOperation(room, user);
 		int count = CardManager.getCardCountOfAll(user, destCard.getNum());
-		if (count == 3) {
-			// NotifyHandler.notifyActionFlow(room, user, destCard, null,
-			// ENActionType.EN_ACTION_CHIKAN, false);
-		} else if (count == 4) {
+		// if (count == 3) {
+		// NotifyHandler.notifyActionFlow(room, user, destCard, null,
+		// ENActionType.EN_ACTION_CHIKAN, false);
+		// } else
+		if (count == 4) {
 			NotifyHandler.notifyActionFlow(room, user, destCard, null,
 					ENActionType.EN_ACTION_HU_SIGEN, false);
 		} else {
@@ -572,9 +587,7 @@ public class GameAction extends AbsAction {
 		// 更新当前手牌信息
 		List<Integer> hold = user.getHold();
 		newHold.addAll(hold);
-		if (isInKou) {
-			user.getKou().remove(Integer.valueOf(destCard.getNum()));
-		}
+
 		hold.remove(Integer.valueOf(destCard.getNum()));
 
 		user.getChuCards().add(destCard.getNum());
@@ -592,6 +605,10 @@ public class GameAction extends AbsAction {
 
 		NotifyHandler.notifyActionFlow(room, user, room.getCurrentCard(), null,
 				ENActionType.EN_ACTION_CHUPAI, true);
+		if (isInKou) {
+			user.getKou().remove(Integer.valueOf(destCard.getNum()));
+			NotifyHandler.notifyKouCardList(user);
+		}
 		CardManager.noChuDouble7AndDiaoZhui(room, user, false);
 		// 通知所有玩家，该玩家出了一张牌
 		int count = CardManager.getCardCountOfChu(user, destCard.getNum());
@@ -831,7 +848,6 @@ public class GameAction extends AbsAction {
 					}
 				}
 			}
-
 			// TODO 点过后,就执行了,,被人抢了:不加入死牌,自己优先级最高,加入不能出,,什么的列表
 			if (!have) {
 				// 都没人要,把牌加入能吃玩家的不能吃列表
@@ -848,6 +864,35 @@ public class GameAction extends AbsAction {
 						null, ENActionType.EN_ACTION_UNKNOWN, true);
 				// 通知位置(下一家),拿牌
 				RoomManager.naPai(room);
+			}
+		} else {
+			// TODO 胡，扯，吃，胡的点过，扯得点扯，会卡住等吃的人
+			for (User user : room.getUsers().values()) {
+				Integer type = room.getActionRecord().get(user.getSeatIndex());
+				if (type != null && !user.getActions().isEmpty()) {
+					if (user.getActions().contains(ENActionType.EN_ACTION_HU)
+							&& type == ENActionType.EN_ACTION_HU_VALUE
+							&& room.getHuChoices().get(user.getSeatIndex())
+							&& room.canHuNow(user)) {
+						hu(user, room);
+						break;
+					} else if (user.getActions().contains(
+							ENActionType.EN_ACTION_PENG)
+							&& type == ENActionType.EN_ACTION_PENG_VALUE
+							&& room.getCanCheSeat() == user.getSeatIndex()
+							&& room.isChe()
+							&& room.isChoiceChe()
+							&& room.canCheNow()) {
+						che(user, room);
+						break;
+					} else if (user.getActions().contains(
+							ENActionType.EN_ACTION_CHI)
+							&& room.getChiChoices().get(user.getSeatIndex())
+							&& room.canChiNow(user)) {
+						chi(user, room);
+						break;
+					}
+				}
 			}
 		}
 	}
@@ -972,6 +1017,27 @@ public class GameAction extends AbsAction {
 		boolean dou14 = CardManager.checkDou14(newHold);
 		boolean tuoNumGou = CardManager.checkTuoNum(room, user, newHold);
 		if (dou14 && tuoNumGou) {
+			boolean baoZi = true;
+			newHold.remove(Integer.valueOf(34));
+			Map<Integer, Integer> holdMap = CardManager.toMap(newHold);
+			Map<Integer, Integer> noChuMap = CardManager.toMap(user
+					.getNoChuCards());
+			for (Integer integer : user.getHold()) {
+				Integer _holdNum = holdMap.get(integer);
+				Integer _noChuNum = noChuMap.get(integer);
+				if (_noChuNum == null || _holdNum > _noChuNum) {
+					baoZi = false;
+					break;
+				}
+			}
+			if (baoZi) {
+				LOGGER.info("不能下七点的叫，其他全是死牌，包子");
+				room.setHuSeat(user.getSeatIndex());
+				user.setBaoZi(true);
+				user.setHuType(4);
+				room.setBaoZiSeat(user.getSeatIndex());
+				RoomManager.total(room);
+			}
 			return ENMessageError.RESPONSE_NOT_CAN_XIA_JIAO_7_VALUE;// 不能在七点上转叫
 		}
 		return 0;

@@ -116,7 +116,7 @@ public class UserManager {
 		} catch (SQLException e) {
 			LOGGER.error("user db error:", e);
 		} finally {
-			DBManager.getInstance().closeConnection(conn);
+			 DBManager.getInstance().closeConnection(conn);
 			DBManager.getInstance().closeStatement(sta);
 			DBManager.getInstance().closeResultSet(rs);
 		}
@@ -161,7 +161,7 @@ public class UserManager {
 			} catch (SQLException e) {
 				LOGGER.error("user db error:", e);
 			} finally {
-				DBManager.getInstance().closeConnection(conn);
+				 DBManager.getInstance().closeConnection(conn);
 				DBManager.getInstance().closeStatement(sta);
 				DBManager.getInstance().closeResultSet(rs);
 			}
@@ -183,7 +183,7 @@ public class UserManager {
 			} catch (SQLException e) {
 				LOGGER.error("user db error:", e);
 			} finally {
-				DBManager.getInstance().closeConnection(conn);
+				 DBManager.getInstance().closeConnection(conn);
 				DBManager.getInstance().closeStatement(sta);
 			}
 		});
@@ -242,7 +242,7 @@ public class UserManager {
 			} catch (SQLException e) {
 				LOGGER.error("user db error:", e);
 			} finally {
-				DBManager.getInstance().closeConnection(conn);
+				 DBManager.getInstance().closeConnection(conn);
 				DBManager.getInstance().closeStatement(sta);
 				DBManager.getInstance().closeResultSet(rs);
 			}

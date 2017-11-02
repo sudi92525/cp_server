@@ -72,6 +72,7 @@ enum ENActionType
 	EN_ACTION_NEXT = 24;							//位置（闹钟）
 	EN_ACTION_DEAL = 25;							//摸牌或翻牌
 	EN_ACTION_KOU = 26;								//扣一个（苍溪招的牌和吃退的牌）
+	EN_ACTION_KOU_LIST = 27;						//通知扣牌数量变化
 }
 
 enum ENChatType
@@ -124,14 +125,15 @@ message PBAction
 	repeated PBColumnInfo col_info = 4;				// 列组合
 	optional int32 dest_index = 5;					// 目标牌来自的座位号
 	optional bool is_fan = 6;						// 目标牌是否翻开
-	repeated int32 death_card = 7;					//死牌即不能出的牌
-	optional bool is_chu = 8;						//是否是出牌
+	repeated int32 death_card = 7;					// 死牌即不能出的牌
+	optional bool is_chu = 8;						// 是否是出牌
 	optional ENZhaoType zhao_type = 9;				// 玩家点击招的类型
 	repeated ENZhaoType zhao_list = 10;				// 可招的类型列表
 	repeated int32 piao_list = 11;					// 漂了的玩家座位号
 	
 	optional int32 left_card_num = 12; 				//剩余牌数量
-	optional int32 tiles_on_hand_num = 13;				//当前手牌张数
+	optional int32 tiles_on_hand_num = 13;			//当前手牌张数
+	repeated int32 kou_card_list = 14;				//扣牌列表
 }
 
 //手牌信息
@@ -346,6 +348,7 @@ message CSResponseDoAction
 	optional ENMessageError result = 1;
 	optional PBAction action = 2;
 	optional int32 tiles_on_hand_num = 3;			//当前手牌张数
+	optional ENActionType guo_type = 4;				//扣牌时点过返回类型
 }
 
 // 通知该谁操作选择（当系统出现一张牌后，判断有谁可碰或吃等操作）
@@ -386,6 +389,7 @@ message CSNotifyNextOperation
 message UserBrand{
 	optional int32 seat_index = 1;					//座位信息
 	repeated int32 tiles_on_hand = 2;				//手牌信息
+	repeated int32 kou_list = 3;					//扣牌列表
 }
 
 message HuUserBrand{
@@ -396,6 +400,7 @@ message HuUserBrand{
 	optional int32 dest_index = 5;					//目标牌来自的座位号
 	optional int32 tuo_num = 6;						//坨数
 	optional int32 fan_num = 7;						//翻数
+	repeated int32 kou_list = 8;					//扣牌列表
 }
 
 //小结算

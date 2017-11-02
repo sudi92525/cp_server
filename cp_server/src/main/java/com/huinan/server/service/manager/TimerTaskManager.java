@@ -59,10 +59,12 @@ public class TimerTaskManager {
 						int ncNum = 0;
 						int xcNum = 0;
 						int myNum = 0;
+						int cxNum = 0;
 						int gyPlayNum = 0;
 						int ncPlayNum = 0;
 						int xcPlayNum = 0;
 						int myPlayNum = 0;
+						int cxPlayNum = 0;
 						for (Room room : RoomManager.getRooms().values()) {
 							if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_GY_VALUE) {
 								gyNum++;
@@ -72,10 +74,11 @@ public class TimerTaskManager {
 								xcNum++;
 							} else if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_MY_VALUE) {
 								myNum++;
+							} else if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX_VALUE) {
+								cxNum++;
 							}
 							if (room.isStart() && room.getUsers().size() == 4) {
 								playRoomNum++;
-
 								if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_GY_VALUE) {
 									gyPlayNum++;
 								} else if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_NC_VALUE) {
@@ -84,23 +87,24 @@ public class TimerTaskManager {
 									xcPlayNum++;
 								} else if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_MY_VALUE) {
 									myPlayNum++;
+								} else if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX_VALUE) {
+									cxPlayNum++;
 								}
 							}
 						}
-						LOGGER.info("------1---client:"
+						LOGGER.info("---1---client:"
 								+ GameSvrHandlerMgr.getInstance()
 										.getCurrentClientsNum()
 								+ ",online players="
 								+ GameSvrPlayerManager.getPlayers().size()
 								+ ",all rooms=" + RoomManager.getRooms().size()
 								+ ",playing rooms=" + playRoomNum);
-						LOGGER.info("------2---GY room:" + gyNum + ",NC room:"
-								+ ncNum + ",XC room:"
-										+ xcNum+ ",MY room:" + myNum);
-						LOGGER.info("------3---GY playing room:" + gyPlayNum
-								+ ",NC playing room:" + ncPlayNum
-								+ ",XC playing room:" + xcPlayNum
-								+ ",MY playing room:" + myPlayNum);
+						LOGGER.info("---2---room,GY:" + gyNum + ",NC:" + ncNum
+								+ ",XC:" + xcNum + ",MY:" + myNum + ",CX:"
+								+ cxNum);
+						LOGGER.info("---3---playing room,GY:" + gyPlayNum
+								+ ",NC:" + ncPlayNum + ",XC:" + xcPlayNum
+								+ ",MY:" + myPlayNum + ",CX:" + cxPlayNum);
 						LogicQueueManager.getInstance().log();
 					}
 

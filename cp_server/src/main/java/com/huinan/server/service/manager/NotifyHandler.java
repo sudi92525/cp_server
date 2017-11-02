@@ -9,6 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import com.huinan.proto.CpMsg.CpHead;
 import com.huinan.proto.CpMsg.CpMsgData;
 import com.huinan.proto.CpMsgCs.CSNotifyActionFlow;
+import com.huinan.proto.CpMsgCs.CSNotifyGameStart;
 import com.huinan.proto.CpMsgCs.CSNotifyIsOnline;
 import com.huinan.proto.CpMsgCs.CSNotifyNextOperation;
 import com.huinan.proto.CpMsgCs.CSNotifyNotice;
@@ -20,6 +21,7 @@ import com.huinan.proto.CpMsgCs.ENActionType;
 import com.huinan.proto.CpMsgCs.ENZhaoType;
 import com.huinan.proto.CpMsgCs.PBAction;
 import com.huinan.proto.CpMsgCs.PBColumnInfo;
+import com.huinan.proto.CpMsgCs.PBTableSeat;
 import com.huinan.server.db.UserManager;
 import com.huinan.server.net.GamePlayer;
 import com.huinan.server.net.GameSvrPlayerManager;
@@ -35,6 +37,32 @@ public class NotifyHandler {
 
 	public static void sendResponse(String uid, int cmd, Object msg) {
 		notifyOne(uid, cmd, msg);
+	}
+
+	public static void notifyGameStart(Room room,
+			CSNotifyGameStart.Builder gameStart) {
+		List<PBTableSeat> seatList = gameStart.getSeatsList();
+		CSNotifyGameStart.Builder newGameStart = CSNotifyGameStart
+				.newBuilder(gameStart.build());
+		for (User user : room.getUsers().values()) {
+			List<PBTableSeat> newSeats = new ArrayList<>();
+			for (PBTableSeat pbTableSeat : seatList) {
+				if (pbTableSeat.getSeatIndex() != user.getSeatIndex()) {
+					PBTableSeat.Builder seat = pbTableSeat.toBuilder();
+					seat.clearTilesOnHand();
+					newSeats.add(seat.build());
+				} else {
+					newSeats.add(pbTableSeat);
+				}
+			}
+			CpMsgData.Builder msg = CpMsgData.newBuilder();
+			newGameStart.clearSeats();
+			newGameStart.addAllSeats(newSeats);
+			msg.setCsNotifyGameStart(newGameStart);
+
+			notifyOne(user.getUuid(),
+					CpMsgData.CS_NOTIFY_GAME_START_FIELD_NUMBER, msg.build());
+		}
 	}
 
 	public static void notifyOpenTouPai(Room room) {
@@ -78,6 +106,22 @@ public class NotifyHandler {
 				pbActions));
 		notifyOne(user.getUuid(),
 				CpMsgData.CS_NOTIFY_SEAT_OPERATION_CHOICE_FIELD_NUMBER,
+				msg.build());
+	}
+
+	public static void notifyKouCardList(User user) {
+		if (user.isFive()) {
+			user.getKou().clear();
+			return;
+		}
+		CpMsgData.Builder msg = CpMsgData.newBuilder();
+		CSNotifyActionFlow.Builder flow = CSNotifyActionFlow.newBuilder();
+		flow.setAction(ProtoBuilder.buildPBAction(user,
+				ENActionType.EN_ACTION_KOU_LIST, null, null, false, null, null));
+		UserUtils.setPlayBackData(user, flow);
+
+		msg.setCsNotifyActionFlow(flow);
+		notifyOne(user.getUuid(), CpMsgData.CS_NOTIFY_ACTION_FLOW_FIELD_NUMBER,
 				msg.build());
 	}
 
@@ -319,4 +363,5 @@ public class NotifyHandler {
 					onlineMsg.build());
 		}
 	}
+
 }

@@ -418,36 +418,33 @@ public class RoomManager {
 
 		// TODO 写死牌
 		// if (room.getRound() > 1) {
-//		for (int i = 0; i < 4; i++) {
-//			int num = CardManager.BRAND_NUMFOUR[i];
-//			User user = room.getUsers().get(seat);
-//			user.setReady(false);
-//			for (int j = 0; j < num; j++) {
-//				int card = room.getFirstCard();
-//				user.getHold().add(card);
-//			}
-//			if (!user.isFive()) {
-//				user.getCanChiHoldCards().clear();
-//				user.getCanChiHoldCards().addAll(user.getHold());
-//			}
-//			CardManager.noChuDouble7AndDiaoZhui(room, user, true);
-//			seat = RoomManager.getNextSeat(seat);
-//		}
+		for (int i = 0; i < 4; i++) {
+			int num = CardManager.BRAND_NUMFOUR[i];
+			User user = room.getUsers().get(seat);
+			user.setReady(false);
+			for (int j = 0; j < num; j++) {
+				int card = room.getFirstCard();
+				user.getHold().add(card);
+			}
+			if (!user.isFive()) {
+				user.getCanChiHoldCards().clear();
+				user.getCanChiHoldCards().addAll(user.getHold());
+			}
+			CardManager.noChuDouble7AndDiaoZhui(room, user, true);
+			seat = RoomManager.getNextSeat(seat);
+		}
 		// }
 		// TODO 写死牌
 		// if (room.getRound() == 1) {
-		 dealSiPai(room, seat);
+		// dealSiPai(room, seat);
 		// }
 
 		room.setFirstCard(true);
 		room.setStepIsPlay(true);
 		// 游戏开始推送
-		CpMsgData.Builder msg = CpMsgData.newBuilder();
-		CSNotifyGameStart.Builder sysBrand = ProtoBuilder.buildGameStart(room);
-		room.setGameStart(sysBrand.build());
-		msg.setCsNotifyGameStart(sysBrand);
-		NotifyHandler.notifyAll(room,
-				CpMsgData.CS_NOTIFY_GAME_START_FIELD_NUMBER, msg.build());
+		CSNotifyGameStart.Builder gameStart = ProtoBuilder.buildGameStart(room);
+		room.setGameStart(gameStart.build());
+		NotifyHandler.notifyGameStart(room, gameStart);
 		// 死牌通知
 		for (User user : room.getUsers().values()) {
 			if (!user.getNoChuCards().isEmpty()) {
@@ -1076,6 +1073,7 @@ public class RoomManager {
 			room.setCurrentCard(cardObj);
 			user.setMoPai(true);
 			int resetCardCount = room.getResetCards().size();
+			user.getHold().add(card);// 加入手牌
 			NotifyHandler.notifyDealCard(room, cardObj, resetCardCount);
 
 			huang = checkHuang(room, user, cardObj, resetCardCount);
@@ -1084,7 +1082,7 @@ public class RoomManager {
 				break;
 			}
 			room.clearCurrentInfo();
-			user.getHold().add(card);// 加入手牌
+
 			// 五张不报不招
 			if (!user.isFive()) {
 				// 一对七点置灰
@@ -1426,7 +1424,8 @@ public class RoomManager {
 		if (room.getRound() == 1) {
 			int userType = room.getRoomTable().getUseCardType();
 			int allRoomCardNum = 0;
-			if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_MY_VALUE) {
+			if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_MY_VALUE
+					|| room.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX_VALUE) {
 				allRoomCardNum = 0;
 			} else {
 				allRoomCardNum = ERoomCardCost.getRoomCardCost(room
@@ -1503,7 +1502,15 @@ public class RoomManager {
 					if (!_user.getUuid().equals(user.getUuid())) {
 						UserBrand.Builder userBrand = UserBrand.newBuilder();
 						userBrand.setSeatIndex(_user.getSeatIndex());
+						// List<Integer> list = new ArrayList<>();
+						// list.addAll(_user.getHold());
+						// for (Integer integer : _user.getKou()) {
+						// if (list.contains(integer)) {
+						// list.remove(integer);
+						// }
+						// }
 						userBrand.addAllTilesOnHand(_user.getHold());
+						userBrand.addAllKouList(_user.getKou());
 						roundResult.addUserBrand(userBrand);
 					}
 				}
