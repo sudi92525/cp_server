@@ -1011,35 +1011,37 @@ public class GameAction extends AbsAction {
 		}
 
 		// 苍溪判断是否出了该牌就是割七点
-		List<Integer> newHold = new ArrayList<>();
-		newHold.addAll(user.getHold());
-		newHold.remove(Integer.valueOf(card));
-		newHold.add(Integer.valueOf(34));
-		boolean dou14 = CardManager.checkDou14(newHold);
-		boolean tuoNumGou = CardManager.checkTuoNum(room, user, newHold);
-		if (dou14 && tuoNumGou) {
-			boolean baoZi = true;
-			newHold.remove(Integer.valueOf(34));
-			Map<Integer, Integer> holdMap = CardManager.toMap(newHold);
-			Map<Integer, Integer> noChuMap = CardManager.toMap(user
-					.getNoChuCards());
-			for (Integer integer : user.getHold()) {
-				Integer _holdNum = holdMap.get(integer);
-				Integer _noChuNum = noChuMap.get(integer);
-				if (_noChuNum == null || _holdNum > _noChuNum) {
-					baoZi = false;
-					break;
+		if (!user.isFive()) {
+			List<Integer> newHold = new ArrayList<>();
+			newHold.addAll(user.getHold());
+			newHold.remove(Integer.valueOf(card));
+			newHold.add(Integer.valueOf(34));
+			boolean dou14 = CardManager.checkDou14(newHold);
+			boolean tuoNumGou = CardManager.checkTuoNum(room, user, newHold);
+			if (dou14 && tuoNumGou) {
+				boolean baoZi = true;
+				newHold.remove(Integer.valueOf(34));
+				Map<Integer, Integer> holdMap = CardManager.toMap(newHold);
+				Map<Integer, Integer> noChuMap = CardManager.toMap(user
+						.getNoChuCards());
+				for (Integer integer : user.getHold()) {
+					Integer _holdNum = holdMap.get(integer);
+					Integer _noChuNum = noChuMap.get(integer);
+					if (_noChuNum == null || _holdNum > _noChuNum) {
+						baoZi = false;
+						break;
+					}
 				}
+				if (baoZi) {
+					LOGGER.info("不能下七点的叫，其他全是死牌，包子");
+					room.setHuSeat(user.getSeatIndex());
+					user.setBaoZi(true);
+					user.setHuType(4);
+					room.setBaoZiSeat(user.getSeatIndex());
+					RoomManager.total(room);
+				}
+				return ENMessageError.RESPONSE_NOT_CAN_XIA_JIAO_7_VALUE;// 不能在七点上转叫
 			}
-			if (baoZi) {
-				LOGGER.info("不能下七点的叫，其他全是死牌，包子");
-				room.setHuSeat(user.getSeatIndex());
-				user.setBaoZi(true);
-				user.setHuType(4);
-				room.setBaoZiSeat(user.getSeatIndex());
-				RoomManager.total(room);
-			}
-			return ENMessageError.RESPONSE_NOT_CAN_XIA_JIAO_7_VALUE;// 不能在七点上转叫
 		}
 		return 0;
 	}
