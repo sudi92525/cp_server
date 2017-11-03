@@ -741,6 +741,7 @@ public class RoomManager {
 					if (user.getKou().contains(card)) {
 						user.getKou().remove(card);
 						user.getKou().remove(card);
+						NotifyHandler.notifyKouCardList(room, user);
 					}
 					user.getHold().removeAll(cards);
 					for (int i = 0; i < cards.size() - 1; i++) {

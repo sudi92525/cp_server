@@ -109,7 +109,12 @@ public class NotifyHandler {
 				msg.build());
 	}
 
-	public static void notifyKouCardList(User user) {
+	/**
+	 * 扣牌列表改变
+	 * 
+	 * @param user
+	 */
+	public static void notifyKouCardList(Room room, User user) {
 		if (user.isFive()) {
 			user.getKou().clear();
 			return;
@@ -121,7 +126,7 @@ public class NotifyHandler {
 		UserUtils.setPlayBackData(user, flow);
 
 		msg.setCsNotifyActionFlow(flow);
-		notifyOne(user.getUuid(), CpMsgData.CS_NOTIFY_ACTION_FLOW_FIELD_NUMBER,
+		notifyAll(room, CpMsgData.CS_NOTIFY_ACTION_FLOW_FIELD_NUMBER,
 				msg.build());
 	}
 

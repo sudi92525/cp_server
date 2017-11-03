@@ -1924,6 +1924,8 @@ public class CardManager {
 		user.setHold(holdTemp);
 		if (user.getKou().contains(Integer.valueOf(card))) {
 			user.getKou().remove(Integer.valueOf(card));
+			Room room = RoomManager.getInstance().getRoom(user.getRoomId());
+			NotifyHandler.notifyKouCardList(room, user);
 		}
 	}
 

@@ -142,7 +142,6 @@ public class GameAction extends AbsAction {
 	 * @param room
 	 */
 	public static void kou(User user, Room room, boolean isAnto) {
-		// TODO 扯牌时已经加入了手牌列表了
 		user.getKou().add(room.getCurrentCard().getNum());
 		if (user.getNoCheCards().contains(
 				Integer.valueOf(room.getCurrentCard().getNum()))) {
@@ -158,6 +157,8 @@ public class GameAction extends AbsAction {
 		// 通知其他玩家
 		NotifyHandler.notifyActionFlow(room, user, room.getCurrentCard(),
 				columnInfo.build(), ENActionType.EN_ACTION_KOU, false);
+
+		NotifyHandler.notifyKouCardList(room, user);
 
 		if (!isAnto) {
 			user.getActions().clear();
@@ -607,7 +608,7 @@ public class GameAction extends AbsAction {
 				ENActionType.EN_ACTION_CHUPAI, true);
 		if (isInKou) {
 			user.getKou().remove(Integer.valueOf(destCard.getNum()));
-			NotifyHandler.notifyKouCardList(user);
+			NotifyHandler.notifyKouCardList(room, user);
 		}
 		CardManager.noChuDouble7AndDiaoZhui(room, user, false);
 		// 通知所有玩家，该玩家出了一张牌
