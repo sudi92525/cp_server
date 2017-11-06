@@ -185,6 +185,8 @@ public class Room implements Serializable {
 		}
 		if (this.jiaFan34) {
 			fanPais.add(34);
+		} else if (this.roomType == ENRoomType.EN_ROOM_TYPE_CX_VALUE) {
+			fanPais.add(34);
 		}
 		if (roomType == ENRoomType.EN_ROOM_TYPE_NC_VALUE) {
 			dingFuShuaiTimes = false;
