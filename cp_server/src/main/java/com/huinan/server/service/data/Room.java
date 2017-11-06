@@ -103,6 +103,8 @@ public class Room implements Serializable {
 	private boolean jiaFan34;
 	/** 是否18烂 */
 	private boolean lan18;
+	/** 是否可以弯叫 */
+	private boolean wanJiao;
 	// -------------------------------苍溪版本-----------------------------------
 	/** 是否小家有斧头的全红全黑算番 */
 	private boolean fanFiveHave56;
@@ -864,6 +866,14 @@ public class Room implements Serializable {
 
 	public void setFanFiveHave56(boolean fanFiveHave56) {
 		this.fanFiveHave56 = fanFiveHave56;
+	}
+
+	public boolean isWanJiao() {
+		return wanJiao;
+	}
+
+	public void setWanJiao(boolean wanJiao) {
+		this.wanJiao = wanJiao;
 	}
 
 }

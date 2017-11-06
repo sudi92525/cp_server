@@ -194,6 +194,7 @@ message CSRequestCreateTable
 	optional bool is_diao_zhui = 21;					//吊追
 	optional bool is_34_fan = 22;					//34算番
 	optional int32 score = 23;					//底分：1-2-5等等，默认选1
+	optional bool is_wan_jiao = 24;					//是否可以弯叫
 }
 
 //创建房间响应

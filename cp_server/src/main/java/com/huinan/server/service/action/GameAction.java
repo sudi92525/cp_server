@@ -467,7 +467,8 @@ public class GameAction extends AbsAction {
 			user.getNoChuCards().remove(Integer.valueOf(destCard.getNum()));
 			user.getNoChuCards().remove(Integer.valueOf(destCard.getNum()));
 			NotifyHandler.notifyDeathCardList(user);
-		} else if (user.getDoubleZhuiCards().contains(Integer.valueOf(destCard.getNum()))) {
+		} else if (user.getDoubleZhuiCards().contains(
+				Integer.valueOf(destCard.getNum()))) {
 			user.getDoubleZhuiCards()
 					.remove(Integer.valueOf(destCard.getNum()));
 			// 将一对七从死牌列表删除
