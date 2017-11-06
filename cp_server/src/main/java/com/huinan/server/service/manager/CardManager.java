@@ -113,6 +113,18 @@ public class CardManager {
 		return BrandEnums.getCodeNum(cardNum) == 1;
 	}
 
+	public static boolean isHaveCheOrTou(User user) {
+		List<PBColumnInfo> open = user.getOpen();
+		for (PBColumnInfo info : open) {
+			if (info.getColType() == ENColType.EN_COL_TYPE_PENG
+					|| info.getColType() == ENColType.EN_COL_TYPE_LONG
+					|| info.getColType() == ENColType.EN_COL_TYPE_TOU) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	/**
 	 * 判断五张是否是全黑(丁斧两边甩)
 	 * 
@@ -588,6 +600,11 @@ public class CardManager {
 				}
 			}
 			fan += siGenNum;
+		} else if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_XC_VALUE) {
+			if (!isHaveCheOrTou(user) && tuo == 18) {
+				fan = 3;
+				log.info("西充吃成18坨，算" + 3 + "翻");
+			}
 		}
 		if (room.isCheAll7Fan() && che7Num == 3) {
 			fan++;
@@ -1250,6 +1267,25 @@ public class CardManager {
 				} else {
 					if (tuo < Constant.hu_xj_score) {
 						log.info("isHu,false:NC/XC/CX普通家坨数不够18");
+						return false;
+					}
+				}
+			} else if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_XC_VALUE) {
+				if (user.getSeatIndex() == room.getDangSeat()) {// 当家20坨
+					if (!isHaveCheOrTou(user)) {
+						if (tuo < Constant.hu_xj_score) {
+							log.info("isHu,false:XC当家没扯过，坨数不够18");
+							return false;
+						}
+					} else {
+						if (tuo < Constant.hu_zj_score) {
+							log.info("isHu,false:XC当家坨数不够20");
+							return false;
+						}
+					}
+				} else {
+					if (tuo < Constant.hu_xj_score) {
+						log.info("isHu,false:XC普通家坨数不够18");
 						return false;
 					}
 				}
