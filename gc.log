@@ -1,0 +1,17 @@
+Java HotSpot(TM) 64-Bit Server VM (25.144-b01) for windows-amd64 JRE (1.8.0_144-b01), built on Jul 21 2017 21:57:33 by "java_re" with MS VC++ 10.0 (VS2010)
+Memory: 4k page, physical 8388208k(3842276k free), swap 13147516k(6434176k free)
+CommandLine flags: -XX:InitialHeapSize=1048576000 -XX:MaxHeapSize=1048576000 -XX:MaxNewSize=104857600 -XX:NewSize=104857600 -XX:OldPLABSize=16 -XX:+PrintGC -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:SurvivorRatio=1 -XX:+UseCompressedClassPointers -XX:+UseCompressedOops -XX:+UseConcMarkSweepGC -XX:-UseLargePagesIndividualAllocation -XX:+UseParNewGC -XX:-UseParallelGC 
+1.272: [GC (Allocation Failure) 1.273: [ParNew: 34176K->8944K(68288K), 0.0123815 secs] 34176K->8944K(989888K), 0.0125478 secs] [Times: user=0.03 sys=0.00, real=0.02 secs] 
+31.297: [GC (CMS Initial Mark) [1 CMS-initial-mark: 0K(921600K)] 34654K(989888K), 0.0061318 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+31.303: [CMS-concurrent-mark-start]
+31.310: [CMS-concurrent-mark: 0.006/0.006 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+31.310: [CMS-concurrent-preclean-start]
+31.311: [CMS-concurrent-preclean: 0.001/0.001 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+31.311: [CMS-concurrent-abortable-preclean-start]
+ CMS: abort preclean due to time 36.335: [CMS-concurrent-abortable-preclean: 0.866/5.023 secs] [Times: user=0.66 sys=0.00, real=5.03 secs] 
+36.335: [GC (CMS Final Remark) [YG occupancy: 34654 K (68288 K)]36.335: [Rescan (parallel) , 0.0063982 secs]36.341: [weak refs processing, 0.0000293 secs]36.341: [class unloading, 0.0032601 secs]36.344: [scrub symbol table, 0.0029256 secs]36.347: [scrub string table, 0.0004198 secs][1 CMS-remark: 0K(921600K)] 34654K(989888K), 0.0135777 secs] [Times: user=0.02 sys=0.00, real=0.01 secs] 
+36.348: [CMS-concurrent-sweep-start]
+36.348: [CMS-concurrent-sweep: 0.000/0.000 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+36.348: [CMS-concurrent-reset-start]
+36.350: [CMS-concurrent-reset: 0.001/0.001 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+4824.330: [GC (Allocation Failure) 4824.330: [ParNew: 43120K->16466K(68288K), 0.0192341 secs] 43120K->16466K(989888K), 0.0193536 secs] [Times: user=0.03 sys=0.00, real=0.01 secs] 

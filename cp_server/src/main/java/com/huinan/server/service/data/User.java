@@ -198,6 +198,10 @@ public class User implements Serializable {
 	 */
 	private List<Integer> hold = new ArrayList<>();
 	/**
+	 * 扣得牌
+	 */
+	private List<Integer> kou = new ArrayList<>();
+	/**
 	 * 扯吃牌堆<PBColumnInfo>
 	 */
 	private List<PBColumnInfo> open = new ArrayList<>();
@@ -260,6 +264,10 @@ public class User implements Serializable {
 	private boolean feiTian25Pass;
 	/** 是否拿过牌：南充小家没摸过牌可以割任何七点 */
 	private boolean moPai;
+	/** 是否弯叫 */
+	private boolean wanJiao;
+	/** 下叫点数 */
+	private int numJiao;
 	/**
 	 * 回访数据
 	 */
@@ -297,6 +305,7 @@ public class User implements Serializable {
 		this.agreeDissolve = false;
 		this.changeCurrency = 0;
 		this.hold.clear();
+		this.kou.clear();
 		this.canChiHoldCards.clear();
 		this.open.clear();
 		this.noCheCards.clear();
@@ -333,6 +342,8 @@ public class User implements Serializable {
 		this.thisChuIsZhui = false;
 		this.feiTian25Pass = false;
 		this.moPai = false;
+		this.wanJiao = false;
+		this.numJiao = 0;
 		clearCurrentInfo();
 	}
 
@@ -864,6 +875,30 @@ public class User implements Serializable {
 
 	public void setMoPai(boolean moPai) {
 		this.moPai = moPai;
+	}
+
+	public List<Integer> getKou() {
+		return kou;
+	}
+
+	public void setKou(List<Integer> kou) {
+		this.kou = kou;
+	}
+
+	public boolean isWanJiao() {
+		return wanJiao;
+	}
+
+	public void setWanJiao(boolean wanJiao) {
+		this.wanJiao = wanJiao;
+	}
+
+	public int getNumJiao() {
+		return numJiao;
+	}
+
+	public void setNumJiao(int numJiao) {
+		this.numJiao = numJiao;
 	}
 
 }

@@ -1,6 +1,8 @@
 package com.huinan.server;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 
@@ -201,16 +203,32 @@ public class NCTest extends TestCase {
 		int hh2 = Integer.valueOf(str);
 		System.out.println("byte to int:" + hh2);
 	}
+
+	public void testDate() {
+		Calendar c = Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String dateStr = sdf.format(c.getTime());
+		System.out.println("date string=" + dateStr);
+	}
 	
 	public void testList(){
 		List<Integer> list = new ArrayList<>();
 		list.add(5);
+		list.add(5);
 		list.add(2);
+		
+		List<Integer> list2 = new ArrayList<>();
+		list2.add(5);
+		list2.add(2);
+		
+		list.removeAll(list2);
+		
 		for (int i = 0; i < list.size(); i++) {
-			if(list.get(i)==5){
-				list.remove(i);
-			}
+//			if(list.get(i)==5){
+//				list.remove(i);
+//			}
+			System.out.println("remove all :" + list.get(i));
 		}
-		System.out.println("list size:" + list.size());
+		System.out.println("list size :" + list.size());
 	}
 }

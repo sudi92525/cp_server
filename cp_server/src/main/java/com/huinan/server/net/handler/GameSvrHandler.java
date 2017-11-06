@@ -110,8 +110,8 @@ public class GameSvrHandler extends ProtoHandler {
 		}
 		CpHead cpHead = (CpHead) headLite;
 		if (cpHead.getCmd() != CpMsgData.CS_REQUEST_HEART_BEAT_FIELD_NUMBER) {
-			LOGGER.info("cmd:" + cpHead.getCmd() + ",head:"
-					+ headLite.toString() + ",data:" + dataLite.toString());
+			LOGGER.info("uid:" + cpHead.getUid() + ",data:"
+					+ dataLite.toString());
 		}
 		if (cpHead.getCmd() != CpMsgData.CS_REQUEST_LOGIN_FIELD_NUMBER) {
 			GamePlayer player = GameSvrPlayerManager.findPlayerByUID(cpHead
@@ -127,7 +127,6 @@ public class GameSvrHandler extends ProtoHandler {
 		request.setHeadLite(headLite);
 
 		if (cpHead.getCmd() == CpMsgData.CS_REQUEST_HEART_BEAT_FIELD_NUMBER) {
-			// LOGGER.info("----BOOM-----------");
 			HeartBeat heartActor = new HeartBeat();
 			heartActor.Action(request);
 			heartActor = null;

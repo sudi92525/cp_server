@@ -60,7 +60,7 @@ public class GameAction extends AbsAction {
 						ENActionType.EN_ACTION_CHUPAI, destCard, null, true,
 						null, null));
 				sendResponse(user, msg, response);
-				chu(user, room, destCard);
+				chu(user, room, destCard, req.getChuCardIsKou());
 			} else if (actionType == ENActionType.EN_ACTION_TUI_VALUE) {// 吃退
 				chiTui(user, room, req);
 				sendResponse(user, msg, response);
@@ -78,10 +78,16 @@ public class GameAction extends AbsAction {
 					|| actionType == ENActionType.EN_ACTION_NO_DANG_VALUE) {// 当/不当
 				dang(user, room, actionType);
 				sendResponse(user, msg, response);
+			} else if (actionType == ENActionType.EN_ACTION_KOU_VALUE) {// 偷牌
+				kou(user, room, false);
+				sendResponse(user, msg, response);
 			} else {// 打牌操作:胡,扯,吃,过
 				response.setAction(ProtoBuilder.buildPBAction(user,
 						ENActionType.valueOf(actionType),
 						room.getCurrentCard(), null, false, null, null));
+				if (user.getActions().contains(ENActionType.EN_ACTION_KOU)) {
+					response.setGuoType(ENActionType.EN_ACTION_KOU);
+				}
 				sendResponse(user, msg, response);
 				// 记录玩家操作,等待所有可胡玩家操作
 				room.getActionRecord().put(user.getSeatIndex(), actionType);
@@ -125,6 +131,45 @@ public class GameAction extends AbsAction {
 				} else if (actionType == ENActionType.EN_ACTION_GUO_VALUE) {
 					pass(user, room);
 				}
+			}
+		}
+	}
+
+	/**
+	 * 苍溪扣牌（招，和吃退）
+	 * 
+	 * @param user
+	 * @param room
+	 */
+	public static void kou(User user, Room room, boolean isAnto) {
+		user.getKou().add(room.getCurrentCard().getNum());
+		if (user.getNoCheCards().contains(
+				Integer.valueOf(room.getCurrentCard().getNum()))) {
+			user.getNoCheCards().remove(
+					Integer.valueOf(room.getCurrentCard().getNum()));
+		}
+		if (user.getNoChiCards().contains(room.getCurrentCard().getNum())) {
+			user.getNoChiCards().remove(
+					Integer.valueOf(room.getCurrentCard().getNum()));
+		}
+		Builder columnInfo = ProtoBuilder.buildPBColumnInfo(user,
+				user.getKou(), ENColType.EN_COL_TYPE_KOU, false);
+		// 通知其他玩家
+		NotifyHandler.notifyActionFlow(room, user, room.getCurrentCard(),
+				columnInfo.build(), ENActionType.EN_ACTION_KOU, false);
+
+		NotifyHandler.notifyKouCardList(room, user);
+
+		if (!isAnto) {
+			user.getActions().clear();
+			room.getCanActionSeat().clear();
+			// 计算可操作的玩家操作列表
+			CardManager.logicUserActionList(room, room.getCurrentCard(), user,
+					user.isFive(), true);
+			// 无人操作,则出牌
+			if (room.getCanActionSeat().isEmpty()) {
+				// 出牌推送
+				CardManager.checkBaoZiOrChuPai(room, user);
 			}
 		}
 	}
@@ -347,14 +392,14 @@ public class GameAction extends AbsAction {
 	private static void chi(User user, Room room) {
 		List<Integer> chiCards = user.getChoiceChiCards();
 		Card destCard = room.getCurrentCard();
-		int chiCard = 0;// 自己手里的牌
+		Integer chiCard = null;// 自己手里的牌
 		for (Integer integer : chiCards) {
 			if (integer != destCard.getNum()) {
 				chiCard = integer;
 				break;
 			}
 		}
-		if (chiCard == 0) {
+		if (chiCard == null) {
 			chiCard = destCard.getNum();
 		}
 		user.getChiCards().add(destCard.getNum());
@@ -391,46 +436,12 @@ public class GameAction extends AbsAction {
 			NotifyHandler.notifyActionFlow(room, user, destCard,
 					columnInfo.build(), ENActionType.EN_ACTION_CHI, false);
 		}
-		if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_GY_VALUE) {
-			int myCardCount = CardManager.getCardCountOfAll(user, chiCard);
-			// GY 包翻:扯/偷过,又吃一个
-			if (count == 4 && CardManager.getCardIsChe(user, destCard.getNum())) {
-				if (destCard.isChu()) {
-					// 打出牌的包翻
-					if (user.getBaoFans().get(destCard.getSeat()) != null) {
-						user.getBaoFans().put(destCard.getSeat(),
-								user.getBaoFans().get(destCard.getSeat()) + 1);
-					} else {
-						user.getBaoFans().put(destCard.getSeat(), 1);
-					}
-				} else if (destCard.isOpen()) {
-					// 翻開的，自己包煩
-					if (user.getBaoFans().get(user.getSeatIndex()) != null) {
-						user.getBaoFans().put(user.getSeatIndex(),
-								user.getBaoFans().get(user.getSeatIndex()) + 1);
-					} else {
-						user.getBaoFans().put(user.getSeatIndex(), 1);
-					}
-				}
-			}
-			// 自己手裏的四根，自己包煩
-			if (myCardCount == 4 && CardManager.getCardIsChe(user, chiCard)) {
-				if (user.getBaoFans().get(user.getSeatIndex()) != null) {
-					user.getBaoFans().put(user.getSeatIndex(),
-							user.getBaoFans().get(user.getSeatIndex()) + 1);
-				} else {
-					user.getBaoFans().put(user.getSeatIndex(), 1);
-				}
-			}
-		}
-
+		RoomManager.isBaoFan(user, room, destCard, chiCard, count);
 		// 为上家记录记过上家的牌被自己吃了
 		if (destCard.getSeat() != user.getSeatIndex()) {
 			User chuUser = room.getUsers().get(destCard.getSeat());
 			chuUser.getNextChiCards().add(destCard.getNum());
 		}
-		// 更新处理不能出牌的消息
-		// CardManager.removeDeathCard(destCard.getNum(), user);
 		// 计算并设置该目标牌是否可以出、之后是否可以碰
 		CardManager.setDeathCardChi(room, user, destCard.getNum());
 		// 通知出牌
@@ -486,9 +497,14 @@ public class GameAction extends AbsAction {
 		NotifyHandler.notifyNextOperation(room, user);
 		room.clearCurrentInfo();
 		user.setZhaoChiNoGe(false);
+		user.setWanJiao(false);
+		
 		// 扯牌推送
 		NotifyHandler.notifyActionFlow(room, user, destCard,
 				columnInfo.build(), type, false);
+
+		int count = CardManager.getCardCountOfAll(user, destCard.getNum());
+		RoomManager.isBaoFan(user, room, destCard, null, count);
 		// 偷牌推送
 		boolean huang = RoomManager.touPai(room, user, 1);
 		if (huang) {
@@ -535,9 +551,19 @@ public class GameAction extends AbsAction {
 		room.setLastHuSeat(user.getSeatIndex());
 		// 位置推送
 		NotifyHandler.notifyNextOperation(room, user);
-		// 胡牌推送
-		NotifyHandler.notifyActionFlow(room, user, destCard, null,
-				ENActionType.EN_ACTION_HU, false);
+		int count = CardManager.getCardCountOfAll(user, destCard.getNum());
+		// if (count == 3) {
+		// NotifyHandler.notifyActionFlow(room, user, destCard, null,
+		// ENActionType.EN_ACTION_CHIKAN, false);
+		// } else
+		if (count == 4) {
+			NotifyHandler.notifyActionFlow(room, user, destCard, null,
+					ENActionType.EN_ACTION_HU_SIGEN, false);
+		} else {
+			// 胡牌推送
+			NotifyHandler.notifyActionFlow(room, user, destCard, null,
+					ENActionType.EN_ACTION_HU, false);
+		}
 		// 结算
 		RoomManager.total(room);
 	}
@@ -549,7 +575,7 @@ public class GameAction extends AbsAction {
 	 * @param room
 	 * @param req
 	 */
-	public static void chu(User user, Room room, Card destCard) {
+	public static void chu(User user, Room room, Card destCard, boolean isInKou) {
 		if (room.isFirstCard()) {
 			destCard.setFirstCard(true);
 			room.setFirstCard(false);
@@ -564,7 +590,9 @@ public class GameAction extends AbsAction {
 		// 更新当前手牌信息
 		List<Integer> hold = user.getHold();
 		newHold.addAll(hold);
+
 		hold.remove(Integer.valueOf(destCard.getNum()));
+
 		user.getChuCards().add(destCard.getNum());
 		user.getGuoShouCards().add(destCard.getNum());
 		// 清空不能胡的牌
@@ -580,6 +608,10 @@ public class GameAction extends AbsAction {
 
 		NotifyHandler.notifyActionFlow(room, user, room.getCurrentCard(), null,
 				ENActionType.EN_ACTION_CHUPAI, true);
+		if (isInKou) {
+			user.getKou().remove(Integer.valueOf(destCard.getNum()));
+			NotifyHandler.notifyKouCardList(room, user);
+		}
 		CardManager.noChuDouble7AndDiaoZhui(room, user, false);
 		// 通知所有玩家，该玩家出了一张牌
 		int count = CardManager.getCardCountOfChu(user, destCard.getNum());
@@ -626,6 +658,7 @@ public class GameAction extends AbsAction {
 			// 通知位置(下一家),拿牌
 			RoomManager.naPai(room);
 		}
+		CardManager.checkIsWanJiao(room, user, destCard);
 	}
 
 	private static void pass(User user, Room room) {
@@ -685,13 +718,8 @@ public class GameAction extends AbsAction {
 						CardManager.notifyChoice(room, room.getCurrentCard(),
 								user);
 					} else {
-						// 计算可操作的玩家操作列表
-						// CardManager.logicUserActionList(room,
-						// room.getCurrentCard(), user, user.isFive(),
-						// true);
 						// 无人操作,则出牌
 						if (room.getCanActionSeat().isEmpty()) {
-							// 出牌推送
 							CardManager.checkBaoZiOrChuPai(room, user);
 						}
 					}
@@ -716,6 +744,10 @@ public class GameAction extends AbsAction {
 				user.getActions().clear();
 				// 出牌推送
 				CardManager.checkBaoZiOrChuPai(room, user);
+			} else if (user.getActions().contains(ENActionType.EN_ACTION_KOU)) {
+				user.getActions().clear();
+				// 出牌推送
+				CardManager.checkBaoZiOrChuPai(room, user);
 			} else {
 				user.getActions().clear();
 				CardManager.checkBaoZiOrChuPai(room, user);
@@ -736,16 +768,14 @@ public class GameAction extends AbsAction {
 				RoomManager.naPai(room);
 			}
 		} else {
-			user.getActions().clear();
 			// 4.打牌流程中的过
-			// addNoChiList(user, room, currentCard);
+			user.getActions().clear();
 			if (room.getCanCheSeat() == user.getSeatIndex()) {
 				user.getNoCheCards().add(currentCard.getNum());
 				room.setCanCheSeat(0);
 				room.setChe(false);
 			}
 			if (room.getCanHuSeat().contains(user.getSeatIndex())) {
-				// user.getNoHuCards().add(room.getCurrentCard().getNum());
 				user.getNoHuCards().addAll(
 						CardManager.getSameCards(currentCard.getNum()));
 				room.getCanHuSeat()
@@ -772,12 +802,6 @@ public class GameAction extends AbsAction {
 			} else {
 				user.getNoChiCards().add(currentCard.getNum());
 			}
-			// 不吃,
-			// if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_GY_VALUE) {
-			// List<Integer> allOtherCards = CardManager.getOtherCardsOfHold(
-			// user, currentCard.getNum());
-			// user.getCanChiHoldCards().removeAll(allOtherCards);//广元:不吃6,
-			// }
 			room.getCanChiSeat().remove(Integer.valueOf(user.getSeatIndex()));
 		}
 	}
@@ -828,7 +852,6 @@ public class GameAction extends AbsAction {
 					}
 				}
 			}
-
 			// TODO 点过后,就执行了,,被人抢了:不加入死牌,自己优先级最高,加入不能出,,什么的列表
 			if (!have) {
 				// 都没人要,把牌加入能吃玩家的不能吃列表
@@ -845,6 +868,35 @@ public class GameAction extends AbsAction {
 						null, ENActionType.EN_ACTION_UNKNOWN, true);
 				// 通知位置(下一家),拿牌
 				RoomManager.naPai(room);
+			}
+		} else {
+			// TODO 胡，扯，吃，胡的点过，扯得点扯，会卡住等吃的人
+			for (User user : room.getUsers().values()) {
+				Integer type = room.getActionRecord().get(user.getSeatIndex());
+				if (type != null && !user.getActions().isEmpty()) {
+					if (user.getActions().contains(ENActionType.EN_ACTION_HU)
+							&& type == ENActionType.EN_ACTION_HU_VALUE
+							&& room.getHuChoices().get(user.getSeatIndex())
+							&& room.canHuNow(user)) {
+						hu(user, room);
+						break;
+					} else if (user.getActions().contains(
+							ENActionType.EN_ACTION_PENG)
+							&& type == ENActionType.EN_ACTION_PENG_VALUE
+							&& room.getCanCheSeat() == user.getSeatIndex()
+							&& room.isChe()
+							&& room.isChoiceChe()
+							&& room.canCheNow()) {
+						che(user, room);
+						break;
+					} else if (user.getActions().contains(
+							ENActionType.EN_ACTION_CHI)
+							&& room.getChiChoices().get(user.getSeatIndex())
+							&& room.canChiNow(user)) {
+						chi(user, room);
+						break;
+					}
+				}
 			}
 		}
 	}
@@ -872,8 +924,7 @@ public class GameAction extends AbsAction {
 		}
 		// 特殊操作判断
 		if (actionType == ENActionType.EN_ACTION_CHUPAI_VALUE) {
-			int card = req.getDestCard();
-			return checkChu(user, room, card);
+			return checkChu(user, room, req);
 		} else if (actionType == ENActionType.EN_ACTION_ZHAO_VALUE) {
 			return checkZhao(user, room, req);
 		} else if (actionType == ENActionType.EN_ACTION_PIAO_VALUE
@@ -942,7 +993,8 @@ public class GameAction extends AbsAction {
 		return 0;
 	}
 
-	private static int checkChu(User user, Room room, int card) {
+	private static int checkChu(User user, Room room, CSRequestDoAction req) {
+		int card = req.getDestCard();
 		// 手里是否有该牌
 		boolean haveMj = false;
 		for (Integer _card : user.getHold()) {
@@ -959,6 +1011,41 @@ public class GameAction extends AbsAction {
 		int noChuNum = CardManager.getCardCountOfNoChu(user, card);
 		if (noChuNum >= holdNum) {
 			return ENMessageError.RESPONSE_DESTCARD_ERROR_VALUE;// 不能出牌列表
+		}
+
+		// 苍溪判断是否出了该牌就是割七点
+		if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX_VALUE
+				&& !user.isFive()) {
+			List<Integer> newHold = new ArrayList<>();
+			newHold.addAll(user.getHold());
+			newHold.remove(Integer.valueOf(card));
+			newHold.add(Integer.valueOf(34));
+			boolean dou14 = CardManager.checkDou14(newHold);
+			boolean tuoNumGou = CardManager.checkTuoNum(room, user, newHold);
+			if (dou14 && tuoNumGou) {
+				boolean baoZi = true;
+				newHold.remove(Integer.valueOf(34));
+				Map<Integer, Integer> holdMap = CardManager.toMap(newHold);
+				Map<Integer, Integer> noChuMap = CardManager.toMap(user
+						.getNoChuCards());
+				for (Integer integer : user.getHold()) {
+					Integer _holdNum = holdMap.get(integer);
+					Integer _noChuNum = noChuMap.get(integer);
+					if (_noChuNum == null || _holdNum > _noChuNum) {
+						baoZi = false;
+						break;
+					}
+				}
+				if (baoZi) {
+					LOGGER.info("不能下七点的叫，其他全是死牌，包子");
+					room.setHuSeat(user.getSeatIndex());
+					user.setBaoZi(true);
+					user.setHuType(4);
+					room.setBaoZiSeat(user.getSeatIndex());
+					RoomManager.total(room);
+				}
+				return ENMessageError.RESPONSE_NOT_CAN_XIA_JIAO_7_VALUE;// 不能在七点上转叫
+			}
 		}
 		return 0;
 	}

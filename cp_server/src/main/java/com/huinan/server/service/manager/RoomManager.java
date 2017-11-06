@@ -58,7 +58,11 @@ public class RoomManager {
 	/**
 	 * 房间信息缓存，临时存储，届时会切入redis
 	 */
-	public static Map<Integer, Room> rooms = new ConcurrentHashMap<>();
+	public Map<Integer, Room> rooms = new ConcurrentHashMap<>();
+
+	public static Map<Integer, Room> getRooms() {
+		return getInstance().rooms;
+	}
 
 	public Room getRoom(int tid) {
 		return rooms.get(tid);
@@ -92,16 +96,22 @@ public class RoomManager {
 		}
 		room.setZiMoJiaFan(requestBody.getIsZiMoFan());
 		room.setDingFuShuaiTimes(requestBody.getIsDingfuShuaiAny());
-		room.setTouDang(requestBody.getIsTouDang());
+		if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX_VALUE) {
+			room.setTouDang(false);
+		} else {
+			room.setTouDang(requestBody.getIsTouDang());
+		}
 		room.setCheZhui(requestBody.getIsCheZhui());
 		room.setDiaoZhui(requestBody.getIsDiaoZhui());
 		if (requestBody.hasScore() && requestBody.getScore() > 0) {
 			room.setDiFen(requestBody.getScore());
 		}
 		room.setLan18(requestBody.getIs18Lan());
+		room.setFanFiveHave56(requestBody.getIsFanXjHave56());
 		room.setCheAll7Fan(requestBody.getIsFanSan7());
+		room.setCanNotWanJiao(requestBody.getIsCanNotWanJiao());
 
-		rooms.put(tid, room);// 存放游戏房间信息
+		getRooms().put(tid, room);// 存放游戏房间信息
 		return room;
 	}
 
@@ -114,7 +124,7 @@ public class RoomManager {
 		int codeNumber = 0;
 		while (true) {
 			codeNumber = (int) ((Math.random() * 9 + 1) * 100000);
-			if (rooms.get(codeNumber) == null) {
+			if (getRooms().get(codeNumber) == null) {
 				break;
 			}
 		}
@@ -173,7 +183,9 @@ public class RoomManager {
 	}
 
 	public static void openTouPai(Room room) {
-		if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_GY_VALUE) {
+		if (room.getRoomType() != ENRoomType.EN_ROOM_TYPE_NC_VALUE
+				&& room.getRoomType() != ENRoomType.EN_ROOM_TYPE_XC_VALUE
+				&& room.getRoomType() != ENRoomType.EN_ROOM_TYPE_CX_VALUE) {
 			return;
 		}
 		for (User user : room.getUsers().values()) {
@@ -301,15 +313,26 @@ public class RoomManager {
 		List<Integer> hold = user.getHold();
 		Map<Integer, Integer> holdMap = CardManager.toMap(hold);
 		Iterator<Integer> iterator = holdMap.keySet().iterator();
+		int heiKanNum = 0;
 		while (iterator.hasNext()) {
 			Integer card = (Integer) iterator.next();
 			int num = holdMap.get(card);
-			if (num >= 3 && CardManager.colorIsRed(card)) {
-				room.setDangSeat(user.getSeatIndex());
-				// 当-notify
-				NotifyHandler.notifyActionFlow(room, user, null, null,
-						ENActionType.EN_ACTION_DANG, false);
-				return true;
+			if (num >= 3) {
+				if (CardManager.colorIsRed(card)) {
+					room.setDangSeat(user.getSeatIndex());
+					NotifyHandler.notifyActionFlow(room, user, null, null,
+							ENActionType.EN_ACTION_DANG, false);
+					return true;
+				} else {
+					heiKanNum++;
+					if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX_VALUE
+							&& heiKanNum == 2) {
+						room.setDangSeat(user.getSeatIndex());
+						NotifyHandler.notifyActionFlow(room, user, null, null,
+								ENActionType.EN_ACTION_DANG, false);
+						return true;
+					}
+				}
 			}
 		}
 		return false;
@@ -393,7 +416,7 @@ public class RoomManager {
 
 		int zhuangSeat = room.getZhuangSeat();
 		int seat = zhuangSeat;
-		
+
 		// TODO 写死牌
 		// if (room.getRound() > 1) {
 		for (int i = 0; i < 4; i++) {
@@ -420,12 +443,9 @@ public class RoomManager {
 		room.setFirstCard(true);
 		room.setStepIsPlay(true);
 		// 游戏开始推送
-		CpMsgData.Builder msg = CpMsgData.newBuilder();
-		CSNotifyGameStart.Builder sysBrand = ProtoBuilder.buildGameStart(room);
-		room.setGameStart(sysBrand.build());
-		msg.setCsNotifyGameStart(sysBrand);
-		NotifyHandler.notifyAll(room,
-				CpMsgData.CS_NOTIFY_GAME_START_FIELD_NUMBER, msg.build());
+		CSNotifyGameStart.Builder gameStart = ProtoBuilder.buildGameStart(room);
+		room.setGameStart(gameStart.build());
+		NotifyHandler.notifyGameStart(room, gameStart);
 		// 死牌通知
 		for (User user : room.getUsers().values()) {
 			if (!user.getNoChuCards().isEmpty()) {
@@ -435,7 +455,8 @@ public class RoomManager {
 		}
 		if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_NC_VALUE
 				|| room.getRoomType() == ENRoomType.EN_ROOM_TYPE_XC_VALUE
-				|| room.getRoomType() == ENRoomType.EN_ROOM_TYPE_MY_VALUE) {
+				|| room.getRoomType() == ENRoomType.EN_ROOM_TYPE_MY_VALUE
+				|| room.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX_VALUE) {
 			// 开始选当
 			startChoiceDang(room);
 		} else {
@@ -464,9 +485,9 @@ public class RoomManager {
 				user.getHold().add(card1);
 				int card2 = 11;
 				user.getHold().add(card2);
-				int card3 = 13;
+				int card3 = 56;
 				user.getHold().add(card3);
-				int card4 = 12;
+				int card4 = 11;
 				user.getHold().add(card4);
 				int card5 = 15;
 				user.getHold().add(card5);
@@ -501,7 +522,7 @@ public class RoomManager {
 				user.getHold().add(card1);
 				int card2 = 56;
 				user.getHold().add(card2);
-				int card3 = 44;
+				int card3 = 66;
 				user.getHold().add(card3);
 				int card4 = 24;
 				user.getHold().add(card4);
@@ -615,8 +636,9 @@ public class RoomManager {
 		if (room.getResetCards().isEmpty()) {
 			return false;
 		}
-		List<Integer> hold = user.getHold();
-		Map<Integer, Integer> holdMap = CardManager.toMap(hold);
+		List<Integer> allCards = new ArrayList<>();
+		allCards.addAll(user.getHold());
+		Map<Integer, Integer> holdMap = CardManager.toMap(allCards);
 		Iterator<Integer> iterator = holdMap.keySet().iterator();
 		while (iterator.hasNext()) {
 			Integer card = (Integer) iterator.next();
@@ -629,7 +651,8 @@ public class RoomManager {
 				Builder columuInfo = ProtoBuilder.buildPBColumnInfo(user,
 						cards, ENColType.EN_COL_TYPE_TOU, false);
 				if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_NC_VALUE
-						|| room.getRoomType() == ENRoomType.EN_ROOM_TYPE_XC_VALUE) {
+						|| room.getRoomType() == ENRoomType.EN_ROOM_TYPE_XC_VALUE
+						|| room.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX_VALUE) {
 					if (faPai && user.getSeatIndex() != room.getZhuangSeat()) {
 						columuInfo.setIsFan(true);
 					}
@@ -716,7 +739,12 @@ public class RoomManager {
 					NotifyHandler.notifyActionFlow(room, user, null,
 							columuInfo.build(), ENActionType.EN_ACTION_TOU,
 							false);
-					hold.removeAll(cards);
+					if (user.getKou().contains(card)) {
+						user.getKou().remove(card);
+						user.getKou().remove(card);
+						NotifyHandler.notifyKouCardList(room, user);
+					}
+					user.getHold().removeAll(cards);
 					for (int i = 0; i < cards.size() - 1; i++) {
 						CardManager.removeDeathCard(card, user);
 					}
@@ -736,6 +764,11 @@ public class RoomManager {
 					CardManager.noChuDouble7AndDiaoZhui(room, user, false);
 
 					if (num == 3) {// 偷一张
+						Card destCard = new Card(card, user.getSeatIndex(),
+								false, false, false, false);
+						int count = CardManager.getCardCountOfAll(user,
+								destCard.getNum());
+						RoomManager.isBaoFan(user, room, destCard, null, count);
 						// 通知发一张牌
 						touPai(room, user, 1);
 						return true;
@@ -766,6 +799,80 @@ public class RoomManager {
 			}
 		}
 		return false;
+	}
+
+	/**
+	 * 检查是否包翻
+	 * 
+	 * @param user
+	 * @param room
+	 * @param destCard
+	 * @param chiCard
+	 * @param count
+	 */
+	public static void isBaoFan(User user, Room room, Card destCard,
+			Integer chiCard, int count) {
+		if (!room.isBaoFan()) {
+			return;
+		}
+		if (chiCard != null) {// 吃成四个
+			int myCardCount = CardManager.getCardCountOfAll(user, chiCard);
+			// 包翻:扯/偷过,又吃一个
+			if (count == 4 && CardManager.getCardIsChe(user, destCard.getNum())) {
+				if (destCard.isChu()) {
+					// 打出牌的包翻
+					if (user.getBaoFans().get(destCard.getSeat()) != null) {
+						user.getBaoFans().put(destCard.getSeat(),
+								user.getBaoFans().get(destCard.getSeat()) + 1);
+					} else {
+						user.getBaoFans().put(destCard.getSeat(), 1);
+					}
+				} else if (destCard.isOpen()) {
+					// 翻開的，自己包煩
+					if (user.getBaoFans().get(user.getSeatIndex()) != null) {
+						user.getBaoFans().put(user.getSeatIndex(),
+								user.getBaoFans().get(user.getSeatIndex()) + 1);
+					} else {
+						user.getBaoFans().put(user.getSeatIndex(), 1);
+					}
+				}
+			}
+			// 自己手里的四根，自己包番
+			if (myCardCount == 4 && CardManager.getCardIsChe(user, chiCard)) {
+				if (user.getBaoFans().get(user.getSeatIndex()) != null) {
+					user.getBaoFans().put(user.getSeatIndex(),
+							user.getBaoFans().get(user.getSeatIndex()) + 1);
+				} else {
+					user.getBaoFans().put(user.getSeatIndex(), 1);
+				}
+			}
+		} else {// 扯后对成四个：苍溪
+			if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX_VALUE) {
+				if (count == 4) {
+					if (destCard.isChu()) {
+						// 打出牌的包翻
+						if (user.getBaoFans().get(destCard.getSeat()) != null) {
+							user.getBaoFans()
+									.put(destCard.getSeat(),
+											user.getBaoFans().get(
+													destCard.getSeat()) + 1);
+						} else {
+							user.getBaoFans().put(destCard.getSeat(), 1);
+						}
+					} else if (destCard.isOpen()) {
+						// 翻開的，自己包煩
+						if (user.getBaoFans().get(user.getSeatIndex()) != null) {
+							user.getBaoFans()
+									.put(user.getSeatIndex(),
+											user.getBaoFans().get(
+													user.getSeatIndex()) + 1);
+						} else {
+							user.getBaoFans().put(user.getSeatIndex(), 1);
+						}
+					}
+				}
+			}
+		}
 	}
 
 	/**
@@ -968,6 +1075,7 @@ public class RoomManager {
 			room.setCurrentCard(cardObj);
 			user.setMoPai(true);
 			int resetCardCount = room.getResetCards().size();
+			user.getHold().add(card);// 加入手牌
 			NotifyHandler.notifyDealCard(room, cardObj, resetCardCount);
 
 			huang = checkHuang(room, user, cardObj, resetCardCount);
@@ -976,7 +1084,7 @@ public class RoomManager {
 				break;
 			}
 			room.clearCurrentInfo();
-			user.getHold().add(card);// 加入手牌
+
 			// 五张不报不招
 			if (!user.isFive()) {
 				// 一对七点置灰
@@ -1005,7 +1113,7 @@ public class RoomManager {
 			}
 		}
 
-		//  内滑???
+		// 内滑???
 
 		// 花对：之前打过7，又扯起来了一个7
 		if (CardManager.getCardValue(card) == 7
@@ -1318,7 +1426,8 @@ public class RoomManager {
 		if (room.getRound() == 1) {
 			int userType = room.getRoomTable().getUseCardType();
 			int allRoomCardNum = 0;
-			if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_MY_VALUE) {
+			if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_MY_VALUE
+					|| room.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX_VALUE) {
 				allRoomCardNum = 0;
 			} else {
 				allRoomCardNum = ERoomCardCost.getRoomCardCost(room
@@ -1395,7 +1504,15 @@ public class RoomManager {
 					if (!_user.getUuid().equals(user.getUuid())) {
 						UserBrand.Builder userBrand = UserBrand.newBuilder();
 						userBrand.setSeatIndex(_user.getSeatIndex());
+						// List<Integer> list = new ArrayList<>();
+						// list.addAll(_user.getHold());
+						// for (Integer integer : _user.getKou()) {
+						// if (list.contains(integer)) {
+						// list.remove(integer);
+						// }
+						// }
 						userBrand.addAllTilesOnHand(_user.getHold());
+						userBrand.addAllKouList(_user.getKou());
 						roundResult.addUserBrand(userBrand);
 					}
 				}
@@ -1413,6 +1530,7 @@ public class RoomManager {
 				addFightRecord(false, room);
 			}
 			addFightRecord(bigTotal, room);
+			UserManager.getInstance().updateRankData(room);
 			removeRoom(room);
 		} else {
 			addFightRecord(bigTotal, room);
@@ -1470,7 +1588,8 @@ public class RoomManager {
 		for (User user : room.getUsers().values()) {
 			user.clear();
 		}
-		rooms.remove(Integer.valueOf(room.getTid()));
+		getRooms().remove(Integer.valueOf(room.getTid()));
+		room = null;
 	}
 
 	/**

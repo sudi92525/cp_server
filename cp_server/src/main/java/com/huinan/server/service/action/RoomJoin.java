@@ -4,10 +4,12 @@ import java.sql.SQLException;
 
 import com.huinan.proto.CpMsg.CpHead;
 import com.huinan.proto.CpMsg.CpMsgData;
+import com.huinan.proto.CpMsgCs.CSNotifyGameStart.Builder;
 import com.huinan.proto.CpMsgCs.CSNottifyEnterTable;
 import com.huinan.proto.CpMsgCs.CSRequestEnterTable;
 import com.huinan.proto.CpMsgCs.CSResponseEnterTable;
 import com.huinan.proto.CpMsgCs.ENMessageError;
+import com.huinan.proto.CpMsgCs.PBTableSeat;
 import com.huinan.proto.CpMsgCs.UserInfo;
 import com.huinan.server.db.UserManager;
 import com.huinan.server.net.ClientRequest;
@@ -145,7 +147,14 @@ public class RoomJoin extends AbsAction {
 			}
 		} else {
 			join.setTableState(Constant.cp_status_started);
-			join.setGameStart(ProtoBuilder.buildGameStart(room));
+			Builder gameStart = ProtoBuilder.buildGameStart(room);
+			for (PBTableSeat pbTableSeat : gameStart.getSeatsList()) {
+				if (pbTableSeat.getSeatIndex() != user.getSeatIndex()) {
+					PBTableSeat.Builder seat = pbTableSeat.toBuilder();
+					seat.clearTilesOnHand();
+				}
+			}
+			join.setGameStart(gameStart);
 		}
 		if (room.isStepIsPlay()) {// 游戏未开始!room.isStart()
 			// 房间正在解散

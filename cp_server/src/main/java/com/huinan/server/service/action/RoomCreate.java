@@ -75,8 +75,10 @@ public class RoomCreate extends AbsAction {
 			creator.setIsDiaoZhui(room.isDiaoZhui());
 			creator.setScore(room.getDiFen());
 			creator.setIs18Lan(room.isLan18());
+			creator.setIsFanXjHave56(room.isFanFiveHave56());
 			creator.setIsFanSan7(room.isCheAll7Fan());
-
+			creator.setIsCanNotWanJiao(room.isCanNotWanJiao());
+			
 			response.setTableInfo(creator);
 			room.setRoomTable(creator.build());
 
@@ -100,10 +102,15 @@ public class RoomCreate extends AbsAction {
 		UserManager.getInstance().getRoomCard(user);
 		int useCardType = request.getUseCardType();
 		int cardNum = ERoomCardCost.getRoomCardCost(roundNum);
-		if (useCardType == ERoomCardType.CREATOR.getValue()
-				&& user.getRoomCardNum() < cardNum) {
-			// 房主付
-			return ENMessageError.RESPONSE_ROOMCARD_LIMIT.getNumber();
+		if (useCardType == ERoomCardType.CREATOR.getValue()) {
+			if (request.getRoomType() == ENRoomType.EN_ROOM_TYPE_MY
+					|| request.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX) {
+				return 0;
+			}
+			if (user.getRoomCardNum() < cardNum) {
+				// 房主付
+				return ENMessageError.RESPONSE_ROOMCARD_LIMIT.getNumber();
+			}
 		} else if (useCardType == ERoomCardType.AA.getValue()) {
 			// 均摊
 			float need = cardNum / Constant.PLAYER_NUM * 1F;

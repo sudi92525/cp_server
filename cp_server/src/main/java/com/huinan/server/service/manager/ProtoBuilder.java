@@ -3,8 +3,6 @@ package com.huinan.server.service.manager;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.logging.log4j.LogManager;
-
 import com.huinan.proto.CpMsg.CpHead;
 import com.huinan.proto.CpMsgCs.CSNotifyDissolveTableOperation;
 import com.huinan.proto.CpMsgCs.CSNotifyGameStart;
@@ -49,6 +47,10 @@ public class ProtoBuilder {
 				.get(Integer.valueOf(destCard.getSeat()));
 		if (destUser != null) {
 			deal.setTilesOnHandNum(destUser.getHold().size());
+			boolean kou = CardManager.isKou(room, destUser);
+			if (kou) {
+				deal.setIsKou(kou);
+			}
 		}
 		return deal;
 	}
@@ -209,7 +211,15 @@ public class ProtoBuilder {
 		tSeat.setSeatIndex(user.getSeatIndex());
 		tSeat.setUserInfo(buildUserInfo(user));
 		if (room.isStepIsPlay()) {
-			tSeat.addAllTilesOnHand(user.getHold());// 手牌
+			List<Integer> list = new ArrayList<>();
+			list.addAll(user.getHold());
+			for (Integer integer : user.getKou()) {
+				if (list.contains(integer)) {
+					list.remove(integer);
+				}
+			}
+			tSeat.addAllTilesOnHand(list);// 手牌
+			tSeat.addAllKouCardList(user.getKou());
 			tSeat.setTilesOnHandNum(user.getHold().size());// 初始化手牌数量
 			tSeat.addAllOutCol(user.getOpen()); // 吃扯牌
 			List<Integer> deadCards = new ArrayList<>();
@@ -243,7 +253,10 @@ public class ProtoBuilder {
 		}
 		if (type.getNumber() == ENActionType.EN_ACTION_NO_CHU_VALUE) {
 			action.addAllDeathCard(user.getNoChuCards());
+		} else if (type.getNumber() == ENActionType.EN_ACTION_KOU_LIST_VALUE) {
+			action.addAllKouCardList(user.getKou());
 		}
+
 		action.setIsChu(isChuPai);
 
 		if (zhaoType != null) {
@@ -260,11 +273,11 @@ public class ProtoBuilder {
 			List<Integer> cards, ENColType type, boolean isFan) {
 		PBColumnInfo.Builder col = PBColumnInfo.newBuilder();
 		col.setScore(CardManager.getScore(user, cards));
-		if (type == ENColType.EN_COL_TYPE_TOU && cards.isEmpty()) {
-			LogManager.getLogger("queue").info(
-					"偷，cardslist is empty,roomId:" + user.getRoomId()
-							+ ",user id=" + user.getUuid());
-		}
+		// if (type == ENColType.EN_COL_TYPE_TOU && cards.isEmpty()) {
+		// LogManager.getLogger("queue").info(
+		// "偷，cardslist is empty,roomId:" + user.getRoomId()
+		// + ",user id=" + user.getUuid());
+		// }
 		col.addAllCards(cards);
 		col.setColType(type);
 		col.setIsFan(isFan);
@@ -280,7 +293,15 @@ public class ProtoBuilder {
 		} else {
 		}
 		huBrand.addAllColInfo(user.getOpen());
+		// List<Integer> list = new ArrayList<>();
+		// list.addAll(user.getHold());
+		// for (Integer integer : user.getKou()) {
+		// if (list.contains(integer)) {
+		// list.remove(integer);
+		// }
+		// }
 		huBrand.addAllTilesOnHand(user.getHold());
+		huBrand.addAllKouList(user.getKou());
 		huBrand.setTuoNum(user.getHuTuoNum());
 		huBrand.setFanNum(user.getHuFanNum());
 		return huBrand.build();
