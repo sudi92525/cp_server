@@ -178,7 +178,7 @@ public class RoomManager {
 		if (huUser.isPiao()) {
 			score += difen;
 		}
-		log.info("---getDiFen,----低分score=" + score);
+		// log.info("---getDiFen,----低分score=" + score);
 		return score;
 	}
 
@@ -355,7 +355,7 @@ public class RoomManager {
 		// TODO 写死牌
 		// if (room.getRound() == 1) {
 		// for (int i = 0; i < 84; i++) {
-		// cards.add(12);
+		// cards.add(15);
 		// cards.add(15);
 		// cards.add(15);
 		// cards.add(15);
@@ -477,13 +477,19 @@ public class RoomManager {
 		fiveUser.setFive(true);
 	}
 
+	/**
+	 * 写死牌
+	 * 
+	 * @param room
+	 * @param seat
+	 */
 	public static void dealSiPai(Room room, int seat) {
 		for (int i = 0; i < 4; i++) {
 			User user = room.getUsers().get(seat);
 			if (i == 0) {
 				int card1 = 66;
 				user.getHold().add(card1);
-				int card2 = 11;
+				int card2 = 12;
 				user.getHold().add(card2);
 				int card3 = 56;
 				user.getHold().add(card3);
@@ -520,35 +526,35 @@ public class RoomManager {
 			} else if (i == 1) {
 				int card1 = 56;
 				user.getHold().add(card1);
-				int card2 = 56;
+				int card2 = 12;
 				user.getHold().add(card2);
-				int card3 = 66;
+				int card3 = 46;
 				user.getHold().add(card3);
-				int card4 = 24;
+				int card4 = 13;
 				user.getHold().add(card4);
-				int card5 = 33;
+				int card5 = 45;
 				user.getHold().add(card5);
-				int card6 = 46;
+				int card6 = 14;
 				user.getHold().add(card6);
-				int card7 = 22;
+				int card7 = 44;
 				user.getHold().add(card7);
 				int card8 = 44;
 				user.getHold().add(card8);
 				int card9 = 24;
 				user.getHold().add(card9);
-				int card10 = 25;
+				int card10 = 15;
 				user.getHold().add(card10);
-				int card11 = 25;
+				int card11 = 16;
 				user.getHold().add(card11);
-				int card12 = 25;
+				int card12 = 16;
 				user.getHold().add(card12);
 				int card13 = 34;
 				user.getHold().add(card13);
-				int card14 = 14;
+				int card14 = 34;
 				user.getHold().add(card14);
-				int card15 = 36;
+				int card15 = 56;
 				user.getHold().add(card15);
-				int card16 = 22;
+				int card16 = 13;
 				user.getHold().add(card16);
 				int card17 = 46;
 				user.getHold().add(card17);
@@ -625,7 +631,6 @@ public class RoomManager {
 		do {
 			tou = isTou(room, user, faPai);
 		} while (tou);// 偷到没偷得为止
-
 		if (!room.isStartChu() && user.getSeatIndex() == room.getZhuangSeat()) {// 下偷
 			NotifyHandler.notifyActionFlow(room, user, null, null,
 					ENActionType.EN_ACTION_XIATOU, false);
@@ -1008,7 +1013,7 @@ public class RoomManager {
 			// 黄了：其他人翻开最后一张
 			if (resetCardCount == 0) {
 				if (destCard.isCheMo()) {
-					// 胡?----------929加-----------
+					// 是否胡
 					CardManager.logicUserActionList(room, destCard, user, true,
 							true);
 					if (!room.getCanHuSeat().contains(
@@ -1029,7 +1034,7 @@ public class RoomManager {
 				}
 			} else if (user.isFive() && resetCardCount == 1) {
 				if (destCard.isCheMo()) {
-					return false;// ----------10.06加:-----------
+					return false;
 				}
 				CardManager.logicUserActionList(room, destCard, user, true,
 						true);
@@ -1064,7 +1069,7 @@ public class RoomManager {
 	 */
 	public static boolean touPai(Room room, User user, int touNum) {
 		boolean huang = false;
-		if (room.getResetCards().size() == 0) {// ----10.20----
+		if (room.getResetCards().size() == 0) {
 			total(room);
 			return true;
 		}
@@ -1101,7 +1106,6 @@ public class RoomManager {
 		}
 		int countOfAll = CardManager.getCardCountOfAll(user, card);
 		int countOfHold = CardManager.getCardCountOfHold(user, card);
-		// int countOfChu = CardManager.getCardCountOfChu(user, card);
 		if (countOfAll == 4) {// 四根
 			NotifyHandler.notifyActionFlow(room, user, cardObj, null,
 					ENActionType.EN_ACTION_SIGEN, false);
@@ -1173,7 +1177,7 @@ public class RoomManager {
 	}
 
 	private static void totalScore(Room room, boolean isHuang, int huSeat) {
-		log.info("--------------start totalScore-------------------");
+		// log.info("--------------start totalScore-------------------");
 		if (room.getBaoZiSeat() != 0) {// 包子:一番
 			log.info("---is bao zi----seat=" + room.getBaoZiSeat());
 			int allScore = 0;
@@ -1218,7 +1222,7 @@ public class RoomManager {
 			Card card = room.getCurrentCard();
 			if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_GY_VALUE
 					&& room.isBaoFan() && !huUser.getBaoFans().isEmpty()) {
-				log.info("---hu,gy bao fan----");
+				// log.info("---hu,gy bao fan----");
 				// 广元包翻
 				int baoFanNum = 0;
 				Iterator<Integer> iterator = huUser.getBaoFans().keySet()
@@ -1237,7 +1241,7 @@ public class RoomManager {
 				}
 				int otherAllScore = 0;
 				if (card.getSeat() == huUser.getSeatIndex()) {// 自摸,大家开
-					log.info("---hu,gy bao fan zimo----");
+					// log.info("---hu,gy bao fan zimo----");
 					for (User _user : room.getUsers().values()) {
 						if (!_user.getUuid().equals(huUser.getUuid())) {
 							int realyScore = CardManager.getScoreByFan(
@@ -1251,9 +1255,9 @@ public class RoomManager {
 								_user.setCurrency(_user.getCurrency() - score);
 								otherAllScore += score;
 							}
-							log.info("---hu,gy bao fan zimo----seat="
-									+ _user.getSeatIndex() + ",score="
-									+ (0 - score));
+							// log.info("---hu,gy bao fan zimo----seat="
+							// + _user.getSeatIndex() + ",score="
+							// + (0 - score));
 						}
 					}
 					// 包翻的开剩余的
@@ -1261,9 +1265,9 @@ public class RoomManager {
 							.setChangeCurrency(0 - (allScore - otherAllScore));
 					baofanUser.setCurrency(baofanUser.getCurrency()
 							- (allScore - otherAllScore));
-					log.info("---hu,bao fan----seat="
-							+ baofanUser.getSeatIndex() + ",bao score="
-							+ (allScore - otherAllScore));
+					// log.info("---hu,bao fan----seat="
+					// + baofanUser.getSeatIndex() + ",bao score="
+					// + (allScore - otherAllScore));
 					huUser.setZiMoTimes(huUser.getZiMoTimes() + 1);
 				} else {
 					User chuUser = room.getUsers().get(card.getSeat());
@@ -1279,9 +1283,9 @@ public class RoomManager {
 										room.getDiFen(), room.isAddFan(),
 										otherFan);
 								otherAllScore += score;
-								log.info("---hu,gy bao fan dianpao----seat="
-										+ _user.getSeatIndex() + ",score="
-										+ (0 - score));
+								// log.info("---hu,gy bao fan dianpao----seat="
+								// + _user.getSeatIndex() + ",score="
+								// + (0 - score));
 							}
 						}
 						if (chuUser.getUuid().equals(baofanUser.getUuid())) {
@@ -1317,9 +1321,9 @@ public class RoomManager {
 											- score);
 									otherAllScore += score;
 								}
-								log.info("---hu,gy bao fan 大家开----seat="
-										+ _user.getSeatIndex() + ",score="
-										+ (0 - score));
+								// log.info("---hu,gy bao fan 大家开----seat="
+								// + _user.getSeatIndex() + ",score="
+								// + (0 - score));
 							}
 						}
 						// 包翻的开剩余的
@@ -1327,16 +1331,16 @@ public class RoomManager {
 								.setChangeCurrency(0 - (allScore - otherAllScore));
 						baofanUser.setCurrency(baofanUser.getCurrency()
 								- (allScore - otherAllScore));
-						log.info("---hu,bao fan----seat="
-								+ baofanUser.getSeatIndex() + ",bao score="
-								+ (allScore - otherAllScore));
+						// log.info("---hu,bao fan----seat="
+						// + baofanUser.getSeatIndex() + ",bao score="
+						// + (allScore - otherAllScore));
 					}
 				}
 			} else {
 				if (card.getSeat() == huUser.getSeatIndex()) {// 自摸,大家开
 					if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_MY_VALUE
 							&& card.isCheMo()) {
-						log.info("---hu,che tou----diao pao-----");
+						// log.info("---hu,che tou----diao pao-----");
 						User chuUser = room.getUsers().get(
 								room.getLastChuSeat());
 						for (User _user : room.getUsers().values()) {
@@ -1345,16 +1349,16 @@ public class RoomManager {
 										getDiFen(_user, room, huUser),
 										room.isAddFan(), fanNum);
 								allScore += score;
-								log.info("---hu,che tou----seat="
-										+ _user.getSeatIndex() + ",score="
-										+ (0 - score));
+								// log.info("---hu,che tou----seat="
+								// + _user.getSeatIndex() + ",score="
+								// + (0 - score));
 							}
 						}
 						chuUser.setChangeCurrency(0 - allScore);
 						chuUser.setCurrency(chuUser.getCurrency() - allScore);
 						chuUser.setDianPaoTimes(chuUser.getDianPaoTimes() + 1);
 					} else {
-						log.info("---hu,zimo----");
+						// log.info("---hu,zimo----");
 						for (User _user : room.getUsers().values()) {
 							if (!_user.getUuid().equals(huUser.getUuid())) {
 								int score = CardManager.getScoreByFan(
@@ -1363,9 +1367,9 @@ public class RoomManager {
 								_user.setChangeCurrency(0 - score);
 								_user.setCurrency(_user.getCurrency() - score);
 								allScore += score;
-								log.info("---hu,zimo----seat="
-										+ _user.getSeatIndex() + ",score="
-										+ (0 - score));
+								// log.info("---hu,zimo----seat="
+								// + _user.getSeatIndex() + ",score="
+								// + (0 - score));
 							}
 						}
 					}
@@ -1379,9 +1383,9 @@ public class RoomManager {
 										getDiFen(_user, room, huUser),
 										room.isAddFan(), fanNum);
 								allScore += score;
-								log.info("---hu,diaopao----seat="
-										+ _user.getSeatIndex() + ",score="
-										+ (0 - score));
+								// log.info("---hu,diaopao----seat="
+								// + _user.getSeatIndex() + ",score="
+								// + (0 - score));
 							}
 						}
 						chuUser.setChangeCurrency(0 - allScore);
@@ -1396,9 +1400,9 @@ public class RoomManager {
 								_user.setChangeCurrency(0 - score);
 								_user.setCurrency(_user.getCurrency() - score);
 								allScore += score;
-								log.info("---hu,大家开----seat="
-										+ _user.getSeatIndex() + ",score="
-										+ (0 - score));
+								// log.info("---hu,大家开----seat="
+								// + _user.getSeatIndex() + ",score="
+								// + (0 - score));
 							}
 						}
 					}
@@ -1426,8 +1430,7 @@ public class RoomManager {
 		if (room.getRound() == 1) {
 			int userType = room.getRoomTable().getUseCardType();
 			int allRoomCardNum = 0;
-			if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_MY_VALUE
-					|| room.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX_VALUE) {
+			if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX_VALUE) {
 				allRoomCardNum = 0;
 			} else {
 				allRoomCardNum = ERoomCardCost.getRoomCardCost(room
@@ -1437,11 +1440,6 @@ public class RoomManager {
 			if (userType == ERoomCardType.CREATOR.getValue()) {
 				String creatorUid = room.getRoomTable().getCreatorUid();
 				User user = UserManager.getInstance().getUser(creatorUid);
-				// User dbUser = UserManager.getInstance().loadFromDB(
-				// user.getUuid());
-				// user.setRoomCardNum(dbUser.getRoomCardNum());
-				log.info("-----------totalRoomCard----------cost room card:,need="
-						+ allRoomCardNum);
 				beforeRoomCard = user.getRoomCardNum();
 				// 扣内存房卡
 				UserManager.getInstance().updateRoomCard(user, allRoomCardNum);
@@ -1453,12 +1451,6 @@ public class RoomManager {
 				// 均摊
 				for (User user : room.getUsers().values()) {
 					float need = allRoomCardNum * 1F / 4;
-					log.info("-----------checkRoomCardTotal----------cost room card:,need="
-							+ need
-							+ ",playerNum:"
-							+ room.getRoomTable().getPlayerNum()
-							+ ",all cost="
-							+ allRoomCardNum);
 					int num = (int) Math.ceil(need);
 					beforeRoomCard = user.getRoomCardNum();
 					UserManager.getInstance().updateRoomCard(user, num);
@@ -1504,13 +1496,6 @@ public class RoomManager {
 					if (!_user.getUuid().equals(user.getUuid())) {
 						UserBrand.Builder userBrand = UserBrand.newBuilder();
 						userBrand.setSeatIndex(_user.getSeatIndex());
-						// List<Integer> list = new ArrayList<>();
-						// list.addAll(_user.getHold());
-						// for (Integer integer : _user.getKou()) {
-						// if (list.contains(integer)) {
-						// list.remove(integer);
-						// }
-						// }
 						userBrand.addAllTilesOnHand(_user.getHold());
 						userBrand.addAllKouList(_user.getKou());
 						roundResult.addUserBrand(userBrand);
@@ -1530,8 +1515,7 @@ public class RoomManager {
 				addFightRecord(false, room);
 			}
 			addFightRecord(bigTotal, room);
-			UserManager.getInstance().updateRankData(room);
-			removeRoom(room);
+			UserManager.getInstance().updateRankData(room, dissolve);
 		} else {
 			addFightRecord(bigTotal, room);
 			room.incrRound();

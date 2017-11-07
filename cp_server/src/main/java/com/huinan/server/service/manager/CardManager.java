@@ -232,27 +232,35 @@ public class CardManager {
 	public static int tuoNum(User user, List<Integer> hold) {
 		int tuo = 0;
 		List<PBColumnInfo> open = user.getOpen();
-		log.info("===========tuoNum===========");
+		// log.info("===========tuoNum===========");
+		int allFuTouNum = 0;
 		for (PBColumnInfo info : open) {
 			tuo += info.getScore();
-			log.info("tuoNum,open:+" + info.getScore());
+			// log.info("tuoNum,open:+" + info.getScore());
+			List<Integer> cards = info.getCardsList();
+			for (Integer integer : cards) {
+				if (integer == 56) {
+					allFuTouNum++;
+				}
+			}
 		}
 		int fuTouNum = 0;
 		for (Integer integer : hold) {
 			if (colorIsRed(integer)) {
 				tuo += 1;
-				log.info("tuoNum,hold:red card,+1" + ",牌:" + integer);
+				// log.info("tuoNum,hold:red card,+1" + ",牌:" + integer);
 			}
 			if (integer == 56) {
 				fuTouNum++;
 			}
 		}
+		allFuTouNum += fuTouNum;
 		Room room = RoomManager.getInstance().getRoom(user.getRoomId());
-		log.info("tuoNum,基本托数=" + tuo);
-		log.info("tuoNum,hold:斧头个次,fuTouNum=" + fuTouNum);
+		// log.info("tuoNum,基本托数=" + tuo);
+		// log.info("tuoNum,hold:斧头个次,fuTouNum=" + fuTouNum);
 		// 五张-全黑/全红=一番(5坨)
 		if (user.isFive() && open.isEmpty()) {
-			log.info("tuoNum,is five,no che tou");
+			// log.info("tuoNum,is five,no che tou");
 			if (fuTouNum == 0) {
 				if (tuo == 0) {
 					tuo = 6;
@@ -322,6 +330,10 @@ public class CardManager {
 			if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_XC_VALUE) {
 				tuo += fuTouNum;
 			}
+		}
+		if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_XC_VALUE
+				&& !isHaveCheOrTou(user) && !user.isFive()) {
+			tuo += allFuTouNum;
 		}
 		log.info("===========tuoNum===========");
 		return tuo;
@@ -751,8 +763,6 @@ public class CardManager {
 			user.setHuType(huType);
 		}
 		if (isChe(room, user, card)) {
-			// !user.isFive()&& (card.isCheMo() || card.isChu()&&
-			// card.getCardValue() == 7)
 			if (!user.isFive() && card.getCardValue() == 7) {
 				// 扯了又可以扯:自动偷(扯起来的有偷必偷),排除五张::::走的checkUserTou()
 				// 7点自动扯:通知扯7
@@ -934,10 +944,6 @@ public class CardManager {
 		if (card == null) {
 			return false;
 		}
-		if (user.isWanJiao()) {
-			log.info("isHu,false:西充弯叫后不能胡！！！");
-			return false;
-		}
 		if (!card.isCheMo() && !isFiveMo
 				&& user.getNoHuCards().contains(card.getNum())) {
 			log.info("isHu,false:不是扯投,该牌在不能胡的牌列表中");
@@ -974,6 +980,15 @@ public class CardManager {
 			boolean canHu7 = checkHu7(user, card);
 			if (!canHu7) {
 				log.info("isHu,false:不是胡的七点:" + card.getNum());
+				return false;
+			}
+		}
+		if (user.isWanJiao()) {
+			if (!isHaveCheOrTou(user)) {
+				log.info("弯叫后，吃成18坨，可以弯叫胡牌");
+				return true;
+			} else {
+				log.info("isHu,false:西充弯叫后不能胡！！！");
 				return false;
 			}
 		}
@@ -1261,16 +1276,15 @@ public class CardManager {
 			}
 		} else {
 			if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_NC_VALUE
-					|| room.getRoomType() == ENRoomType.EN_ROOM_TYPE_XC_VALUE
 					|| room.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX_VALUE) {
 				if (user.getSeatIndex() == room.getDangSeat()) {// 当家20坨
 					if (tuo < Constant.hu_zj_score) {
-						log.info("isHu,false:NC/XC/CX当家坨数不够20");
+						log.info("isHu,false:NC/CX当家坨数不够20");
 						return false;
 					}
 				} else {
 					if (tuo < Constant.hu_xj_score) {
-						log.info("isHu,false:NC/XC/CX普通家坨数不够18");
+						log.info("isHu,false:NC/CX普通家坨数不够18");
 						return false;
 					}
 				}
@@ -1464,14 +1478,12 @@ public class CardManager {
 								if (otherCard != 0) {
 									Integer card = Integer.valueOf(otherCard);
 									Integer count = holdMap.get(card);
-
 									Integer _count = holdMap.get(cardNum);
 									if (count != null && count == 1
 											&& _count == null) {
 										zhui = true;
 										deadCards.remove(card);
 										chuCard = card;
-
 										user.setThisChuIsZhui(true);
 										NotifyHandler.notifyDeathCardOfZhui(
 												user, deadCards);
@@ -1502,7 +1514,8 @@ public class CardManager {
 	 * @param card
 	 */
 	public static void checkIsWanJiao(Room room, User user, Card card) {
-		if (!room.isCanNotWanJiao() || user.isFive()) {
+		if (!room.isCanNotWanJiao() || user.isFive()) {// !room.isCanNotWanJiao()
+														// || user.isFive()
 			return;
 		}
 		if (user.getNumJiao() == 0) {
@@ -1553,11 +1566,6 @@ public class CardManager {
 		return columuInfo.build();
 	}
 
-	public static boolean isHuSiGen(Room room, User user, Card huCard) {
-
-		return false;
-	}
-
 	/**
 	 * 吃红打黑:是否吃过同点数的红牌
 	 * 
@@ -1576,11 +1584,9 @@ public class CardManager {
 			if (getCardValue(integer) == getCardValue(card)) {
 				if (colorIsRed(integer)) {
 					if (colorIsRed(card)) {
-						// addToDeathCard(card, user);
 						return true;
 					}
 				} else {
-					// addToDeathCard(card, user);
 					return true;
 				}
 			}
@@ -1607,7 +1613,6 @@ public class CardManager {
 				}
 			}
 		}
-		// -----------9.14下午注释-------------
 		for (Integer cardNum : user.getChuCards()) {
 			if (tempCard.get(cardNum) != null) {
 				tempCard.put(cardNum, tempCard.get(cardNum) + 1);
@@ -1695,7 +1700,6 @@ public class CardManager {
 		Map<Integer, Integer> map = new HashMap<>();
 		for (User _user : room.getUsers().values()) {
 			// 自己手里拿下来吃的牌也算
-			// ----------10.06加:-----------
 			if (_user.getUuid().equals(user.getUuid())) {
 				for (PBColumnInfo col : _user.getOpen()) {
 					for (Integer cardNum : col.getCardsList()) {
@@ -1772,10 +1776,8 @@ public class CardManager {
 		if (user.isFive()) {
 			return;
 		}
-		// Map<Integer, Integer> noChuMap = toMap(user.getNoChuCards());
 		Map<Integer, Integer> holdMap = toMap(user.getHold());
 		Iterator<Integer> it = holdMap.keySet().iterator();
-		// boolean send = false;
 		while (it.hasNext()) {
 			Integer card = (Integer) it.next();
 			int count = holdMap.get(card);
@@ -1790,7 +1792,6 @@ public class CardManager {
 				user.getDouble7s().remove(card);
 				user.getDouble7s().remove(card);
 				user.getDouble7s().add(card);
-				// send = true;
 			}
 		}
 
@@ -1816,28 +1817,24 @@ public class CardManager {
 				user.getNoChuCards().add(Integer.valueOf(66));
 
 				user.getDoubleZhuiCards().add(Integer.valueOf(66));
-				// send = true;
 			}
 			if (dPCount != null && dPCount == 2 && tpCount == null) {
 				user.getNoChuCards().add(Integer.valueOf(11));
 				user.getNoChuCards().add(Integer.valueOf(11));
 
 				user.getDoubleZhuiCards().add(Integer.valueOf(11));
-				// send = true;
 			}
 			if (ftCount != null && ftCount == 2 && ddCount == null) {
 				user.getNoChuCards().add(Integer.valueOf(56));
 				user.getNoChuCards().add(Integer.valueOf(56));
 
 				user.getDoubleZhuiCards().add(Integer.valueOf(56));
-				// send = true;
 			}
 			if (ddCount != null && ddCount == 2 && ftCount == null) {
 				user.getNoChuCards().add(Integer.valueOf(12));
 				user.getNoChuCards().add(Integer.valueOf(12));
 
 				user.getDoubleZhuiCards().add(Integer.valueOf(12));
-				// send = true;
 			}
 		}
 		if (!isDealCard) {// send && 发牌先不发该通知，发完后再通知

@@ -22,6 +22,7 @@ import com.huinan.server.server.net.config.ServerConfig;
 import com.huinan.server.service.data.Room;
 import com.huinan.server.service.data.User;
 import com.huinan.server.service.manager.NotifyHandler;
+import com.huinan.server.service.manager.RoomManager;
 
 /**
  *
@@ -116,7 +117,7 @@ public class UserManager {
 		} catch (SQLException e) {
 			LOGGER.error("user db error:", e);
 		} finally {
-			 DBManager.getInstance().closeConnection(conn);
+			DBManager.getInstance().closeConnection(conn);
 			DBManager.getInstance().closeStatement(sta);
 			DBManager.getInstance().closeResultSet(rs);
 		}
@@ -161,7 +162,7 @@ public class UserManager {
 			} catch (SQLException e) {
 				LOGGER.error("user db error:", e);
 			} finally {
-				 DBManager.getInstance().closeConnection(conn);
+				DBManager.getInstance().closeConnection(conn);
 				DBManager.getInstance().closeStatement(sta);
 				DBManager.getInstance().closeResultSet(rs);
 			}
@@ -183,7 +184,7 @@ public class UserManager {
 			} catch (SQLException e) {
 				LOGGER.error("user db error:", e);
 			} finally {
-				 DBManager.getInstance().closeConnection(conn);
+				DBManager.getInstance().closeConnection(conn);
 				DBManager.getInstance().closeStatement(sta);
 			}
 		});
@@ -194,7 +195,7 @@ public class UserManager {
 	 * 
 	 * @param room
 	 */
-	public void updateRankData(Room room) {
+	public void updateRankData(Room room, boolean dissolve) {
 		EXECUTOR.execute(() -> {
 			Connection conn = null;
 			PreparedStatement sta = null;
@@ -205,8 +206,9 @@ public class UserManager {
 				String dateStr = sdf.format(c.getTime());
 
 				conn = DBManager.getInstance().getConnection();
-				for (User user : room.getUsers().values()) {
 
+				int round = dissolve ? room.getRound() - 1 : room.getRound();
+				for (User user : room.getUsers().values()) {
 					sta = conn.prepareStatement(SELECT_RANK_SQL_BY_UID);
 					sta.setInt(1, Integer.valueOf(user.getUuid()));//
 					sta.setString(2, ServerConfig.getInstance().getGameCode());//
@@ -216,7 +218,7 @@ public class UserManager {
 					rs = sta.executeQuery();
 					if (rs.next()) {
 						sta = conn.prepareStatement(UPDATE_RANK_SQL);
-						sta.setInt(1, room.getRoomTable().getGameNum());// 局数
+						sta.setInt(1, round);// 局数
 						sta.setInt(2, user.getCurrency());// 积分变化
 
 						// where
@@ -228,7 +230,7 @@ public class UserManager {
 						sta.executeUpdate();
 					} else {
 						sta = conn.prepareStatement(INSERT_RANK_SQL);
-						sta.setInt(1, room.getRoomTable().getGameNum());// 局数
+						sta.setInt(1, round);// 局数
 						sta.setInt(2, user.getCurrency());// 积分变化
 						sta.setInt(3, Integer.valueOf(user.getUuid()));//
 						sta.setString(4, ServerConfig.getInstance()
@@ -242,10 +244,11 @@ public class UserManager {
 			} catch (SQLException e) {
 				LOGGER.error("user db error:", e);
 			} finally {
-				 DBManager.getInstance().closeConnection(conn);
+				DBManager.getInstance().closeConnection(conn);
 				DBManager.getInstance().closeStatement(sta);
 				DBManager.getInstance().closeResultSet(rs);
 			}
+			RoomManager.removeRoom(room);
 		});
 	}
 

@@ -27,7 +27,6 @@ public class Ready extends AbsAction {
 		CSRequestReadyForGame requestBody = request.getMsg()
 				.getCsRequestReadyForGame();
 		boolean state = requestBody.getState();
-		// GamePlayer gamePlayer = request.getGamePlayer();
 		User user = UserManager.getInstance().getUser(request.getUid());
 		Room room = RoomManager.getInstance().getRoom(user.getRoomId());
 		CpMsgData.Builder msg = CpMsgData.newBuilder();
@@ -78,17 +77,11 @@ public class Ready extends AbsAction {
 			}
 
 			if (bool) {// 房间所有人已准备游戏
-			// if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_NC_VALUE
-			// || room.getRoomType() == ENRoomType.EN_ROOM_TYPE_XC_VALUE) {
 				if (room.getRound() == 1 && room.isPiao()) {
 					RoomManager.startPiao(room);
 				} else {
 					RoomManager.startDealCard(room);
 				}
-				// } else if (room.getRoomType() ==
-				// ENRoomType.EN_ROOM_TYPE_GY_VALUE) {
-				// RoomManager.startDealCard(room);
-				// }
 			}
 		}
 	}

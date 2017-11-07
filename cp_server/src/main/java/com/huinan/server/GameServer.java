@@ -45,7 +45,7 @@ public class GameServer {
 			RedisDAO.loadFromRedis();
 			// init rabbitMQ
 			RabbitMQManager.init();
-			
+
 			GYcpInfoDAO.loadHorseNotice();
 			stop();
 			GameSvrPlayerManager.initPlayerPool();

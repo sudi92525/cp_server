@@ -32,7 +32,6 @@ public class Login extends AbsAction {
 		String uid = request.getUid();
 
 		// 1 通过token取用户数据，验证该用户是否已微信授权。若已授权，则生成UUID返回登录成功；若未授权，则返回登录失败
-		// User user = UserManager.getInstance().getUser(uid);
 		Map<String, Object> params = new HashMap<>();
 		params.put("uid", uid);
 		params.put("request", request);
@@ -52,7 +51,6 @@ public class Login extends AbsAction {
 		if (user == null) {
 			response.setState(false);
 		} else {
-			// user.setRoomCardNum(requestBody.getRoomCardNum());
 			user.setSex(requestBody.getSex());
 			user.setPic_url(requestBody.getPicUrl());
 			user.setNick(requestBody.getNick());
@@ -95,7 +93,6 @@ public class Login extends AbsAction {
 			player = GameSvrPlayerManager.createPlayer(uid);
 		}
 		if (player != null) {
-			// player.setUid(uid);
 			if (player.getClient() != null) {
 				// 踢人下线推送
 				GameSvrHandlerMgr.getInstance()
@@ -103,7 +100,6 @@ public class Login extends AbsAction {
 			}
 			player.setClient(request.getClient());
 			player.setHead((CpHead) request.getHeadLite());
-			// request.setGamePlayer(player);
 		}
 		return player;
 	}
