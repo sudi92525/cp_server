@@ -195,6 +195,7 @@ public class UserManager {
 	 * 
 	 * @param room
 	 */
+	@SuppressWarnings("resource")
 	public void updateRankData(Room room, boolean dissolve) {
 		EXECUTOR.execute(() -> {
 			Connection conn = null;
