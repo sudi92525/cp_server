@@ -42,7 +42,7 @@ public class Ready extends AbsAction {
 
 			// 2 更改房间用户准备信息
 			boolean bool = true;
-			if (room.getUsers().size() != 4) {
+			if (room.getUsers().size() != room.getUserNum()) {
 				bool = false;
 			} else {
 				for (User _user : room.getUsers().values()) {

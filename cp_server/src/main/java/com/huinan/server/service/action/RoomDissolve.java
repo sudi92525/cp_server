@@ -63,7 +63,7 @@ public class RoomDissolve extends AbsAction {
 				// 推送状态
 				notifyDissolveState(user, room);
 
-				if (agreeNum >= 3) {
+				if (agreeNum >= room.getUserNum() - 1) {
 					// 解散成功
 					dissolveNotify(room, user, true);
 				} else if (noAgreeNum >= 1) {
@@ -113,8 +113,8 @@ public class RoomDissolve extends AbsAction {
 		if (dissolve) {
 			// 大结算
 			if (room.isStart()) {
-				RoomManager.gameOverTotal(room, true, true,true);
-			}else{
+				RoomManager.gameOverTotal(room, true, true, true);
+			} else {
 				RoomManager.removeRoom(room);
 			}
 		} else {

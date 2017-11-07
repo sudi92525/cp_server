@@ -55,7 +55,7 @@ public class RoomJoin extends AbsAction {
 				return;
 			}
 			// 4 将用户信息加入该房间，并更新系统缓存房间数据
-			for (int i = 1; i <= 4; i++) {
+			for (int i = 1; i <= room.getUserNum(); i++) {
 				User _user = room.getUsers().get(i);
 				if (_user == null) {
 					user.setSeatIndex(i);
@@ -67,7 +67,7 @@ public class RoomJoin extends AbsAction {
 
 			// 7 响应该用户，房间信息与房间所有用户信息
 			response.setTableInfo(room.getRoomTable());// 设置房间信息
-			for (int i = 1; i <= 4; i++) {
+			for (int i = 1; i <= room.getUserNum(); i++) {
 				User _user = room.getUsers().get(i);
 				if (_user != null) {
 					response.addUserInfo(ProtoBuilder.buildUserInfo(_user));
@@ -119,7 +119,7 @@ public class RoomJoin extends AbsAction {
 			if (room == null) {
 				return ENMessageError.RESPONSE_ROOM_ID_ERROR_VALUE;
 			}
-			if (room.getUsers().size() == Constant.PLAYER_NUM) {
+			if (room.getUsers().size() == room.getUserNum()) {
 				return ENMessageError.RESPONSE_ROOM_FULL_VALUE;
 			}
 		}
@@ -135,7 +135,7 @@ public class RoomJoin extends AbsAction {
 		room.setLastEnterTime(System.currentTimeMillis());
 		if (!room.isStart()) {
 			join.setTableState(Constant.cp_status_wait);
-			for (int i = 1; i <= 4; i++) {// 准备阶段发userInfo
+			for (int i = 1; i <= room.getUserNum(); i++) {// 准备阶段发userInfo
 				User _user = room.getUsers().get(i);
 				if (_user != null) {
 					join.addUserInfo(ProtoBuilder.buildUserInfo(_user));

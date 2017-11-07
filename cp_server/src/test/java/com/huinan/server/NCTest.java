@@ -154,9 +154,10 @@ public class NCTest extends TestCase {
 
 	public void testRandomZhuang() {
 		int lastZhuang = 1;
-		int seat2 = RoomManager.getLastSeat(lastZhuang);
+		// int seat2 = RoomManager.getLastSeat(lastZhuang);
 		// 上把庄家的对门开始数
-		int seatDuiMen = RoomManager.getLastSeat(seat2);
+		// int seatDuiMen = RoomManager.getLastSeat(seat2);
+		int seatDuiMen = 3;
 		// 随机一张牌
 		int index = new Random().nextInt(84) + 1;
 		int zhuangCard = 13;// room.getResetCards().get(index);
@@ -210,23 +211,23 @@ public class NCTest extends TestCase {
 		String dateStr = sdf.format(c.getTime());
 		System.out.println("date string=" + dateStr);
 	}
-	
-	public void testList(){
+
+	public void testList() {
 		List<Integer> list = new ArrayList<>();
 		list.add(5);
 		list.add(5);
 		list.add(2);
-		
+
 		List<Integer> list2 = new ArrayList<>();
 		list2.add(5);
 		list2.add(2);
-		
+
 		list.removeAll(list2);
-		
+
 		for (int i = 0; i < list.size(); i++) {
-//			if(list.get(i)==5){
-//				list.remove(i);
-//			}
+			// if(list.get(i)==5){
+			// list.remove(i);
+			// }
 			System.out.println("remove all :" + list.get(i));
 		}
 		System.out.println("list size :" + list.size());

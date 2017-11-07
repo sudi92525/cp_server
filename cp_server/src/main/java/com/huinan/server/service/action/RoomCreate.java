@@ -41,7 +41,7 @@ public class RoomCreate extends AbsAction {
 			user.setSeatIndex(1);
 			user.setRoomId(room.getTid());
 			room.getUsers().put(user.getSeatIndex(), user);
-			for (int i = 1; i <= 4; i++) {
+			for (int i = 1; i <= room.getUserNum(); i++) {
 				if (i == user.getSeatIndex()) {
 					response.addUserInfo(ProtoBuilder.buildUserInfo(user));
 				} else {
@@ -78,7 +78,7 @@ public class RoomCreate extends AbsAction {
 			creator.setIsFanXjHave56(room.isFanFiveHave56());
 			creator.setIsFanSan7(room.isCheAll7Fan());
 			creator.setIsCanNotWanJiao(room.isCanNotWanJiao());
-			
+
 			response.setTableInfo(creator);
 			room.setRoomTable(creator.build());
 
@@ -113,7 +113,7 @@ public class RoomCreate extends AbsAction {
 			}
 		} else if (useCardType == ERoomCardType.AA.getValue()) {
 			// 均摊
-			float need = cardNum / Constant.PLAYER_NUM * 1F;
+			float need = cardNum / Constant.PLAYER_NUM * 1F;// TODO:传人数
 			if (user.getRoomCardNum() < Math.ceil(need)) {
 				return ENMessageError.RESPONSE_ROOMCARD_LIMIT.getNumber();
 			}

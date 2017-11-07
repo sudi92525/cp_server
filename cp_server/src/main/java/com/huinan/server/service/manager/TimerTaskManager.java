@@ -77,7 +77,7 @@ public class TimerTaskManager {
 							} else if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX_VALUE) {
 								cxNum++;
 							}
-							if (room.isStart() && room.getUsers().size() == 4) {
+							if (room.isStart() && room.getUsers().size() == room.getUserNum()) {
 								playRoomNum++;
 								if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_GY_VALUE) {
 									gyPlayNum++;

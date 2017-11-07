@@ -890,9 +890,10 @@ public class CardManager {
 	 * @return
 	 */
 	public static boolean isChi(User user, Card card) {
+		Room room = RoomManager.getInstance().getRoom(user.getRoomId());
 		// 判断位置
-		int nextSeat = RoomManager.getNextSeat(card.getSeat());
-		if (user.isFive()) {//
+		int nextSeat = RoomManager.getNextSeat(room, card.getSeat());
+		if (user.isFive()) {
 			return false;
 		}
 		if (card.isChu()) {
