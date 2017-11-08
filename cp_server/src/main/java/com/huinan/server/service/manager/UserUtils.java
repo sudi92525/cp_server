@@ -27,17 +27,23 @@ public class UserUtils {
 			List<PBColumnInfo> cols = action.getColInfoList();
 			if (cols != null && !cols.isEmpty()) {
 				List<PBColumnInfo> newCols = new ArrayList<>();
-				newCols.addAll(cols);
-				for (int i = 0; i < newCols.size(); i++) {
-					PBColumnInfo pbColumnInfo = newCols.get(i);
+				for (int i = 0; i < cols.size(); i++) {
+					PBColumnInfo pbColumnInfo = cols.get(i);
 					if (pbColumnInfo.getIsFan()) {
-						PBColumnInfo.Builder build = pbColumnInfo.toBuilder();
+						PBColumnInfo.Builder build = PBColumnInfo.newBuilder();
+						build.setScore(pbColumnInfo.getScore());
+						build.addAllCards(pbColumnInfo.getCardsList());
+						build.setColType(pbColumnInfo.getColType());
 						build.setIsFan(false);
-						newCols.set(i, build.build());
+						build.setIsQishouTou(pbColumnInfo.getIsQishouTou());
+						newCols.add(build.build());
 					}
 				}
-				action.toBuilder().clearColInfo();
-				action.toBuilder().addAllColInfo(newCols);
+				PBAction.Builder newAction = ProtoBuilder.buildPBAction(action);
+				newAction.clearColInfo();
+				newAction.addAllColInfo(newCols);
+				flow.clearAction();
+				flow.setAction(newAction.build());
 			}
 		}
 		if (user.getPlayBack() == null) {

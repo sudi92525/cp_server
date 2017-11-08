@@ -355,7 +355,7 @@ public class RoomManager {
 		// TODO 写死牌
 		// if (room.getRound() == 1) {
 		// for (int i = 0; i < 84; i++) {
-		// cards.add(15);
+		// cards.add(24);
 		// cards.add(15);
 		// cards.add(15);
 		// cards.add(15);
@@ -544,13 +544,13 @@ public class RoomManager {
 				user.getHold().add(card9);
 				int card10 = 15;
 				user.getHold().add(card10);
-				int card11 = 16;
+				int card11 = 23;
 				user.getHold().add(card11);
 				int card12 = 16;
 				user.getHold().add(card12);
 				int card13 = 34;
 				user.getHold().add(card13);
-				int card14 = 34;
+				int card14 = 25;
 				user.getHold().add(card14);
 				int card15 = 56;
 				user.getHold().add(card15);
@@ -559,13 +559,13 @@ public class RoomManager {
 				int card17 = 46;
 				user.getHold().add(card17);
 			} else if (i == 2) {
-				int card1 = 33;
+				int card1 = 11;
 				user.getHold().add(card1);
 				int card2 = 11;
 				user.getHold().add(card2);
 				int card3 = 66;
 				user.getHold().add(card3);
-				int card4 = 24;
+				int card4 = 66;
 				user.getHold().add(card4);
 				int card5 = 35;
 				user.getHold().add(card5);
@@ -573,9 +573,9 @@ public class RoomManager {
 				user.getHold().add(card6);
 				int card7 = 22;
 				user.getHold().add(card7);
-				int card8 = 44;
+				int card8 = 16;
 				user.getHold().add(card8);
-				int card9 = 24;
+				int card9 = 16;
 				user.getHold().add(card9);
 				int card10 = 25;
 				user.getHold().add(card10);
@@ -666,8 +666,9 @@ public class RoomManager {
 					}
 				}
 
-				if (user.isFive()) {
-					// 向尾家发送CSNotifySeatOperationChoice，让尾家选择是否头牌。尾家不是必须偷牌
+				if (user.isFive()
+						&& room.getRoomType() != ENRoomType.EN_ROOM_TYPE_NC_VALUE) {
+					// 向尾家发送CSNotifySeatOperationChoice，让尾家选择是否偷牌。尾家不是必须偷牌
 					CpMsgData.Builder msg = CpMsgData.newBuilder();
 					CSNotifySeatOperationChoice.Builder choice = CSNotifySeatOperationChoice
 							.newBuilder();
@@ -737,7 +738,9 @@ public class RoomManager {
 						return false;
 					}
 					return true;
-				} else {
+				} else if (!user.isFive()
+						|| user.isFive()
+						&& room.getRoomType() == ENRoomType.EN_ROOM_TYPE_NC_VALUE) {
 					// 更变玩家手牌信息
 					user.getOpen().add(columuInfo.build());// 将偷牌数据放入打出去的组(吃碰杠等)
 					// 通知偷牌消息
@@ -776,9 +779,17 @@ public class RoomManager {
 						RoomManager.isBaoFan(user, room, destCard, null, count);
 						// 通知发一张牌
 						touPai(room, user, 1);
+						if (user.isFive()
+								&& room.getRoomType() == ENRoomType.EN_ROOM_TYPE_NC_VALUE) {
+							return false;
+						}
 						return true;
 					} else if (num == 4) { // 偷两张
 						touPai(room, user, 2);
+						if (user.isFive()
+								&& room.getRoomType() == ENRoomType.EN_ROOM_TYPE_NC_VALUE) {
+							return false;
+						}
 						return true;
 					}
 				}

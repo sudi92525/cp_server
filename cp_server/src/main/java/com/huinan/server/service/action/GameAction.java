@@ -105,6 +105,9 @@ public class GameAction extends AbsAction {
 					if (room.getCanHuSeat().contains(user.getSeatIndex())) {
 						room.getCanHuSeat().remove(
 								Integer.valueOf(user.getSeatIndex()));
+						user.getNoHuCards().addAll(
+								CardManager.getSameCards(room.getCurrentCard()
+										.getNum()));
 					}
 					if (room.canCheNow()) {
 						// 无人胡了,也无人将要胡: 执行扯
@@ -116,11 +119,16 @@ public class GameAction extends AbsAction {
 					room.getChiChoices().put(user.getSeatIndex(), true);
 					user.getChoiceChiCards().addAll(req.getCardsList());
 					if (room.getCanCheSeat() == user.getSeatIndex()) {
+						user.getNoCheCards()
+								.add(room.getCurrentCard().getNum());
 						room.setCanCheSeat(0);
 					}
 					if (room.getCanHuSeat().contains(user.getSeatIndex())) {
 						room.getCanHuSeat().remove(
 								Integer.valueOf(user.getSeatIndex()));
+						user.getNoHuCards().addAll(
+								CardManager.getSameCards(room.getCurrentCard()
+										.getNum()));
 					}
 					if (room.canChiNow(user)) {
 						// 无人胡和扯,也无人将要胡和扯: 执行吃
@@ -499,7 +507,7 @@ public class GameAction extends AbsAction {
 		user.setZhaoChiNoGe(false);
 		user.setWanJiao(false);
 		user.setNumJiao(0);
-		
+
 		// 扯牌推送
 		NotifyHandler.notifyActionFlow(room, user, destCard,
 				columnInfo.build(), type, false);
@@ -557,7 +565,8 @@ public class GameAction extends AbsAction {
 		// NotifyHandler.notifyActionFlow(room, user, destCard, null,
 		// ENActionType.EN_ACTION_CHIKAN, false);
 		// } else
-		if (count == 4) {
+		if (count == 4
+				&& room.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX_VALUE) {
 			NotifyHandler.notifyActionFlow(room, user, destCard, null,
 					ENActionType.EN_ACTION_HU_SIGEN, false);
 		} else {
@@ -853,7 +862,7 @@ public class GameAction extends AbsAction {
 					}
 				}
 			}
-			//点过后,就执行了,,被人抢了:不加入死牌,自己优先级最高,加入不能出,,什么的列表
+			// 点过后,就执行了,,被人抢了:不加入死牌,自己优先级最高,加入不能出,,什么的列表
 			if (!have) {
 				// 都没人要,把牌加入能吃玩家的不能吃列表
 				for (Integer canChiSeat : room.getCanChiSeatTemp()) {

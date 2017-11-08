@@ -992,6 +992,21 @@ public class CardManager {
 				return false;
 			}
 		}
+		if (user.isFive()
+				&& room.getRoomType() == ENRoomType.EN_ROOM_TYPE_XC_VALUE) {
+			Map<Integer, Integer> holdMap = toMap(newHold);
+			boolean haveTou = false;
+			for (Integer integer : holdMap.values()) {
+				if (integer >= 3) {
+					haveTou = true;
+					break;
+				}
+			}
+			if (haveTou) {
+				log.info("isHu,false:西充小家有扯不能割！！！");
+				return false;
+			}
+		}
 		log.info("==========is Hu=true============");
 		return true;
 	}
@@ -1220,8 +1235,7 @@ public class CardManager {
 	 */
 	private static boolean checkNCChiTui(Room room, User user, Integer card) {
 		boolean tui = false;
-		if (room.getRoomType() != ENRoomType.EN_ROOM_TYPE_NC_VALUE
-				&& room.getRoomType() != ENRoomType.EN_ROOM_TYPE_XC_VALUE) {
+		if (room.getRoomType() != ENRoomType.EN_ROOM_TYPE_NC_VALUE) {
 			return tui;
 		}
 		int cardValue = getCardValue(card);
