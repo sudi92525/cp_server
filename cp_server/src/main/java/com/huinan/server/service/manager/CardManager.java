@@ -358,7 +358,7 @@ public class CardManager {
 				fan++;
 				log.info("庄家大胡，加1翻");
 			}
-		} else if (user.getSeatIndex() == room.getDangSeat()) {
+		} else if (user.getSeatIndex() == room.getDangSeat() && !user.isFive()) {
 			if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_XC_VALUE) {
 				if (tuo >= Constant.TUO_XIANJIA_FAN) {
 					fan++;

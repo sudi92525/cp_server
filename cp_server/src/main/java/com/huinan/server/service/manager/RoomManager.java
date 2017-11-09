@@ -596,7 +596,7 @@ public class RoomManager {
 			} else if (i == 3) {
 				int card1 = 24;
 				user.getHold().add(card1);
-				int card2 = 26;
+				int card2 = 44;
 				user.getHold().add(card2);
 				int card3 = 44;
 				user.getHold().add(card3);
