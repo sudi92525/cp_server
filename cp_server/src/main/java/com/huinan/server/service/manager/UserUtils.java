@@ -37,6 +37,8 @@ public class UserUtils {
 						build.setIsFan(false);
 						build.setIsQishouTou(pbColumnInfo.getIsQishouTou());
 						newCols.add(build.build());
+					}else {
+						newCols.add(pbColumnInfo);
 					}
 				}
 				PBAction.Builder newAction = ProtoBuilder.buildPBAction(action);

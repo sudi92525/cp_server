@@ -350,6 +350,8 @@ public class CardManager {
 		if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_MY_VALUE) {
 			return fanNumMY(user, room);
 		}
+
+		// 大胡计算
 		if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_GY_VALUE
 				&& user.getSeatIndex() == room.getZhuangSeat()) {
 			if (tuo >= Constant.TUO_ZHUANG_FAN) {
@@ -415,8 +417,9 @@ public class CardManager {
 			}
 		}
 
+		// 扯牌番数
 		int blackKan = 0;// 几坎黑
-		int che7Num = 0;
+		int che7Num = 0;// 几砍七
 		for (PBColumnInfo info : open) {
 			int type = info.getColType().getNumber();
 			if (type == ENColType.EN_COL_TYPE_TOU_VALUE) {
@@ -426,13 +429,14 @@ public class CardManager {
 				}
 				if (info.getCardsCount() == 4) {
 					if (room.getFanPais().contains(card)) {
-						if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_GY_VALUE) {
+						if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_GY_VALUE
+								|| room.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX_VALUE) {
 							if (user.isFive()) {
 								fan += 3;// 小家番牌龙
-								log.info("GY小家偷番牌龙，加3翻");
+								log.info("GY/CX小家偷番牌龙，加3翻");
 							} else {
 								fan += 2;// 普通家番牌龙
-								log.info("GY普通家偷番牌龙，加2翻");
+								log.info("GY/CX普通家偷番牌龙，加2翻");
 							}
 						} else {
 							if (info.getIsQishouTou()) {
@@ -454,13 +458,14 @@ public class CardManager {
 							}
 						}
 					} else {
-						if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_GY_VALUE) {
+						if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_GY_VALUE
+								|| room.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX_VALUE) {
 							if (user.isFive()) {// 小家普通牌龙
 								fan += 2;
-								log.info("GY小家偷普通牌龙，加2翻");
+								log.info("GY/CX小家偷普通牌龙，加2翻");
 							} else {
 								fan++;
-								log.info("GY普通家偷普通牌龙，加1翻");
+								log.info("GY/CX普通家偷普通牌龙，加1翻");
 							}
 						} else {
 							if (user.isFive()) {
@@ -474,13 +479,14 @@ public class CardManager {
 					}
 				} else {
 					if (room.getFanPais().contains(card)) {
-						if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_GY_VALUE) {
+						if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_GY_VALUE
+								|| room.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX_VALUE) {
 							if (user.isFive()) {// 小家偷番牌
 								fan += 2;
-								log.info("GY小家偷番牌，加2翻");
+								log.info("GY/CX小家偷番牌，加2翻");
 							} else {
 								fan += 1;
-								log.info("GY普通家偷番牌，加1翻");
+								log.info("GY/CX普通家偷番牌，加1翻");
 							}
 						} else {
 							if (user.isFive()) {// 小家偷番牌
@@ -493,9 +499,10 @@ public class CardManager {
 						}
 					} else {
 						if (user.isFive()
-								&& room.getRoomType() == ENRoomType.EN_ROOM_TYPE_GY_VALUE) {// 小家普通牌
+								&& (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_GY_VALUE || room
+										.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX_VALUE)) {// 小家普通牌
 							fan += 1;
-							log.info("GY小家偷普通牌，加1翻");
+							log.info("GY/CX小家偷普通牌，加1翻");
 						}
 					}
 				}
@@ -508,13 +515,14 @@ public class CardManager {
 					che7Num++;
 				}
 				if (room.getFanPais().contains(card)) {
-					if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_GY_VALUE) {
+					if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_GY_VALUE
+							|| room.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX_VALUE) {
 						if (user.isFive()) {// 小家扯番牌
 							fan += 2;
-							log.info("GY小家扯番牌，加2翻");
+							log.info("GY/CX小家扯番牌，加2翻");
 						} else {
 							fan++;
-							log.info("GY普通家扯番牌，加1翻");
+							log.info("GY/CX普通家扯番牌，加1翻");
 						}
 					} else {
 						if (user.isFive()) {// 小家扯番牌
@@ -527,9 +535,10 @@ public class CardManager {
 					}
 				} else {
 					if (user.isFive()
-							&& room.getRoomType() == ENRoomType.EN_ROOM_TYPE_GY_VALUE) {// 小家扯番牌
+							&& (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_GY_VALUE || room
+									.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX_VALUE)) {// 小家扯番牌
 						fan += 1;
-						log.info("GY小家扯普通牌，加1翻");
+						log.info("GY/CX小家扯普通牌，加1翻");
 					}
 				}
 				if (!colorIsRed(card)) {

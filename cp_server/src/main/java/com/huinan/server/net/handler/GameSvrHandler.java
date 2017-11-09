@@ -221,12 +221,12 @@ public class GameSvrHandler extends ProtoHandler {
 
 	@Override
 	protected void reSet() {
-		LOGGER.info("reSet-----------gamePlayers=:"
-				+ GameSvrPlayerManager.getPlayers().size());
+		// LOGGER.info("reSet-----------gamePlayers=:"
+		// + GameSvrPlayerManager.getPlayers().size());
 		GamePlayer gamePlayer = GameSvrPlayerManager
 				.getPlayerByChannel(getChannel());
 		if (gamePlayer != null) {
-			LOGGER.info("reSet-----------not null=:");
+			// LOGGER.info("reSet-----------not null=:");
 			gamePlayer.logout();
 			GameSvrPlayerManager.deletePlayer(gamePlayer);
 			// gamePlayer = null;

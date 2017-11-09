@@ -538,19 +538,19 @@ public class RoomManager {
 				user.getHold().add(card6);
 				int card7 = 44;
 				user.getHold().add(card7);
-				int card8 = 44;
+				int card8 = 35;
 				user.getHold().add(card8);
-				int card9 = 24;
+				int card9 = 44;
 				user.getHold().add(card9);
-				int card10 = 15;
+				int card10 = 26;
 				user.getHold().add(card10);
-				int card11 = 23;
+				int card11 = 35;
 				user.getHold().add(card11);
 				int card12 = 16;
 				user.getHold().add(card12);
 				int card13 = 34;
 				user.getHold().add(card13);
-				int card14 = 25;
+				int card14 = 12;
 				user.getHold().add(card14);
 				int card15 = 56;
 				user.getHold().add(card15);
@@ -561,9 +561,9 @@ public class RoomManager {
 			} else if (i == 2) {
 				int card1 = 11;
 				user.getHold().add(card1);
-				int card2 = 11;
+				int card2 = 12;
 				user.getHold().add(card2);
-				int card3 = 66;
+				int card3 = 56;
 				user.getHold().add(card3);
 				int card4 = 66;
 				user.getHold().add(card4);
@@ -573,15 +573,15 @@ public class RoomManager {
 				user.getHold().add(card6);
 				int card7 = 22;
 				user.getHold().add(card7);
-				int card8 = 16;
+				int card8 = 26;
 				user.getHold().add(card8);
-				int card9 = 16;
+				int card9 = 33;
 				user.getHold().add(card9);
-				int card10 = 25;
+				int card10 = 45;
 				user.getHold().add(card10);
 				int card11 = 25;
 				user.getHold().add(card11);
-				int card12 = 34;
+				int card12 = 13;
 				user.getHold().add(card12);
 				int card13 = 34;
 				user.getHold().add(card13);
@@ -589,16 +589,16 @@ public class RoomManager {
 				user.getHold().add(card14);
 				int card15 = 36;
 				user.getHold().add(card15);
-				int card16 = 22;
+				int card16 = 15;
 				user.getHold().add(card16);
-				int card17 = 46;
+				int card17 = 16;
 				user.getHold().add(card17);
 			} else if (i == 3) {
-				int card1 = 12;
+				int card1 = 24;
 				user.getHold().add(card1);
-				int card2 = 56;
+				int card2 = 26;
 				user.getHold().add(card2);
-				int card3 = 24;
+				int card3 = 44;
 				user.getHold().add(card3);
 				int card4 = 44;
 				user.getHold().add(card4);
@@ -779,14 +779,18 @@ public class RoomManager {
 						RoomManager.isBaoFan(user, room, destCard, null, count);
 						// 通知发一张牌
 						touPai(room, user, 1);
-						if (user.isFive()
+						if (faPai) {
+							return true;
+						} else if (user.isFive()
 								&& room.getRoomType() == ENRoomType.EN_ROOM_TYPE_NC_VALUE) {
 							return false;
 						}
 						return true;
 					} else if (num == 4) { // 偷两张
 						touPai(room, user, 2);
-						if (user.isFive()
+						if (faPai) {
+							return true;
+						} else if (user.isFive()
 								&& room.getRoomType() == ENRoomType.EN_ROOM_TYPE_NC_VALUE) {
 							return false;
 						}
@@ -812,6 +816,8 @@ public class RoomManager {
 					CardManager.checkBaoZiOrChuPai(room, zhuang);
 				}
 				room.setStartChu(true);
+			} else {
+				return true;
 			}
 		}
 		return false;
@@ -828,14 +834,14 @@ public class RoomManager {
 	 */
 	public static void isBaoFan(User user, Room room, Card destCard,
 			Integer chiCard, int count) {
-		if (!room.isBaoFan()) {
-			return;
-		}
+		// if (!room.isBaoFan()) {
+		// return;
+		// }
 		if (chiCard != null) {// 吃成四个
 			int myCardCount = CardManager.getCardCountOfAll(user, chiCard);
 			// 包翻:扯/偷过,又吃一个
 			if (count == 4 && CardManager.getCardIsChe(user, destCard.getNum())) {
-				if (destCard.isChu()) {
+				if (destCard.isChu() && room.isBaoFan()) {
 					// 打出牌的包翻
 					if (user.getBaoFans().get(destCard.getSeat()) != null) {
 						user.getBaoFans().put(destCard.getSeat(),
@@ -843,7 +849,9 @@ public class RoomManager {
 					} else {
 						user.getBaoFans().put(destCard.getSeat(), 1);
 					}
-				} else if (destCard.isOpen()) {
+				} else if (destCard.isOpen()
+						&& (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_GY_VALUE || room
+								.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX_VALUE)) {
 					// 翻開的，自己包煩
 					if (user.getBaoFans().get(user.getSeatIndex()) != null) {
 						user.getBaoFans().put(user.getSeatIndex(),
@@ -854,7 +862,10 @@ public class RoomManager {
 				}
 			}
 			// 自己手里的四根，自己包番
-			if (myCardCount == 4 && CardManager.getCardIsChe(user, chiCard)) {
+			if (myCardCount == 4
+					&& CardManager.getCardIsChe(user, chiCard)
+					&& (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_GY_VALUE || room
+							.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX_VALUE)) {
 				if (user.getBaoFans().get(user.getSeatIndex()) != null) {
 					user.getBaoFans().put(user.getSeatIndex(),
 							user.getBaoFans().get(user.getSeatIndex()) + 1);
@@ -865,7 +876,7 @@ public class RoomManager {
 		} else {// 扯后对成四个：苍溪
 			if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX_VALUE) {
 				if (count == 4) {
-					if (destCard.isChu()) {
+					if (destCard.isChu() && room.isBaoFan()) {
 						// 打出牌的包翻
 						if (user.getBaoFans().get(destCard.getSeat()) != null) {
 							user.getBaoFans()
@@ -911,6 +922,7 @@ public class RoomManager {
 			boolean lan = true;
 			User user = room.getUsers().get(seat);
 			if (!user.getOpen().isEmpty()) {
+				seat = RoomManager.getNextSeat(seat);
 				continue;
 			}
 			Map<Integer, Integer> map = CardManager.toMap(user.getHold());
