@@ -743,6 +743,7 @@ public class CardManager {
 		return false;
 	}
 
+
 	/**
 	 * 计算user可操作列表（出牌，翻牌，偷牌）
 	 * 
@@ -753,25 +754,7 @@ public class CardManager {
 	 */
 	public static boolean logicUserActionList(Room room, Card card, User user,
 			boolean isFiveMo, boolean sendNotify) {
-		boolean hu = isHu(user, card, isFiveMo);
-		if (hu) {
-			room.getCanHuSeat().add(user.getSeatIndex());
-			user.getActions().add(ENActionType.EN_ACTION_HU);
-			int huType = 0;
-			if (user.getSeatIndex() == card.getSeat()) {
-				if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_MY_VALUE
-						&& card.isCheMo()) {
-					huType = 2;// MY点炮
-				} else {
-					huType = 1;// 自摸
-				}
-			} else if (card.isChu()) {
-				huType = 2;// 点炮
-			} else {
-				huType = 3;// 别人翻开的
-			}
-			user.setHuType(huType);
-		}
+		logicUserIsHu(room, card, user, isFiveMo);
 		if (isChe(room, user, card)) {
 			if (!user.isFive() && card.getCardValue() == 7) {
 				// 扯了又可以扯:自动偷(扯起来的有偷必偷),排除五张::::走的checkUserTou()
@@ -800,6 +783,29 @@ public class CardManager {
 			notifyChoice(room, card, user);
 		}
 		return false;
+	}
+
+	public static void logicUserIsHu(Room room, Card card, User user,
+			boolean isFiveMo) {
+		boolean hu = isHu(user, card, isFiveMo);
+		if (hu) {
+			room.getCanHuSeat().add(user.getSeatIndex());
+			user.getActions().add(ENActionType.EN_ACTION_HU);
+			int huType = 0;
+			if (user.getSeatIndex() == card.getSeat()) {
+				if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_MY_VALUE
+						&& card.isCheMo()) {
+					huType = 2;// MY点炮
+				} else {
+					huType = 1;// 自摸
+				}
+			} else if (card.isChu()) {
+				huType = 2;// 点炮
+			} else {
+				huType = 3;// 别人翻开的
+			}
+			user.setHuType(huType);
+		}
 	}
 
 	public static boolean checkTianHu(Room room, User zhuang) {

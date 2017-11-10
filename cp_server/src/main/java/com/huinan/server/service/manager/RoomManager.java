@@ -1023,8 +1023,7 @@ public class RoomManager {
 			// 五张摸起来最后一张，没扯过牌就黄
 			if (user.isFive() && resetCardCount == 0
 					&& user.getOpen().isEmpty()) {
-				CardManager.logicUserActionList(room, destCard, user, true,
-						true);
+				CardManager.logicUserIsHu(room, destCard, user, true);
 				if (!room.getCanHuSeat().contains(
 						Integer.valueOf(user.getSeatIndex()))) {
 					// 小家摸牌过后下面剩余一张,黄，不打了
@@ -1037,8 +1036,7 @@ public class RoomManager {
 			if (resetCardCount == 0) {
 				if (destCard.isCheMo()) {
 					// 是否胡
-					CardManager.logicUserActionList(room, destCard, user, true,
-							true);
+					CardManager.logicUserIsHu(room, destCard, user, true);
 					if (!room.getCanHuSeat().contains(
 							Integer.valueOf(user.getSeatIndex()))) {
 						destCard.setOpen(true);
@@ -1059,8 +1057,7 @@ public class RoomManager {
 				if (destCard.isCheMo()) {
 					return false;
 				}
-				CardManager.logicUserActionList(room, destCard, user, true,
-						true);
+				CardManager.logicUserIsHu(room, destCard, user, true);
 				if (!room.getCanHuSeat().contains(
 						Integer.valueOf(user.getSeatIndex()))) {
 					// 小家摸牌过后下面剩余一张,黄，不打了
