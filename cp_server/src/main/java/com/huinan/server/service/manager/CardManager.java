@@ -600,11 +600,12 @@ public class CardManager {
 				log.info("三坎黑，加1翻");
 			}
 		}
-		if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_GY_VALUE) {
+		if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_GY_VALUE
+				|| room.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX_VALUE) {
 			if (!user.getBaoFans().isEmpty()) {
 				for (Integer num : user.getBaoFans().values()) {
 					fan += num;
-					log.info("广元吃成四根,加" + num + "翻");
+					log.info("广元/CX吃成四根,加" + num + "翻");
 				}
 			}
 			// 计算四根的个数
@@ -616,7 +617,7 @@ public class CardManager {
 					int card = info.getCards(0);
 					if (user.getHold().contains(Integer.valueOf(card))) {
 						siGenNum++;
-						log.info("广元手里的四根,加" + 1 + "翻");
+						log.info("广元/CX手里的四根,加" + 1 + "翻");
 					}
 				}
 			}
