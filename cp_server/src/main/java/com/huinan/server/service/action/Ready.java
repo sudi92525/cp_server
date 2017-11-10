@@ -90,6 +90,9 @@ public class Ready extends AbsAction {
 		if (room == null) {
 			return ENMessageError.RESPONSE_ROOM_ID_ERROR.getNumber();
 		}
+		if (user.isReady() == state) {
+			return ENMessageError.RESPONSE_FAIL_VALUE;
+		}
 		return 0;
 	}
 

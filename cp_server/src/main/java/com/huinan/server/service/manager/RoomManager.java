@@ -354,8 +354,8 @@ public class RoomManager {
 		// }
 		// TODO 写死牌
 		// if (room.getRound() == 1) {
-		// for (int i = 0; i < 84; i++) {
-		// cards.add(24);
+		// for (int i = 0; i < 84; i++) {// 84
+		// cards.add(44);
 		// cards.add(15);
 		// cards.add(15);
 		// cards.add(15);
@@ -382,7 +382,8 @@ public class RoomManager {
 		}
 		room.setJiaoPaiSeat(seatDuiMen);
 		// 随机一张牌
-		int index = new Random().nextInt(84);
+		// TODO
+		int index = new Random().nextInt(84);// 84
 		int zhuangCard = room.getResetCards().get(index);
 		room.setChoiceZhuangCard(zhuangCard);
 
@@ -526,11 +527,11 @@ public class RoomManager {
 			} else if (i == 1) {
 				int card1 = 56;
 				user.getHold().add(card1);
-				int card2 = 12;
+				int card2 = 56;
 				user.getHold().add(card2);
 				int card3 = 46;
 				user.getHold().add(card3);
-				int card4 = 13;
+				int card4 = 46;
 				user.getHold().add(card4);
 				int card5 = 45;
 				user.getHold().add(card5);
@@ -540,23 +541,23 @@ public class RoomManager {
 				user.getHold().add(card7);
 				int card8 = 35;
 				user.getHold().add(card8);
-				int card9 = 44;
+				int card9 = 35;
 				user.getHold().add(card9);
 				int card10 = 26;
 				user.getHold().add(card10);
-				int card11 = 35;
+				int card11 = 34;
 				user.getHold().add(card11);
-				int card12 = 16;
+				int card12 = 34;
 				user.getHold().add(card12);
 				int card13 = 34;
 				user.getHold().add(card13);
-				int card14 = 12;
+				int card14 = 11;
 				user.getHold().add(card14);
-				int card15 = 56;
+				int card15 = 66;
 				user.getHold().add(card15);
-				int card16 = 13;
+				int card16 = 24;
 				user.getHold().add(card16);
-				int card17 = 46;
+				int card17 = 15;
 				user.getHold().add(card17);
 			} else if (i == 2) {
 				int card1 = 11;
@@ -594,13 +595,13 @@ public class RoomManager {
 				int card17 = 16;
 				user.getHold().add(card17);
 			} else if (i == 3) {
-				int card1 = 24;
+				int card1 = 12;
 				user.getHold().add(card1);
-				int card2 = 44;
+				int card2 = 12;
 				user.getHold().add(card2);
-				int card3 = 44;
+				int card3 = 12;
 				user.getHold().add(card3);
-				int card4 = 44;
+				int card4 = 56;
 				user.getHold().add(card4);
 				int card5 = 24;
 				user.getHold().add(card5);
@@ -774,7 +775,7 @@ public class RoomManager {
 					if (num == 3) {// 偷一张
 						Card destCard = new Card(card, user.getSeatIndex(),
 								false, false, false, false);
-						int count = CardManager.getCardCountOfAll(user,
+						int count = CardManager.getCardCountOfOpen(user,
 								destCard.getNum());
 						RoomManager.isBaoFan(user, room, destCard, null, count);
 						// 通知发一张牌
@@ -838,7 +839,7 @@ public class RoomManager {
 		// return;
 		// }
 		if (chiCard != null) {// 吃成四个
-			int myCardCount = CardManager.getCardCountOfAll(user, chiCard);
+			int myCardCount = CardManager.getCardCountOfOpen(user, chiCard);
 			// 包翻:扯/偷过,又吃一个
 			if (count == 4 && CardManager.getCardIsChe(user, destCard.getNum())) {
 				if (destCard.isChu() && room.isBaoFan()) {

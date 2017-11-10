@@ -292,9 +292,10 @@ public class CardManager {
 			} else {// 多个斧头
 				if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_NC_VALUE
 						|| room.getRoomType() == ENRoomType.EN_ROOM_TYPE_MY_VALUE
+						|| room.getRoomType() == ENRoomType.EN_ROOM_TYPE_GY_VALUE
 						|| room.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX_VALUE) {
 					tuo = 0;
-					log.info("tuoNum,南充/西充/MY/苍溪，一对丁丁斧头不能割牌，tuo = 0");
+					log.info("tuoNum,GY/南充/MY/苍溪，一对丁丁斧头不能割牌，tuo = 0");
 					return tuo;
 				} else if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_XC_VALUE) {
 					if (tuo == 2) {// 2个丁丁，其他全黑
@@ -605,7 +606,7 @@ public class CardManager {
 			if (!user.getBaoFans().isEmpty()) {
 				for (Integer num : user.getBaoFans().values()) {
 					fan += num;
-					log.info("广元/CX吃成四根,加" + num + "翻");
+					log.info("广元吃成四根/CX吃、扯成四根,加" + num + "翻");
 				}
 			}
 			// 计算四根的个数
@@ -742,7 +743,6 @@ public class CardManager {
 		}
 		return false;
 	}
-
 
 	/**
 	 * 计算user可操作列表（出牌，翻牌，偷牌）
@@ -1648,6 +1648,32 @@ public class CardManager {
 				tempCard.put(cardNum, tempCard.get(cardNum) + 1);
 			} else {
 				tempCard.put(cardNum, 1);
+			}
+		}
+		if (tempCard.get(card) != null) {
+			return tempCard.get(card);
+		} else {
+			return 0;
+		}
+	}
+
+	/**
+	 * 得到该牌的总数（手里和扯牌列表）
+	 * 
+	 * @param user
+	 * @param seat
+	 * @param card
+	 * @return
+	 */
+	public static int getCardCountOfOpen(User user, Integer card) {
+		Map<Integer, Integer> tempCard = new HashMap<>();// toMap(user.getHold());
+		for (PBColumnInfo col : user.getOpen()) {
+			for (Integer cardNum : col.getCardsList()) {
+				if (tempCard.get(cardNum) != null) {
+					tempCard.put(cardNum, tempCard.get(cardNum) + 1);
+				} else {
+					tempCard.put(cardNum, 1);
+				}
 			}
 		}
 		if (tempCard.get(card) != null) {

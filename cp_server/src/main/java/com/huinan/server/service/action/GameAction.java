@@ -512,7 +512,7 @@ public class GameAction extends AbsAction {
 		NotifyHandler.notifyActionFlow(room, user, destCard,
 				columnInfo.build(), type, false);
 
-		int count = CardManager.getCardCountOfAll(user, destCard.getNum());
+		int count = CardManager.getCardCountOfOpen(user, destCard.getNum());
 		RoomManager.isBaoFan(user, room, destCard, null, count);
 		// 偷牌推送
 		boolean huang = RoomManager.touPai(room, user, 1);
