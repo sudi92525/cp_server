@@ -651,13 +651,18 @@ public class GameAction extends AbsAction {
 				}
 			}
 		} else {
-			user.getNoChiCards().add(destCard.getNum());
+			if (!user.getNoChiCards().contains(
+					Integer.valueOf(destCard.getNum()))) {
+				user.getNoChiCards().add(Integer.valueOf(destCard.getNum()));
+			}
 
 			// 恰胡
 			boolean dou14 = CardManager.checkDou14(newHold);
 			if (dou14 && CardManager.checkTuoNum(room, user, newHold)) {
-				user.getNoHuCards().addAll(
-						CardManager.getSameCards(destCard.getNum()));
+				List<Integer> sameCards = CardManager.getSameCards(destCard
+						.getNum());
+				user.getNoHuCards().removeAll(sameCards);
+				user.getNoHuCards().addAll(sameCards);
 			}
 		}
 		user.getNoCheCards().add(destCard.getNum());
@@ -808,14 +813,21 @@ public class GameAction extends AbsAction {
 			if (room.isChiHongDaHei()) {
 				// 吃红打黑:不吃35，不能吃26(不吃红，红黑点都不能吃)
 				if (CardManager.colorIsRed(currentCard.getNum())) {
+					user.getNoChiCards().removeAll(
+							CardManager.getSameCards(currentCard.getNum()));
 					user.getNoChiCards().addAll(
 							CardManager.getSameCards(currentCard.getNum()));
 				} else {
+					user.getNoChiCards().removeAll(
+							CardManager.getSameHeiCards(currentCard.getNum()));
 					user.getNoChiCards().addAll(
 							CardManager.getSameHeiCards(currentCard.getNum()));
 				}
 			} else {
-				user.getNoChiCards().add(currentCard.getNum());
+				if (!user.getNoChiCards().contains(
+						Integer.valueOf(currentCard.getNum()))) {
+					user.getNoChiCards().add(currentCard.getNum());
+				}
 			}
 			room.getCanChiSeat().remove(Integer.valueOf(user.getSeatIndex()));
 		}
