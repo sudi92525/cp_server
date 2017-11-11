@@ -269,18 +269,39 @@ public class RoomManager {
 			NotifyHandler.notifyActionFlow(room, zhuang, null, null,
 					ENActionType.EN_ACTION_DANG, false);
 		} else {
-			for (int i = 0; i < 4; i++) {
-				User user = room.getUsers().get(seat);
-				dang = checkMustDang(room, user);
-				if (dang) {
-					break;
+			if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX_VALUE) {
+				for (int i = 0; i < 4; i++) {
+					User user = room.getUsers().get(seat);
+					if (user.isChoiceDang()) {
+						seat = RoomManager.getNextSeat(seat);
+						continue;
+					}
+					dang = checkMustDang(room, user);
+					if (dang) {
+						break;
+					} else {
+						nextChoicedang(room, user);
+						return false;
+					}
 				}
-				seat = RoomManager.getNextSeat(seat);
+			} else {
+				for (int i = 0; i < 4; i++) {
+					User user = room.getUsers().get(seat);
+					dang = checkMustDang(room, user);
+					if (dang) {
+						break;
+					}
+					seat = RoomManager.getNextSeat(seat);
+				}
 			}
 		}
-		if (!dang) {// 没人必当,从庄家开始依次选择
-			nextChoicedang(room, zhuang);
-		} else {// 开始偷
+		if (room.getRoomType() != ENRoomType.EN_ROOM_TYPE_CX_VALUE) {
+			if (!dang) {// 没人必当,从庄家开始依次选择
+				nextChoicedang(room, zhuang);
+			} else {// 开始偷
+				startTou(room);
+			}
+		} else {
 			startTou(room);
 		}
 		return dang;
@@ -313,7 +334,7 @@ public class RoomManager {
 		List<Integer> hold = user.getHold();
 		Map<Integer, Integer> holdMap = CardManager.toMap(hold);
 		Iterator<Integer> iterator = holdMap.keySet().iterator();
-		int heiKanNum = 0;
+		// int heiKanNum = 0;
 		while (iterator.hasNext()) {
 			Integer card = (Integer) iterator.next();
 			int num = holdMap.get(card);
@@ -324,14 +345,15 @@ public class RoomManager {
 							ENActionType.EN_ACTION_DANG, false);
 					return true;
 				} else {
-					heiKanNum++;
-					if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX_VALUE
-							&& heiKanNum == 2) {
-						room.setDangSeat(user.getSeatIndex());
-						NotifyHandler.notifyActionFlow(room, user, null, null,
-								ENActionType.EN_ACTION_DANG, false);
-						return true;
-					}
+					// heiKanNum++;
+					// if (room.getRoomType() ==
+					// ENRoomType.EN_ROOM_TYPE_CX_VALUE
+					// && heiKanNum == 2) {
+					// room.setDangSeat(user.getSeatIndex());
+					// NotifyHandler.notifyActionFlow(room, user, null, null,
+					// ENActionType.EN_ACTION_DANG, false);
+					// return true;
+					// }
 				}
 			}
 		}
@@ -354,14 +376,26 @@ public class RoomManager {
 		// }
 		// TODO 写死牌
 		// if (room.getRound() == 1) {
-		// for (int i = 0; i < 84; i++) {// 84
-		// cards.add(44);
+		// for (int i = 0; i < 4; i++) {// 84
+		// cards.add(26);
+		// cards.add(34);
 		// cards.add(15);
 		// cards.add(15);
 		// cards.add(15);
 		// cards.add(15);
 		// cards.add(15);
 		// }
+		// cards.add(26);
+		// cards.add(34);
+		// cards.add(26);
+		// cards.add(34);
+		// cards.add(26);
+		// cards.add(34);
+
+		// cards.add(26);
+		// cards.add(34);
+		// cards.add(26);
+		// cards.add(34);
 		// }
 		Collections.shuffle(cards);
 		Collections.shuffle(cards);
@@ -383,7 +417,7 @@ public class RoomManager {
 		room.setJiaoPaiSeat(seatDuiMen);
 		// 随机一张牌
 		// TODO
-		int index = new Random().nextInt(84);// 84
+		int index = new Random().nextInt(room.getResetCards().size());// 84
 		int zhuangCard = room.getResetCards().get(index);
 		room.setChoiceZhuangCard(zhuangCard);
 
@@ -595,13 +629,13 @@ public class RoomManager {
 				int card17 = 16;
 				user.getHold().add(card17);
 			} else if (i == 3) {
-				int card1 = 12;
+				int card1 = 26;
 				user.getHold().add(card1);
-				int card2 = 12;
+				int card2 = 26;
 				user.getHold().add(card2);
-				int card3 = 12;
+				int card3 = 34;
 				user.getHold().add(card3);
-				int card4 = 56;
+				int card4 = 44;
 				user.getHold().add(card4);
 				int card5 = 24;
 				user.getHold().add(card5);
@@ -994,8 +1028,8 @@ public class RoomManager {
 			boolean tou = isTou(room, user, false);
 			if (!tou) {
 				// 胡?
-				CardManager.logicUserActionList(room, destCard, user, true,
-						true);
+				CardManager.logicUserActionList(room, room.getCurrentCard(),
+						user, true, true);
 			}
 		} else {
 			// 计算可操作的玩家操作列表
@@ -1032,8 +1066,27 @@ public class RoomManager {
 					return true;
 				}
 			}
-		} else {
-			// 黄了：其他人翻开最后一张
+		} else if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_GY_VALUE
+				|| room.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX_VALUE) {
+			if (resetCardCount == 0) {
+				destCard.setOpen(true);
+				log.info("GY/CX所有人，最后一张牌不能胡，剩余牌=" + resetCardCount + "张，黄了!");
+				// 黄了,结算
+				RoomManager.total(room);
+				return true;
+			} else if (user.isFive() && resetCardCount == 1) {
+				if (destCard.isCheMo()) {
+					return false;
+				}
+				CardManager.logicUserIsHu(room, destCard, user, true);
+				if (!room.getCanHuSeat().contains(
+						Integer.valueOf(user.getSeatIndex()))) {
+					// 小家摸牌过后下面剩余一张,黄，不打了
+					fiveHuangTotal(room, resetCardCount);
+					return true;
+				}
+			}
+		} else {// 其他地区
 			if (resetCardCount == 0) {
 				if (destCard.isCheMo()) {
 					// 是否胡
@@ -1065,6 +1118,7 @@ public class RoomManager {
 					fiveHuangTotal(room, resetCardCount);
 					return true;
 				}
+				// TODO 南充：倒数第二张不胡，但是有自动偷，偷不偷？？？
 			}
 		}
 		return false;

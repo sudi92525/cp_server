@@ -217,8 +217,8 @@ public class Room implements Serializable {
 
 	public int getFirstCard() {
 		int index = RandomUtils.nextInt(this.resetCards.size());
-		Integer card = this.resetCards.get(index);
-		this.resetCards.remove(index);
+		Integer card = this.resetCards.get(index);// index
+		this.resetCards.remove(index);// index
 		return card;
 	}
 

@@ -207,7 +207,12 @@ public class GameAction extends AbsAction {
 				// 开始偷
 				RoomManager.startTou(room);
 			} else { // 通知下一家选择
-				RoomManager.nextChoicedang(room, nextUser);
+				if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX_VALUE) {
+					// 不当，继续选择必当
+					RoomManager.startChoiceDang(room);
+				} else {
+					RoomManager.nextChoicedang(room, nextUser);
+				}
 			}
 		}
 	}
