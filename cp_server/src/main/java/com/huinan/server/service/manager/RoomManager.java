@@ -386,18 +386,19 @@ public class RoomManager {
 		// }
 		// }
 		// }
+		
 		// TODO 写死牌
 		// if (room.getRound() == 1) {
 		// cards.add(14);
-		for (int i = 0; i < 6; i++) {// 84
-			cards.add(45);
-			// cards.add(34);
-			// cards.add(15);
-			// cards.add(15);
-			// cards.add(15);
-			// cards.add(15);
-			// cards.add(15);
-		}
+		 for (int i = 0; i < 6; i++) {// 84
+		 cards.add(34);
+		// cards.add(34);
+		// cards.add(15);
+		// cards.add(15);
+		// cards.add(15);
+		// cards.add(15);
+		// cards.add(15);
+		 }
 		// cards.add(22);
 		// cards.add(22);
 		// cards.add(22);
@@ -596,13 +597,13 @@ public class RoomManager {
 				user.getHold().add(card11);
 				int card12 = 15;
 				user.getHold().add(card12);
-				int card13 = 25;
+				int card13 = 34;
 				user.getHold().add(card13);
-				int card14 = 16;
+				int card14 = 34;
 				user.getHold().add(card14);
 				int card15 = 23;
 				user.getHold().add(card15);
-				int card16 = 14;
+				int card16 = 16;
 				user.getHold().add(card16);
 				int card17 = 14;
 				user.getHold().add(card17);
@@ -642,9 +643,9 @@ public class RoomManager {
 				int card17 = 16;
 				user.getHold().add(card17);
 			} else if (i == 3) {
-				int card1 = 14;
+				int card1 = 11;
 				user.getHold().add(card1);
-				int card2 = 14;
+				int card2 = 66;
 				user.getHold().add(card2);
 				int card3 = 34;
 				user.getHold().add(card3);
