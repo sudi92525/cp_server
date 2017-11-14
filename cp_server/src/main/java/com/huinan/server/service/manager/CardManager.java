@@ -686,7 +686,7 @@ public class CardManager {
 	 */
 	public static boolean logicActionList(Room room, User chuUser,
 			boolean isFiveMo) {
-		boolean che7 = false;
+		boolean antoChe7 = false;
 		room.getCanActionSeat().clear();
 		Card card = room.getCurrentCard();
 		Map<Integer, User> users = room.getUsers();
@@ -699,16 +699,30 @@ public class CardManager {
 			if (isFeiTian25) {
 				return false;// -------10.7增加，自动che7后不往下走-----
 			}
+
 			for (User user : users.values()) {
 				if (card.isChu() && user.getUuid().equals(chuUser.getUuid())) {
 					continue;
 				}
-				che7 = logicUserActionList(room, card, user, false, false);
-				if (che7) {
+				logicUserIsHu(room, card, user, isFiveMo);
+			}
+
+			for (User user : users.values()) {
+				if (card.isChu() && user.getUuid().equals(chuUser.getUuid())) {
+					continue;
+				}
+				antoChe7 = logicUserIsChe(room, card, user);
+				if (antoChe7 || room.getChe7Seat() != 0) {
 					break;
 				}
+				logicUserIsChi(room, card, user);
+
+				// che7 = logicUserActionList(room, card, user, false, false);
+				// if (che7) {
+				// break;
+				// }
 			}
-			if (!che7) {
+			if (!antoChe7) {
 				for (User user : users.values()) {
 					if (card.isChu()
 							&& user.getUuid().equals(chuUser.getUuid())) {
@@ -720,7 +734,7 @@ public class CardManager {
 				}
 			}
 		}
-		return che7;// -------10.7增加，自动che7后不往下走-----
+		return antoChe7;// -------10.7增加，自动che7后不往下走-----
 	}
 
 	private static boolean feiTian25(Room room, User chuUser, boolean isFiveMo,
@@ -765,23 +779,46 @@ public class CardManager {
 	public static boolean logicUserActionList(Room room, Card card, User user,
 			boolean isFiveMo, boolean sendNotify) {
 		logicUserIsHu(room, card, user, isFiveMo);
+		boolean che7 = logicUserIsChe(room, card, user);
+		if (che7) {
+			return true;
+		}
+		logicUserIsChi(room, card, user);
+
+		if (sendNotify && !user.getActions().isEmpty()) {
+			notifyChoice(room, card, user);
+		}
+		return false;
+	}
+
+	private static boolean logicUserIsChe(Room room, Card card, User user) {
 		if (isChe(room, user, card)) {
 			if (!user.isFive() && card.getCardValue() == 7) {
-				// 扯了又可以扯:自动偷(扯起来的有偷必偷),排除五张::::走的checkUserTou()
-				// 7点自动扯:通知扯7
-				GameAction.che(user, room);
-				// 清理其他玩家的actions
-				for (User _user : room.getUsers().values()) {
-					if (!_user.getUuid().equals(user.getUuid())
-							&& !_user.getActions().isEmpty()) {
-						_user.getActions().clear();
+				if (room.getCanHuSeat().isEmpty()) {// 无人胡
+					// 扯了又可以扯:自动偷(扯起来的有偷必偷),排除五张::::走的checkUserTou()
+					// 7点自动扯:通知扯7
+					GameAction.che(user, room);
+					// 清理其他玩家的actions
+					for (User _user : room.getUsers().values()) {
+						if (!_user.getUuid().equals(user.getUuid())
+								&& !_user.getActions().isEmpty()) {
+							_user.getActions().clear();
+						}
 					}
+					return true;
+				} else {
+					room.setChe7Seat(user.getSeatIndex());
+					return false;
 				}
-				return true;
+			} else {
+				room.setCanCheSeat(user.getSeatIndex());
+				user.getActions().add(ENActionType.EN_ACTION_PENG);
 			}
-			room.setCanCheSeat(user.getSeatIndex());
-			user.getActions().add(ENActionType.EN_ACTION_PENG);
 		}
+		return false;
+	}
+
+	private static void logicUserIsChi(Room room, Card card, User user) {
 		if (!card.isCheMo() && user.getHold().size() > 1) {// 扯起来的不管吃
 			if (isChi(user, card)) {
 				room.getCanChiSeat().add(user.getSeatIndex());
@@ -789,10 +826,6 @@ public class CardManager {
 				user.getActions().add(ENActionType.EN_ACTION_CHI);
 			}
 		}
-		if (sendNotify && user.getActions().size() != 0) {
-			notifyChoice(room, card, user);
-		}
-		return false;
 	}
 
 	public static void logicUserIsHu(Room room, Card card, User user,
@@ -1130,8 +1163,12 @@ public class CardManager {
 				card.getNum());
 		if (card.getCardValue() == 7 && countOfHold == 2) {// 一对七，不用招吃，自动报招扯
 			if (countOfAllChu >= 1) {
-				user.getNoCheCards().remove(Integer.valueOf(card.getNum()));
-				if (room.getRoomType() != ENRoomType.EN_ROOM_TYPE_CX_VALUE) {
+				// user.getNoCheCards().remove(Integer.valueOf(card.getNum()));
+				removeNoCheCard(user, Integer.valueOf(card.getNum()));
+				if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX_VALUE) {
+					// 自动报扣
+					GameAction.kou(user, room, true);
+				} else {
 					List<Integer> cards = new ArrayList<>();
 					user.setZhaoChe(false);
 					cards.add(card.getNum());
@@ -1143,20 +1180,39 @@ public class CardManager {
 					NotifyHandler.notifyActionFlowZhao(room, user, card,
 							col.build(), ENActionType.EN_ACTION_ZHAO, false,
 							ENZhaoType.EN_ZHAO_TYPE_CHE);
-				} else {
-					// 自动报扣
-					GameAction.kou(user, room, true);
+				}
+			}
+			if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_XC_VALUE) {
+				// 一对七也判断是否招吃
+				boolean isZhaoChi = isZhaoChi(user, card);
+				if (isZhaoChi) {
+					user.getActions().add(ENActionType.EN_ACTION_ZHAO);
+					return true;
 				}
 			}
 			return false;
 		}
-		boolean zhao = false;
+
+		boolean zhaoChe = false;
 		if (countOfHold == 2 && countOfAllChu >= 1) {
 			user.getNoCheCards().add(Integer.valueOf(card.getNum()));// 不招就不能扯
 			user.setZhaoChe(true);
-			zhao = true;
+			zhaoChe = true;
 		}
+		boolean isZhaoChi = isZhaoChi(user, card);
+		if (zhaoChe || isZhaoChi) {
+			if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX_VALUE) {
+				user.getActions().add(ENActionType.EN_ACTION_KOU);
+			} else {
+				user.getActions().add(ENActionType.EN_ACTION_ZHAO);
+			}
+			return true;
+		}
+		return false;
+	}
 
+	private static boolean isZhaoChi(User user, Card card) {
+		boolean isZhaoChi = false;
 		// 招吃:之前牌桌打出或翻出的某种牌没有吃，或则自己打出过某种牌，因为偷牌上手后，想同样的牌打出或翻出时吃，需要“招吃”。
 		List<Integer> noChiList = user.getNoChiCards();
 		List<Integer> zhaoChiList = user.getZhaoChiCards();
@@ -1165,7 +1221,7 @@ public class CardManager {
 				// zhao chi
 				if (!zhaoChiList.contains(integer)) {
 					zhaoChiList.add(integer);
-					zhao = true;
+					isZhaoChi = true;
 					// break;//---11.13改：招吃不能吃的问题
 				}
 			}
@@ -1178,7 +1234,7 @@ public class CardManager {
 					// zhao chi
 					if (!zhaoChiList.contains(integer)) {
 						zhaoChiList.add(integer);
-						zhao = true;
+						isZhaoChi = true;
 						// break;
 					}
 				}
@@ -1192,20 +1248,13 @@ public class CardManager {
 					// zhao chi
 					if (!zhaoChiList.contains(integer)) {
 						zhaoChiList.add(integer);
-						zhao = true;
+						isZhaoChi = true;
 						// break;
 					}
 				}
 			}
 		}
-		if (zhao) {
-			if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX_VALUE) {
-				user.getActions().add(ENActionType.EN_ACTION_KOU);
-			} else {
-				user.getActions().add(ENActionType.EN_ACTION_ZHAO);
-			}
-		}
-		return zhao;
+		return isZhaoChi;
 	}
 
 	/**

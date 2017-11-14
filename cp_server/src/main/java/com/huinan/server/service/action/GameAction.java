@@ -876,60 +876,65 @@ public class GameAction extends AbsAction {
 	 */
 	private static void maxPriority(Room room, Card currentCard) {
 		if (room.getActionRecord().size() == room.getCanActionSeat().size()) {
-			boolean have = false;// 过了后有其他人执行
-			Map<Integer, Boolean> huChoices = room.getHuChoices();
-			if (!huChoices.isEmpty()) {
-				for (int i = 0; i < 4; i++) {
-					int seat = currentCard.getSeat() + i;
-					if (seat > 4) {
-						seat -= 4;
-					}// -------9.14增加----------
-					if (huChoices.get(seat) != null && huChoices.get(seat)) {
-						User huUser = room.getUsers().get(seat);
-						hu(huUser, room);// 从牌位置开始找到第一个胡的人
-						have = true;
-						break;
+			if (room.getChe7Seat() != 0) {
+				User che7User = room.getUsers().get(room.getChe7Seat());
+				GameAction.che(che7User, room);
+			} else {
+				boolean have = false;// 过了后有其他人执行
+				Map<Integer, Boolean> huChoices = room.getHuChoices();
+				if (!huChoices.isEmpty()) {
+					for (int i = 0; i < 4; i++) {
+						int seat = currentCard.getSeat() + i;
+						if (seat > 4) {
+							seat -= 4;
+						}// -------9.14增加----------
+						if (huChoices.get(seat) != null && huChoices.get(seat)) {
+							User huUser = room.getUsers().get(seat);
+							hu(huUser, room);// 从牌位置开始找到第一个胡的人
+							have = true;
+							break;
+						}
+					}
+				} else if (room.getCanCheSeat() != 0 && room.isChe()) {// 有人扯,且要扯
+					User cheUser = room.getUsers().get(room.getCanCheSeat());
+					che(cheUser, room);
+					have = true;
+				} else if (!room.getChiChoices().isEmpty()) {
+					int firstSeat = 0;
+					if (currentCard.isChu()) {// 手里打出的从下一家开始判断
+						firstSeat = 1;
+					}
+					for (int i = firstSeat; i < 4; i++) {
+						int seat = currentCard.getSeat() + i;
+						if (seat > 4) {
+							seat -= 4;
+						}
+						if (room.getChiChoices().get(seat) != null
+								&& room.getChiChoices().get(seat)) {
+							User chiUser = room.getUsers().get(seat);
+							chi(chiUser, room);// 从牌位置开始找到第一个吃的人
+							have = true;
+							break;
+						}
 					}
 				}
-			} else if (room.getCanCheSeat() != 0 && room.isChe()) {// 有人扯,且要扯
-				User cheUser = room.getUsers().get(room.getCanCheSeat());
-				che(cheUser, room);
-				have = true;
-			} else if (!room.getChiChoices().isEmpty()) {
-				int firstSeat = 0;
-				if (currentCard.isChu()) {// 手里打出的从下一家开始判断
-					firstSeat = 1;
-				}
-				for (int i = firstSeat; i < 4; i++) {
-					int seat = currentCard.getSeat() + i;
-					if (seat > 4) {
-						seat -= 4;
+				// 点过后,就执行了,,被人抢了:不加入死牌,自己优先级最高,加入不能出,,什么的列表
+				if (!have) {
+					// 都没人要,把牌加入能吃玩家的不能吃列表
+					for (Integer canChiSeat : room.getCanChiSeatTemp()) {
+						User user = room.getUsers().get(canChiSeat);
+						addNoChiList(user, room, currentCard);
 					}
-					if (room.getChiChoices().get(seat) != null
-							&& room.getChiChoices().get(seat)) {
-						User chiUser = room.getUsers().get(seat);
-						chi(chiUser, room);// 从牌位置开始找到第一个吃的人
-						have = true;
-						break;
-					}
+					room.clearCurrentInfo();
+					User cardUser = room.getUsers().get(currentCard.getSeat());
+					List<Integer> lost = cardUser.getChuListCards();
+					lost.add(currentCard.getNum());// 加入出牌列表
+					// 通知牌没人要
+					NotifyHandler.notifyActionFlow(room, cardUser, currentCard,
+							null, ENActionType.EN_ACTION_UNKNOWN, true);
+					// 通知位置(下一家),拿牌
+					RoomManager.naPai(room);
 				}
-			}
-			// 点过后,就执行了,,被人抢了:不加入死牌,自己优先级最高,加入不能出,,什么的列表
-			if (!have) {
-				// 都没人要,把牌加入能吃玩家的不能吃列表
-				for (Integer canChiSeat : room.getCanChiSeatTemp()) {
-					User user = room.getUsers().get(canChiSeat);
-					addNoChiList(user, room, currentCard);
-				}
-				room.clearCurrentInfo();
-				User cardUser = room.getUsers().get(currentCard.getSeat());
-				List<Integer> lost = cardUser.getChuListCards();
-				lost.add(currentCard.getNum());// 加入出牌列表
-				// 通知牌没人要
-				NotifyHandler.notifyActionFlow(room, cardUser, currentCard,
-						null, ENActionType.EN_ACTION_UNKNOWN, true);
-				// 通知位置(下一家),拿牌
-				RoomManager.naPai(room);
 			}
 		} else {
 			// 胡，扯，吃，胡的点过，扯得点扯，会卡住等吃的人

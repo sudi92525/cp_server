@@ -168,6 +168,8 @@ public class Room implements Serializable {
 	private int lastChuSeat;
 	/** 西充烂18座位 */
 	private int lan18Seat;
+	/** 是否是自动扯7:所有胡的人点了过判断是否扯7 */
+	private int che7Seat;
 
 	public Room(int tid, int roomType, boolean dingFuColor,
 			boolean dingFu34IsFan, boolean jiaFan34) {
@@ -357,6 +359,7 @@ public class Room implements Serializable {
 		this.che = false;
 		this.choiceChe = false;
 		this.currentHuSeat.clear();
+		this.che7Seat = 0;
 		for (User user : users.values()) {
 			user.clearCurrentInfo();
 		}
@@ -866,6 +869,14 @@ public class Room implements Serializable {
 
 	public void setCanNotWanJiao(boolean canNotWanJiao) {
 		this.canNotWanJiao = canNotWanJiao;
+	}
+
+	public int getChe7Seat() {
+		return che7Seat;
+	}
+
+	public void setChe7Seat(int che7Seat) {
+		this.che7Seat = che7Seat;
 	}
 
 }
