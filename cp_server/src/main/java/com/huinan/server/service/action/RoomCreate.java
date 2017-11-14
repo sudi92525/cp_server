@@ -77,8 +77,10 @@ public class RoomCreate extends AbsAction {
 			creator.setIs18Lan(room.isLan18());
 			creator.setIsFanXjHave56(room.isFanFiveHave56());
 			creator.setIsFanSan7(room.isCheAll7Fan());
+			// 西充选项
 			if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_XC_VALUE) {
 				creator.setIsCanNotWanJiao(room.isCanNotWanJiao());
+				creator.setIsFanSanHei(room.isSanKanHeiIsFan());
 			}
 
 			response.setTableInfo(creator);
