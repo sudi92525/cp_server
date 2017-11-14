@@ -210,24 +210,27 @@ public class NCTest extends TestCase {
 		String dateStr = sdf.format(c.getTime());
 		System.out.println("date string=" + dateStr);
 	}
-	
-	public void testList(){
+
+	public void testList() {
 		List<Integer> list = new ArrayList<>();
 		list.add(5);
 		list.add(5);
 		list.add(2);
-		
+
 		List<Integer> list2 = new ArrayList<>();
 		list2.add(5);
 		list2.add(2);
-		
-		list.removeAll(list2);
-		
+
+		// list.removeAll(list2);
+		while (list.contains(5)) {
+			list.remove(Integer.valueOf(5));
+		}
+
 		for (int i = 0; i < list.size(); i++) {
-//			if(list.get(i)==5){
-//				list.remove(i);
-//			}
-			System.out.println("remove all :" + list.get(i));
+			// if (list.get(i) == 5) {
+			// list.remove(i);
+			// }
+			// System.out.println("remove all :" + list.get(i));
 		}
 		System.out.println("list size :" + list.size());
 	}

@@ -378,24 +378,24 @@ public class RoomManager {
 	public static void shuffle(Room room) {
 		List<Integer> cards = new ArrayList<>();
 		// if (room.getRound() > 1) {
-		for (int card : CardManager.allPais) {
-			for (int k = 0; k < 4; k++) {
-				cards.add(card);
-			}
-		}
+		// for (int card : CardManager.allPais) {
+		// for (int k = 0; k < 4; k++) {
+		// cards.add(card);
+		// }
+		// }
 		// }
 		// TODO 写死牌
 		// if (room.getRound() == 1) {
 		// cards.add(14);
-		// for (int i = 0; i < 6; i++) {// 84
-		// cards.add(44);
-		// cards.add(34);
-		// cards.add(15);
-		// cards.add(15);
-		// cards.add(15);
-		// cards.add(15);
-		// cards.add(15);
-		// }
+		for (int i = 0; i < 6; i++) {// 84
+			cards.add(45);
+			// cards.add(34);
+			// cards.add(15);
+			// cards.add(15);
+			// cards.add(15);
+			// cards.add(15);
+			// cards.add(15);
+		}
 		// cards.add(22);
 		// cards.add(22);
 		// cards.add(22);
@@ -465,25 +465,25 @@ public class RoomManager {
 
 		// TODO 写死牌
 		// if (room.getRound() > 1) {
-		for (int i = 0; i < 4; i++) {
-			int num = CardManager.BRAND_NUMFOUR[i];
-			User user = room.getUsers().get(seat);
-			user.setReady(false);
-			for (int j = 0; j < num; j++) {
-				int card = room.getFirstCard();
-				user.getHold().add(card);
-			}
-			if (!user.isFive()) {
-				user.getCanChiHoldCards().clear();
-				user.getCanChiHoldCards().addAll(user.getHold());
-			}
-			CardManager.noChuDouble7AndDiaoZhui(room, user, true);
-			seat = RoomManager.getNextSeat(seat);
-		}
+//		for (int i = 0; i < 4; i++) {
+//			int num = CardManager.BRAND_NUMFOUR[i];
+//			User user = room.getUsers().get(seat);
+//			user.setReady(false);
+//			for (int j = 0; j < num; j++) {
+//				int card = room.getFirstCard();
+//				user.getHold().add(card);
+//			}
+//			if (!user.isFive()) {
+//				user.getCanChiHoldCards().clear();
+//				user.getCanChiHoldCards().addAll(user.getHold());
+//			}
+//			CardManager.noChuDouble7AndDiaoZhui(room, user, true);
+//			seat = RoomManager.getNextSeat(seat);
+//		}
 		// }
 		// TODO 写死牌
 		// if (room.getRound() == 1) {
-		// dealSiPai(room, seat);
+		 dealSiPai(room, seat);
 		// }
 
 		room.setFirstCard(true);
@@ -567,7 +567,7 @@ public class RoomManager {
 				user.getHold().add(card16);
 				int card17 = 46;
 				user.getHold().add(card17);
-				int card18 = 44;
+				int card18 = 45;
 				user.getHold().add(card18);
 			} else if (i == 1) {
 				int card1 = 56;
@@ -588,9 +588,9 @@ public class RoomManager {
 				user.getHold().add(card8);
 				int card9 = 26;
 				user.getHold().add(card9);
-				int card10 = 44;
+				int card10 = 45;
 				user.getHold().add(card10);
-				int card11 = 44;
+				int card11 = 45;
 				user.getHold().add(card11);
 				int card12 = 15;
 				user.getHold().add(card12);
@@ -605,7 +605,7 @@ public class RoomManager {
 				int card17 = 14;
 				user.getHold().add(card17);
 			} else if (i == 2) {
-				int card1 = 11;
+				int card1 = 12;
 				user.getHold().add(card1);
 				int card2 = 12;
 				user.getHold().add(card2);

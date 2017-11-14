@@ -354,7 +354,12 @@ public class GameAction extends AbsAction {
 		Builder col = null;
 		List<Integer> cards = new ArrayList<>();
 		if (zhaoType == ENZhaoType.EN_ZHAO_TYPE_CHE) {
-			user.getNoCheCards().remove(Integer.valueOf(destCard.getNum()));
+			// while (user.getNoCheCards().contains(destCard.getNum())) {
+			// user.getNoCheCards().remove(Integer.valueOf(destCard.getNum()));
+			// }
+			CardManager.removeNoCheCard(user,
+					Integer.valueOf(destCard.getNum()));
+
 			user.setZhaoChe(false);
 			cards.add(destCard.getNum());
 			cards.add(destCard.getNum());
@@ -362,14 +367,18 @@ public class GameAction extends AbsAction {
 		} else if (zhaoType == ENZhaoType.EN_ZHAO_TYPE_CHI) {
 			for (Integer integer : user.getZhaoChiCards()) {
 				cards.add(integer);
-				user.getNoChiCards().remove(integer);
+				// while (user.getNoChiCards().contains(integer)) {
+				// user.getNoChiCards().remove(integer);
+				// }
+				CardManager.removeNoChiCard(user, integer);
 			}
 			List<Integer> sameCards = CardManager
 					.getSameCardsByValue(14 - destCard.getCardValue());
 			for (Integer integer : sameCards) {
-				if (user.getNoChiCards().contains(integer)) {
-					user.getNoChiCards().remove(integer);
-				}
+				// while (user.getNoChiCards().contains(integer)) {
+				// user.getNoChiCards().remove(integer);
+				// }
+				CardManager.removeNoChiCard(user, integer);
 			}
 			user.getZhaoChiCards().clear();
 			if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_NC_VALUE
@@ -377,21 +386,29 @@ public class GameAction extends AbsAction {
 				user.setZhaoChiNoGe(true);
 			}
 		} else {// 全招
-			user.getNoCheCards().remove(Integer.valueOf(destCard.getNum()));
+			// while (user.getNoCheCards().contains(destCard.getNum())) {
+			// user.getNoCheCards().remove(Integer.valueOf(destCard.getNum()));
+			// }
+			CardManager.removeNoCheCard(user,
+					Integer.valueOf(destCard.getNum()));
 			user.setZhaoChe(false);
 			cards.add(destCard.getNum());
 			cards.add(destCard.getNum());
 			cards.add(destCard.getNum());
 			for (Integer integer : user.getZhaoChiCards()) {
 				cards.add(integer);
-				user.getNoChiCards().remove(integer);
+				// while (user.getNoChiCards().contains(integer)) {
+				// user.getNoChiCards().remove(integer);
+				// }
+				CardManager.removeNoChiCard(user, integer);
 			}
 			List<Integer> sameCards = CardManager
 					.getSameCardsByValue(14 - destCard.getCardValue());
 			for (Integer integer : sameCards) {
-				if (user.getNoChiCards().contains(integer)) {
-					user.getNoChiCards().remove(integer);
-				}
+				// while (user.getNoChiCards().contains(integer)) {
+				// user.getNoChiCards().remove(integer);
+				// }
+				CardManager.removeNoChiCard(user, integer);
 			}
 			user.getZhaoChiCards().clear();
 			if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_NC_VALUE) {

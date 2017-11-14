@@ -1926,6 +1926,18 @@ public class CardManager {
 		}
 	}
 
+	public static void removeNoChiCard(User user, Integer card) {
+		while (user.getNoChiCards().contains(card)) {
+			user.getNoChiCards().remove(card);
+		}
+	}
+
+	public static void removeNoCheCard(User user, Integer card) {
+		while (user.getNoCheCards().contains(card)) {
+			user.getNoCheCards().remove(card);
+		}
+	}
+
 	/**
 	 * 报吃退后(即玩家点击吃退后)或吃牌后，去掉该死牌
 	 * 
