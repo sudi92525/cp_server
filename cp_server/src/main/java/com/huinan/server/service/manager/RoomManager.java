@@ -380,25 +380,25 @@ public class RoomManager {
 	public static void shuffle(Room room) {
 		List<Integer> cards = new ArrayList<>();
 		// if (room.getRound() > 1) {
-		// for (int card : CardManager.allPais) {
-		// for (int k = 0; k < 4; k++) {
-		// cards.add(card);
+		for (int card : CardManager.allPais) {
+			for (int k = 0; k < 4; k++) {
+				cards.add(card);
+			}
+		}
 		// }
-		// }
-		// }
-		
+
 		// TODO 写死牌
 		// if (room.getRound() == 1) {
 		// cards.add(14);
-		 for (int i = 0; i < 6; i++) {// 84
-		 cards.add(34);
+		// for (int i = 0; i < 6; i++) {// 84
+		// cards.add(25);
 		// cards.add(34);
 		// cards.add(15);
 		// cards.add(15);
 		// cards.add(15);
 		// cards.add(15);
 		// cards.add(15);
-		 }
+		// }
 		// cards.add(22);
 		// cards.add(22);
 		// cards.add(22);
@@ -468,25 +468,25 @@ public class RoomManager {
 
 		// TODO 写死牌
 		// if (room.getRound() > 1) {
-		// for (int i = 0; i < 4; i++) {
-		// int num = CardManager.BRAND_NUMFOUR[i];
-		// User user = room.getUsers().get(seat);
-		// user.setReady(false);
-		// for (int j = 0; j < num; j++) {
-		// int card = room.getFirstCard();
-		// user.getHold().add(card);
-		// }
-		// if (!user.isFive()) {
-		// user.getCanChiHoldCards().clear();
-		// user.getCanChiHoldCards().addAll(user.getHold());
-		// }
-		// CardManager.noChuDouble7AndDiaoZhui(room, user, true);
-		// seat = RoomManager.getNextSeat(seat);
-		// }
+		for (int i = 0; i < 4; i++) {
+			int num = CardManager.BRAND_NUMFOUR[i];
+			User user = room.getUsers().get(seat);
+			user.setReady(false);
+			for (int j = 0; j < num; j++) {
+				int card = room.getFirstCard();
+				user.getHold().add(card);
+			}
+			if (!user.isFive()) {
+				user.getCanChiHoldCards().clear();
+				user.getCanChiHoldCards().addAll(user.getHold());
+			}
+			CardManager.noChuDouble7AndDiaoZhui(room, user, true);
+			seat = RoomManager.getNextSeat(seat);
+		}
 		// }
 		// TODO 写死牌
 		// if (room.getRound() == 1) {
-		dealSiPai(room, seat);
+		// dealSiPai(room, seat);
 		// }
 
 		room.setFirstCard(true);
@@ -570,7 +570,7 @@ public class RoomManager {
 				user.getHold().add(card16);
 				int card17 = 46;
 				user.getHold().add(card17);
-				int card18 = 45;
+				int card18 = 55;
 				user.getHold().add(card18);
 			} else if (i == 1) {
 				int card1 = 56;
@@ -599,7 +599,7 @@ public class RoomManager {
 				user.getHold().add(card12);
 				int card13 = 34;
 				user.getHold().add(card13);
-				int card14 = 34;
+				int card14 = 25;
 				user.getHold().add(card14);
 				int card15 = 23;
 				user.getHold().add(card15);
@@ -643,13 +643,13 @@ public class RoomManager {
 				int card17 = 16;
 				user.getHold().add(card17);
 			} else if (i == 3) {
-				int card1 = 11;
+				int card1 = 44;
 				user.getHold().add(card1);
-				int card2 = 66;
+				int card2 = 44;
 				user.getHold().add(card2);
-				int card3 = 34;
+				int card3 = 35;
 				user.getHold().add(card3);
-				int card4 = 44;
+				int card4 = 24;
 				user.getHold().add(card4);
 				int card5 = 24;
 				user.getHold().add(card5);
@@ -1205,23 +1205,11 @@ public class RoomManager {
 						ENActionType.EN_ACTION_KAN, false);
 			}
 		}
-
-		// 内滑???
-
 		// 花对：之前打过7，又扯起来了一个7
-		if (CardManager.getCardValue(card) == 7) {
-			// boolean chi = false;
-			// for (PBColumnInfo col : user.getOpen()) {
-			// if (col.getColType() == ENColType.EN_COL_TYPE_CHI) {
-			// List<Integer> cards = col.getCardsList();
-			// for (Integer integer : cards) {
-			// if (!user.getChiCards().contains(integer)) {
-			//
-			// }
-			// }
-			// }
-			// }
-			if (user.getChuCards().contains(card)) {
+		if (CardManager.getCardValue(card) == 7
+				&& CardManager.toMap(user.getHold()).get(Integer.valueOf(card)) == 1) {
+			if (user.getChuCards().contains(Integer.valueOf(card))
+					|| user.getChiCardOfHolds().contains(Integer.valueOf(card))) {
 				NotifyHandler.notifyActionFlow(room, user, cardObj, null,
 						ENActionType.EN_ACTION_HUADUI, false);
 			}

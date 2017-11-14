@@ -606,7 +606,7 @@ public class CardManager {
 			}
 		} else {
 			// 三砍黑算一番(包括黑龙)
-			if (blackKan >= 3) {
+			if (room.isSanKanHeiIsFan() && blackKan >= 3) {
 				fan++;
 				log.info("三坎黑，加1翻");
 			}
@@ -1053,7 +1053,7 @@ public class CardManager {
 		}
 		if (user.isFive()
 				&& room.getRoomType() == ENRoomType.EN_ROOM_TYPE_XC_VALUE) {
-			Map<Integer, Integer> holdMap = toMap(newHold);
+			Map<Integer, Integer> holdMap = toMap(user.getHold());
 			boolean haveTou = false;
 			for (Integer integer : holdMap.values()) {
 				if (integer >= 3) {

@@ -455,6 +455,7 @@ public class GameAction extends AbsAction {
 				ENColType.EN_COL_TYPE_CHI, false);
 		user.getOpen().add(columnInfo.build());
 
+		user.getChiCardOfHolds().add(chiCard);
 		CardManager.removeCardOfHold(user, chiCard);
 		CardManager.removeDeathCard(chiCard, user);
 
