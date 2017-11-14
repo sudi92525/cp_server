@@ -109,6 +109,10 @@ public class GameAction extends AbsAction {
 								CardManager.getSameCards(room.getCurrentCard()
 										.getNum()));
 					}
+					if (room.getCanChiSeat().contains(user.getSeatIndex())) {
+						room.getCanChiSeat().remove(
+								Integer.valueOf(user.getSeatIndex()));
+					}
 					if (room.canCheNow()) {
 						// 无人胡了,也无人将要胡: 执行扯
 						che(user, room);
@@ -360,6 +364,13 @@ public class GameAction extends AbsAction {
 				cards.add(integer);
 				user.getNoChiCards().remove(integer);
 			}
+			List<Integer> sameCards = CardManager
+					.getSameCardsByValue(14 - destCard.getCardValue());
+			for (Integer integer : sameCards) {
+				if (user.getNoChiCards().contains(integer)) {
+					user.getNoChiCards().remove(integer);
+				}
+			}
 			user.getZhaoChiCards().clear();
 			if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_NC_VALUE
 					|| room.getRoomType() == ENRoomType.EN_ROOM_TYPE_XC_VALUE) {
@@ -374,6 +385,13 @@ public class GameAction extends AbsAction {
 			for (Integer integer : user.getZhaoChiCards()) {
 				cards.add(integer);
 				user.getNoChiCards().remove(integer);
+			}
+			List<Integer> sameCards = CardManager
+					.getSameCardsByValue(14 - destCard.getCardValue());
+			for (Integer integer : sameCards) {
+				if (user.getNoChiCards().contains(integer)) {
+					user.getNoChiCards().remove(integer);
+				}
 			}
 			user.getZhaoChiCards().clear();
 			if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_NC_VALUE) {

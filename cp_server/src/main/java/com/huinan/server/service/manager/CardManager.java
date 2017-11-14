@@ -75,6 +75,16 @@ public class CardManager {
 		return sameCards;
 	}
 
+	public static List<Integer> getSameCardsByValue(int cardValue) {
+		List<Integer> sameCards = new ArrayList<>();
+		for (Integer integer : allPais) {
+			if (cardValue == getCardValue(integer)) {
+				sameCards.add(integer);
+			}
+		}
+		return sameCards;
+	}
+
 	public static List<Integer> getOtherCardsOfHold(User user, int cardValue) {
 		int value = 14 - cardValue;
 		List<Integer> sameCards = new ArrayList<>();
@@ -906,11 +916,11 @@ public class CardManager {
 	 * @return
 	 */
 	public static boolean isChi(User user, Card card) {
-		// 判断位置
-		int nextSeat = RoomManager.getNextSeat(card.getSeat());
-		if (user.isFive()) {//
+		if (user.isFive()) {
 			return false;
 		}
+		// 判断位置
+		int nextSeat = RoomManager.getNextSeat(card.getSeat());
 		if (card.isChu()) {
 			if (user.getSeatIndex() != nextSeat) {
 				return false;
@@ -1156,7 +1166,7 @@ public class CardManager {
 				if (!zhaoChiList.contains(integer)) {
 					zhaoChiList.add(integer);
 					zhao = true;
-					break;
+					// break;//---11.13改：招吃不能吃的问题
 				}
 			}
 		}
@@ -1169,12 +1179,12 @@ public class CardManager {
 					if (!zhaoChiList.contains(integer)) {
 						zhaoChiList.add(integer);
 						zhao = true;
-						break;
+						// break;
 					}
 				}
 			}
 		}
-		// 上家打过,需要招
+		// 上家打过没要的,需要招
 		List<Integer> lastChuList = getLastChuList(user);
 		if (!lastChuList.isEmpty()) {
 			for (Integer integer : lastChuList) {
@@ -1183,7 +1193,7 @@ public class CardManager {
 					if (!zhaoChiList.contains(integer)) {
 						zhaoChiList.add(integer);
 						zhao = true;
-						break;
+						// break;
 					}
 				}
 			}
@@ -1388,11 +1398,28 @@ public class CardManager {
 		return false;
 	}
 
-	public static int getScoreByFan(int initScore, boolean addFan, int fanNum) {
+	public static int getScoreByFan(int roomType, int initScore,
+			boolean addFan, int fanNum, boolean isZhuang) {
 		if (addFan) {
-			return initScore + initScore * fanNum;
+			if (roomType == ENRoomType.EN_ROOM_TYPE_CX_VALUE) {
+				if (isZhuang) {
+					return initScore + initScore + initScore * fanNum;
+				} else {
+					return initScore + initScore * fanNum;
+				}
+			} else {
+				return initScore + initScore * fanNum;
+			}
 		} else {
-			return initScore * (int) Math.pow(2, fanNum);
+			if (roomType == ENRoomType.EN_ROOM_TYPE_CX_VALUE) {
+				if (isZhuang) {
+					return initScore * (int) Math.pow(2, fanNum) + initScore;
+				} else {
+					return initScore * (int) Math.pow(2, fanNum);
+				}
+			} else {
+				return initScore * (int) Math.pow(2, fanNum);
+			}
 		}
 	}
 

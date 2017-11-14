@@ -165,15 +165,25 @@ public class RoomManager {
 		return null;
 	}
 
+	public static boolean isDangJia(User huUser, User user, Room room) {
+		if (room.getDangSeat() == user.getSeatIndex()
+				|| room.getDangSeat() == huUser.getSeatIndex()) {
+			return true;
+		}
+		return false;
+	}
+
 	public static int getDiFen(User user, Room room, User huUser) {
 		int score = room.getDiFen();
 		int difen = room.getDiFen();
 		if (user.isPiao()) {
 			score += difen;
 		}
-		if (room.getDangSeat() == user.getSeatIndex()
-				|| room.getDangSeat() == huUser.getSeatIndex()) {
-			score += difen;
+		if (room.getRoomType() != ENRoomType.EN_ROOM_TYPE_CX_VALUE) {
+			if (room.getDangSeat() == user.getSeatIndex()
+					|| room.getDangSeat() == huUser.getSeatIndex()) {
+				score += difen;
+			}
 		}
 		if (huUser.isPiao()) {
 			score += difen;
@@ -376,8 +386,9 @@ public class RoomManager {
 		// }
 		// TODO 写死牌
 		// if (room.getRound() == 1) {
-		// for (int i = 0; i < 4; i++) {// 84
-		// cards.add(26);
+		// cards.add(14);
+		// for (int i = 0; i < 6; i++) {// 84
+		// cards.add(44);
 		// cards.add(34);
 		// cards.add(15);
 		// cards.add(15);
@@ -385,12 +396,12 @@ public class RoomManager {
 		// cards.add(15);
 		// cards.add(15);
 		// }
-		// cards.add(26);
-		// cards.add(34);
-		// cards.add(26);
-		// cards.add(34);
-		// cards.add(26);
-		// cards.add(34);
+		// cards.add(22);
+		// cards.add(22);
+		// cards.add(22);
+		// cards.add(22);
+		// cards.add(22);
+		// cards.add(22);
 
 		// cards.add(26);
 		// cards.add(34);
@@ -532,9 +543,9 @@ public class RoomManager {
 				user.getHold().add(card4);
 				int card5 = 15;
 				user.getHold().add(card5);
-				int card6 = 16;
+				int card6 = 22;
 				user.getHold().add(card6);
-				int card7 = 22;
+				int card7 = 13;
 				user.getHold().add(card7);
 				int card8 = 23;
 				user.getHold().add(card8);
@@ -561,37 +572,37 @@ public class RoomManager {
 			} else if (i == 1) {
 				int card1 = 56;
 				user.getHold().add(card1);
-				int card2 = 56;
+				int card2 = 46;
 				user.getHold().add(card2);
-				int card3 = 46;
+				int card3 = 55;
 				user.getHold().add(card3);
-				int card4 = 46;
+				int card4 = 56;
 				user.getHold().add(card4);
-				int card5 = 45;
+				int card5 = 55;
 				user.getHold().add(card5);
-				int card6 = 14;
+				int card6 = 13;
 				user.getHold().add(card6);
-				int card7 = 44;
+				int card7 = 22;
 				user.getHold().add(card7);
-				int card8 = 35;
+				int card8 = 22;
 				user.getHold().add(card8);
-				int card9 = 35;
+				int card9 = 26;
 				user.getHold().add(card9);
-				int card10 = 26;
+				int card10 = 44;
 				user.getHold().add(card10);
-				int card11 = 34;
+				int card11 = 44;
 				user.getHold().add(card11);
-				int card12 = 34;
+				int card12 = 15;
 				user.getHold().add(card12);
-				int card13 = 34;
+				int card13 = 25;
 				user.getHold().add(card13);
-				int card14 = 11;
+				int card14 = 16;
 				user.getHold().add(card14);
-				int card15 = 66;
+				int card15 = 23;
 				user.getHold().add(card15);
-				int card16 = 24;
+				int card16 = 14;
 				user.getHold().add(card16);
-				int card17 = 15;
+				int card17 = 14;
 				user.getHold().add(card17);
 			} else if (i == 2) {
 				int card1 = 11;
@@ -629,9 +640,9 @@ public class RoomManager {
 				int card17 = 16;
 				user.getHold().add(card17);
 			} else if (i == 3) {
-				int card1 = 26;
+				int card1 = 14;
 				user.getHold().add(card1);
-				int card2 = 26;
+				int card2 = 14;
 				user.getHold().add(card2);
 				int card3 = 34;
 				user.getHold().add(card3);
@@ -1195,10 +1206,22 @@ public class RoomManager {
 		// 内滑???
 
 		// 花对：之前打过7，又扯起来了一个7
-		if (CardManager.getCardValue(card) == 7
-				&& user.getChuCards().contains(card)) {
-			NotifyHandler.notifyActionFlow(room, user, cardObj, null,
-					ENActionType.EN_ACTION_HUADUI, false);
+		if (CardManager.getCardValue(card) == 7) {
+			// boolean chi = false;
+			// for (PBColumnInfo col : user.getOpen()) {
+			// if (col.getColType() == ENColType.EN_COL_TYPE_CHI) {
+			// List<Integer> cards = col.getCardsList();
+			// for (Integer integer : cards) {
+			// if (!user.getChiCards().contains(integer)) {
+			//
+			// }
+			// }
+			// }
+			// }
+			if (user.getChuCards().contains(card)) {
+				NotifyHandler.notifyActionFlow(room, user, cardObj, null,
+						ENActionType.EN_ACTION_HUADUI, false);
+			}
 		}
 	}
 
@@ -1259,9 +1282,9 @@ public class RoomManager {
 			User baoZiUser = room.getUsers().get(room.getBaoZiSeat());
 			for (User _user : room.getUsers().values()) {
 				if (!_user.getUuid().equals(baoZiUser.getUuid())) {
-					int score = CardManager.getScoreByFan(
+					int score = CardManager.getScoreByFan(room.getRoomType(),
 							getDiFen(_user, room, baoZiUser), room.isAddFan(),
-							1);
+							1, isDangJia(baoZiUser, _user, room));
 					_user.setChangeCurrency(score);
 					_user.setCurrency(_user.getCurrency() + score);
 					allScore += score;
@@ -1276,9 +1299,9 @@ public class RoomManager {
 			User lan18User = room.getUsers().get(room.getLan18Seat());
 			for (User _user : room.getUsers().values()) {
 				if (!_user.getUuid().equals(lan18User.getUuid())) {
-					int score = CardManager.getScoreByFan(
+					int score = CardManager.getScoreByFan(room.getRoomType(),
 							getDiFen(_user, room, lan18User), room.isAddFan(),
-							1);
+							1, isDangJia(lan18User, _user, room));
 					_user.setChangeCurrency(0 - score);
 					_user.setCurrency(_user.getCurrency() - score);
 					allScore += score;
@@ -1320,11 +1343,15 @@ public class RoomManager {
 					for (User _user : room.getUsers().values()) {
 						if (!_user.getUuid().equals(huUser.getUuid())) {
 							int realyScore = CardManager.getScoreByFan(
-									room.getDiFen(), room.isAddFan(), fanNum);
+									room.getRoomType(), room.getDiFen(),
+									room.isAddFan(), fanNum,
+									isDangJia(huUser, _user, room));
 							allScore += realyScore;
 
 							int score = CardManager.getScoreByFan(
-									room.getDiFen(), room.isAddFan(), otherFan);
+									room.getRoomType(), room.getDiFen(),
+									room.isAddFan(), otherFan,
+									isDangJia(huUser, _user, room));
 							if (_user.getSeatIndex() != baoFanSeat) {
 								_user.setChangeCurrency(0 - score);
 								_user.setCurrency(_user.getCurrency() - score);
@@ -1350,13 +1377,15 @@ public class RoomManager {
 						for (User _user : room.getUsers().values()) {
 							if (!_user.getUuid().equals(huUser.getUuid())) {
 								int realyScore = CardManager.getScoreByFan(
-										room.getDiFen(), room.isAddFan(),
-										fanNum);
+										room.getRoomType(), room.getDiFen(),
+										room.isAddFan(), fanNum,
+										isDangJia(huUser, _user, room));
 								allScore += realyScore;
 
 								int score = CardManager.getScoreByFan(
-										room.getDiFen(), room.isAddFan(),
-										otherFan);
+										room.getRoomType(), room.getDiFen(),
+										room.isAddFan(), otherFan,
+										isDangJia(huUser, _user, room));
 								otherAllScore += score;
 								// log.info("---hu,gy bao fan dianpao----seat="
 								// + _user.getSeatIndex() + ",score="
@@ -1383,13 +1412,15 @@ public class RoomManager {
 						for (User _user : room.getUsers().values()) {
 							if (!_user.getUuid().equals(huUser.getUuid())) {
 								int realyScore = CardManager.getScoreByFan(
-										room.getDiFen(), room.isAddFan(),
-										fanNum);
+										room.getRoomType(), room.getDiFen(),
+										room.isAddFan(), fanNum,
+										isDangJia(huUser, _user, room));
 								allScore += realyScore;
 
 								int score = CardManager.getScoreByFan(
-										room.getDiFen(), room.isAddFan(),
-										otherFan);
+										room.getRoomType(), room.getDiFen(),
+										room.isAddFan(), otherFan,
+										isDangJia(huUser, _user, room));
 								if (_user.getSeatIndex() != baoFanSeat) {
 									_user.setChangeCurrency(0 - score);
 									_user.setCurrency(_user.getCurrency()
@@ -1421,8 +1452,10 @@ public class RoomManager {
 						for (User _user : room.getUsers().values()) {
 							if (!_user.getUuid().equals(huUser.getUuid())) {
 								int score = CardManager.getScoreByFan(
+										room.getRoomType(),
 										getDiFen(_user, room, huUser),
-										room.isAddFan(), fanNum);
+										room.isAddFan(), fanNum,
+										isDangJia(huUser, _user, room));
 								allScore += score;
 								// log.info("---hu,che tou----seat="
 								// + _user.getSeatIndex() + ",score="
@@ -1437,8 +1470,10 @@ public class RoomManager {
 						for (User _user : room.getUsers().values()) {
 							if (!_user.getUuid().equals(huUser.getUuid())) {
 								int score = CardManager.getScoreByFan(
+										room.getRoomType(),
 										getDiFen(_user, room, huUser),
-										room.isAddFan(), fanNum);
+										room.isAddFan(), fanNum,
+										isDangJia(huUser, _user, room));
 								_user.setChangeCurrency(0 - score);
 								_user.setCurrency(_user.getCurrency() - score);
 								allScore += score;
@@ -1455,8 +1490,10 @@ public class RoomManager {
 						for (User _user : room.getUsers().values()) {
 							if (!_user.getUuid().equals(huUser.getUuid())) {
 								int score = CardManager.getScoreByFan(
+										room.getRoomType(),
 										getDiFen(_user, room, huUser),
-										room.isAddFan(), fanNum);
+										room.isAddFan(), fanNum,
+										isDangJia(huUser, _user, room));
 								allScore += score;
 								// log.info("---hu,diaopao----seat="
 								// + _user.getSeatIndex() + ",score="
@@ -1470,8 +1507,10 @@ public class RoomManager {
 						for (User _user : room.getUsers().values()) {
 							if (!_user.getUuid().equals(huUser.getUuid())) {
 								int score = CardManager.getScoreByFan(
+										room.getRoomType(),
 										getDiFen(_user, room, huUser),
-										room.isAddFan(), fanNum);
+										room.isAddFan(), fanNum,
+										isDangJia(huUser, _user, room));
 								_user.setChangeCurrency(0 - score);
 								_user.setCurrency(_user.getCurrency() - score);
 								allScore += score;
