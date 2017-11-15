@@ -828,7 +828,7 @@ public class CardManager {
 		}
 	}
 
-	public static void logicUserIsHu(Room room, Card card, User user,
+	public static boolean logicUserIsHu(Room room, Card card, User user,
 			boolean isFiveMo) {
 		boolean hu = isHu(user, card, isFiveMo);
 		if (hu) {
@@ -849,6 +849,7 @@ public class CardManager {
 			}
 			user.setHuType(huType);
 		}
+		return hu;
 	}
 
 	public static boolean checkTianHu(Room room, User zhuang) {

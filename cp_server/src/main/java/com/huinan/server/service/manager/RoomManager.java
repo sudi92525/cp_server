@@ -392,7 +392,7 @@ public class RoomManager {
 		// if (room.getRound() == 1) {
 		// cards.add(14);
 		// for (int i = 0; i < 6; i++) {// 84
-		// cards.add(25);
+		// cards.add(34);
 		// cards.add(34);
 		// cards.add(15);
 		// cards.add(15);
@@ -551,35 +551,35 @@ public class RoomManager {
 				user.getHold().add(card2);
 				int card3 = 56;
 				user.getHold().add(card3);
-				int card4 = 11;
+				int card4 = 66;
 				user.getHold().add(card4);
 				int card5 = 15;
 				user.getHold().add(card5);
-				int card6 = 22;
+				int card6 = 44;
 				user.getHold().add(card6);
 				int card7 = 13;
 				user.getHold().add(card7);
-				int card8 = 23;
+				int card8 = 46;
 				user.getHold().add(card8);
 				int card9 = 24;
 				user.getHold().add(card9);
 				int card10 = 25;
 				user.getHold().add(card10);
-				int card11 = 26;
+				int card11 = 44;
 				user.getHold().add(card11);
-				int card12 = 33;
+				int card12 = 24;
 				user.getHold().add(card12);
-				int card13 = 34;
+				int card13 = 16;
 				user.getHold().add(card13);
 				int card14 = 35;
 				user.getHold().add(card14);
-				int card15 = 36;
+				int card15 = 45;
 				user.getHold().add(card15);
-				int card16 = 56;
+				int card16 = 14;
 				user.getHold().add(card16);
 				int card17 = 46;
 				user.getHold().add(card17);
-				int card18 = 55;
+				int card18 = 13;
 				user.getHold().add(card18);
 			} else if (i == 1) {
 				int card1 = 56;
@@ -610,7 +610,7 @@ public class RoomManager {
 				user.getHold().add(card13);
 				int card14 = 25;
 				user.getHold().add(card14);
-				int card15 = 23;
+				int card15 = 25;
 				user.getHold().add(card15);
 				int card16 = 16;
 				user.getHold().add(card16);
