@@ -105,6 +105,13 @@ public class GameAction extends AbsAction {
 					if (room.getCanHuSeat().contains(user.getSeatIndex())) {
 						room.getCanHuSeat().remove(
 								Integer.valueOf(user.getSeatIndex()));
+						user.getNoHuCards().addAll(
+								CardManager.getSameCards(room.getCurrentCard()
+										.getNum()));
+					}
+					if (room.getCanChiSeat().contains(user.getSeatIndex())) {
+						room.getCanChiSeat().remove(
+								Integer.valueOf(user.getSeatIndex()));
 					}
 					if (room.canCheNow()) {
 						// 无人胡了,也无人将要胡: 执行扯
@@ -116,11 +123,16 @@ public class GameAction extends AbsAction {
 					room.getChiChoices().put(user.getSeatIndex(), true);
 					user.getChoiceChiCards().addAll(req.getCardsList());
 					if (room.getCanCheSeat() == user.getSeatIndex()) {
+						user.getNoCheCards()
+								.add(room.getCurrentCard().getNum());
 						room.setCanCheSeat(0);
 					}
 					if (room.getCanHuSeat().contains(user.getSeatIndex())) {
 						room.getCanHuSeat().remove(
 								Integer.valueOf(user.getSeatIndex()));
+						user.getNoHuCards().addAll(
+								CardManager.getSameCards(room.getCurrentCard()
+										.getNum()));
 					}
 					if (room.canChiNow(user)) {
 						// 无人胡和扯,也无人将要胡和扯: 执行吃
@@ -199,7 +211,12 @@ public class GameAction extends AbsAction {
 				// 开始偷
 				RoomManager.startTou(room);
 			} else { // 通知下一家选择
-				RoomManager.nextChoicedang(room, nextUser);
+				if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX_VALUE) {
+					// 不当，继续选择必当
+					RoomManager.startChoiceDang(room);
+				} else {
+					RoomManager.nextChoicedang(room, nextUser);
+				}
 			}
 		}
 	}
@@ -337,7 +354,12 @@ public class GameAction extends AbsAction {
 		Builder col = null;
 		List<Integer> cards = new ArrayList<>();
 		if (zhaoType == ENZhaoType.EN_ZHAO_TYPE_CHE) {
-			user.getNoCheCards().remove(Integer.valueOf(destCard.getNum()));
+			// while (user.getNoCheCards().contains(destCard.getNum())) {
+			// user.getNoCheCards().remove(Integer.valueOf(destCard.getNum()));
+			// }
+			CardManager.removeNoCheCard(user,
+					Integer.valueOf(destCard.getNum()));
+
 			user.setZhaoChe(false);
 			cards.add(destCard.getNum());
 			cards.add(destCard.getNum());
@@ -345,7 +367,18 @@ public class GameAction extends AbsAction {
 		} else if (zhaoType == ENZhaoType.EN_ZHAO_TYPE_CHI) {
 			for (Integer integer : user.getZhaoChiCards()) {
 				cards.add(integer);
-				user.getNoChiCards().remove(integer);
+				// while (user.getNoChiCards().contains(integer)) {
+				// user.getNoChiCards().remove(integer);
+				// }
+				CardManager.removeNoChiCard(user, integer);
+			}
+			List<Integer> sameCards = CardManager
+					.getSameCardsByValue(14 - destCard.getCardValue());
+			for (Integer integer : sameCards) {
+				// while (user.getNoChiCards().contains(integer)) {
+				// user.getNoChiCards().remove(integer);
+				// }
+				CardManager.removeNoChiCard(user, integer);
 			}
 			user.getZhaoChiCards().clear();
 			if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_NC_VALUE
@@ -353,14 +386,29 @@ public class GameAction extends AbsAction {
 				user.setZhaoChiNoGe(true);
 			}
 		} else {// 全招
-			user.getNoCheCards().remove(Integer.valueOf(destCard.getNum()));
+			// while (user.getNoCheCards().contains(destCard.getNum())) {
+			// user.getNoCheCards().remove(Integer.valueOf(destCard.getNum()));
+			// }
+			CardManager.removeNoCheCard(user,
+					Integer.valueOf(destCard.getNum()));
 			user.setZhaoChe(false);
 			cards.add(destCard.getNum());
 			cards.add(destCard.getNum());
 			cards.add(destCard.getNum());
 			for (Integer integer : user.getZhaoChiCards()) {
 				cards.add(integer);
-				user.getNoChiCards().remove(integer);
+				// while (user.getNoChiCards().contains(integer)) {
+				// user.getNoChiCards().remove(integer);
+				// }
+				CardManager.removeNoChiCard(user, integer);
+			}
+			List<Integer> sameCards = CardManager
+					.getSameCardsByValue(14 - destCard.getCardValue());
+			for (Integer integer : sameCards) {
+				// while (user.getNoChiCards().contains(integer)) {
+				// user.getNoChiCards().remove(integer);
+				// }
+				CardManager.removeNoChiCard(user, integer);
 			}
 			user.getZhaoChiCards().clear();
 			if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_NC_VALUE) {
@@ -407,6 +455,7 @@ public class GameAction extends AbsAction {
 				ENColType.EN_COL_TYPE_CHI, false);
 		user.getOpen().add(columnInfo.build());
 
+		user.getChiCardOfHolds().add(chiCard);
 		CardManager.removeCardOfHold(user, chiCard);
 		CardManager.removeDeathCard(chiCard, user);
 
@@ -499,12 +548,12 @@ public class GameAction extends AbsAction {
 		user.setZhaoChiNoGe(false);
 		user.setWanJiao(false);
 		user.setNumJiao(0);
-		
+
 		// 扯牌推送
 		NotifyHandler.notifyActionFlow(room, user, destCard,
 				columnInfo.build(), type, false);
 
-		int count = CardManager.getCardCountOfAll(user, destCard.getNum());
+		int count = CardManager.getCardCountOfOpen(user, destCard.getNum());
 		RoomManager.isBaoFan(user, room, destCard, null, count);
 		// 偷牌推送
 		boolean huang = RoomManager.touPai(room, user, 1);
@@ -557,7 +606,8 @@ public class GameAction extends AbsAction {
 		// NotifyHandler.notifyActionFlow(room, user, destCard, null,
 		// ENActionType.EN_ACTION_CHIKAN, false);
 		// } else
-		if (count == 4) {
+		if (count == 4
+				&& room.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX_VALUE) {
 			NotifyHandler.notifyActionFlow(room, user, destCard, null,
 					ENActionType.EN_ACTION_HU_SIGEN, false);
 		} else {
@@ -637,13 +687,18 @@ public class GameAction extends AbsAction {
 				}
 			}
 		} else {
-			user.getNoChiCards().add(destCard.getNum());
+			if (!user.getNoChiCards().contains(
+					Integer.valueOf(destCard.getNum()))) {
+				user.getNoChiCards().add(Integer.valueOf(destCard.getNum()));
+			}
 
 			// 恰胡
 			boolean dou14 = CardManager.checkDou14(newHold);
 			if (dou14 && CardManager.checkTuoNum(room, user, newHold)) {
-				user.getNoHuCards().addAll(
-						CardManager.getSameCards(destCard.getNum()));
+				List<Integer> sameCards = CardManager.getSameCards(destCard
+						.getNum());
+				user.getNoHuCards().removeAll(sameCards);
+				user.getNoHuCards().addAll(sameCards);
 			}
 		}
 		user.getNoCheCards().add(destCard.getNum());
@@ -794,14 +849,21 @@ public class GameAction extends AbsAction {
 			if (room.isChiHongDaHei()) {
 				// 吃红打黑:不吃35，不能吃26(不吃红，红黑点都不能吃)
 				if (CardManager.colorIsRed(currentCard.getNum())) {
+					user.getNoChiCards().removeAll(
+							CardManager.getSameCards(currentCard.getNum()));
 					user.getNoChiCards().addAll(
 							CardManager.getSameCards(currentCard.getNum()));
 				} else {
+					user.getNoChiCards().removeAll(
+							CardManager.getSameHeiCards(currentCard.getNum()));
 					user.getNoChiCards().addAll(
 							CardManager.getSameHeiCards(currentCard.getNum()));
 				}
 			} else {
-				user.getNoChiCards().add(currentCard.getNum());
+				if (!user.getNoChiCards().contains(
+						Integer.valueOf(currentCard.getNum()))) {
+					user.getNoChiCards().add(currentCard.getNum());
+				}
 			}
 			room.getCanChiSeat().remove(Integer.valueOf(user.getSeatIndex()));
 		}
@@ -815,60 +877,65 @@ public class GameAction extends AbsAction {
 	 */
 	private static void maxPriority(Room room, Card currentCard) {
 		if (room.getActionRecord().size() == room.getCanActionSeat().size()) {
-			boolean have = false;// 过了后有其他人执行
-			Map<Integer, Boolean> huChoices = room.getHuChoices();
-			if (!huChoices.isEmpty()) {
-				for (int i = 0; i < room.getUserNum(); i++) {
-					int seat = currentCard.getSeat() + i;
-					if (seat > room.getUserNum()) {
-						seat -= room.getUserNum();
-					}// -------9.14增加----------
-					if (huChoices.get(seat) != null && huChoices.get(seat)) {
-						User huUser = room.getUsers().get(seat);
-						hu(huUser, room);// 从牌位置开始找到第一个胡的人
-						have = true;
-						break;
+			if (room.getChe7Seat() != 0) {
+				User che7User = room.getUsers().get(room.getChe7Seat());
+				GameAction.che(che7User, room);
+			} else {
+				boolean have = false;// 过了后有其他人执行
+				Map<Integer, Boolean> huChoices = room.getHuChoices();
+				if (!huChoices.isEmpty()) {
+					for (int i = 0; i < 4; i++) {
+						int seat = currentCard.getSeat() + i;
+						if (seat > 4) {
+							seat -= 4;
+						}// -------9.14增加----------
+						if (huChoices.get(seat) != null && huChoices.get(seat)) {
+							User huUser = room.getUsers().get(seat);
+							hu(huUser, room);// 从牌位置开始找到第一个胡的人
+							have = true;
+							break;
+						}
+					}
+				} else if (room.getCanCheSeat() != 0 && room.isChe()) {// 有人扯,且要扯
+					User cheUser = room.getUsers().get(room.getCanCheSeat());
+					che(cheUser, room);
+					have = true;
+				} else if (!room.getChiChoices().isEmpty()) {
+					int firstSeat = 0;
+					if (currentCard.isChu()) {// 手里打出的从下一家开始判断
+						firstSeat = 1;
+					}
+					for (int i = firstSeat; i < room.getUserNum(); i++) {
+						int seat = currentCard.getSeat() + i;
+						if (seat > room.getUserNum()) {
+							seat -= room.getUserNum();
+						}
+						if (room.getChiChoices().get(seat) != null
+								&& room.getChiChoices().get(seat)) {
+							User chiUser = room.getUsers().get(seat);
+							chi(chiUser, room);// 从牌位置开始找到第一个吃的人
+							have = true;
+							break;
+						}
 					}
 				}
-			} else if (room.getCanCheSeat() != 0 && room.isChe()) {// 有人扯,且要扯
-				User cheUser = room.getUsers().get(room.getCanCheSeat());
-				che(cheUser, room);
-				have = true;
-			} else if (!room.getChiChoices().isEmpty()) {
-				int firstSeat = 0;
-				if (currentCard.isChu()) {// 手里打出的从下一家开始判断
-					firstSeat = 1;
-				}
-				for (int i = firstSeat; i < room.getUserNum(); i++) {
-					int seat = currentCard.getSeat() + i;
-					if (seat > room.getUserNum()) {
-						seat -= room.getUserNum();
+				// 点过后,就执行了,,被人抢了:不加入死牌,自己优先级最高,加入不能出,,什么的列表
+				if (!have) {
+					// 都没人要,把牌加入能吃玩家的不能吃列表
+					for (Integer canChiSeat : room.getCanChiSeatTemp()) {
+						User user = room.getUsers().get(canChiSeat);
+						addNoChiList(user, room, currentCard);
 					}
-					if (room.getChiChoices().get(seat) != null
-							&& room.getChiChoices().get(seat)) {
-						User chiUser = room.getUsers().get(seat);
-						chi(chiUser, room);// 从牌位置开始找到第一个吃的人
-						have = true;
-						break;
-					}
+					room.clearCurrentInfo();
+					User cardUser = room.getUsers().get(currentCard.getSeat());
+					List<Integer> lost = cardUser.getChuListCards();
+					lost.add(currentCard.getNum());// 加入出牌列表
+					// 通知牌没人要
+					NotifyHandler.notifyActionFlow(room, cardUser, currentCard,
+							null, ENActionType.EN_ACTION_UNKNOWN, true);
+					// 通知位置(下一家),拿牌
+					RoomManager.naPai(room);
 				}
-			}
-			//点过后,就执行了,,被人抢了:不加入死牌,自己优先级最高,加入不能出,,什么的列表
-			if (!have) {
-				// 都没人要,把牌加入能吃玩家的不能吃列表
-				for (Integer canChiSeat : room.getCanChiSeatTemp()) {
-					User user = room.getUsers().get(canChiSeat);
-					addNoChiList(user, room, currentCard);
-				}
-				room.clearCurrentInfo();
-				User cardUser = room.getUsers().get(currentCard.getSeat());
-				List<Integer> lost = cardUser.getChuListCards();
-				lost.add(currentCard.getNum());// 加入出牌列表
-				// 通知牌没人要
-				NotifyHandler.notifyActionFlow(room, cardUser, currentCard,
-						null, ENActionType.EN_ACTION_UNKNOWN, true);
-				// 通知位置(下一家),拿牌
-				RoomManager.naPai(room);
 			}
 		} else {
 			// 胡，扯，吃，胡的点过，扯得点扯，会卡住等吃的人

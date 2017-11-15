@@ -202,6 +202,7 @@ message CSRequestCreateTable
 	optional bool is_fan_san7 = 25;					//三砍七算番（苍溪）
 	optional bool is_fan_xj_have_56 = 26;			//小家有丁斧全红全黑算番（苍溪）
 	optional bool is_can_not_wan_jiao = 27;			//是否可以弯叫:true=不能弯叫，false=可弯叫（默认）
+	optional bool is_fan_san_hei = 28;				//三砍黑算番
 }
 
 //创建房间响应

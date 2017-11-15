@@ -222,13 +222,16 @@ public class NCTest extends TestCase {
 		list2.add(5);
 		list2.add(2);
 
-		list.removeAll(list2);
+		// list.removeAll(list2);
+		while (list.contains(5)) {
+			list.remove(Integer.valueOf(5));
+		}
 
 		for (int i = 0; i < list.size(); i++) {
-			// if(list.get(i)==5){
+			// if (list.get(i) == 5) {
 			// list.remove(i);
 			// }
-			System.out.println("remove all :" + list.get(i));
+			// System.out.println("remove all :" + list.get(i));
 		}
 		System.out.println("list size :" + list.size());
 	}

@@ -5,10 +5,6 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.timeout.ReadTimeoutException;
 
 import java.net.SocketAddress;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadFactory;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.logging.log4j.Marker;
 import org.apache.logging.log4j.MarkerManager;
@@ -26,7 +22,6 @@ import com.huinan.server.net.clientfsm.clientstate.IClientFiniteState;
 import com.huinan.server.net.clientfsm.clientstate.NewClientState;
 import com.huinan.server.net.socket.GameSvrHandlerMgr;
 import com.huinan.server.server.LogicQueueManager;
-import com.huinan.server.server.net.config.ServerConfig;
 import com.huinan.server.server.net.exception.IllegalException;
 import com.huinan.server.server.net.handler.ProtoHandler;
 import com.huinan.server.service.AbsAction;
@@ -47,23 +42,23 @@ public class GameSvrHandler extends ProtoHandler {
 	private ClientFSM fsm;
 	private HeartBeatRec heartBeatRec;
 
-	public static final ExecutorService EXECUTOR = Executors
-			.newFixedThreadPool(ServerConfig.getInstance()
-					.getHandlerThreadCount(), new ThreadFactory() {
-				AtomicInteger atomic = new AtomicInteger();
-
-				public Thread newThread(Runnable r) {
-					return new Thread(r, "gamesvr_handler_"
-							+ this.atomic.getAndIncrement());
-				}
-			});
-
-	public GameSvrHandler() {
-	}
-
-	public static void shutdonw() {
-		EXECUTOR.shutdown();
-	}
+	// public static final ExecutorService EXECUTOR = Executors
+	// .newFixedThreadPool(ServerConfig.getInstance()
+	// .getHandlerThreadCount(), new ThreadFactory() {
+	// AtomicInteger atomic = new AtomicInteger();
+	//
+	// public Thread newThread(Runnable r) {
+	// return new Thread(r, "gamesvr_handler_"
+	// + this.atomic.getAndIncrement());
+	// }
+	// });
+	//
+	// public GameSvrHandler() {
+	// }
+	//
+	// public static void shutdonw() {
+	// EXECUTOR.shutdown();
+	// }
 
 	@Override
 	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
@@ -221,12 +216,12 @@ public class GameSvrHandler extends ProtoHandler {
 
 	@Override
 	protected void reSet() {
-		LOGGER.info("reSet-----------gamePlayers=:"
-				+ GameSvrPlayerManager.getPlayers().size());
+		// LOGGER.info("reSet-----------gamePlayers=:"
+		// + GameSvrPlayerManager.getPlayers().size());
 		GamePlayer gamePlayer = GameSvrPlayerManager
 				.getPlayerByChannel(getChannel());
 		if (gamePlayer != null) {
-			LOGGER.info("reSet-----------not null=:");
+			// LOGGER.info("reSet-----------not null=:");
 			gamePlayer.logout();
 			GameSvrPlayerManager.deletePlayer(gamePlayer);
 			// gamePlayer = null;

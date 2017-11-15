@@ -89,7 +89,7 @@ public class Room implements Serializable {
 	/** difen */
 	private int diFen = 1;
 	/** 人数 */
-	private int userNum = 3;
+	private int userNum = 4;
 
 	private int huSeat;
 	// ---------------西充规则--------------------
@@ -105,6 +105,8 @@ public class Room implements Serializable {
 	private boolean lan18;
 	/** 是否可以弯叫 :默认为可以弯叫 */
 	private boolean canNotWanJiao;
+	/** 是否三砍黑加翻 */
+	private boolean sanKanHeiIsFan = true;
 	// -------------------------------苍溪版本-----------------------------------
 	/** 是否小家有斧头的全红全黑算番 */
 	private boolean fanFiveHave56;
@@ -170,6 +172,8 @@ public class Room implements Serializable {
 	private int lastChuSeat;
 	/** 西充烂18座位 */
 	private int lan18Seat;
+	/** 是否是自动扯7:所有胡的人点了过判断是否扯7 */
+	private int che7Seat;
 
 	public Room(int tid, int roomType, boolean dingFuColor,
 			boolean dingFu34IsFan, boolean jiaFan34) {
@@ -219,8 +223,8 @@ public class Room implements Serializable {
 
 	public int getFirstCard() {
 		int index = RandomUtils.nextInt(this.resetCards.size());
-		Integer card = this.resetCards.get(index);
-		this.resetCards.remove(index);
+		Integer card = this.resetCards.get(index);// index
+		this.resetCards.remove(index);// index
 		return card;
 	}
 
@@ -361,6 +365,7 @@ public class Room implements Serializable {
 		this.che = false;
 		this.choiceChe = false;
 		this.currentHuSeat.clear();
+		this.che7Seat = 0;
 		for (User user : users.values()) {
 			user.clearCurrentInfo();
 		}
@@ -878,6 +883,22 @@ public class Room implements Serializable {
 
 	public void setUserNum(int userNum) {
 		this.userNum = userNum;
+	}
+
+	public boolean isSanKanHeiIsFan() {
+		return sanKanHeiIsFan;
+	}
+
+	public void setSanKanHeiIsFan(boolean sanKanHeiIsFan) {
+		this.sanKanHeiIsFan = sanKanHeiIsFan;
+	}
+
+	public int getChe7Seat() {
+		return che7Seat;
+	}
+
+	public void setChe7Seat(int che7Seat) {
+		this.che7Seat = che7Seat;
 	}
 
 }

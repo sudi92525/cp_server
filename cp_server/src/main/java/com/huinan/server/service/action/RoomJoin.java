@@ -156,11 +156,11 @@ public class RoomJoin extends AbsAction {
 			}
 			join.setGameStart(gameStart);
 		}
+		// 房间正在解散
+		if (room.getLaunch_uuid() != null) {
+			join.setDissolveInfos(ProtoBuilder.buildDissolveOperation(room));
+		}
 		if (room.isStepIsPlay()) {// 游戏未开始!room.isStart()
-			// 房间正在解散
-			if (room.getLaunch_uuid() != null) {
-				join.setDissolveInfos(ProtoBuilder.buildDissolveOperation(room));
-			}
 			if (!user.getHold().isEmpty()) {
 				// 闹钟位置
 				int actionSeat = room.getActionSeat();

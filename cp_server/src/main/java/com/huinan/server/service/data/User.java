@@ -224,6 +224,10 @@ public class User implements Serializable {
 	 */
 	public List<Integer> chiCards = new ArrayList<>();
 	/**
+	 * 该玩家所有手里拿下去吃的牌
+	 */
+	public List<Integer> chiCardOfHolds = new ArrayList<>();
+	/**
 	 * 不能胡的牌
 	 */
 	public List<Integer> noHuCards = new ArrayList<>();
@@ -318,6 +322,7 @@ public class User implements Serializable {
 		this.doubleZhuiCards.clear();
 		this.noHuCards.clear();
 		this.chiCards.clear();
+		this.chiCardOfHolds.clear();
 		this.chuCards.clear();
 		this.chuListCards.clear();
 		this.nextChiCards.clear();
@@ -910,6 +915,14 @@ public class User implements Serializable {
 
 	public void setLast(boolean last) {
 		this.last = last;
+	}
+
+	public List<Integer> getChiCardOfHolds() {
+		return chiCardOfHolds;
+	}
+
+	public void setChiCardOfHolds(List<Integer> chiCardOfHolds) {
+		this.chiCardOfHolds = chiCardOfHolds;
 	}
 
 }

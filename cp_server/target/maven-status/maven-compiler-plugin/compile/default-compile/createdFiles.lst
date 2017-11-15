@@ -65,7 +65,6 @@ com\huinan\server\server\db\DBThreadLocal$1.class
 com\huinan\proto\CpMsgCs$CSNottifyEnterTable$Builder.class
 com\huinan\proto\CpMsgCs$UserBrand$Builder.class
 com\huinan\proto\CpMsgCs$CSNotifyOwnerTirenOrBuilder.class
-com\huinan\server\net\handler\GameSvrHandler$1.class
 com\huinan\proto\CpMsgCs$CSRequestOwnerTirenOrBuilder.class
 com\huinan\server\server\DBRoomCardJob$1.class
 com\huinan\proto\CpMsgCs$CSResponseLogin.class

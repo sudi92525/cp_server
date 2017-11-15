@@ -209,6 +209,10 @@ public class UserManager {
 				conn = DBManager.getInstance().getConnection();
 
 				int round = dissolve ? room.getRound() - 1 : room.getRound();
+				if (round == 0) {
+					RoomManager.removeRoom(room);
+					return;
+				}
 				for (User user : room.getUsers().values()) {
 					sta = conn.prepareStatement(SELECT_RANK_SQL_BY_UID);
 					sta.setInt(1, Integer.valueOf(user.getUuid()));//
@@ -241,6 +245,7 @@ public class UserManager {
 
 						sta.executeUpdate();
 					}
+					//LOGGER.info("update rank data:" + sta.toString());
 				}
 			} catch (SQLException e) {
 				LOGGER.error("user db error:", e);
