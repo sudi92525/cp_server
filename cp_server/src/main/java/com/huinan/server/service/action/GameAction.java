@@ -552,10 +552,7 @@ public class GameAction extends AbsAction {
 				if (chiTui) {
 					CardManager.notifyChoice(room, room.getCurrentCard(), user);
 				} else {
-					// 计算可操作的玩家操作列表
-					// CardManager.logicUserActionList(room,
-					// room.getCurrentCard(), user, user.isFive(), true);
-					// 无人操作,则出牌
+					// 无操作,则出牌
 					if (room.getCanActionSeat().isEmpty()) {
 						// 出牌推送
 						CardManager.checkBaoZiOrChuPai(room, user);
@@ -563,24 +560,6 @@ public class GameAction extends AbsAction {
 				}
 			}
 		}
-		// boolean zhao = CardManager.isZhao(room, user);// 扯揍还有招：割，招，过；
-		// if (!cheZou && zhao) {
-		// CardManager.notifyChoice(room, room.getCurrentCard(), user);
-		// } else {
-		// boolean chiTui = CardManager.isChiTui(room, user);
-		// if (!cheZou && chiTui) {
-		// CardManager.notifyChoice(room, room.getCurrentCard(), user);
-		// } else {
-		// // 计算可操作的玩家操作列表
-		// CardManager.logicUserActionList(room, room.getCurrentCard(),
-		// user, user.isFive(), true);
-		// // 无人操作,则出牌
-		// if (room.getCanActionSeat().isEmpty()) {
-		// // 出牌推送
-		// CardManager.checkBaoZiOrChuPai(room, user);
-		// }
-		// }
-		// }
 	}
 
 	private static void hu(User user, Room room) {

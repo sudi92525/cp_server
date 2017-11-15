@@ -89,7 +89,7 @@ public class Room implements Serializable {
 	/** difen */
 	private int diFen = 1;
 	/** 人数 */
-	private int userNum = 4;
+	private int userNum = 3;
 
 	private int huSeat;
 	// ---------------西充规则--------------------
