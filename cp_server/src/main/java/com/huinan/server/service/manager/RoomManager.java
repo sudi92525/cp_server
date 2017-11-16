@@ -1321,7 +1321,8 @@ public class RoomManager {
 			int otherFan = fanNum;
 			int baoFanSeat = 0;
 			Card card = room.getCurrentCard();
-			if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_GY_VALUE
+			if ((room.getRoomType() == ENRoomType.EN_ROOM_TYPE_GY_VALUE || room
+					.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX_VALUE)
 					&& room.isBaoFan() && !huUser.getBaoFans().isEmpty()) {
 				// log.info("---hu,gy bao fan----");
 				// 广元包翻
