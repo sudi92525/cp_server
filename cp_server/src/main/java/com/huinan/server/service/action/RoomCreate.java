@@ -56,6 +56,7 @@ public class RoomCreate extends AbsAction {
 			creator.setCreatorUid(user.getUuid());
 			creator.setTid(room.getTid());
 			creator.setGameNum(requestBody.getGameNum());
+			creator.setPlayerNum(room.getUserNum());// 人数
 			creator.setHighTimes(requestBody.getHighTimes());
 			creator.setIsPiao(requestBody.getIsPiao());
 			creator.setUseCardType(requestBody.getUseCardType());
@@ -101,6 +102,11 @@ public class RoomCreate extends AbsAction {
 		int roundNum = request.getGameNum();
 		int cost = ERoomCardCost.getRoomCardCost(roundNum);
 		if (roundNum <= 0 || cost == 0) {
+			return ENMessageError.RESPONSE_FAIL.getNumber();
+		}
+		if (request.hasPlayerNum()
+				&& (request.getPlayerNum() != Constant.PLAYER_NUM_THREE || request
+						.getPlayerNum() != Constant.PLAYER_NUM_FOUR)) {
 			return ENMessageError.RESPONSE_FAIL.getNumber();
 		}
 		UserManager.getInstance().getRoomCard(user);

@@ -235,4 +235,11 @@ public class NCTest extends TestCase {
 		}
 		System.out.println("list size :" + list.size());
 	}
+
+	public void testRoomId() {
+		for (int i = 0; i < 10; i++) {
+			int codeNumber = (int) ((Math.random() * 5 + 1) * 100000);
+			System.out.println("codeNumber :" + codeNumber);
+		}
+	}
 }

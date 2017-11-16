@@ -113,6 +113,9 @@ public class RoomManager {
 		if (requestBody.hasIsFanSanHei()) {
 			room.setSanKanHeiIsFan(requestBody.getIsFanSanHei());
 		}
+		if (requestBody.hasPlayerNum()) {
+			room.setUserNum(requestBody.getPlayerNum());
+		}
 		getRooms().put(tid, room);// 存放游戏房间信息
 		return room;
 	}
@@ -527,9 +530,9 @@ public class RoomManager {
 			lastSeat = zhuangSeat - 1;
 		}
 		User lastUser = room.getUsers().get(lastSeat);
-		if (room.getUserNum() == 3) {
+		if (room.getUserNum() == Constant.PLAYER_NUM_THREE) {
 			lastUser.setLast(true);
-		} else if (room.getUserNum() == 4) {
+		} else if (room.getUserNum() == Constant.PLAYER_NUM_FOUR) {
 			lastUser.setFive(true);
 			lastUser.setLast(true);
 		}

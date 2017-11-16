@@ -649,7 +649,7 @@ public class CardManager {
 				&& fan > room.getRoomTable().getHighTimes()) {
 			fan = room.getRoomTable().getHighTimes();
 			log.info("超出最大番数=" + fan);
-		}
+		} 
 		log.info("最终番数=" + fan);
 		return fan;
 	}
