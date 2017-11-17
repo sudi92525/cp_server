@@ -83,6 +83,7 @@ public class RoomCreate extends AbsAction {
 				creator.setIsCanNotWanJiao(room.isCanNotWanJiao());
 				creator.setIsFanSanHei(room.isSanKanHeiIsFan());
 			}
+			creator.setPlayerNum(room.getUserNum());
 
 			response.setTableInfo(creator);
 			room.setRoomTable(creator.build());

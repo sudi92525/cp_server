@@ -45,6 +45,7 @@ public class TimerTaskManager {
 	public void runTimer() {
 		Timer timer = new Timer("timer_task_thread");
 		TimerTask timeTask = new TimerTask() {
+			@SuppressWarnings("deprecation")
 			@Override
 			public void run() {
 				try {
