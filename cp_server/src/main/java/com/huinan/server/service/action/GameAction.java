@@ -202,7 +202,7 @@ public class GameAction extends AbsAction {
 		} else if (actionType == ENActionType.EN_ACTION_NO_DANG_VALUE) {
 			int nextSeat = RoomManager.getNextSeat(room, user.getSeatIndex());
 			User nextUser = room.getUsers().get(nextSeat);
-			if (nextUser.getSeatIndex() == room.getUserNum()) {// 小家必当
+			if (nextUser.isLast()) {// 最后一家必当
 				room.setDangSeat(nextUser.getSeatIndex());
 				nextUser.setChoiceDang(true);
 				// 通知其他玩家-当
