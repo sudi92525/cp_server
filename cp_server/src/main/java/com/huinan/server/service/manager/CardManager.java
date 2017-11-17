@@ -1366,15 +1366,16 @@ public class CardManager {
 			}
 		} else {
 			if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_NC_VALUE
-					|| room.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX_VALUE) {
+					|| room.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX_VALUE
+					|| room.getRoomType() == ENRoomType.EN_ROOM_TYPE_MY_VALUE) {
 				if (user.getSeatIndex() == room.getDangSeat()) {// 当家20坨
 					if (tuo < Constant.hu_zj_score) {
-						log.info("isHu,false:NC/CX当家坨数不够20");
+						log.info("isHu,false:NC/CX/MY当家坨数不够20");
 						return false;
 					}
 				} else {
 					if (tuo < Constant.hu_xj_score) {
-						log.info("isHu,false:NC/CX普通家坨数不够18");
+						log.info("isHu,false:NC/CX/MY普通家坨数不够18");
 						return false;
 					}
 				}
