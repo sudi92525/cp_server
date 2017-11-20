@@ -2,6 +2,7 @@ package com.huinan.server;
 
 import org.apache.logging.log4j.LogManager;
 
+import com.huinan.server.db.ClubDAO;
 import com.huinan.server.db.GYcpInfoDAO;
 import com.huinan.server.db.RedisDAO;
 import com.huinan.server.net.GameSvrPlayerManager;
@@ -55,6 +56,7 @@ public class GameServer {
 			RabbitMQManager.init();
 
 			GYcpInfoDAO.loadHorseNotice();
+			ClubDAO.getInstance().init();
 			stop();
 			GameSvrPlayerManager.initPlayerPool();
 			LogicQueueManager.getInstance().start();

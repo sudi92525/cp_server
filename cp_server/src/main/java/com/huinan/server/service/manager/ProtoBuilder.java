@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.huinan.proto.CpMsg.CpHead;
+import com.huinan.proto.CpMsgClub.ClubMemberProto;
+import com.huinan.proto.CpMsgClub.ClubProto;
+import com.huinan.proto.CpMsgClub.ClubRoomProto;
 import com.huinan.proto.CpMsgCs.CSNotifyDissolveTableOperation;
 import com.huinan.proto.CpMsgCs.CSNotifyGameStart;
 import com.huinan.proto.CpMsgCs.CSNotifyNextOperation;
@@ -22,14 +25,51 @@ import com.huinan.proto.CpMsgCs.PBColumnInfo.Builder;
 import com.huinan.proto.CpMsgCs.PBTableSeat;
 import com.huinan.proto.CpMsgCs.UserInfo;
 import com.huinan.server.service.data.Card;
+import com.huinan.server.service.data.Constant;
 import com.huinan.server.service.data.Room;
 import com.huinan.server.service.data.User;
+import com.huinan.server.service.data.club.Club;
+import com.huinan.server.service.data.club.ClubRoom;
 
 /**
  *
  * renchao
  */
 public class ProtoBuilder {
+
+	// ------------------------club-------------------------
+	public static ClubProto.Builder buildClubProto(Club club) {
+		ClubProto.Builder clubProto = ClubProto.newBuilder();
+		clubProto.setId(club.getId());
+		clubProto.setGameType(club.getGameType());
+		clubProto.setName(club.getName());
+		clubProto.setRoomNum(club.getRooms().size());
+		return clubProto;
+	}
+
+	public static ClubRoomProto.Builder buildClubRoomProto(ClubRoom clubRoom,
+			Room room) {
+		ClubRoomProto.Builder clubRoomProto = ClubRoomProto.newBuilder();
+		clubRoomProto.setTableInfo(room.getRoomTable());
+		if (!room.isStart()) {
+			clubRoomProto.setTableState(Constant.cp_status_wait);
+		} else {
+			clubRoomProto.setTableState(Constant.cp_status_started);
+		}
+		for (User user : room.getUsers().values()) {
+			clubRoomProto.addUserInfo(buildUserInfo(user));
+		}
+		return clubRoomProto;
+	}
+
+	public static ClubMemberProto.Builder buildClubMemberProto(Club club,
+			User user) {
+		ClubMemberProto.Builder clubMemberProto = ClubMemberProto.newBuilder();
+		clubMemberProto.setUserInfo(buildUserInfo(user));
+		clubMemberProto.setIsMaster(user.getUuid().equals(club.getCreatorId()));
+		clubMemberProto.setOnline(user.isOnline());
+		return clubMemberProto;
+	}
 
 	public static CSNotifyPlayerDealCard.Builder buildDealCard(Room room,
 			Card destCard, int resetCardCount) {

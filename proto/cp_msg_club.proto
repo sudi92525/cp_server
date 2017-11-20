@@ -1,0 +1,121 @@
+package com.huinan.proto;
+import "cp_msg_cs.proto";
+
+
+
+
+
+message ClubRoomProto{
+	optional CSRequestCreateTable table_info = 1;		//房间信息
+	repeated UserInfo user_info = 2;					//房间其他用户信息
+	optional int32 table_state = 3;						//房间状态:0等待，1开始，2结算中
+}
+
+
+message ClubMemberProto{
+	optional UserInfo user_info = 1;					//成员信息
+	optional bool online = 2;							//是否在线
+	optional bool is_master = 3;						//是否群主
+}
+
+
+message ClubProto{
+	optional int32 id = 1;								//id
+	optional string name = 2;							//名称
+	optional int32 game_type = 3;						//游戏类型：加枚举
+	optional int32 room_num = 4;						//已开房间数
+	//....
+}
+
+
+//协议一：获取俱乐部:列表
+message CSRequestClubInfo {
+
+}
+
+message CSResponseClubInfo {
+	optional ENMessageError result = 1; 				//结果
+	repeated ClubProto club = 2;						//俱乐部列表
+}
+
+
+//协议二：获取俱乐部:房间(刷新)
+message CSRequestClubRoom {
+	optional int32 club_id = 1;							//俱乐部id
+}
+
+
+message CSResponseClubRoom {
+	optional ENMessageError result = 1; 				//结果
+	repeated ClubRoomProto club_room = 2;				//房间列表
+	optional bool have_apply = 3;						//是否有申请消息
+}
+
+
+
+//协议三：获取俱乐部:成员
+message CSRequestClubMember {
+	optional int32 club_id = 1;							//俱乐部id
+}
+
+message CSResponseClubMember {
+	optional ENMessageError result = 1; 				//结果
+	repeated ClubMemberProto club_member = 2;			//俱乐部成员列表
+}
+
+
+//协议四：获取俱乐部:申请消息
+message CSRequestClubMessage {
+	optional int32 club_id = 1;							//俱乐部id
+}
+
+message CSResponseClubMessage {
+	optional ENMessageError result = 1; 				//结果
+	repeated UserInfo apply_user = 2;					//申请列表
+}
+
+
+//协议五：推送：俱乐部申请消息
+message CSNotifyClubApply{
+	optional int32 club_id = 1;							//俱乐部id
+	optional bool have = 2;								//是否有申请消息
+}
+
+
+//协议六：移除俱乐部房间
+message CSRequestClubRemoveRoom{
+	optional int32 club_id = 1;							//俱乐部id
+	optional int32 room_id = 2;							//房间id
+}
+
+message CSResponseClubRemoveRoom{
+	optional ENMessageError result = 1; 				//结果
+}
+
+
+//协议七：请求俱乐部:踢人
+message CSRequestClubKick{
+	optional int32 club_id = 1;							//俱乐部id
+	optional string uid = 2;							//用户唯一标识符
+}
+
+message CSResponseClubKick{
+	optional ENMessageError result = 1; 				//结果
+}
+
+
+//协议八：审核：同意、拒绝
+message CSRequestClubIsAgree{
+	optional int32 club_id = 1;							//俱乐部id
+	optional string uid = 2;							//用户唯一标识符
+	optional bool agree = 3;							//是否同意：true=同意，false=拒绝
+}
+
+message CSResponseClubIsAgree{
+	optional ENMessageError result = 1; 				//结果
+}
+
+
+
+
+

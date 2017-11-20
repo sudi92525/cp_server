@@ -5,6 +5,7 @@
 //* ----------------------------------------------------------------------
 package com.huinan.proto;
 import "cp_msg_cs.proto";
+import "cp_msg_club.proto";
 
 //协议头数据
 message CpHead {
@@ -90,5 +91,35 @@ message CpMsgData
 		
 		CSNotifyNotice cs_notify_notice = 42;						//跑马灯，公告通知
 		CSNotifyOpenTouPai cs_notify_open_tou_pai = 43;				//推送翻开偷牌
+		
+		
+		
+		//--------------俱乐部-------------------------
+		CSRequestClubInfo cs_request_club_info = 44;			//获取俱乐部:列表
+		CSResponseClubInfo cs_response_club_info = 45;			//响应俱乐部:列表
+		
+		CSRequestClubRoom cs_request_club_room = 46;			//获取俱乐部:房间
+		CSResponseClubRoom cs_response_club_room = 47;			//响应俱乐部:房间
+		
+		CSRequestClubMember cs_request_club_member = 48;		//获取俱乐部:成员
+		CSResponseClubMember cs_response_club_member = 49;		//响应俱乐部:成员
+		
+		CSRequestClubMessage cs_request_club_message = 50;			//获取俱乐部:申请消息
+		CSResponseClubMessage cs_response_club_message  = 51;		//响应俱乐部:申请消息
+		
+		CSNotifyClubApply cs_notify_club_apply = 52;				//推送：俱乐部申请消息
+		
+		CSRequestClubRemoveRoom cs_request_club_re_room = 53;		//移除俱乐部房间
+		CSResponseClubRemoveRoom cs_response_club_re_room  = 54;	//响应移除俱乐部房间
+		
+		CSRequestClubKick cs_request_club_kick = 55;				//请求俱乐部:踢人
+		CSResponseClubKick cs_response_club_kick  = 56;				//响应俱乐部:踢人
+		
+		CSRequestClubIsAgree cs_request_club_is_agree = 57;			//请求俱乐部:审批
+		CSResponseClubIsAgree cs_response_club_is_agree  = 58;		//响应俱乐部:审批
+		
+		
+		
+		
 	}
 }
