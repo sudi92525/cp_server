@@ -154,9 +154,10 @@ public class NCTest extends TestCase {
 
 	public void testRandomZhuang() {
 		int lastZhuang = 1;
-		int seat2 = RoomManager.getLastSeat(lastZhuang);
+		// int seat2 = RoomManager.getLastSeat(lastZhuang);
 		// 上把庄家的对门开始数
-		int seatDuiMen = RoomManager.getLastSeat(seat2);
+		// int seatDuiMen = RoomManager.getLastSeat(seat2);
+		int seatDuiMen = 3;
 		// 随机一张牌
 		int index = new Random().nextInt(84) + 1;
 		int zhuangCard = 13;// room.getResetCards().get(index);
@@ -233,5 +234,12 @@ public class NCTest extends TestCase {
 			// System.out.println("remove all :" + list.get(i));
 		}
 		System.out.println("list size :" + list.size());
+	}
+
+	public void testRoomId() {
+		for (int i = 0; i < 10; i++) {
+			int codeNumber = (int) ((Math.random() * 5 + 1) * 100000);
+			System.out.println("codeNumber :" + codeNumber);
+		}
 	}
 }

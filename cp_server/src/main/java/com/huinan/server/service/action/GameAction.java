@@ -200,9 +200,9 @@ public class GameAction extends AbsAction {
 			// 开始偷
 			RoomManager.startTou(room);
 		} else if (actionType == ENActionType.EN_ACTION_NO_DANG_VALUE) {
-			int nextSeat = RoomManager.getNextSeat(user.getSeatIndex());
+			int nextSeat = RoomManager.getNextSeat(room, user.getSeatIndex());
 			User nextUser = room.getUsers().get(nextSeat);
-			if (nextUser.isFive()) {// 小家必当
+			if (nextUser.isLast()) {// 最后一家必当
 				room.setDangSeat(nextUser.getSeatIndex());
 				nextUser.setChoiceDang(true);
 				// 通知其他玩家-当
@@ -558,10 +558,7 @@ public class GameAction extends AbsAction {
 				if (chiTui) {
 					CardManager.notifyChoice(room, room.getCurrentCard(), user);
 				} else {
-					// 计算可操作的玩家操作列表
-					// CardManager.logicUserActionList(room,
-					// room.getCurrentCard(), user, user.isFive(), true);
-					// 无人操作,则出牌
+					// 无操作,则出牌
 					if (room.getCanActionSeat().isEmpty()) {
 						// 出牌推送
 						CardManager.checkBaoZiOrChuPai(room, user);
@@ -569,24 +566,6 @@ public class GameAction extends AbsAction {
 				}
 			}
 		}
-		// boolean zhao = CardManager.isZhao(room, user);// 扯揍还有招：割，招，过；
-		// if (!cheZou && zhao) {
-		// CardManager.notifyChoice(room, room.getCurrentCard(), user);
-		// } else {
-		// boolean chiTui = CardManager.isChiTui(room, user);
-		// if (!cheZou && chiTui) {
-		// CardManager.notifyChoice(room, room.getCurrentCard(), user);
-		// } else {
-		// // 计算可操作的玩家操作列表
-		// CardManager.logicUserActionList(room, room.getCurrentCard(),
-		// user, user.isFive(), true);
-		// // 无人操作,则出牌
-		// if (room.getCanActionSeat().isEmpty()) {
-		// // 出牌推送
-		// CardManager.checkBaoZiOrChuPai(room, user);
-		// }
-		// }
-		// }
 	}
 
 	private static void hu(User user, Room room) {
@@ -901,10 +880,10 @@ public class GameAction extends AbsAction {
 					if (currentCard.isChu()) {// 手里打出的从下一家开始判断
 						firstSeat = 1;
 					}
-					for (int i = firstSeat; i < 4; i++) {
+					for (int i = firstSeat; i < room.getUserNum(); i++) {
 						int seat = currentCard.getSeat() + i;
-						if (seat > 4) {
-							seat -= 4;
+						if (seat > room.getUserNum()) {
+							seat -= room.getUserNum();
 						}
 						if (room.getChiChoices().get(seat) != null
 								&& room.getChiChoices().get(seat)) {

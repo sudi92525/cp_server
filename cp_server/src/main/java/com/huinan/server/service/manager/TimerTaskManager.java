@@ -45,6 +45,7 @@ public class TimerTaskManager {
 	public void runTimer() {
 		Timer timer = new Timer("timer_task_thread");
 		TimerTask timeTask = new TimerTask() {
+			@SuppressWarnings("deprecation")
 			@Override
 			public void run() {
 				try {
@@ -77,7 +78,7 @@ public class TimerTaskManager {
 							} else if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX_VALUE) {
 								cxNum++;
 							}
-							if (room.isStart() && room.getUsers().size() == 4) {
+							if (room.isStart() && room.getUsers().size() == room.getUserNum()) {
 								playRoomNum++;
 								if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_GY_VALUE) {
 									gyPlayNum++;

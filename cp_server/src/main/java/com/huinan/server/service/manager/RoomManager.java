@@ -113,6 +113,9 @@ public class RoomManager {
 		if (requestBody.hasIsFanSanHei()) {
 			room.setSanKanHeiIsFan(requestBody.getIsFanSanHei());
 		}
+		if (requestBody.hasPlayerNum()) {
+			room.setUserNum(requestBody.getPlayerNum());
+		}
 		getRooms().put(tid, room);// 存放游戏房间信息
 		return room;
 	}
@@ -133,28 +136,29 @@ public class RoomManager {
 		return codeNumber;
 	}
 
-	public static int getNextSeat(int currentSeat) {
-		if (currentSeat == 4) {
+	public static int getNextSeat(Room room, int currentSeat) {
+		if (currentSeat == room.getUserNum()) {
 			return 1;
 		} else {
 			return currentSeat + 1;
 		}
 	}
 
-	public static int getLastSeat(int currentSeat) {
+	public static int getLastSeat(Room room, int currentSeat) {
 		if (currentSeat == 1) {
-			return 4;
+			return room.getUserNum();
 		} else {
 			return currentSeat - 1;
 		}
 	}
 
 	public static int getNextSeatIndex(Room room) {
-		return getNextSeat(room.getActionSeat());
+		return getNextSeat(room, room.getActionSeat());
 	}
 
 	public static int getLastSeatIndex(User user) {
-		return getLastSeat(user.getSeatIndex());
+		Room room = RoomManager.getInstance().getRoom(user.getRoomId());
+		return getLastSeat(room, user.getSeatIndex());
 	}
 
 	public static User getZhuangJia(Room room) {
@@ -282,10 +286,10 @@ public class RoomManager {
 					ENActionType.EN_ACTION_DANG, false);
 		} else {
 			if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX_VALUE) {
-				for (int i = 0; i < 4; i++) {
+				for (int i = 0; i < room.getUserNum(); i++) {
 					User user = room.getUsers().get(seat);
 					if (user.isChoiceDang()) {
-						seat = RoomManager.getNextSeat(seat);
+						seat = RoomManager.getNextSeat(room, seat);
 						continue;
 					}
 					dang = checkMustDang(room, user);
@@ -297,13 +301,13 @@ public class RoomManager {
 					}
 				}
 			} else {
-				for (int i = 0; i < 4; i++) {
+				for (int i = 0; i < room.getUserNum(); i++) {
 					User user = room.getUsers().get(seat);
 					dang = checkMustDang(room, user);
 					if (dang) {
 						break;
 					}
-					seat = RoomManager.getNextSeat(seat);
+					seat = RoomManager.getNextSeat(room, seat);
 				}
 			}
 		}
@@ -391,7 +395,7 @@ public class RoomManager {
 		// if (room.getRound() == 1) {
 		// cards.add(14);
 		 for (int i = 0; i < 6; i++) {// 84
-		 cards.add(34);
+		 cards.add(12);
 		// cards.add(34);
 		// cards.add(15);
 		// cards.add(15);
@@ -424,9 +428,13 @@ public class RoomManager {
 			if (lastZhuang == 0) {
 				lastZhuang = room.getZhuangSeat();
 			}
-			int seat2 = RoomManager.getLastSeat(lastZhuang);
-			// 上把庄家的对门开始数
-			seatDuiMen = RoomManager.getLastSeat(seat2);
+			if (room.getUserNum() == 4) {
+				int seat2 = RoomManager.getLastSeat(room, lastZhuang);
+				// 上把庄家的对门开始数
+				seatDuiMen = RoomManager.getLastSeat(room, seat2);
+			} else if (room.getUserNum() == 3) {
+				seatDuiMen = RoomManager.getNextSeat(room, lastZhuang);
+			}
 		}
 		room.setJiaoPaiSeat(seatDuiMen);
 		// 随机一张牌
@@ -437,13 +445,13 @@ public class RoomManager {
 
 		// 数这一局的庄家位置
 		int cardValue = CardManager.getCardValue(zhuangCard);
-		int yu = cardValue % 4;
+		int yu = cardValue % room.getUserNum();
 		if (yu == 0) {
-			yu = 4;
+			yu = room.getUserNum();
 		}
 		int thisSeat = seatDuiMen + yu - 1;
-		if (thisSeat > 4) {
-			thisSeat = thisSeat - 4;
+		if (thisSeat > room.getUserNum()) {
+			thisSeat = thisSeat - room.getUserNum();
 		}
 		room.setZhuangSeat(thisSeat);
 	}
@@ -468,21 +476,21 @@ public class RoomManager {
 
 		// TODO 写死牌
 		// if (room.getRound() > 1) {
-//		for (int i = 0; i < 4; i++) {
-//			int num = CardManager.BRAND_NUMFOUR[i];
-//			User user = room.getUsers().get(seat);
-//			user.setReady(false);
-//			for (int j = 0; j < num; j++) {
-//				int card = room.getFirstCard();
-//				user.getHold().add(card);
-//			}
-//			if (!user.isFive()) {
-//				user.getCanChiHoldCards().clear();
-//				user.getCanChiHoldCards().addAll(user.getHold());
-//			}
-//			CardManager.noChuDouble7AndDiaoZhui(room, user, true);
-//			seat = RoomManager.getNextSeat(seat);
-//		}
+		// for (int i = 0; i < room.getUserNum(); i++) {
+		// int num = CardManager.BRAND_NUMFOUR[i];
+		// User user = room.getUsers().get(seat);
+		// user.setReady(false);
+		// for (int j = 0; j < num; j++) {
+		// int card = room.getFirstCard();
+		// user.getHold().add(card);
+		// }
+		// if (!user.isFive()) {
+		// user.getCanChiHoldCards().clear();
+		// user.getCanChiHoldCards().addAll(user.getHold());
+		// }
+		// CardManager.noChuDouble7AndDiaoZhui(room, user, true);
+		// seat = RoomManager.getNextSeat(room, seat);
+		// }
 		// }
 		// TODO 写死牌
 		// if (room.getRound() == 1) {
@@ -515,15 +523,19 @@ public class RoomManager {
 
 	public static void setFive(Room room) {
 		int zhuangSeat = room.getZhuangSeat();
-		int fiveSeat = 0;
+		int lastSeat = 0;
 		if (zhuangSeat == 1) {
-			fiveSeat = 4;
+			lastSeat = room.getUserNum();
 		} else {
-			fiveSeat = zhuangSeat - 1;
+			lastSeat = zhuangSeat - 1;
 		}
-
-		User fiveUser = room.getUsers().get(fiveSeat);
-		fiveUser.setFive(true);
+		User lastUser = room.getUsers().get(lastSeat);
+		if (room.getUserNum() == Constant.PLAYER_NUM_THREE) {
+			lastUser.setLast(true);
+		} else if (room.getUserNum() == Constant.PLAYER_NUM_FOUR) {
+			lastUser.setFive(true);
+			lastUser.setLast(true);
+		}
 	}
 
 	/**
@@ -533,7 +545,7 @@ public class RoomManager {
 	 * @param seat
 	 */
 	public static void dealSiPai(Room room, int seat) {
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < room.getUserNum(); i++) {
 			User user = room.getUsers().get(seat);
 			if (i == 0) {
 				int card1 = 11;
@@ -562,7 +574,7 @@ public class RoomManager {
 				user.getHold().add(card12);
 				int card13 = 16;
 				user.getHold().add(card13);
-				int card14 = 35;
+				int card14 = 44;
 				user.getHold().add(card14);
 				int card15 = 45;
 				user.getHold().add(card15);
@@ -655,7 +667,7 @@ public class RoomManager {
 				user.getHold().add(card5);
 			}
 			CardManager.noChuDouble7AndDiaoZhui(room, user, true);
-			seat = RoomManager.getNextSeat(seat);
+			seat = RoomManager.getNextSeat(room, seat);
 		}
 	}
 
@@ -668,10 +680,10 @@ public class RoomManager {
 		int zhuangSeat = room.getZhuangSeat();
 		room.clearCurrentInfo();
 		int seat = zhuangSeat;
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < room.getUserNum(); i++) {
 			User user = room.getUsers().get(seat);
 			checkUserTou(room, user, true);
-			seat = RoomManager.getNextSeat(seat);
+			seat = RoomManager.getNextSeat(room, seat);
 		}
 	}
 
@@ -849,7 +861,7 @@ public class RoomManager {
 			}
 		}
 		// 当判断到尾家没有偷牌情况，直接通知庄家开始出牌，发送一个位置通知，再发送给庄家一个choice
-		if (!room.isStartChu() && user.isFive()) {
+		if (!room.isStartChu() && user.isLast()) {
 			room.getCanActionSeat().clear();
 			boolean lan18 = xc18lan(room);
 			if (!lan18) {
@@ -971,7 +983,7 @@ public class RoomManager {
 			boolean lan = true;
 			User user = room.getUsers().get(seat);
 			if (!user.getOpen().isEmpty()) {
-				seat = RoomManager.getNextSeat(seat);
+				seat = RoomManager.getNextSeat(room, seat);
 				continue;
 			}
 			Map<Integer, Integer> map = CardManager.toMap(user.getHold());
@@ -989,7 +1001,7 @@ public class RoomManager {
 				lan18 = true;
 				break;
 			}
-			seat = RoomManager.getNextSeat(seat);
+			seat = RoomManager.getNextSeat(room, seat);
 		}
 		return lan18;
 	}

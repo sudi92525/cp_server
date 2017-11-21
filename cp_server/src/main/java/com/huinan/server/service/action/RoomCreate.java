@@ -41,7 +41,7 @@ public class RoomCreate extends AbsAction {
 			user.setSeatIndex(1);
 			user.setRoomId(room.getTid());
 			room.getUsers().put(user.getSeatIndex(), user);
-			for (int i = 1; i <= 4; i++) {
+			for (int i = 1; i <= room.getUserNum(); i++) {
 				if (i == user.getSeatIndex()) {
 					response.addUserInfo(ProtoBuilder.buildUserInfo(user));
 				} else {
@@ -56,6 +56,7 @@ public class RoomCreate extends AbsAction {
 			creator.setCreatorUid(user.getUuid());
 			creator.setTid(room.getTid());
 			creator.setGameNum(requestBody.getGameNum());
+			creator.setPlayerNum(room.getUserNum());// 人数
 			creator.setHighTimes(requestBody.getHighTimes());
 			creator.setIsPiao(requestBody.getIsPiao());
 			creator.setUseCardType(requestBody.getUseCardType());
@@ -82,6 +83,7 @@ public class RoomCreate extends AbsAction {
 				creator.setIsCanNotWanJiao(room.isCanNotWanJiao());
 				creator.setIsFanSanHei(room.isSanKanHeiIsFan());
 			}
+			creator.setPlayerNum(room.getUserNum());
 
 			response.setTableInfo(creator);
 			room.setRoomTable(creator.build());
@@ -103,6 +105,11 @@ public class RoomCreate extends AbsAction {
 		if (roundNum <= 0 || cost == 0) {
 			return ENMessageError.RESPONSE_FAIL.getNumber();
 		}
+		if (request.hasPlayerNum()
+				&& (request.getPlayerNum() != Constant.PLAYER_NUM_THREE || request
+						.getPlayerNum() != Constant.PLAYER_NUM_FOUR)) {
+			return ENMessageError.RESPONSE_FAIL.getNumber();
+		}
 		UserManager.getInstance().getRoomCard(user);
 		int useCardType = request.getUseCardType();
 		int cardNum = ERoomCardCost.getRoomCardCost(roundNum);
@@ -117,7 +124,7 @@ public class RoomCreate extends AbsAction {
 			}
 		} else if (useCardType == ERoomCardType.AA.getValue()) {
 			// 均摊
-			float need = cardNum / Constant.PLAYER_NUM * 1F;
+			float need = cardNum / Constant.PLAYER_NUM * 1F;// TODO:传人数
 			if (user.getRoomCardNum() < Math.ceil(need)) {
 				return ENMessageError.RESPONSE_ROOMCARD_LIMIT.getNumber();
 			}

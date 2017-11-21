@@ -153,6 +153,8 @@ public class User implements Serializable {
 	private List<ENActionType> actions = new ArrayList<>();
 	/** 是否是五张 */
 	private boolean five;
+	/** 是否是尾家 */
+	private boolean last;
 	/** 初始化手牌数量 */
 	private int initHoldSize;
 	/** 当前坨数 */
@@ -328,6 +330,7 @@ public class User implements Serializable {
 		this.hu = false;
 		this.outFirstMj = true;
 		this.five = false;
+		this.last = false;
 		this.huCard = null;
 		this.huFanNum = 0;
 		this.huTuoNum = 0;
@@ -904,6 +907,14 @@ public class User implements Serializable {
 
 	public void setNumJiao(int numJiao) {
 		this.numJiao = numJiao;
+	}
+
+	public boolean isLast() {
+		return last;
+	}
+
+	public void setLast(boolean last) {
+		this.last = last;
 	}
 
 	public List<Integer> getChiCardOfHolds() {

@@ -88,6 +88,8 @@ public class Room implements Serializable {
 	private boolean touDang;
 	/** difen */
 	private int diFen = 1;
+	/** 人数 */
+	private int userNum = 4;
 
 	private int huSeat;
 	// ---------------西充规则--------------------
@@ -245,13 +247,15 @@ public class Room implements Serializable {
 		if (canHuSeat.size() == 1) {
 			return true;
 		} else {
+			Room room = RoomManager.getInstance().getRoom(user.getRoomId());
 			int firstSeat = 0;
 			int currentSeat = currentCard.getSeat();
 			if (currentCard.isChu()) {// 手里打出的从下一家开始判断
 				firstSeat = 1;
-				currentSeat = RoomManager.getNextSeat(currentCard.getSeat());
+				currentSeat = RoomManager.getNextSeat(room,
+						currentCard.getSeat());
 			}
-			for (int i = firstSeat; i < 4; i++) {
+			for (int i = firstSeat; i < getUserNum(); i++) {
 				if (currentSeat == user.getSeatIndex()) {
 					return true;// 判断我自己,可以胡
 				}
@@ -269,7 +273,7 @@ public class Room implements Serializable {
 						return false;// user前面有人点了胡
 					}
 				}
-				currentSeat = RoomManager.getNextSeat(currentSeat);
+				currentSeat = RoomManager.getNextSeat(room, currentSeat);
 			}
 		}
 		return true;
@@ -873,6 +877,14 @@ public class Room implements Serializable {
 		this.canNotWanJiao = canNotWanJiao;
 	}
 
+	public int getUserNum() {
+		return userNum;
+	}
+
+	public void setUserNum(int userNum) {
+		this.userNum = userNum;
+	}
+
 	public boolean isSanKanHeiIsFan() {
 		return sanKanHeiIsFan;
 	}
@@ -880,7 +892,7 @@ public class Room implements Serializable {
 	public void setSanKanHeiIsFan(boolean sanKanHeiIsFan) {
 		this.sanKanHeiIsFan = sanKanHeiIsFan;
 	}
-	
+
 	public int getChe7Seat() {
 		return che7Seat;
 	}

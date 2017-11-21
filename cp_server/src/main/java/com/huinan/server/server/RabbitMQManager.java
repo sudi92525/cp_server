@@ -8,9 +8,11 @@ import org.apache.logging.log4j.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.huinan.server.db.ClubDAO;
 import com.huinan.server.db.GYcpInfoDAO;
 import com.huinan.server.db.UserManager;
 import com.huinan.server.server.net.config.ServerConfig;
+import com.huinan.server.service.manager.ClubManager;
 import com.huinan.server.service.manager.NotifyHandler;
 import com.huinan.server.service.manager.RoomManager;
 import com.rabbitmq.client.AMQP;
@@ -56,8 +58,7 @@ public class RabbitMQManager {
 		factory.setPassword(password);
 		factory.setVirtualHost(virtual_host);
 		factory.setPort(port);
-		
-		
+
 		Connection connection;
 		try {
 			connection = factory.newConnection();
@@ -95,6 +96,12 @@ public class RabbitMQManager {
 						} else if (PushType == 3) {
 							// 解锁房间
 							RoomManager.unlockRoom(String.valueOf(uid));
+						} else if (PushType == 5) {// 创建俱乐部
+							int clubId = (int) jsonOBJ.get("ClubId");
+							ClubManager.createClub(clubId, "club_name", uid);
+						} else if (PushType == 6) {// 申请加入俱乐部
+							int clubId = (int) jsonOBJ.get("ClubId");
+							ClubManager.applyClub(uid, clubId);
 						}
 					}
 				}
