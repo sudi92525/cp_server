@@ -978,9 +978,12 @@ public class CardManager {
 
 		for (Integer integer : user.getHold()) {
 			if (getCardValue(integer) + card.getCardValue() == 14
-					&& !user.getDouble7s().contains(integer)
-					&& !user.getDoubleZhuiCards().contains(integer)) {
-				return true;
+					&& !user.getDouble7s().contains(integer)) {
+				if (!user.getDoubleZhuiCards().contains(integer)) {// 不是一对，可吃
+					return true;
+				} else {// 一对的情况，判断是否可拆对
+					return checkZhuiCardChaiDui(user, integer);
+				}
 			}
 		}
 		return false;
@@ -1299,6 +1302,30 @@ public class CardManager {
 			}
 		}
 		return tui;
+	}
+
+	public static boolean checkZhuiCardChaiDui(User user, Integer chaiDuiCard) {
+		Map<Integer, Integer> holdMap = toMap(user.getHold());
+		if (!user.getDoubleZhuiCards().contains(chaiDuiCard)) {
+			return true;
+		} else {
+			// 要吃的牌，成对
+			for (int i = 0; i < zhuiCards.size(); i++) {
+				int zhuiCard = zhuiCards.get(i);
+				Integer count = holdMap.get(zhuiCard);
+				if (count != null) {
+					if (count == 1) {// 有单牌，不能拆对
+						return false;
+					} else if (count == 2
+							&& getCardValue(zhuiCard)
+									+ getCardValue(chaiDuiCard) == 14) {
+						// 有背靠背两对不能拆
+						return false;
+					}
+				}
+			}
+		}
+		return true;
 	}
 
 	/**

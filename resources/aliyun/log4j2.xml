@@ -77,7 +77,7 @@
 				<TimeBasedTriggeringPolicy />
 				<SizeBasedTriggeringPolicy size="50 MB" />
 			</Policies>
-			<DefaultRolloverStrategy max="100" />
+			<DefaultRolloverStrategy max="500" />
 		</RollingRandomAccessFile>
 
 		<!-- output default info into Rolling file -->
@@ -90,7 +90,7 @@
 				<TimeBasedTriggeringPolicy />
 				<SizeBasedTriggeringPolicy size="50 MB" />
 			</Policies>
-			<DefaultRolloverStrategy max="100" />
+			<DefaultRolloverStrategy max="500" />
 		</RollingRandomAccessFile>
 
 
