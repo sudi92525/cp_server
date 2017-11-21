@@ -1535,13 +1535,13 @@ public class RoomManager {
 	public static void totalRoomCard(Room room) {
 		if (room.getRound() == 1) {
 			int userType = room.getRoomTable().getUseCardType();
-			int allRoomCardNum = 0;
-			if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX_VALUE) {
-				allRoomCardNum = 0;
-			} else {
-				allRoomCardNum = ERoomCardCost.getRoomCardCost(room
-						.getRoomTable().getGameNum());
-			}
+			// int allRoomCardNum = 0;
+			// if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX_VALUE) {
+			// allRoomCardNum = 0;
+			// } else {
+			int allRoomCardNum = ERoomCardCost.getRoomCardCost(room
+					.getRoomTable().getGameNum());
+			// }
 			int beforeRoomCard = 0;
 			if (userType == ERoomCardType.CREATOR.getValue()) {
 				String creatorUid = room.getRoomTable().getCreatorUid();
