@@ -63,10 +63,10 @@ public class RedisDAO {
 				if (user.getRoomId() != 0) {
 					Room room = RoomManager.getRooms().get(
 							Integer.valueOf(user.getRoomId()));
-					if (room.getRoomTable() == null) {
+					if (room != null && room.getRoomTable() == null) {
 						user.clear();
 						room.setStart(false);
-					} else {
+					} else if (room != null) {
 						room.getUsers().put(user.getSeatIndex(), user);
 					}
 				}
@@ -83,8 +83,8 @@ public class RedisDAO {
 				ServerConfig.getInstance().getGameCode());
 		String roomKey = String.format(RedisKeyManager.getKey("ROOM_MAP_KEY"),
 				ServerConfig.getInstance().getGameCode());
-		redis.del(userKey);
-		redis.del(roomKey);
+		// redis.del(userKey);
+		// redis.del(roomKey);
 		for (User user : UserManager.getInstance().getUsers().values()) {
 			redis.hset(userKey.getBytes(), user.getUuid().getBytes(),
 					RedisManager.serialize(user));
