@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
@@ -38,7 +39,7 @@ public class UserManager {
 		return instance;
 	}
 
-	private Map<String, User> users = new ConcurrentHashMap<>();
+	private ConcurrentMap<String, User> users = new ConcurrentHashMap<>();
 
 	private static ExecutorService EXECUTOR = Executors.newFixedThreadPool(2,
 			new ThreadFactory() {

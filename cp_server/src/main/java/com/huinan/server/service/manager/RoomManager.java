@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -36,7 +37,6 @@ import com.huinan.server.net.GamePlayer;
 import com.huinan.server.net.GameSvrPlayerManager;
 import com.huinan.server.service.data.Card;
 import com.huinan.server.service.data.Constant;
-import com.huinan.server.service.data.ERoomCardCost;
 import com.huinan.server.service.data.ERoomCardType;
 import com.huinan.server.service.data.Room;
 import com.huinan.server.service.data.User;
@@ -58,7 +58,7 @@ public class RoomManager {
 	/**
 	 * 房间信息缓存，临时存储，届时会切入redis
 	 */
-	public Map<Integer, Room> rooms = new ConcurrentHashMap<>();
+	public ConcurrentMap<Integer, Room> rooms = new ConcurrentHashMap<>();
 
 	public static Map<Integer, Room> getRooms() {
 		return getInstance().rooms;
@@ -384,25 +384,25 @@ public class RoomManager {
 	public static void shuffle(Room room) {
 		List<Integer> cards = new ArrayList<>();
 		// if (room.getRound() > 1) {
-//		for (int card : CardManager.allPais) {
-//			for (int k = 0; k < 4; k++) {
-//				cards.add(card);
-//			}
-//		}
+		// for (int card : CardManager.allPais) {
+		// for (int k = 0; k < 4; k++) {
+		// cards.add(card);
+		// }
+		// }
 		// }
 
 		// TODO 写死牌
 		// if (room.getRound() == 1) {
 		// cards.add(14);
-		 for (int i = 0; i < 6; i++) {// 84
-		 cards.add(12);
-		// cards.add(34);
-		// cards.add(15);
-		// cards.add(15);
-		// cards.add(15);
-		// cards.add(15);
-		// cards.add(15);
-		 }
+		for (int i = 0; i < 6; i++) {// 84
+			cards.add(12);
+			// cards.add(34);
+			// cards.add(15);
+			// cards.add(15);
+			// cards.add(15);
+			// cards.add(15);
+			// cards.add(15);
+		}
 		// cards.add(22);
 		// cards.add(22);
 		// cards.add(22);
@@ -415,6 +415,13 @@ public class RoomManager {
 		// cards.add(26);
 		// cards.add(34);
 		// }
+		Collections.shuffle(cards);
+		Collections.shuffle(cards);
+		Collections.shuffle(cards);
+		Collections.shuffle(cards);
+		Collections.shuffle(cards);
+		Collections.shuffle(cards);
+		Collections.shuffle(cards);
 		Collections.shuffle(cards);
 		Collections.shuffle(cards);
 		Collections.shuffle(cards);
@@ -494,7 +501,7 @@ public class RoomManager {
 		// }
 		// TODO 写死牌
 		// if (room.getRound() == 1) {
-		 dealSiPai(room, seat);
+		dealSiPai(room, seat);
 		// }
 
 		room.setFirstCard(true);
@@ -1547,7 +1554,7 @@ public class RoomManager {
 	public static void totalRoomCard(Room room) {
 		if (room.getRound() == 1) {
 			int userType = room.getRoomTable().getUseCardType();
-			 int allRoomCardNum = 0;
+			int allRoomCardNum = 0;
 			// if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX_VALUE) {
 			// allRoomCardNum = 0;
 			// } else {

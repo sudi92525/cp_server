@@ -4,7 +4,6 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.util.HashedWheelTimer;
 import io.netty.util.Timer;
 
-import java.util.NoSuchElementException;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ConcurrentMap;
@@ -13,7 +12,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.huinan.server.net.handler.GameSvrHandler;
-import com.huinan.server.server.net.config.ServerConfig;
 import com.huinan.server.server.net.handler.BaseHandler;
 
 /**
