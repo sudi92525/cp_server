@@ -38,7 +38,7 @@ public class GameSvrChannelInitializer extends BaseSvrChannelInitializer {
 		// create player here
 		try {
 			GameSvrHandler handler = (GameSvrHandler) GameSvrHandlerMgr
-					.getInstance().createClient();
+					.getInstance().createClient(ch);
 			p.addLast(newIdleHandler());
 			p.addLast(new MessageDecoder(ProtoHandler.HEADER_LENGTH));
 			p.addLast(handler);
