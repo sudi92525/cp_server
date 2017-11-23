@@ -52,12 +52,12 @@ public class HandlerManager {
 		if (clientIps.get(curIp) == null) {
 			clientIps.put(curIp, 1);
 			LogManager.getLogger("ip").info(
-					"create new socket,ip:" + curIp + ",times:"
+					"create new client,ip:" + curIp + ",times:"
 							+ clientIps.get(curIp));
 		} else {
 			clientIps.put(curIp, clientIps.get(curIp) + 1);
 			LogManager.getLogger("ip").info(
-					"create reset socket,ip:"
+					"create reset client,ip:"
 							+ curIp
 							+ ",times:"
 							+ clientIps.get(curIp)

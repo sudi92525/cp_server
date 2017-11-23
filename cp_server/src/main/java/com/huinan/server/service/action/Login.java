@@ -78,9 +78,9 @@ public class Login extends AbsAction {
 			response.setRoomCardNum(user.getRoomCardNum());
 		}
 		msg.setCsResponseLogin(response);
-		// request.getClient().sendMessage(
-		// CpMsgData.CS_RESPONSE_LOGIN_FIELD_NUMBER, user.getUuid(),
-		// (CpHead) request.getHeadLite(), msg.build());
+		request.getClient().sendMessage(
+				CpMsgData.CS_RESPONSE_LOGIN_FIELD_NUMBER, user.getUuid(),
+				(CpHead) request.getHeadLite(), msg.build());
 
 		GYcpInfoDAO.loginNotifyHorseNotice(user);
 	}
