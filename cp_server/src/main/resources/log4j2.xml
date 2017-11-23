@@ -11,6 +11,7 @@
 		<Property name="online">online</Property>
 		<Property name="queue">queue</Property>
 		<Property name="rabbit_mq">rabbit_mq</Property>
+		<Property name="ip">ip</Property>
 		<Property name="logpath">/mnt/logs/xnsccp
 		</Property>
 		<Property name="backup">/mnt/logs/xnsccp/backup
@@ -121,6 +122,21 @@
 				<SizeBasedTriggeringPolicy size="50 MB" />
 			</Policies>
 		</RollingRandomAccessFile>
+		
+		<RollingRandomAccessFile name="IP"
+			fileName="${logpath}/${ip}.log"
+			filePattern="${backup}/${ip}/$${date:yyyy-MM-dd}/%d{MM-dd-yyyy}-%i.ip.log.gz">
+			<PatternLayout
+				pattern="%d{yyyy-MM-dd 'at' HH:mm:ss z} %-5level  %L %M - %msg%xEx%n">
+				<!-- <header>null${sys:line.separator}</header> -->
+				<!-- <footer>null</footer> -->
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="50 MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="500" />
+		</RollingRandomAccessFile>
 
 	</Appenders>
 
@@ -141,6 +157,10 @@
 		</LOGGER>
 		<LOGGER name="rabbit_mq" level="info" additivity="false">
 			<AppenderRef ref="RABBIT_MQ" />
+			<AppenderRef ref="CONSOLE" />
+		</LOGGER>
+		<LOGGER name="ip" level="info" additivity="false">
+			<AppenderRef ref="IP" />
 			<AppenderRef ref="CONSOLE" />
 		</LOGGER>
 	</Loggers>

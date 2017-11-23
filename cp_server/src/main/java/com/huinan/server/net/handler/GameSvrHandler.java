@@ -260,7 +260,7 @@ public class GameSvrHandler extends ProtoHandler {
 	public String getIp() {
 		String address = getChannel().remoteAddress().toString();
 		String[] arr = address.split(":");
-		return arr[0];
+		return arr[0].split("/")[1];
 	}
 
 }

@@ -9,7 +9,7 @@
         <HanlerThreadPoolSize>8</HanlerThreadPoolSize>
 	</ServerConfig>
 	<ClientPoolConfig>
-		<MaxTotal>200000</MaxTotal>
+		<MaxTotal>60000</MaxTotal>
 		<ClientClass>com.huinan.server.net.handler.GameSvrHandler</ClientClass>
 	</ClientPoolConfig>
 	<TCPChannelOptions>

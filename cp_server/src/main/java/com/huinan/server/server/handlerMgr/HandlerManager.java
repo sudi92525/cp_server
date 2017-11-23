@@ -1,13 +1,19 @@
 package com.huinan.server.server.handlerMgr;
 
+import io.netty.channel.socket.SocketChannel;
 import io.netty.util.HashedWheelTimer;
 import io.netty.util.Timer;
 
+import java.util.NoSuchElementException;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.ConcurrentMap;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.huinan.server.net.handler.GameSvrHandler;
+import com.huinan.server.server.net.config.ServerConfig;
 import com.huinan.server.server.net.handler.BaseHandler;
 
 /**
@@ -17,51 +23,76 @@ import com.huinan.server.server.net.handler.BaseHandler;
  *
  */
 public class HandlerManager {
-    private static String PlAYER_CLASS_NAME;
-    protected static final Logger LOGGER = LogManager
-	    .getLogger(HandlerManager.class);
-    protected ConcurrentLinkedQueue<BaseHandler> clients = new ConcurrentLinkedQueue<>();
+	private static String PlAYER_CLASS_NAME;
+	protected static final Logger LOGGER = LogManager
+			.getLogger(HandlerManager.class);
+	protected ConcurrentLinkedQueue<BaseHandler> clients = new ConcurrentLinkedQueue<>();
 
-    protected final Timer timer = new HashedWheelTimer();
+	protected ConcurrentMap<String, Integer> clientIps = new ConcurrentHashMap<>();
+	protected ConcurrentMap<String, Long> clientTimes = new ConcurrentHashMap<>();
 
-    protected HandlerManager() {
-    }
+	protected final Timer timer = new HashedWheelTimer();
 
-    public static void SetPlayerClass(String className) {
-	PlAYER_CLASS_NAME = className;
-    }
-
-    public BaseHandler createClient() throws Exception {
-	// if(clients.size() >=
-	// ServerConfig.getInstance().getClientAmountMax()){
-	// throw new NoSuchElementException("Pool exhausted");
-	// }
-	Class<?> clazz = Class.forName(PlAYER_CLASS_NAME);
-	BaseHandler client = (BaseHandler) clazz.newInstance();
-	clients.add(client);
-	return client;
-    }
-
-    public void deleteClient(BaseHandler obj) {
-	if (obj != null) {
-	    try {
-		clients.remove(obj);
-	    } catch (Exception e) {
-		LOGGER.error(e.getMessage(), e);
-	    }
+	protected HandlerManager() {
 	}
-    }
 
-    public int getCurrentClientsNum() {
-	return clients.size();
-    }
+	public static void SetPlayerClass(String className) {
+		PlAYER_CLASS_NAME = className;
+	}
 
-    /**
-     * 获得定时器
-     * 
-     * @return
-     */
-    public Timer getTimer() {
-	return timer;
-    }
+	public BaseHandler createClient(SocketChannel ch) throws Exception {
+		// if (clients.size() >=
+		// ServerConfig.getInstance().getClientAmountMax()) {
+		// throw new NoSuchElementException("Pool exhausted");
+		// }
+		Class<?> clazz = Class.forName(PlAYER_CLASS_NAME);
+		BaseHandler client = (BaseHandler) clazz.newInstance();
+		clients.add(client);
+		String curIp = ch.remoteAddress().getHostString();
+		if (clientIps.get(curIp) == null) {
+			clientIps.put(curIp, 1);
+			LogManager.getLogger("ip").info(
+					"create new socket,ip:" + curIp + ",times:"
+							+ clientIps.get(curIp));
+		} else {
+			clientIps.put(curIp, clientIps.get(curIp) + 1);
+			LogManager.getLogger("ip").info(
+					"create reset socket,ip:"
+							+ curIp
+							+ ",times:"
+							+ clientIps.get(curIp)
+							+ ",last time:"
+							+ (System.currentTimeMillis() - clientTimes
+									.get(curIp)));
+		}
+		clientTimes.put(curIp, System.currentTimeMillis());
+		return client;
+	}
+
+	public void deleteClient(GameSvrHandler obj) {
+		if (obj != null) {
+			try {
+				clients.remove(obj);
+				clientIps.remove(obj.getIp());
+				clientTimes.remove(obj.getIp());
+				// LogManager.getLogger("ip").info("-----:::;" + obj.getIp());
+				obj.getChannel().close();
+			} catch (Exception e) {
+				LOGGER.error(e.getMessage(), e);
+			}
+		}
+	}
+
+	public int getCurrentClientsNum() {
+		return clients.size();
+	}
+
+	/**
+	 * 获得定时器
+	 * 
+	 * @return
+	 */
+	public Timer getTimer() {
+		return timer;
+	}
 }
