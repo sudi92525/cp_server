@@ -538,3 +538,9 @@ message CSResponsePlayBack
 message CSNotifyOpenTouPai{
 	optional bool open = 1;
 }
+
+
+//推送下线：重复登录
+message CSNotifyLogout{
+	
+}

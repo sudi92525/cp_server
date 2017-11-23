@@ -3814,6 +3814,31 @@ public final class CpMsg {
      * </pre>
      */
     com.huinan.proto.CpMsgCs.CSNotifyOpenTouPaiOrBuilder getCsNotifyOpenTouPaiOrBuilder();
+
+    /**
+     * <code>optional .com.huinan.proto.CSNotifyLogout cs_notify_logout = 44;</code>
+     *
+     * <pre>
+     *登录推送
+     * </pre>
+     */
+    boolean hasCsNotifyLogout();
+    /**
+     * <code>optional .com.huinan.proto.CSNotifyLogout cs_notify_logout = 44;</code>
+     *
+     * <pre>
+     *登录推送
+     * </pre>
+     */
+    com.huinan.proto.CpMsgCs.CSNotifyLogout getCsNotifyLogout();
+    /**
+     * <code>optional .com.huinan.proto.CSNotifyLogout cs_notify_logout = 44;</code>
+     *
+     * <pre>
+     *登录推送
+     * </pre>
+     */
+    com.huinan.proto.CpMsgCs.CSNotifyLogoutOrBuilder getCsNotifyLogoutOrBuilder();
   }
   /**
    * Protobuf type {@code com.huinan.proto.CpMsgData}
@@ -4431,6 +4456,19 @@ public final class CpMsg {
               msgUnionCase_ = 43;
               break;
             }
+            case 354: {
+              com.huinan.proto.CpMsgCs.CSNotifyLogout.Builder subBuilder = null;
+              if (msgUnionCase_ == 44) {
+                subBuilder = ((com.huinan.proto.CpMsgCs.CSNotifyLogout) msgUnion_).toBuilder();
+              }
+              msgUnion_ = input.readMessage(com.huinan.proto.CpMsgCs.CSNotifyLogout.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom((com.huinan.proto.CpMsgCs.CSNotifyLogout) msgUnion_);
+                msgUnion_ = subBuilder.buildPartial();
+              }
+              msgUnionCase_ = 44;
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -4519,6 +4557,7 @@ public final class CpMsg {
       CS_RESPONSE_PALY_BACK(41),
       CS_NOTIFY_NOTICE(42),
       CS_NOTIFY_OPEN_TOU_PAI(43),
+      CS_NOTIFY_LOGOUT(44),
       MSGUNION_NOT_SET(0);
       private int value = 0;
       private MsgUnionCase(int value) {
@@ -4569,6 +4608,7 @@ public final class CpMsg {
           case 41: return CS_RESPONSE_PALY_BACK;
           case 42: return CS_NOTIFY_NOTICE;
           case 43: return CS_NOTIFY_OPEN_TOU_PAI;
+          case 44: return CS_NOTIFY_LOGOUT;
           case 0: return MSGUNION_NOT_SET;
           default: throw new java.lang.IllegalArgumentException(
             "Value is undefined for this oneof enum.");
@@ -6219,6 +6259,44 @@ public final class CpMsg {
       return com.huinan.proto.CpMsgCs.CSNotifyOpenTouPai.getDefaultInstance();
     }
 
+    public static final int CS_NOTIFY_LOGOUT_FIELD_NUMBER = 44;
+    /**
+     * <code>optional .com.huinan.proto.CSNotifyLogout cs_notify_logout = 44;</code>
+     *
+     * <pre>
+     *登录推送
+     * </pre>
+     */
+    public boolean hasCsNotifyLogout() {
+      return msgUnionCase_ == 44;
+    }
+    /**
+     * <code>optional .com.huinan.proto.CSNotifyLogout cs_notify_logout = 44;</code>
+     *
+     * <pre>
+     *登录推送
+     * </pre>
+     */
+    public com.huinan.proto.CpMsgCs.CSNotifyLogout getCsNotifyLogout() {
+      if (msgUnionCase_ == 44) {
+         return (com.huinan.proto.CpMsgCs.CSNotifyLogout) msgUnion_;
+      }
+      return com.huinan.proto.CpMsgCs.CSNotifyLogout.getDefaultInstance();
+    }
+    /**
+     * <code>optional .com.huinan.proto.CSNotifyLogout cs_notify_logout = 44;</code>
+     *
+     * <pre>
+     *登录推送
+     * </pre>
+     */
+    public com.huinan.proto.CpMsgCs.CSNotifyLogoutOrBuilder getCsNotifyLogoutOrBuilder() {
+      if (msgUnionCase_ == 44) {
+         return (com.huinan.proto.CpMsgCs.CSNotifyLogout) msgUnion_;
+      }
+      return com.huinan.proto.CpMsgCs.CSNotifyLogout.getDefaultInstance();
+    }
+
     private void initFields() {
     }
     private byte memoizedIsInitialized = -1;
@@ -6362,6 +6440,9 @@ public final class CpMsg {
       }
       if (msgUnionCase_ == 43) {
         output.writeMessage(43, (com.huinan.proto.CpMsgCs.CSNotifyOpenTouPai) msgUnion_);
+      }
+      if (msgUnionCase_ == 44) {
+        output.writeMessage(44, (com.huinan.proto.CpMsgCs.CSNotifyLogout) msgUnion_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -6543,6 +6624,10 @@ public final class CpMsg {
       if (msgUnionCase_ == 43) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(43, (com.huinan.proto.CpMsgCs.CSNotifyOpenTouPai) msgUnion_);
+      }
+      if (msgUnionCase_ == 44) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(44, (com.huinan.proto.CpMsgCs.CSNotifyLogout) msgUnion_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -6998,6 +7083,13 @@ public final class CpMsg {
             result.msgUnion_ = csNotifyOpenTouPaiBuilder_.build();
           }
         }
+        if (msgUnionCase_ == 44) {
+          if (csNotifyLogoutBuilder_ == null) {
+            result.msgUnion_ = msgUnion_;
+          } else {
+            result.msgUnion_ = csNotifyLogoutBuilder_.build();
+          }
+        }
         result.bitField0_ = to_bitField0_;
         result.bitField1_ = to_bitField1_;
         result.msgUnionCase_ = msgUnionCase_;
@@ -7187,6 +7279,10 @@ public final class CpMsg {
           }
           case CS_NOTIFY_OPEN_TOU_PAI: {
             mergeCsNotifyOpenTouPai(other.getCsNotifyOpenTouPai());
+            break;
+          }
+          case CS_NOTIFY_LOGOUT: {
+            mergeCsNotifyLogout(other.getCsNotifyLogout());
             break;
           }
           case MSGUNION_NOT_SET: {
@@ -14589,6 +14685,177 @@ public final class CpMsg {
         return csNotifyOpenTouPaiBuilder_;
       }
 
+      private com.google.protobuf.SingleFieldBuilder<
+          com.huinan.proto.CpMsgCs.CSNotifyLogout, com.huinan.proto.CpMsgCs.CSNotifyLogout.Builder, com.huinan.proto.CpMsgCs.CSNotifyLogoutOrBuilder> csNotifyLogoutBuilder_;
+      /**
+       * <code>optional .com.huinan.proto.CSNotifyLogout cs_notify_logout = 44;</code>
+       *
+       * <pre>
+       *登录推送
+       * </pre>
+       */
+      public boolean hasCsNotifyLogout() {
+        return msgUnionCase_ == 44;
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSNotifyLogout cs_notify_logout = 44;</code>
+       *
+       * <pre>
+       *登录推送
+       * </pre>
+       */
+      public com.huinan.proto.CpMsgCs.CSNotifyLogout getCsNotifyLogout() {
+        if (csNotifyLogoutBuilder_ == null) {
+          if (msgUnionCase_ == 44) {
+            return (com.huinan.proto.CpMsgCs.CSNotifyLogout) msgUnion_;
+          }
+          return com.huinan.proto.CpMsgCs.CSNotifyLogout.getDefaultInstance();
+        } else {
+          if (msgUnionCase_ == 44) {
+            return csNotifyLogoutBuilder_.getMessage();
+          }
+          return com.huinan.proto.CpMsgCs.CSNotifyLogout.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSNotifyLogout cs_notify_logout = 44;</code>
+       *
+       * <pre>
+       *登录推送
+       * </pre>
+       */
+      public Builder setCsNotifyLogout(com.huinan.proto.CpMsgCs.CSNotifyLogout value) {
+        if (csNotifyLogoutBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          msgUnion_ = value;
+          onChanged();
+        } else {
+          csNotifyLogoutBuilder_.setMessage(value);
+        }
+        msgUnionCase_ = 44;
+        return this;
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSNotifyLogout cs_notify_logout = 44;</code>
+       *
+       * <pre>
+       *登录推送
+       * </pre>
+       */
+      public Builder setCsNotifyLogout(
+          com.huinan.proto.CpMsgCs.CSNotifyLogout.Builder builderForValue) {
+        if (csNotifyLogoutBuilder_ == null) {
+          msgUnion_ = builderForValue.build();
+          onChanged();
+        } else {
+          csNotifyLogoutBuilder_.setMessage(builderForValue.build());
+        }
+        msgUnionCase_ = 44;
+        return this;
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSNotifyLogout cs_notify_logout = 44;</code>
+       *
+       * <pre>
+       *登录推送
+       * </pre>
+       */
+      public Builder mergeCsNotifyLogout(com.huinan.proto.CpMsgCs.CSNotifyLogout value) {
+        if (csNotifyLogoutBuilder_ == null) {
+          if (msgUnionCase_ == 44 &&
+              msgUnion_ != com.huinan.proto.CpMsgCs.CSNotifyLogout.getDefaultInstance()) {
+            msgUnion_ = com.huinan.proto.CpMsgCs.CSNotifyLogout.newBuilder((com.huinan.proto.CpMsgCs.CSNotifyLogout) msgUnion_)
+                .mergeFrom(value).buildPartial();
+          } else {
+            msgUnion_ = value;
+          }
+          onChanged();
+        } else {
+          if (msgUnionCase_ == 44) {
+            csNotifyLogoutBuilder_.mergeFrom(value);
+          }
+          csNotifyLogoutBuilder_.setMessage(value);
+        }
+        msgUnionCase_ = 44;
+        return this;
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSNotifyLogout cs_notify_logout = 44;</code>
+       *
+       * <pre>
+       *登录推送
+       * </pre>
+       */
+      public Builder clearCsNotifyLogout() {
+        if (csNotifyLogoutBuilder_ == null) {
+          if (msgUnionCase_ == 44) {
+            msgUnionCase_ = 0;
+            msgUnion_ = null;
+            onChanged();
+          }
+        } else {
+          if (msgUnionCase_ == 44) {
+            msgUnionCase_ = 0;
+            msgUnion_ = null;
+          }
+          csNotifyLogoutBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSNotifyLogout cs_notify_logout = 44;</code>
+       *
+       * <pre>
+       *登录推送
+       * </pre>
+       */
+      public com.huinan.proto.CpMsgCs.CSNotifyLogout.Builder getCsNotifyLogoutBuilder() {
+        return getCsNotifyLogoutFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSNotifyLogout cs_notify_logout = 44;</code>
+       *
+       * <pre>
+       *登录推送
+       * </pre>
+       */
+      public com.huinan.proto.CpMsgCs.CSNotifyLogoutOrBuilder getCsNotifyLogoutOrBuilder() {
+        if ((msgUnionCase_ == 44) && (csNotifyLogoutBuilder_ != null)) {
+          return csNotifyLogoutBuilder_.getMessageOrBuilder();
+        } else {
+          if (msgUnionCase_ == 44) {
+            return (com.huinan.proto.CpMsgCs.CSNotifyLogout) msgUnion_;
+          }
+          return com.huinan.proto.CpMsgCs.CSNotifyLogout.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSNotifyLogout cs_notify_logout = 44;</code>
+       *
+       * <pre>
+       *登录推送
+       * </pre>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.huinan.proto.CpMsgCs.CSNotifyLogout, com.huinan.proto.CpMsgCs.CSNotifyLogout.Builder, com.huinan.proto.CpMsgCs.CSNotifyLogoutOrBuilder> 
+          getCsNotifyLogoutFieldBuilder() {
+        if (csNotifyLogoutBuilder_ == null) {
+          if (!(msgUnionCase_ == 44)) {
+            msgUnion_ = com.huinan.proto.CpMsgCs.CSNotifyLogout.getDefaultInstance();
+          }
+          csNotifyLogoutBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.huinan.proto.CpMsgCs.CSNotifyLogout, com.huinan.proto.CpMsgCs.CSNotifyLogout.Builder, com.huinan.proto.CpMsgCs.CSNotifyLogoutOrBuilder>(
+                  (com.huinan.proto.CpMsgCs.CSNotifyLogout) msgUnion_,
+                  getParentForChildren(),
+                  isClean());
+          msgUnion_ = null;
+        }
+        msgUnionCase_ = 44;
+        return csNotifyLogoutBuilder_;
+      }
+
       // @@protoc_insertion_point(builder_scope:com.huinan.proto.CpMsgData)
     }
 
@@ -14627,7 +14894,7 @@ public final class CpMsg {
       " \001(\t\022\n\n\002os\030\010 \001(\t\022\013\n\003osv\030\t \001(\t\022\014\n\004band\030\n " +
       "\001(\t\022\014\n\004imei\030\013 \001(\t\022\013\n\003cmd\030\014 \001(\003\022\023\n\013json_m" +
       "sg_id\030\r \001(\005\022\020\n\010json_msg\030\016 \001(\t\022\013\n\003uid\030\017 \001" +
-      "(\t\"\324\030\n\tCpMsgData\022<\n\020cs_request_login\030\001 \001" +
+      "(\t\"\222\031\n\tCpMsgData\022<\n\020cs_request_login\030\001 \001" +
       "(\0132 .com.huinan.proto.CSRequestLoginH\000\022>",
       "\n\021cs_response_login\030\002 \001(\0132!.com.huinan.p" +
       "roto.CSResponseLoginH\000\022I\n\027cs_request_cre" +
@@ -14705,8 +14972,9 @@ public final class CpMsg {
       "onsePlayBackH\000\022<\n\020cs_notify_notice\030* \001(\013" +
       "2 .com.huinan.proto.CSNotifyNoticeH\000\022F\n\026" +
       "cs_notify_open_tou_pai\030+ \001(\0132$.com.huina" +
-      "n.proto.CSNotifyOpenTouPaiH\000B\013\n\tmsg_unio" +
-      "n"
+      "n.proto.CSNotifyOpenTouPaiH\000\022<\n\020cs_notif" +
+      "y_logout\030, \001(\0132 .com.huinan.proto.CSNoti" +
+      "fyLogoutH\000B\013\n\tmsg_union"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -14732,7 +15000,7 @@ public final class CpMsg {
     internal_static_com_huinan_proto_CpMsgData_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_huinan_proto_CpMsgData_descriptor,
-        new java.lang.String[] { "CsRequestLogin", "CsResponseLogin", "CsRequestCreateTable", "CsResponseCreateTable", "CsRequestEnterTable", "CsResponseEnterTable", "CsNotifyEnterTable", "CsRequestLogoutTable", "CsResponseLogoutTable", "CsNotifyLogoutTable", "CsRequestOwnerTiren", "CsResponseOwnerTiren", "CsNotifyOwnerTiren", "CsRequestDissolveTable", "CsResponseDissolveTable", "CsNotifyDissolveTableOperation", "CsNotifyTableDissolved", "CsRequestReadyForGame", "CsResponseReadyForGame", "CsNotifyReadyForGame", "CsNotifyGameStart", "CsNotifySeatOperationChoice", "CsRequestDoAction", "CsResponseDoAction", "CsNotifyActionFlow", "CsNotifyPlayerDealCard", "CsNotifyNextOperation", "CsNotifyGameOver", "CsRequestReconnect", "CsResponseReconnect", "CsRequestHeartBeat", "CsResponseHeartBeat", "CsRequestChat", "CsResponseChat", "CsNotifyChat", "CsRequestIsOnline", "CsResponseIsOnline", "CsNotifyIsOnline", "CsNotifyRoomCardChange", "CsRequestPalyBack", "CsResponsePalyBack", "CsNotifyNotice", "CsNotifyOpenTouPai", "MsgUnion", });
+        new java.lang.String[] { "CsRequestLogin", "CsResponseLogin", "CsRequestCreateTable", "CsResponseCreateTable", "CsRequestEnterTable", "CsResponseEnterTable", "CsNotifyEnterTable", "CsRequestLogoutTable", "CsResponseLogoutTable", "CsNotifyLogoutTable", "CsRequestOwnerTiren", "CsResponseOwnerTiren", "CsNotifyOwnerTiren", "CsRequestDissolveTable", "CsResponseDissolveTable", "CsNotifyDissolveTableOperation", "CsNotifyTableDissolved", "CsRequestReadyForGame", "CsResponseReadyForGame", "CsNotifyReadyForGame", "CsNotifyGameStart", "CsNotifySeatOperationChoice", "CsRequestDoAction", "CsResponseDoAction", "CsNotifyActionFlow", "CsNotifyPlayerDealCard", "CsNotifyNextOperation", "CsNotifyGameOver", "CsRequestReconnect", "CsResponseReconnect", "CsRequestHeartBeat", "CsResponseHeartBeat", "CsRequestChat", "CsResponseChat", "CsNotifyChat", "CsRequestIsOnline", "CsResponseIsOnline", "CsNotifyIsOnline", "CsNotifyRoomCardChange", "CsRequestPalyBack", "CsResponsePalyBack", "CsNotifyNotice", "CsNotifyOpenTouPai", "CsNotifyLogout", "MsgUnion", });
     com.huinan.proto.CpMsgCs.getDescriptor();
   }
 

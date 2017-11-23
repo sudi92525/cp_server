@@ -19,6 +19,7 @@ import com.huinan.server.server.LogicQueueManager;
 import com.huinan.server.service.AbsAction;
 import com.huinan.server.service.data.Room;
 import com.huinan.server.service.data.User;
+import com.huinan.server.service.manager.NotifyHandler;
 import com.huinan.server.service.manager.RoomManager;
 
 /**
@@ -78,9 +79,9 @@ public class Login extends AbsAction {
 			response.setRoomCardNum(user.getRoomCardNum());
 		}
 		msg.setCsResponseLogin(response);
-		// request.getClient().sendMessage(
-		// CpMsgData.CS_RESPONSE_LOGIN_FIELD_NUMBER, user.getUuid(),
-		// (CpHead) request.getHeadLite(), msg.build());
+		request.getClient().sendMessage(
+				CpMsgData.CS_RESPONSE_LOGIN_FIELD_NUMBER, user.getUuid(),
+				(CpHead) request.getHeadLite(), msg.build());
 
 		GYcpInfoDAO.loginNotifyHorseNotice(user);
 	}
@@ -95,6 +96,8 @@ public class Login extends AbsAction {
 		if (player != null) {
 			if (player.getClient() != null) {
 				// 踢人下线推送
+				NotifyHandler.notifyLogout(player);
+
 				GameSvrHandlerMgr.getInstance()
 						.deleteClient(player.getClient());
 			}
@@ -103,4 +106,5 @@ public class Login extends AbsAction {
 		}
 		return player;
 	}
+
 }
