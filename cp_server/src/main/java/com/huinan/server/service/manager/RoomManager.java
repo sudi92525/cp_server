@@ -31,6 +31,7 @@ import com.huinan.proto.CpMsgCs.PBColumnInfo;
 import com.huinan.proto.CpMsgCs.PBColumnInfo.Builder;
 import com.huinan.proto.CpMsgCs.SmallResult;
 import com.huinan.proto.CpMsgCs.UserBrand;
+import com.huinan.server.db.ClubDAO;
 import com.huinan.server.db.GYcpInfoDAO;
 import com.huinan.server.db.UserManager;
 import com.huinan.server.net.GamePlayer;
@@ -43,6 +44,7 @@ import com.huinan.server.service.data.Room;
 import com.huinan.server.service.data.User;
 import com.huinan.server.service.data.UserInfoDto;
 import com.huinan.server.service.data.UserScoreRecord;
+import com.huinan.server.service.data.club.ClubRoom;
 
 /**
  *
@@ -116,6 +118,9 @@ public class RoomManager {
 		}
 		if (requestBody.hasPlayerNum()) {
 			room.setUserNum(requestBody.getPlayerNum());
+		}
+		if (requestBody.hasClubId() && requestBody.getClubId() > 0) {
+			room.setClubId(requestBody.getClubId());
 		}
 		getRooms().put(tid, room);// 存放游戏房间信息
 		return room;
@@ -472,6 +477,12 @@ public class RoomManager {
 	public static void startDealCard(Room room) {
 		if (room.getRound() == 1) {
 			room.setStart(true);
+			if (room.getClubId() != 0) {
+				ClubRoom clubRoom = ClubDAO.getInstance().getClubRoom(
+						room.getClubId(), room.getTid());
+				clubRoom.setStatus(1);
+				ClubDAO.getInstance().updateClubRoom(clubRoom);
+			}
 		}
 		// 洗牌
 		shuffle(room);
@@ -1563,8 +1574,13 @@ public class RoomManager {
 			// }
 			int beforeRoomCard = 0;
 			if (userType == ERoomCardType.CREATOR.getValue()) {
-				String creatorUid = room.getRoomTable().getCreatorUid();
-				User user = UserManager.getInstance().getUser(creatorUid);
+				User user = null;
+				if (room.getClubId() != 0) {
+					user = ClubManager.getClubOwner(room.getClubId());
+				} else {
+					String creatorUid = room.getRoomTable().getCreatorUid();
+					user = UserManager.getInstance().getUser(creatorUid);
+				}
 				beforeRoomCard = user.getRoomCardNum();
 				// 扣内存房卡
 				UserManager.getInstance().updateRoomCard(user, allRoomCardNum);
@@ -1640,6 +1656,14 @@ public class RoomManager {
 				addFightRecord(false, room);
 			}
 			addFightRecord(bigTotal, room);
+			
+			if (room.getClubId() != 0) {
+				ClubRoom clubRoom = ClubDAO.getInstance().getClubRoom(
+						room.getClubId(), room.getTid());
+				clubRoom.setStatus(2);
+				ClubDAO.getInstance().updateClubRoom(clubRoom);
+			}
+			
 			UserManager.getInstance().updateRankData(room, dissolve);
 		} else {
 			addFightRecord(bigTotal, room);

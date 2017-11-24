@@ -17,6 +17,16 @@ enum ENMessageError
 	RESPONSE_ALREADY_READY = 14;					//已经准备了
 	RESPONSE_IS_IN_ROOM = 15;						//已存在房间中
 	RESPONSE_NOT_CAN_XIA_JIAO_7 = 16;				//不能在七点上转叫
+	
+	//club
+	RESPONSE_CLUB_IS_NULL = 17;						//俱乐部不存在
+	RESPONSE_CLUB_NOT_CREATOR = 18;					//不是群主
+	RESPONSE_CLUB_IN_THIS_CLUB = 19;				//已在该俱乐部
+	RESPONSE_CLUB_NOT_IN_APPLY_LIST = 20;			//不在申请列表
+	RESPONSE_CLUB_NOT_IN_THIS_CLUB = 21;			//不在该俱乐部
+	RESPONSE_CLUB_ROOM_FULL = 22;					//俱乐部房间数达到上限，请清除房间
+	
+	
 }
 
 enum ENOperationType
@@ -203,6 +213,8 @@ message CSRequestCreateTable
 	optional bool is_fan_xj_have_56 = 26;			//小家有丁斧全红全黑算番（苍溪）
 	optional bool is_can_not_wan_jiao = 27;			//是否可以弯叫:true=不能弯叫，false=可弯叫（默认）
 	optional bool is_fan_san_hei = 28;				//三砍黑算番
+	
+	optional int32 club_id = 29;					//是否来自俱乐部的创建
 }
 
 //创建房间响应

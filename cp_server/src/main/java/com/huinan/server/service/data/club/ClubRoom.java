@@ -2,12 +2,22 @@ package com.huinan.server.service.data.club;
 
 public class ClubRoom {
 
+	private int clubId;
 	private int roomId;
 	private byte[] totalData;
 	private int status;
 
-	public ClubRoom(int roomId) {
+	public ClubRoom(int clubId, int roomId) {
+		this.clubId = clubId;
 		this.roomId = roomId;
+	}
+
+	public int getClubId() {
+		return clubId;
+	}
+
+	public void setClubId(int clubId) {
+		this.clubId = clubId;
 	}
 
 	public int getRoomId() {
@@ -34,5 +44,4 @@ public class ClubRoom {
 		this.status = status;
 	}
 
-	
 }

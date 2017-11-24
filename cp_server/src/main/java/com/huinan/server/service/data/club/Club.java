@@ -2,6 +2,8 @@ package com.huinan.server.service.data.club;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 public class Club {
 
@@ -18,8 +20,7 @@ public class Club {
 	/** 申请uid */
 	private List<String> applys = new ArrayList<>();
 	/** 房间列表 */
-	private List<ClubRoom> rooms = new ArrayList<>();
-	
+	private ConcurrentMap<Integer, ClubRoom> rooms = new ConcurrentHashMap<>();
 
 	public Club(int id, String creatorId, String name) {
 		this.id = id;
@@ -75,14 +76,13 @@ public class Club {
 		this.applys = applys;
 	}
 
-	public List<ClubRoom> getRooms() {
+	public ConcurrentMap<Integer, ClubRoom> getRooms() {
 		return rooms;
 	}
 
-	public void setRooms(List<ClubRoom> rooms) {
+	public void setRooms(ConcurrentMap<Integer, ClubRoom> rooms) {
 		this.rooms = rooms;
 	}
-	
-	
+
 
 }

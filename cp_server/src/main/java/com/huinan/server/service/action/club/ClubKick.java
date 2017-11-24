@@ -7,10 +7,10 @@ import com.huinan.proto.CpMsgClub.CSResponseClubKick;
 import com.huinan.proto.CpMsgCs.ENMessageError;
 import com.huinan.server.db.ClubDAO;
 import com.huinan.server.net.ClientRequest;
-import com.huinan.server.service.IAction;
+import com.huinan.server.service.AbsAction;
 import com.huinan.server.service.data.club.Club;
 
-public class ClubKick implements IAction {
+public class ClubKick extends AbsAction {
 
 	@Override
 	public void Action(ClientRequest request) throws Exception {
@@ -26,7 +26,7 @@ public class ClubKick implements IAction {
 
 		int error = check(club, uid, kickUId);
 		if (error != 0) {
-			response.setResult(ENMessageError.RESPONSE_FAIL);
+			response.setResult(ENMessageError.valueOf(error));
 		} else {
 			response.setResult(ENMessageError.RESPONSE_SUCCESS);
 
@@ -42,13 +42,13 @@ public class ClubKick implements IAction {
 
 	private int check(Club club, String uid, String applyUId) {
 		if (club == null) {
-			return ENMessageError.RESPONSE_FAIL_VALUE;
+			return ENMessageError.RESPONSE_CLUB_IS_NULL_VALUE;
 		}
 		if (!club.getCreatorId().equals(uid)) {
-			return ENMessageError.RESPONSE_FAIL_VALUE;// TODO 不是群主
+			return ENMessageError.RESPONSE_CLUB_NOT_CREATOR_VALUE;
 		}
 		if (!club.getMembers().contains(applyUId)) {
-			return ENMessageError.RESPONSE_FAIL_VALUE;// TODO bu在俱乐部
+			return ENMessageError.RESPONSE_CLUB_NOT_IN_THIS_CLUB_VALUE;
 		}
 		return 0;
 	}

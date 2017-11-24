@@ -7,14 +7,14 @@ import com.huinan.proto.CpMsgClub.CSResponseClubRoom;
 import com.huinan.proto.CpMsgCs.ENMessageError;
 import com.huinan.server.db.ClubDAO;
 import com.huinan.server.net.ClientRequest;
-import com.huinan.server.service.IAction;
+import com.huinan.server.service.AbsAction;
 import com.huinan.server.service.data.Room;
 import com.huinan.server.service.data.club.Club;
 import com.huinan.server.service.data.club.ClubRoom;
 import com.huinan.server.service.manager.ProtoBuilder;
 import com.huinan.server.service.manager.RoomManager;
 
-public class GetClueRoom implements IAction {
+public class GetClueRoom extends AbsAction {
 
 	@Override
 	public void Action(ClientRequest request) throws Exception {
@@ -28,10 +28,10 @@ public class GetClueRoom implements IAction {
 
 		int error = check(club, uid);
 		if (error != 0) {
-			response.setResult(ENMessageError.RESPONSE_FAIL);
+			response.setResult(ENMessageError.valueOf(error));
 		} else {
 			response.setResult(ENMessageError.RESPONSE_SUCCESS);
-			for (ClubRoom clubRoom : club.getRooms()) {
+			for (ClubRoom clubRoom : club.getRooms().values()) {
 				Room room = RoomManager.getInstance().getRoom(
 						clubRoom.getRoomId());
 				response.addClubRoom(ProtoBuilder.buildClubRoomProto(clubRoom,
@@ -47,10 +47,10 @@ public class GetClueRoom implements IAction {
 
 	private int check(Club club, String uid) {
 		if (club == null) {
-			return ENMessageError.RESPONSE_FAIL_VALUE;
+			return ENMessageError.RESPONSE_CLUB_IS_NULL_VALUE;
 		}
 		if (!club.getMembers().contains(uid)) {
-			return ENMessageError.RESPONSE_FAIL_VALUE;// TODO 不在俱乐部
+			return ENMessageError.RESPONSE_CLUB_NOT_IN_THIS_CLUB_VALUE;
 		}
 		return 0;
 	}

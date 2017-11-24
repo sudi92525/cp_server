@@ -51,7 +51,9 @@ public class ProtoBuilder {
 			Room room) {
 		ClubRoomProto.Builder clubRoomProto = ClubRoomProto.newBuilder();
 		clubRoomProto.setTableInfo(room.getRoomTable());
-		if (!room.isStart()) {
+		if (clubRoom.getTotalData() != null) {
+			clubRoomProto.setTableState(2);// 结算中...
+		} else if (!room.isStart()) {
 			clubRoomProto.setTableState(Constant.cp_status_wait);
 		} else {
 			clubRoomProto.setTableState(Constant.cp_status_started);

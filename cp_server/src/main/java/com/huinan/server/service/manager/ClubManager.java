@@ -6,7 +6,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.huinan.server.db.ClubDAO;
+import com.huinan.server.db.UserManager;
+import com.huinan.server.service.data.ERoomCardCost;
+import com.huinan.server.service.data.Room;
+import com.huinan.server.service.data.User;
 import com.huinan.server.service.data.club.Club;
+import com.huinan.server.service.data.club.ClubRoom;
 
 public class ClubManager {
 	private static Logger log = LogManager.getLogger(ClubManager.class);
@@ -40,7 +45,30 @@ public class ClubManager {
 		club.getApplys().add(String.valueOf(uid));
 		log.info("applyClub,clubId=" + clubId + ",uid=" + uid);
 	}
-	
-	
+
+	/**
+	 * 获取俱乐部待扣房卡数
+	 * 
+	 * @param clubId
+	 * @return
+	 */
+	public static int getClubOrderCard(int clubId) {
+		int allCard = 0;
+		Club club = ClubDAO.getInstance().getClub(clubId);
+		for (ClubRoom clubRoom : club.getRooms().values()) {
+			Room room = RoomManager.getInstance().getRoom(clubRoom.getRoomId());
+			if (!room.isStart() || room.getRound() == 1) {// 未开始的，才第一局的
+				int allRoomCardNum = ERoomCardCost.getRoomCardCost(room
+						.getRoomTable().getGameNum());
+				allCard += allRoomCardNum;
+			}
+		}
+		return allCard;
+	}
+
+	public static User getClubOwner(int clubId) {
+		Club club = ClubDAO.getInstance().getClub(clubId);
+		return UserManager.getInstance().getDBUser(club.getCreatorId());
+	}
 
 }

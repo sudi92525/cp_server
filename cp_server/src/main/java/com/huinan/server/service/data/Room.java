@@ -61,6 +61,9 @@ public class Room implements Serializable {
 	private long startDissolveTime;
 	/** 上次进入房间的时间 */
 	private long lastEnterTime;
+	/** 俱乐部 */
+	private int clubId;
+
 	// -------------------------创房选项----------------------------------
 	/** GY:是否有包翻的功能 */
 	private boolean baoFan;
@@ -899,6 +902,14 @@ public class Room implements Serializable {
 
 	public void setChe7Seat(int che7Seat) {
 		this.che7Seat = che7Seat;
+	}
+
+	public int getClubId() {
+		return clubId;
+	}
+
+	public void setClubId(int clubId) {
+		this.clubId = clubId;
 	}
 
 }

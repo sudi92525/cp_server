@@ -8,11 +8,11 @@ import com.huinan.proto.CpMsgClub.CSResponseClubInfo;
 import com.huinan.proto.CpMsgCs.ENMessageError;
 import com.huinan.server.db.ClubDAO;
 import com.huinan.server.net.ClientRequest;
-import com.huinan.server.service.IAction;
+import com.huinan.server.service.AbsAction;
 import com.huinan.server.service.data.club.Club;
 import com.huinan.server.service.manager.ProtoBuilder;
 
-public class GetClubList implements IAction {
+public class GetClubList extends AbsAction {
 
 	@Override
 	public void Action(ClientRequest request) throws Exception {

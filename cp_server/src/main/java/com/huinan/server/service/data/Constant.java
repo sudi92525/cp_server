@@ -105,6 +105,8 @@ public class Constant {
 	public static final int TUO_XIAOJIA_4_FAN_NC = 18;
 
 	public static final int PLAYER_NUM = 4;
+	
+	public static final int CLUB_MAX_ROOM_NUM = 100;
 
 	/**
 	 * 必碰的牌，临时缓存

@@ -7,10 +7,10 @@ import com.huinan.proto.CpMsgClub.CSResponseClubIsAgree;
 import com.huinan.proto.CpMsgCs.ENMessageError;
 import com.huinan.server.db.ClubDAO;
 import com.huinan.server.net.ClientRequest;
-import com.huinan.server.service.IAction;
+import com.huinan.server.service.AbsAction;
 import com.huinan.server.service.data.club.Club;
 
-public class ClubIsAgree implements IAction {
+public class ClubIsAgree extends AbsAction {
 
 	@Override
 	public void Action(ClientRequest request) throws Exception {
@@ -29,7 +29,7 @@ public class ClubIsAgree implements IAction {
 
 		int error = check(club, agree, uid, applyUId);
 		if (error != 0) {
-			response.setResult(ENMessageError.RESPONSE_FAIL);
+			response.setResult(ENMessageError.valueOf(error));
 		} else {
 			response.setResult(ENMessageError.RESPONSE_SUCCESS);
 
@@ -51,17 +51,17 @@ public class ClubIsAgree implements IAction {
 
 	private int check(Club club, boolean agree, String uid, String applyUId) {
 		if (club == null) {
-			return ENMessageError.RESPONSE_FAIL_VALUE;
+			return ENMessageError.RESPONSE_CLUB_IS_NULL_VALUE;
 		}
 		if (!club.getCreatorId().equals(uid)) {
-			return ENMessageError.RESPONSE_FAIL_VALUE;// TODO 不是群主
+			return ENMessageError.RESPONSE_CLUB_NOT_CREATOR_VALUE;
 		}
 		if (!club.getApplys().contains(applyUId)) {
-			return ENMessageError.RESPONSE_FAIL_VALUE;// TODO 不在申请列表
+			return ENMessageError.RESPONSE_CLUB_NOT_IN_APPLY_LIST_VALUE;
 		}
 		if (agree) {
 			if (club.getMembers().contains(applyUId)) {
-				return ENMessageError.RESPONSE_FAIL_VALUE;// TODO 已在俱乐部
+				return ENMessageError.RESPONSE_CLUB_IN_THIS_CLUB_VALUE;
 			}
 		}
 		return 0;
