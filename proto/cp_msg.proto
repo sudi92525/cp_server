@@ -92,8 +92,7 @@ message CpMsgData
 		CSNotifyNotice cs_notify_notice = 42;						//跑马灯，公告通知
 		CSNotifyOpenTouPai cs_notify_open_tou_pai = 43;				//推送翻开偷牌
 		
-		
-		
+
 		//--------------俱乐部-------------------------
 		CSRequestClubInfo cs_request_club_info = 44;			//获取俱乐部:列表
 		CSResponseClubInfo cs_response_club_info = 45;			//响应俱乐部:列表
@@ -120,6 +119,6 @@ message CpMsgData
 		
 		
 		
-		
+		CSNotifyLogout cs_notify_logout = 59;					//登录推送
 	}
 }

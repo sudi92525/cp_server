@@ -51527,6 +51527,327 @@ public final class CpMsgCs {
     // @@protoc_insertion_point(class_scope:com.huinan.proto.CSNotifyOpenTouPai)
   }
 
+  public interface CSNotifyLogoutOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.huinan.proto.CSNotifyLogout)
+      com.google.protobuf.MessageOrBuilder {
+  }
+  /**
+   * Protobuf type {@code com.huinan.proto.CSNotifyLogout}
+   *
+   * <pre>
+   *推送下线：重复登录
+   * </pre>
+   */
+  public static final class CSNotifyLogout extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.huinan.proto.CSNotifyLogout)
+      CSNotifyLogoutOrBuilder {
+    // Use CSNotifyLogout.newBuilder() to construct.
+    private CSNotifyLogout(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private CSNotifyLogout(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final CSNotifyLogout defaultInstance;
+    public static CSNotifyLogout getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public CSNotifyLogout getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private CSNotifyLogout(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.huinan.proto.CpMsgCs.internal_static_com_huinan_proto_CSNotifyLogout_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.huinan.proto.CpMsgCs.internal_static_com_huinan_proto_CSNotifyLogout_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.huinan.proto.CpMsgCs.CSNotifyLogout.class, com.huinan.proto.CpMsgCs.CSNotifyLogout.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<CSNotifyLogout> PARSER =
+        new com.google.protobuf.AbstractParser<CSNotifyLogout>() {
+      public CSNotifyLogout parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new CSNotifyLogout(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<CSNotifyLogout> getParserForType() {
+      return PARSER;
+    }
+
+    private void initFields() {
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.huinan.proto.CpMsgCs.CSNotifyLogout parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.huinan.proto.CpMsgCs.CSNotifyLogout parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.huinan.proto.CpMsgCs.CSNotifyLogout parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.huinan.proto.CpMsgCs.CSNotifyLogout parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.huinan.proto.CpMsgCs.CSNotifyLogout parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.huinan.proto.CpMsgCs.CSNotifyLogout parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.huinan.proto.CpMsgCs.CSNotifyLogout parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.huinan.proto.CpMsgCs.CSNotifyLogout parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.huinan.proto.CpMsgCs.CSNotifyLogout parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.huinan.proto.CpMsgCs.CSNotifyLogout parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.huinan.proto.CpMsgCs.CSNotifyLogout prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.huinan.proto.CSNotifyLogout}
+     *
+     * <pre>
+     *推送下线：重复登录
+     * </pre>
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.huinan.proto.CSNotifyLogout)
+        com.huinan.proto.CpMsgCs.CSNotifyLogoutOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.huinan.proto.CpMsgCs.internal_static_com_huinan_proto_CSNotifyLogout_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.huinan.proto.CpMsgCs.internal_static_com_huinan_proto_CSNotifyLogout_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.huinan.proto.CpMsgCs.CSNotifyLogout.class, com.huinan.proto.CpMsgCs.CSNotifyLogout.Builder.class);
+      }
+
+      // Construct using com.huinan.proto.CpMsgCs.CSNotifyLogout.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.huinan.proto.CpMsgCs.internal_static_com_huinan_proto_CSNotifyLogout_descriptor;
+      }
+
+      public com.huinan.proto.CpMsgCs.CSNotifyLogout getDefaultInstanceForType() {
+        return com.huinan.proto.CpMsgCs.CSNotifyLogout.getDefaultInstance();
+      }
+
+      public com.huinan.proto.CpMsgCs.CSNotifyLogout build() {
+        com.huinan.proto.CpMsgCs.CSNotifyLogout result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.huinan.proto.CpMsgCs.CSNotifyLogout buildPartial() {
+        com.huinan.proto.CpMsgCs.CSNotifyLogout result = new com.huinan.proto.CpMsgCs.CSNotifyLogout(this);
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.huinan.proto.CpMsgCs.CSNotifyLogout) {
+          return mergeFrom((com.huinan.proto.CpMsgCs.CSNotifyLogout)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.huinan.proto.CpMsgCs.CSNotifyLogout other) {
+        if (other == com.huinan.proto.CpMsgCs.CSNotifyLogout.getDefaultInstance()) return this;
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.huinan.proto.CpMsgCs.CSNotifyLogout parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.huinan.proto.CpMsgCs.CSNotifyLogout) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.huinan.proto.CSNotifyLogout)
+    }
+
+    static {
+      defaultInstance = new CSNotifyLogout(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.huinan.proto.CSNotifyLogout)
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_huinan_proto_UserInfo_descriptor;
   private static
@@ -51792,6 +52113,11 @@ public final class CpMsgCs {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_huinan_proto_CSNotifyOpenTouPai_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_huinan_proto_CSNotifyLogout_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_huinan_proto_CSNotifyLogout_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -51966,46 +52292,46 @@ public final class CpMsgCs {
       "\005flows\030\004 \003(\0132$.com.huinan.proto.CSNotify" +
       "ActionFlow\0225\n\tgame_over\030\005 \001(\0132\".com.huin" +
       "an.proto.CSNotifyGameOver\"\"\n\022CSNotifyOpe" +
-      "nTouPai\022\014\n\004open\030\001 \001(\010*\331\003\n\016ENMessageError" +
-      "\022\024\n\020RESPONSE_SUCCESS\020\001\022\021\n\rRESPONSE_FAIL\020" +
-      "\002\022\034\n\030RESPONSE_SEATINDEX_ERROR\020\003\022\032\n\026RESPO" +
-      "NSE_ACTTYPE_ERROR\020\004\022\033\n\027RESPONSE_DESTCARD" +
-      "_ERROR\020\005\022\026\n\022RESPONSE_ROOM_FULL\020\006\022\035\n\031RESP",
-      "ONSE_ROOM_INEXISTENCE\020\007\022\032\n\026RESPONSE_ROOM" +
-      "_ID_ERROR\020\010\022\033\n\027RESPONSE_ROOMCARD_LIMIT\020\t" +
-      "\022\032\n\026RESPONSE_IN_OTHER_ROOM\020\n\022\024\n\020RESPONSE" +
-      "_PLAYING\020\013\022 \n\034RESPONSE_DEALER_CAN_NOT_QU" +
-      "IT\020\014\022-\n)RESPONSE_FIRST_DISSOLVE_ROOM_CHO" +
-      "ICE_ERROR\020\r\022\032\n\026RESPONSE_ALREADY_READY\020\016\022" +
-      "\027\n\023RESPONSE_IS_IN_ROOM\020\017\022\037\n\033RESPONSE_NOT" +
-      "_CAN_XIA_JIAO_7\020\020*4\n\017ENOperationType\022\020\n\014" +
-      "LOGOUT_TABLE\020\001\022\017\n\013OWNER_TIREN\020\002*\214\001\n\tENCo" +
-      "lType\022\023\n\017EN_COL_TYPE_TOU\020\001\022\024\n\020EN_COL_TYP",
-      "E_PENG\020\002\022\023\n\017EN_COL_TYPE_CHI\020\003\022\024\n\020EN_COL_" +
-      "TYPE_ZHAO\020\004\022\024\n\020EN_COL_TYPE_LONG\020\005\022\023\n\017EN_" +
-      "COL_TYPE_KOU\020\006*N\n\nENZhaoType\022\024\n\020EN_ZHAO_" +
-      "TYPE_CHI\020\001\022\024\n\020EN_ZHAO_TYPE_CHE\020\002\022\024\n\020EN_Z" +
-      "HAO_TYPE_ALL\020\003*\305\004\n\014ENActionType\022\025\n\021EN_AC" +
-      "TION_UNKNOWN\020\001\022\023\n\017EN_ACTION_NAPAI\020\002\022\024\n\020E" +
-      "N_ACTION_CHUPAI\020\003\022\021\n\rEN_ACTION_GUO\020\004\022\021\n\r" +
-      "EN_ACTION_TOU\020\005\022\022\n\016EN_ACTION_PENG\020\006\022\021\n\rE" +
-      "N_ACTION_CHI\020\007\022\020\n\014EN_ACTION_HU\020\010\022\022\n\016EN_A" +
-      "CTION_ZHAO\020\t\022\023\n\017EN_ACTION_SIGEN\020\n\022\021\n\rEN_",
-      "ACTION_TUI\020\013\022\024\n\020EN_ACTION_NO_CHU\020\014\022\021\n\rEN" +
-      "_ACTION_KAN\020\r\022\024\n\020EN_ACTION_XIATOU\020\016\022\024\n\020E" +
-      "N_ACTION_HUADUI\020\017\022\024\n\020EN_ACTION_CHIKAN\020\020\022" +
-      "\023\n\017EN_ACTION_DAKAN\020\021\022\027\n\023EN_ACTION_CHI_SI" +
-      "GEN\020\022\022\026\n\022EN_ACTION_HU_SIGEN\020\023\022\022\n\016EN_ACTI" +
-      "ON_PIAO\020\024\022\025\n\021EN_ACTION_NO_PIAO\020\025\022\022\n\016EN_A" +
-      "CTION_DANG\020\026\022\025\n\021EN_ACTION_NO_DANG\020\027\022\022\n\016E" +
-      "N_ACTION_NEXT\020\030\022\022\n\016EN_ACTION_DEAL\020\031\022\021\n\rE" +
-      "N_ACTION_KOU\020\032\022\026\n\022EN_ACTION_KOU_LIST\020\033*Z" +
-      "\n\nENChatType\022\032\n\026EN_CHAT_TYPE_CHARACTER\020\000",
-      "\022\030\n\024EN_CHAT_TYPE_BIGFACE\020\001\022\026\n\022EN_CHAT_TY" +
-      "PE_VOICE\020\002*u\n\nENRoomType\022\023\n\017EN_ROOM_TYPE" +
-      "_GY\020\001\022\023\n\017EN_ROOM_TYPE_NC\020\002\022\023\n\017EN_ROOM_TY" +
-      "PE_XC\020\003\022\023\n\017EN_ROOM_TYPE_MY\020\004\022\023\n\017EN_ROOM_" +
-      "TYPE_CX\020\005"
+      "nTouPai\022\014\n\004open\030\001 \001(\010\"\020\n\016CSNotifyLogout*" +
+      "\331\003\n\016ENMessageError\022\024\n\020RESPONSE_SUCCESS\020\001" +
+      "\022\021\n\rRESPONSE_FAIL\020\002\022\034\n\030RESPONSE_SEATINDE" +
+      "X_ERROR\020\003\022\032\n\026RESPONSE_ACTTYPE_ERROR\020\004\022\033\n" +
+      "\027RESPONSE_DESTCARD_ERROR\020\005\022\026\n\022RESPONSE_R",
+      "OOM_FULL\020\006\022\035\n\031RESPONSE_ROOM_INEXISTENCE\020" +
+      "\007\022\032\n\026RESPONSE_ROOM_ID_ERROR\020\010\022\033\n\027RESPONS" +
+      "E_ROOMCARD_LIMIT\020\t\022\032\n\026RESPONSE_IN_OTHER_" +
+      "ROOM\020\n\022\024\n\020RESPONSE_PLAYING\020\013\022 \n\034RESPONSE" +
+      "_DEALER_CAN_NOT_QUIT\020\014\022-\n)RESPONSE_FIRST" +
+      "_DISSOLVE_ROOM_CHOICE_ERROR\020\r\022\032\n\026RESPONS" +
+      "E_ALREADY_READY\020\016\022\027\n\023RESPONSE_IS_IN_ROOM" +
+      "\020\017\022\037\n\033RESPONSE_NOT_CAN_XIA_JIAO_7\020\020*4\n\017E" +
+      "NOperationType\022\020\n\014LOGOUT_TABLE\020\001\022\017\n\013OWNE" +
+      "R_TIREN\020\002*\214\001\n\tENColType\022\023\n\017EN_COL_TYPE_T",
+      "OU\020\001\022\024\n\020EN_COL_TYPE_PENG\020\002\022\023\n\017EN_COL_TYP" +
+      "E_CHI\020\003\022\024\n\020EN_COL_TYPE_ZHAO\020\004\022\024\n\020EN_COL_" +
+      "TYPE_LONG\020\005\022\023\n\017EN_COL_TYPE_KOU\020\006*N\n\nENZh" +
+      "aoType\022\024\n\020EN_ZHAO_TYPE_CHI\020\001\022\024\n\020EN_ZHAO_" +
+      "TYPE_CHE\020\002\022\024\n\020EN_ZHAO_TYPE_ALL\020\003*\305\004\n\014ENA" +
+      "ctionType\022\025\n\021EN_ACTION_UNKNOWN\020\001\022\023\n\017EN_A" +
+      "CTION_NAPAI\020\002\022\024\n\020EN_ACTION_CHUPAI\020\003\022\021\n\rE" +
+      "N_ACTION_GUO\020\004\022\021\n\rEN_ACTION_TOU\020\005\022\022\n\016EN_" +
+      "ACTION_PENG\020\006\022\021\n\rEN_ACTION_CHI\020\007\022\020\n\014EN_A" +
+      "CTION_HU\020\010\022\022\n\016EN_ACTION_ZHAO\020\t\022\023\n\017EN_ACT",
+      "ION_SIGEN\020\n\022\021\n\rEN_ACTION_TUI\020\013\022\024\n\020EN_ACT" +
+      "ION_NO_CHU\020\014\022\021\n\rEN_ACTION_KAN\020\r\022\024\n\020EN_AC" +
+      "TION_XIATOU\020\016\022\024\n\020EN_ACTION_HUADUI\020\017\022\024\n\020E" +
+      "N_ACTION_CHIKAN\020\020\022\023\n\017EN_ACTION_DAKAN\020\021\022\027" +
+      "\n\023EN_ACTION_CHI_SIGEN\020\022\022\026\n\022EN_ACTION_HU_" +
+      "SIGEN\020\023\022\022\n\016EN_ACTION_PIAO\020\024\022\025\n\021EN_ACTION" +
+      "_NO_PIAO\020\025\022\022\n\016EN_ACTION_DANG\020\026\022\025\n\021EN_ACT" +
+      "ION_NO_DANG\020\027\022\022\n\016EN_ACTION_NEXT\020\030\022\022\n\016EN_" +
+      "ACTION_DEAL\020\031\022\021\n\rEN_ACTION_KOU\020\032\022\026\n\022EN_A" +
+      "CTION_KOU_LIST\020\033*Z\n\nENChatType\022\032\n\026EN_CHA",
+      "T_TYPE_CHARACTER\020\000\022\030\n\024EN_CHAT_TYPE_BIGFA" +
+      "CE\020\001\022\026\n\022EN_CHAT_TYPE_VOICE\020\002*u\n\nENRoomTy" +
+      "pe\022\023\n\017EN_ROOM_TYPE_GY\020\001\022\023\n\017EN_ROOM_TYPE_" +
+      "NC\020\002\022\023\n\017EN_ROOM_TYPE_XC\020\003\022\023\n\017EN_ROOM_TYP" +
+      "E_MY\020\004\022\023\n\017EN_ROOM_TYPE_CX\020\005"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -52337,6 +52663,12 @@ public final class CpMsgCs {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_huinan_proto_CSNotifyOpenTouPai_descriptor,
         new java.lang.String[] { "Open", });
+    internal_static_com_huinan_proto_CSNotifyLogout_descriptor =
+      getDescriptor().getMessageTypes().get(53);
+    internal_static_com_huinan_proto_CSNotifyLogout_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_huinan_proto_CSNotifyLogout_descriptor,
+        new java.lang.String[] { });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

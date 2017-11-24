@@ -37,6 +37,7 @@ import com.huinan.server.net.GamePlayer;
 import com.huinan.server.net.GameSvrPlayerManager;
 import com.huinan.server.service.data.Card;
 import com.huinan.server.service.data.Constant;
+import com.huinan.server.service.data.ERoomCardCost;
 import com.huinan.server.service.data.ERoomCardType;
 import com.huinan.server.service.data.Room;
 import com.huinan.server.service.data.User;
@@ -1554,12 +1555,11 @@ public class RoomManager {
 	public static void totalRoomCard(Room room) {
 		if (room.getRound() == 1) {
 			int userType = room.getRoomTable().getUseCardType();
-			int allRoomCardNum = 0;
 			// if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX_VALUE) {
 			// allRoomCardNum = 0;
 			// } else {
-			// int allRoomCardNum = ERoomCardCost.getRoomCardCost(room
-			// .getRoomTable().getGameNum());
+			int allRoomCardNum = ERoomCardCost.getRoomCardCost(room
+					.getRoomTable().getGameNum());
 			// }
 			int beforeRoomCard = 0;
 			if (userType == ERoomCardType.CREATOR.getValue()) {

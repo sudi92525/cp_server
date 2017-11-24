@@ -8,7 +8,6 @@ import org.apache.logging.log4j.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.huinan.server.db.ClubDAO;
 import com.huinan.server.db.GYcpInfoDAO;
 import com.huinan.server.db.UserManager;
 import com.huinan.server.server.net.config.ServerConfig;

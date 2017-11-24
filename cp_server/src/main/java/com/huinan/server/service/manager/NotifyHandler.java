@@ -11,6 +11,7 @@ import com.huinan.proto.CpMsg.CpMsgData;
 import com.huinan.proto.CpMsgCs.CSNotifyActionFlow;
 import com.huinan.proto.CpMsgCs.CSNotifyGameStart;
 import com.huinan.proto.CpMsgCs.CSNotifyIsOnline;
+import com.huinan.proto.CpMsgCs.CSNotifyLogout;
 import com.huinan.proto.CpMsgCs.CSNotifyNextOperation;
 import com.huinan.proto.CpMsgCs.CSNotifyNotice;
 import com.huinan.proto.CpMsgCs.CSNotifyOpenTouPai;
@@ -37,6 +38,16 @@ public class NotifyHandler {
 
 	public static void sendResponse(String uid, int cmd, Object msg) {
 		notifyOne(uid, cmd, msg);
+	}
+	
+
+	public static void notifyLogout(GamePlayer player) {
+		CpMsgData.Builder msg = CpMsgData.newBuilder();
+		CSNotifyLogout.Builder response = CSNotifyLogout.newBuilder();
+		msg.setCsNotifyLogout(response);
+
+		player.getClient().sendMessage(CpMsgData.CS_NOTIFY_LOGOUT_FIELD_NUMBER,
+				player.getUid(), (CpHead) player.getHead(), msg.build());
 	}
 
 	public static void notifyGameStart(Room room,
