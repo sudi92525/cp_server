@@ -456,6 +456,7 @@ public class RoomManager {
 	public static void startDealCard(Room room) {
 		if (room.getRound() == 1) {
 			room.setStart(true);
+			room.clearRound();
 		}
 		// 洗牌
 		shuffle(room);

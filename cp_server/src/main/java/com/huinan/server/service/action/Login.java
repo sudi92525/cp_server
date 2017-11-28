@@ -73,7 +73,7 @@ public class Login extends AbsAction {
 					response.setPosType(2);
 				}
 			} else {
-				user.setRoomId(0);
+				user.clear();
 				response.setPosType(1);
 			}
 			response.setRoomCardNum(user.getRoomCardNum());
