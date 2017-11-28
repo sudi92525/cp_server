@@ -8,6 +8,104 @@ public final class CpMsgClub {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
+  /**
+   * Protobuf enum {@code com.huinan.proto.ENClubGameType}
+   */
+  public enum ENClubGameType
+      implements com.google.protobuf.ProtocolMessageEnum {
+    /**
+     * <code>CP = 1;</code>
+     *
+     * <pre>
+     *长牌
+     * </pre>
+     */
+    CP(0, 1),
+    /**
+     * <code>MJ = 2;</code>
+     *
+     * <pre>
+     *麻将
+     * </pre>
+     */
+    MJ(1, 2),
+    ;
+
+    /**
+     * <code>CP = 1;</code>
+     *
+     * <pre>
+     *长牌
+     * </pre>
+     */
+    public static final int CP_VALUE = 1;
+    /**
+     * <code>MJ = 2;</code>
+     *
+     * <pre>
+     *麻将
+     * </pre>
+     */
+    public static final int MJ_VALUE = 2;
+
+
+    public final int getNumber() { return value; }
+
+    public static ENClubGameType valueOf(int value) {
+      switch (value) {
+        case 1: return CP;
+        case 2: return MJ;
+        default: return null;
+      }
+    }
+
+    public static com.google.protobuf.Internal.EnumLiteMap<ENClubGameType>
+        internalGetValueMap() {
+      return internalValueMap;
+    }
+    private static com.google.protobuf.Internal.EnumLiteMap<ENClubGameType>
+        internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<ENClubGameType>() {
+            public ENClubGameType findValueByNumber(int number) {
+              return ENClubGameType.valueOf(number);
+            }
+          };
+
+    public final com.google.protobuf.Descriptors.EnumValueDescriptor
+        getValueDescriptor() {
+      return getDescriptor().getValues().get(index);
+    }
+    public final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptorForType() {
+      return getDescriptor();
+    }
+    public static final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptor() {
+      return com.huinan.proto.CpMsgClub.getDescriptor().getEnumTypes().get(0);
+    }
+
+    private static final ENClubGameType[] VALUES = values();
+
+    public static ENClubGameType valueOf(
+        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+      if (desc.getType() != getDescriptor()) {
+        throw new java.lang.IllegalArgumentException(
+          "EnumValueDescriptor is not for this type.");
+      }
+      return VALUES[desc.getIndex()];
+    }
+
+    private final int index;
+    private final int value;
+
+    private ENClubGameType(int index, int value) {
+      this.index = index;
+      this.value = value;
+    }
+
+    // @@protoc_insertion_point(enum_scope:com.huinan.proto.ENClubGameType)
+  }
+
   public interface ClubRoomProtoOrBuilder extends
       // @@protoc_insertion_point(interface_extends:com.huinan.proto.ClubRoomProto)
       com.google.protobuf.MessageOrBuilder {
@@ -97,6 +195,31 @@ public final class CpMsgClub {
      * </pre>
      */
     int getTableState();
+
+    /**
+     * <code>optional .com.huinan.proto.CSNotifyGameOver big_reslut = 4;</code>
+     *
+     * <pre>
+     *大结算
+     * </pre>
+     */
+    boolean hasBigReslut();
+    /**
+     * <code>optional .com.huinan.proto.CSNotifyGameOver big_reslut = 4;</code>
+     *
+     * <pre>
+     *大结算
+     * </pre>
+     */
+    com.huinan.proto.CpMsgCs.CSNotifyGameOver getBigReslut();
+    /**
+     * <code>optional .com.huinan.proto.CSNotifyGameOver big_reslut = 4;</code>
+     *
+     * <pre>
+     *大结算
+     * </pre>
+     */
+    com.huinan.proto.CpMsgCs.CSNotifyGameOverOrBuilder getBigReslutOrBuilder();
   }
   /**
    * Protobuf type {@code com.huinan.proto.ClubRoomProto}
@@ -174,6 +297,19 @@ public final class CpMsgClub {
             case 24: {
               bitField0_ |= 0x00000002;
               tableState_ = input.readInt32();
+              break;
+            }
+            case 34: {
+              com.huinan.proto.CpMsgCs.CSNotifyGameOver.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000004) == 0x00000004)) {
+                subBuilder = bigReslut_.toBuilder();
+              }
+              bigReslut_ = input.readMessage(com.huinan.proto.CpMsgCs.CSNotifyGameOver.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(bigReslut_);
+                bigReslut_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000004;
               break;
             }
           }
@@ -330,10 +466,44 @@ public final class CpMsgClub {
       return tableState_;
     }
 
+    public static final int BIG_RESLUT_FIELD_NUMBER = 4;
+    private com.huinan.proto.CpMsgCs.CSNotifyGameOver bigReslut_;
+    /**
+     * <code>optional .com.huinan.proto.CSNotifyGameOver big_reslut = 4;</code>
+     *
+     * <pre>
+     *大结算
+     * </pre>
+     */
+    public boolean hasBigReslut() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional .com.huinan.proto.CSNotifyGameOver big_reslut = 4;</code>
+     *
+     * <pre>
+     *大结算
+     * </pre>
+     */
+    public com.huinan.proto.CpMsgCs.CSNotifyGameOver getBigReslut() {
+      return bigReslut_;
+    }
+    /**
+     * <code>optional .com.huinan.proto.CSNotifyGameOver big_reslut = 4;</code>
+     *
+     * <pre>
+     *大结算
+     * </pre>
+     */
+    public com.huinan.proto.CpMsgCs.CSNotifyGameOverOrBuilder getBigReslutOrBuilder() {
+      return bigReslut_;
+    }
+
     private void initFields() {
       tableInfo_ = com.huinan.proto.CpMsgCs.CSRequestCreateTable.getDefaultInstance();
       userInfo_ = java.util.Collections.emptyList();
       tableState_ = 0;
+      bigReslut_ = com.huinan.proto.CpMsgCs.CSNotifyGameOver.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -357,6 +527,9 @@ public final class CpMsgClub {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeInt32(3, tableState_);
       }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeMessage(4, bigReslut_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -377,6 +550,10 @@ public final class CpMsgClub {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(3, tableState_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(4, bigReslut_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -489,6 +666,7 @@ public final class CpMsgClub {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getTableInfoFieldBuilder();
           getUserInfoFieldBuilder();
+          getBigReslutFieldBuilder();
         }
       }
       private static Builder create() {
@@ -511,6 +689,12 @@ public final class CpMsgClub {
         }
         tableState_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
+        if (bigReslutBuilder_ == null) {
+          bigReslut_ = com.huinan.proto.CpMsgCs.CSNotifyGameOver.getDefaultInstance();
+        } else {
+          bigReslutBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
 
@@ -560,6 +744,14 @@ public final class CpMsgClub {
           to_bitField0_ |= 0x00000002;
         }
         result.tableState_ = tableState_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        if (bigReslutBuilder_ == null) {
+          result.bigReslut_ = bigReslut_;
+        } else {
+          result.bigReslut_ = bigReslutBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -607,6 +799,9 @@ public final class CpMsgClub {
         }
         if (other.hasTableState()) {
           setTableState(other.getTableState());
+        }
+        if (other.hasBigReslut()) {
+          mergeBigReslut(other.getBigReslut());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -1145,6 +1340,158 @@ public final class CpMsgClub {
         tableState_ = 0;
         onChanged();
         return this;
+      }
+
+      private com.huinan.proto.CpMsgCs.CSNotifyGameOver bigReslut_ = com.huinan.proto.CpMsgCs.CSNotifyGameOver.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.huinan.proto.CpMsgCs.CSNotifyGameOver, com.huinan.proto.CpMsgCs.CSNotifyGameOver.Builder, com.huinan.proto.CpMsgCs.CSNotifyGameOverOrBuilder> bigReslutBuilder_;
+      /**
+       * <code>optional .com.huinan.proto.CSNotifyGameOver big_reslut = 4;</code>
+       *
+       * <pre>
+       *大结算
+       * </pre>
+       */
+      public boolean hasBigReslut() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSNotifyGameOver big_reslut = 4;</code>
+       *
+       * <pre>
+       *大结算
+       * </pre>
+       */
+      public com.huinan.proto.CpMsgCs.CSNotifyGameOver getBigReslut() {
+        if (bigReslutBuilder_ == null) {
+          return bigReslut_;
+        } else {
+          return bigReslutBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSNotifyGameOver big_reslut = 4;</code>
+       *
+       * <pre>
+       *大结算
+       * </pre>
+       */
+      public Builder setBigReslut(com.huinan.proto.CpMsgCs.CSNotifyGameOver value) {
+        if (bigReslutBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          bigReslut_ = value;
+          onChanged();
+        } else {
+          bigReslutBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000008;
+        return this;
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSNotifyGameOver big_reslut = 4;</code>
+       *
+       * <pre>
+       *大结算
+       * </pre>
+       */
+      public Builder setBigReslut(
+          com.huinan.proto.CpMsgCs.CSNotifyGameOver.Builder builderForValue) {
+        if (bigReslutBuilder_ == null) {
+          bigReslut_ = builderForValue.build();
+          onChanged();
+        } else {
+          bigReslutBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000008;
+        return this;
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSNotifyGameOver big_reslut = 4;</code>
+       *
+       * <pre>
+       *大结算
+       * </pre>
+       */
+      public Builder mergeBigReslut(com.huinan.proto.CpMsgCs.CSNotifyGameOver value) {
+        if (bigReslutBuilder_ == null) {
+          if (((bitField0_ & 0x00000008) == 0x00000008) &&
+              bigReslut_ != com.huinan.proto.CpMsgCs.CSNotifyGameOver.getDefaultInstance()) {
+            bigReslut_ =
+              com.huinan.proto.CpMsgCs.CSNotifyGameOver.newBuilder(bigReslut_).mergeFrom(value).buildPartial();
+          } else {
+            bigReslut_ = value;
+          }
+          onChanged();
+        } else {
+          bigReslutBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000008;
+        return this;
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSNotifyGameOver big_reslut = 4;</code>
+       *
+       * <pre>
+       *大结算
+       * </pre>
+       */
+      public Builder clearBigReslut() {
+        if (bigReslutBuilder_ == null) {
+          bigReslut_ = com.huinan.proto.CpMsgCs.CSNotifyGameOver.getDefaultInstance();
+          onChanged();
+        } else {
+          bigReslutBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000008);
+        return this;
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSNotifyGameOver big_reslut = 4;</code>
+       *
+       * <pre>
+       *大结算
+       * </pre>
+       */
+      public com.huinan.proto.CpMsgCs.CSNotifyGameOver.Builder getBigReslutBuilder() {
+        bitField0_ |= 0x00000008;
+        onChanged();
+        return getBigReslutFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSNotifyGameOver big_reslut = 4;</code>
+       *
+       * <pre>
+       *大结算
+       * </pre>
+       */
+      public com.huinan.proto.CpMsgCs.CSNotifyGameOverOrBuilder getBigReslutOrBuilder() {
+        if (bigReslutBuilder_ != null) {
+          return bigReslutBuilder_.getMessageOrBuilder();
+        } else {
+          return bigReslut_;
+        }
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSNotifyGameOver big_reslut = 4;</code>
+       *
+       * <pre>
+       *大结算
+       * </pre>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.huinan.proto.CpMsgCs.CSNotifyGameOver, com.huinan.proto.CpMsgCs.CSNotifyGameOver.Builder, com.huinan.proto.CpMsgCs.CSNotifyGameOverOrBuilder> 
+          getBigReslutFieldBuilder() {
+        if (bigReslutBuilder_ == null) {
+          bigReslutBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.huinan.proto.CpMsgCs.CSNotifyGameOver, com.huinan.proto.CpMsgCs.CSNotifyGameOver.Builder, com.huinan.proto.CpMsgCs.CSNotifyGameOverOrBuilder>(
+                  getBigReslut(),
+                  getParentForChildren(),
+                  isClean());
+          bigReslut_ = null;
+        }
+        return bigReslutBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:com.huinan.proto.ClubRoomProto)
@@ -1994,7 +2341,7 @@ public final class CpMsgClub {
         getNameBytes();
 
     /**
-     * <code>optional int32 game_type = 3;</code>
+     * <code>optional .com.huinan.proto.ENClubGameType game_type = 3;</code>
      *
      * <pre>
      *游戏类型：加枚举
@@ -2002,13 +2349,13 @@ public final class CpMsgClub {
      */
     boolean hasGameType();
     /**
-     * <code>optional int32 game_type = 3;</code>
+     * <code>optional .com.huinan.proto.ENClubGameType game_type = 3;</code>
      *
      * <pre>
      *游戏类型：加枚举
      * </pre>
      */
-    int getGameType();
+    com.huinan.proto.CpMsgClub.ENClubGameType getGameType();
 
     /**
      * <code>optional int32 room_num = 4;</code>
@@ -2091,8 +2438,14 @@ public final class CpMsgClub {
               break;
             }
             case 24: {
-              bitField0_ |= 0x00000004;
-              gameType_ = input.readInt32();
+              int rawValue = input.readEnum();
+              com.huinan.proto.CpMsgClub.ENClubGameType value = com.huinan.proto.CpMsgClub.ENClubGameType.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(3, rawValue);
+              } else {
+                bitField0_ |= 0x00000004;
+                gameType_ = value;
+              }
               break;
             }
             case 32: {
@@ -2218,9 +2571,9 @@ public final class CpMsgClub {
     }
 
     public static final int GAME_TYPE_FIELD_NUMBER = 3;
-    private int gameType_;
+    private com.huinan.proto.CpMsgClub.ENClubGameType gameType_;
     /**
-     * <code>optional int32 game_type = 3;</code>
+     * <code>optional .com.huinan.proto.ENClubGameType game_type = 3;</code>
      *
      * <pre>
      *游戏类型：加枚举
@@ -2230,13 +2583,13 @@ public final class CpMsgClub {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional int32 game_type = 3;</code>
+     * <code>optional .com.huinan.proto.ENClubGameType game_type = 3;</code>
      *
      * <pre>
      *游戏类型：加枚举
      * </pre>
      */
-    public int getGameType() {
+    public com.huinan.proto.CpMsgClub.ENClubGameType getGameType() {
       return gameType_;
     }
 
@@ -2266,7 +2619,7 @@ public final class CpMsgClub {
     private void initFields() {
       id_ = 0;
       name_ = "";
-      gameType_ = 0;
+      gameType_ = com.huinan.proto.CpMsgClub.ENClubGameType.CP;
       roomNum_ = 0;
     }
     private byte memoizedIsInitialized = -1;
@@ -2289,7 +2642,7 @@ public final class CpMsgClub {
         output.writeBytes(2, getNameBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt32(3, gameType_);
+        output.writeEnum(3, gameType_.getNumber());
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeInt32(4, roomNum_);
@@ -2313,7 +2666,7 @@ public final class CpMsgClub {
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, gameType_);
+          .computeEnumSize(3, gameType_.getNumber());
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
@@ -2440,7 +2793,7 @@ public final class CpMsgClub {
         bitField0_ = (bitField0_ & ~0x00000001);
         name_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
-        gameType_ = 0;
+        gameType_ = com.huinan.proto.CpMsgClub.ENClubGameType.CP;
         bitField0_ = (bitField0_ & ~0x00000004);
         roomNum_ = 0;
         bitField0_ = (bitField0_ & ~0x00000008);
@@ -2693,9 +3046,9 @@ public final class CpMsgClub {
         return this;
       }
 
-      private int gameType_ ;
+      private com.huinan.proto.CpMsgClub.ENClubGameType gameType_ = com.huinan.proto.CpMsgClub.ENClubGameType.CP;
       /**
-       * <code>optional int32 game_type = 3;</code>
+       * <code>optional .com.huinan.proto.ENClubGameType game_type = 3;</code>
        *
        * <pre>
        *游戏类型：加枚举
@@ -2705,30 +3058,33 @@ public final class CpMsgClub {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional int32 game_type = 3;</code>
+       * <code>optional .com.huinan.proto.ENClubGameType game_type = 3;</code>
        *
        * <pre>
        *游戏类型：加枚举
        * </pre>
        */
-      public int getGameType() {
+      public com.huinan.proto.CpMsgClub.ENClubGameType getGameType() {
         return gameType_;
       }
       /**
-       * <code>optional int32 game_type = 3;</code>
+       * <code>optional .com.huinan.proto.ENClubGameType game_type = 3;</code>
        *
        * <pre>
        *游戏类型：加枚举
        * </pre>
        */
-      public Builder setGameType(int value) {
+      public Builder setGameType(com.huinan.proto.CpMsgClub.ENClubGameType value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
         bitField0_ |= 0x00000004;
         gameType_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 game_type = 3;</code>
+       * <code>optional .com.huinan.proto.ENClubGameType game_type = 3;</code>
        *
        * <pre>
        *游戏类型：加枚举
@@ -2736,7 +3092,7 @@ public final class CpMsgClub {
        */
       public Builder clearGameType() {
         bitField0_ = (bitField0_ & ~0x00000004);
-        gameType_ = 0;
+        gameType_ = com.huinan.proto.CpMsgClub.ENClubGameType.CP;
         onChanged();
         return this;
       }
@@ -2800,6 +3156,2235 @@ public final class CpMsgClub {
     // @@protoc_insertion_point(class_scope:com.huinan.proto.ClubProto)
   }
 
+  public interface CSRequestClubCreateOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.huinan.proto.CSRequestClubCreate)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>required string name = 1;</code>
+     *
+     * <pre>
+     *名称
+     * </pre>
+     */
+    boolean hasName();
+    /**
+     * <code>required string name = 1;</code>
+     *
+     * <pre>
+     *名称
+     * </pre>
+     */
+    java.lang.String getName();
+    /**
+     * <code>required string name = 1;</code>
+     *
+     * <pre>
+     *名称
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getNameBytes();
+
+    /**
+     * <code>optional .com.huinan.proto.ENClubGameType game_type = 2;</code>
+     *
+     * <pre>
+     *游戏类型：加枚举
+     * </pre>
+     */
+    boolean hasGameType();
+    /**
+     * <code>optional .com.huinan.proto.ENClubGameType game_type = 2;</code>
+     *
+     * <pre>
+     *游戏类型：加枚举
+     * </pre>
+     */
+    com.huinan.proto.CpMsgClub.ENClubGameType getGameType();
+  }
+  /**
+   * Protobuf type {@code com.huinan.proto.CSRequestClubCreate}
+   *
+   * <pre>
+   *协议一：创建俱乐部
+   * </pre>
+   */
+  public static final class CSRequestClubCreate extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.huinan.proto.CSRequestClubCreate)
+      CSRequestClubCreateOrBuilder {
+    // Use CSRequestClubCreate.newBuilder() to construct.
+    private CSRequestClubCreate(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private CSRequestClubCreate(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final CSRequestClubCreate defaultInstance;
+    public static CSRequestClubCreate getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public CSRequestClubCreate getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private CSRequestClubCreate(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000001;
+              name_ = bs;
+              break;
+            }
+            case 16: {
+              int rawValue = input.readEnum();
+              com.huinan.proto.CpMsgClub.ENClubGameType value = com.huinan.proto.CpMsgClub.ENClubGameType.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(2, rawValue);
+              } else {
+                bitField0_ |= 0x00000002;
+                gameType_ = value;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.huinan.proto.CpMsgClub.internal_static_com_huinan_proto_CSRequestClubCreate_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.huinan.proto.CpMsgClub.internal_static_com_huinan_proto_CSRequestClubCreate_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.huinan.proto.CpMsgClub.CSRequestClubCreate.class, com.huinan.proto.CpMsgClub.CSRequestClubCreate.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<CSRequestClubCreate> PARSER =
+        new com.google.protobuf.AbstractParser<CSRequestClubCreate>() {
+      public CSRequestClubCreate parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new CSRequestClubCreate(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<CSRequestClubCreate> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int NAME_FIELD_NUMBER = 1;
+    private java.lang.Object name_;
+    /**
+     * <code>required string name = 1;</code>
+     *
+     * <pre>
+     *名称
+     * </pre>
+     */
+    public boolean hasName() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required string name = 1;</code>
+     *
+     * <pre>
+     *名称
+     * </pre>
+     */
+    public java.lang.String getName() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          name_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string name = 1;</code>
+     *
+     * <pre>
+     *名称
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getNameBytes() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        name_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int GAME_TYPE_FIELD_NUMBER = 2;
+    private com.huinan.proto.CpMsgClub.ENClubGameType gameType_;
+    /**
+     * <code>optional .com.huinan.proto.ENClubGameType game_type = 2;</code>
+     *
+     * <pre>
+     *游戏类型：加枚举
+     * </pre>
+     */
+    public boolean hasGameType() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional .com.huinan.proto.ENClubGameType game_type = 2;</code>
+     *
+     * <pre>
+     *游戏类型：加枚举
+     * </pre>
+     */
+    public com.huinan.proto.CpMsgClub.ENClubGameType getGameType() {
+      return gameType_;
+    }
+
+    private void initFields() {
+      name_ = "";
+      gameType_ = com.huinan.proto.CpMsgClub.ENClubGameType.CP;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasName()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, getNameBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeEnum(2, gameType_.getNumber());
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, getNameBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(2, gameType_.getNumber());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.huinan.proto.CpMsgClub.CSRequestClubCreate parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.huinan.proto.CpMsgClub.CSRequestClubCreate parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.huinan.proto.CpMsgClub.CSRequestClubCreate parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.huinan.proto.CpMsgClub.CSRequestClubCreate parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.huinan.proto.CpMsgClub.CSRequestClubCreate parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.huinan.proto.CpMsgClub.CSRequestClubCreate parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.huinan.proto.CpMsgClub.CSRequestClubCreate parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.huinan.proto.CpMsgClub.CSRequestClubCreate parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.huinan.proto.CpMsgClub.CSRequestClubCreate parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.huinan.proto.CpMsgClub.CSRequestClubCreate parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.huinan.proto.CpMsgClub.CSRequestClubCreate prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.huinan.proto.CSRequestClubCreate}
+     *
+     * <pre>
+     *协议一：创建俱乐部
+     * </pre>
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.huinan.proto.CSRequestClubCreate)
+        com.huinan.proto.CpMsgClub.CSRequestClubCreateOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.huinan.proto.CpMsgClub.internal_static_com_huinan_proto_CSRequestClubCreate_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.huinan.proto.CpMsgClub.internal_static_com_huinan_proto_CSRequestClubCreate_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.huinan.proto.CpMsgClub.CSRequestClubCreate.class, com.huinan.proto.CpMsgClub.CSRequestClubCreate.Builder.class);
+      }
+
+      // Construct using com.huinan.proto.CpMsgClub.CSRequestClubCreate.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        name_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        gameType_ = com.huinan.proto.CpMsgClub.ENClubGameType.CP;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.huinan.proto.CpMsgClub.internal_static_com_huinan_proto_CSRequestClubCreate_descriptor;
+      }
+
+      public com.huinan.proto.CpMsgClub.CSRequestClubCreate getDefaultInstanceForType() {
+        return com.huinan.proto.CpMsgClub.CSRequestClubCreate.getDefaultInstance();
+      }
+
+      public com.huinan.proto.CpMsgClub.CSRequestClubCreate build() {
+        com.huinan.proto.CpMsgClub.CSRequestClubCreate result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.huinan.proto.CpMsgClub.CSRequestClubCreate buildPartial() {
+        com.huinan.proto.CpMsgClub.CSRequestClubCreate result = new com.huinan.proto.CpMsgClub.CSRequestClubCreate(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.name_ = name_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.gameType_ = gameType_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.huinan.proto.CpMsgClub.CSRequestClubCreate) {
+          return mergeFrom((com.huinan.proto.CpMsgClub.CSRequestClubCreate)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.huinan.proto.CpMsgClub.CSRequestClubCreate other) {
+        if (other == com.huinan.proto.CpMsgClub.CSRequestClubCreate.getDefaultInstance()) return this;
+        if (other.hasName()) {
+          bitField0_ |= 0x00000001;
+          name_ = other.name_;
+          onChanged();
+        }
+        if (other.hasGameType()) {
+          setGameType(other.getGameType());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasName()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.huinan.proto.CpMsgClub.CSRequestClubCreate parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.huinan.proto.CpMsgClub.CSRequestClubCreate) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.lang.Object name_ = "";
+      /**
+       * <code>required string name = 1;</code>
+       *
+       * <pre>
+       *名称
+       * </pre>
+       */
+      public boolean hasName() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required string name = 1;</code>
+       *
+       * <pre>
+       *名称
+       * </pre>
+       */
+      public java.lang.String getName() {
+        java.lang.Object ref = name_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            name_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string name = 1;</code>
+       *
+       * <pre>
+       *名称
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getNameBytes() {
+        java.lang.Object ref = name_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          name_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string name = 1;</code>
+       *
+       * <pre>
+       *名称
+       * </pre>
+       */
+      public Builder setName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        name_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string name = 1;</code>
+       *
+       * <pre>
+       *名称
+       * </pre>
+       */
+      public Builder clearName() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        name_ = getDefaultInstance().getName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string name = 1;</code>
+       *
+       * <pre>
+       *名称
+       * </pre>
+       */
+      public Builder setNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        name_ = value;
+        onChanged();
+        return this;
+      }
+
+      private com.huinan.proto.CpMsgClub.ENClubGameType gameType_ = com.huinan.proto.CpMsgClub.ENClubGameType.CP;
+      /**
+       * <code>optional .com.huinan.proto.ENClubGameType game_type = 2;</code>
+       *
+       * <pre>
+       *游戏类型：加枚举
+       * </pre>
+       */
+      public boolean hasGameType() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional .com.huinan.proto.ENClubGameType game_type = 2;</code>
+       *
+       * <pre>
+       *游戏类型：加枚举
+       * </pre>
+       */
+      public com.huinan.proto.CpMsgClub.ENClubGameType getGameType() {
+        return gameType_;
+      }
+      /**
+       * <code>optional .com.huinan.proto.ENClubGameType game_type = 2;</code>
+       *
+       * <pre>
+       *游戏类型：加枚举
+       * </pre>
+       */
+      public Builder setGameType(com.huinan.proto.CpMsgClub.ENClubGameType value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000002;
+        gameType_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .com.huinan.proto.ENClubGameType game_type = 2;</code>
+       *
+       * <pre>
+       *游戏类型：加枚举
+       * </pre>
+       */
+      public Builder clearGameType() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        gameType_ = com.huinan.proto.CpMsgClub.ENClubGameType.CP;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.huinan.proto.CSRequestClubCreate)
+    }
+
+    static {
+      defaultInstance = new CSRequestClubCreate(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.huinan.proto.CSRequestClubCreate)
+  }
+
+  public interface CSResponseClubCreateOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.huinan.proto.CSResponseClubCreate)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional .com.huinan.proto.ENMessageError result = 1;</code>
+     *
+     * <pre>
+     *结果
+     * </pre>
+     */
+    boolean hasResult();
+    /**
+     * <code>optional .com.huinan.proto.ENMessageError result = 1;</code>
+     *
+     * <pre>
+     *结果
+     * </pre>
+     */
+    com.huinan.proto.CpMsgCs.ENMessageError getResult();
+
+    /**
+     * <code>optional .com.huinan.proto.ClubProto club = 2;</code>
+     *
+     * <pre>
+     *俱乐部信息
+     * </pre>
+     */
+    boolean hasClub();
+    /**
+     * <code>optional .com.huinan.proto.ClubProto club = 2;</code>
+     *
+     * <pre>
+     *俱乐部信息
+     * </pre>
+     */
+    com.huinan.proto.CpMsgClub.ClubProto getClub();
+    /**
+     * <code>optional .com.huinan.proto.ClubProto club = 2;</code>
+     *
+     * <pre>
+     *俱乐部信息
+     * </pre>
+     */
+    com.huinan.proto.CpMsgClub.ClubProtoOrBuilder getClubOrBuilder();
+  }
+  /**
+   * Protobuf type {@code com.huinan.proto.CSResponseClubCreate}
+   */
+  public static final class CSResponseClubCreate extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.huinan.proto.CSResponseClubCreate)
+      CSResponseClubCreateOrBuilder {
+    // Use CSResponseClubCreate.newBuilder() to construct.
+    private CSResponseClubCreate(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private CSResponseClubCreate(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final CSResponseClubCreate defaultInstance;
+    public static CSResponseClubCreate getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public CSResponseClubCreate getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private CSResponseClubCreate(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              int rawValue = input.readEnum();
+              com.huinan.proto.CpMsgCs.ENMessageError value = com.huinan.proto.CpMsgCs.ENMessageError.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(1, rawValue);
+              } else {
+                bitField0_ |= 0x00000001;
+                result_ = value;
+              }
+              break;
+            }
+            case 18: {
+              com.huinan.proto.CpMsgClub.ClubProto.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000002) == 0x00000002)) {
+                subBuilder = club_.toBuilder();
+              }
+              club_ = input.readMessage(com.huinan.proto.CpMsgClub.ClubProto.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(club_);
+                club_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000002;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.huinan.proto.CpMsgClub.internal_static_com_huinan_proto_CSResponseClubCreate_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.huinan.proto.CpMsgClub.internal_static_com_huinan_proto_CSResponseClubCreate_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.huinan.proto.CpMsgClub.CSResponseClubCreate.class, com.huinan.proto.CpMsgClub.CSResponseClubCreate.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<CSResponseClubCreate> PARSER =
+        new com.google.protobuf.AbstractParser<CSResponseClubCreate>() {
+      public CSResponseClubCreate parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new CSResponseClubCreate(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<CSResponseClubCreate> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int RESULT_FIELD_NUMBER = 1;
+    private com.huinan.proto.CpMsgCs.ENMessageError result_;
+    /**
+     * <code>optional .com.huinan.proto.ENMessageError result = 1;</code>
+     *
+     * <pre>
+     *结果
+     * </pre>
+     */
+    public boolean hasResult() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional .com.huinan.proto.ENMessageError result = 1;</code>
+     *
+     * <pre>
+     *结果
+     * </pre>
+     */
+    public com.huinan.proto.CpMsgCs.ENMessageError getResult() {
+      return result_;
+    }
+
+    public static final int CLUB_FIELD_NUMBER = 2;
+    private com.huinan.proto.CpMsgClub.ClubProto club_;
+    /**
+     * <code>optional .com.huinan.proto.ClubProto club = 2;</code>
+     *
+     * <pre>
+     *俱乐部信息
+     * </pre>
+     */
+    public boolean hasClub() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional .com.huinan.proto.ClubProto club = 2;</code>
+     *
+     * <pre>
+     *俱乐部信息
+     * </pre>
+     */
+    public com.huinan.proto.CpMsgClub.ClubProto getClub() {
+      return club_;
+    }
+    /**
+     * <code>optional .com.huinan.proto.ClubProto club = 2;</code>
+     *
+     * <pre>
+     *俱乐部信息
+     * </pre>
+     */
+    public com.huinan.proto.CpMsgClub.ClubProtoOrBuilder getClubOrBuilder() {
+      return club_;
+    }
+
+    private void initFields() {
+      result_ = com.huinan.proto.CpMsgCs.ENMessageError.RESPONSE_SUCCESS;
+      club_ = com.huinan.proto.CpMsgClub.ClubProto.getDefaultInstance();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeEnum(1, result_.getNumber());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeMessage(2, club_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(1, result_.getNumber());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, club_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.huinan.proto.CpMsgClub.CSResponseClubCreate parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.huinan.proto.CpMsgClub.CSResponseClubCreate parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.huinan.proto.CpMsgClub.CSResponseClubCreate parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.huinan.proto.CpMsgClub.CSResponseClubCreate parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.huinan.proto.CpMsgClub.CSResponseClubCreate parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.huinan.proto.CpMsgClub.CSResponseClubCreate parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.huinan.proto.CpMsgClub.CSResponseClubCreate parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.huinan.proto.CpMsgClub.CSResponseClubCreate parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.huinan.proto.CpMsgClub.CSResponseClubCreate parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.huinan.proto.CpMsgClub.CSResponseClubCreate parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.huinan.proto.CpMsgClub.CSResponseClubCreate prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.huinan.proto.CSResponseClubCreate}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.huinan.proto.CSResponseClubCreate)
+        com.huinan.proto.CpMsgClub.CSResponseClubCreateOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.huinan.proto.CpMsgClub.internal_static_com_huinan_proto_CSResponseClubCreate_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.huinan.proto.CpMsgClub.internal_static_com_huinan_proto_CSResponseClubCreate_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.huinan.proto.CpMsgClub.CSResponseClubCreate.class, com.huinan.proto.CpMsgClub.CSResponseClubCreate.Builder.class);
+      }
+
+      // Construct using com.huinan.proto.CpMsgClub.CSResponseClubCreate.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getClubFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        result_ = com.huinan.proto.CpMsgCs.ENMessageError.RESPONSE_SUCCESS;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        if (clubBuilder_ == null) {
+          club_ = com.huinan.proto.CpMsgClub.ClubProto.getDefaultInstance();
+        } else {
+          clubBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.huinan.proto.CpMsgClub.internal_static_com_huinan_proto_CSResponseClubCreate_descriptor;
+      }
+
+      public com.huinan.proto.CpMsgClub.CSResponseClubCreate getDefaultInstanceForType() {
+        return com.huinan.proto.CpMsgClub.CSResponseClubCreate.getDefaultInstance();
+      }
+
+      public com.huinan.proto.CpMsgClub.CSResponseClubCreate build() {
+        com.huinan.proto.CpMsgClub.CSResponseClubCreate result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.huinan.proto.CpMsgClub.CSResponseClubCreate buildPartial() {
+        com.huinan.proto.CpMsgClub.CSResponseClubCreate result = new com.huinan.proto.CpMsgClub.CSResponseClubCreate(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.result_ = result_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        if (clubBuilder_ == null) {
+          result.club_ = club_;
+        } else {
+          result.club_ = clubBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.huinan.proto.CpMsgClub.CSResponseClubCreate) {
+          return mergeFrom((com.huinan.proto.CpMsgClub.CSResponseClubCreate)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.huinan.proto.CpMsgClub.CSResponseClubCreate other) {
+        if (other == com.huinan.proto.CpMsgClub.CSResponseClubCreate.getDefaultInstance()) return this;
+        if (other.hasResult()) {
+          setResult(other.getResult());
+        }
+        if (other.hasClub()) {
+          mergeClub(other.getClub());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.huinan.proto.CpMsgClub.CSResponseClubCreate parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.huinan.proto.CpMsgClub.CSResponseClubCreate) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private com.huinan.proto.CpMsgCs.ENMessageError result_ = com.huinan.proto.CpMsgCs.ENMessageError.RESPONSE_SUCCESS;
+      /**
+       * <code>optional .com.huinan.proto.ENMessageError result = 1;</code>
+       *
+       * <pre>
+       *结果
+       * </pre>
+       */
+      public boolean hasResult() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional .com.huinan.proto.ENMessageError result = 1;</code>
+       *
+       * <pre>
+       *结果
+       * </pre>
+       */
+      public com.huinan.proto.CpMsgCs.ENMessageError getResult() {
+        return result_;
+      }
+      /**
+       * <code>optional .com.huinan.proto.ENMessageError result = 1;</code>
+       *
+       * <pre>
+       *结果
+       * </pre>
+       */
+      public Builder setResult(com.huinan.proto.CpMsgCs.ENMessageError value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000001;
+        result_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .com.huinan.proto.ENMessageError result = 1;</code>
+       *
+       * <pre>
+       *结果
+       * </pre>
+       */
+      public Builder clearResult() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        result_ = com.huinan.proto.CpMsgCs.ENMessageError.RESPONSE_SUCCESS;
+        onChanged();
+        return this;
+      }
+
+      private com.huinan.proto.CpMsgClub.ClubProto club_ = com.huinan.proto.CpMsgClub.ClubProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.huinan.proto.CpMsgClub.ClubProto, com.huinan.proto.CpMsgClub.ClubProto.Builder, com.huinan.proto.CpMsgClub.ClubProtoOrBuilder> clubBuilder_;
+      /**
+       * <code>optional .com.huinan.proto.ClubProto club = 2;</code>
+       *
+       * <pre>
+       *俱乐部信息
+       * </pre>
+       */
+      public boolean hasClub() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional .com.huinan.proto.ClubProto club = 2;</code>
+       *
+       * <pre>
+       *俱乐部信息
+       * </pre>
+       */
+      public com.huinan.proto.CpMsgClub.ClubProto getClub() {
+        if (clubBuilder_ == null) {
+          return club_;
+        } else {
+          return clubBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.huinan.proto.ClubProto club = 2;</code>
+       *
+       * <pre>
+       *俱乐部信息
+       * </pre>
+       */
+      public Builder setClub(com.huinan.proto.CpMsgClub.ClubProto value) {
+        if (clubBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          club_ = value;
+          onChanged();
+        } else {
+          clubBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .com.huinan.proto.ClubProto club = 2;</code>
+       *
+       * <pre>
+       *俱乐部信息
+       * </pre>
+       */
+      public Builder setClub(
+          com.huinan.proto.CpMsgClub.ClubProto.Builder builderForValue) {
+        if (clubBuilder_ == null) {
+          club_ = builderForValue.build();
+          onChanged();
+        } else {
+          clubBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .com.huinan.proto.ClubProto club = 2;</code>
+       *
+       * <pre>
+       *俱乐部信息
+       * </pre>
+       */
+      public Builder mergeClub(com.huinan.proto.CpMsgClub.ClubProto value) {
+        if (clubBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002) &&
+              club_ != com.huinan.proto.CpMsgClub.ClubProto.getDefaultInstance()) {
+            club_ =
+              com.huinan.proto.CpMsgClub.ClubProto.newBuilder(club_).mergeFrom(value).buildPartial();
+          } else {
+            club_ = value;
+          }
+          onChanged();
+        } else {
+          clubBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .com.huinan.proto.ClubProto club = 2;</code>
+       *
+       * <pre>
+       *俱乐部信息
+       * </pre>
+       */
+      public Builder clearClub() {
+        if (clubBuilder_ == null) {
+          club_ = com.huinan.proto.CpMsgClub.ClubProto.getDefaultInstance();
+          onChanged();
+        } else {
+          clubBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+      /**
+       * <code>optional .com.huinan.proto.ClubProto club = 2;</code>
+       *
+       * <pre>
+       *俱乐部信息
+       * </pre>
+       */
+      public com.huinan.proto.CpMsgClub.ClubProto.Builder getClubBuilder() {
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return getClubFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.huinan.proto.ClubProto club = 2;</code>
+       *
+       * <pre>
+       *俱乐部信息
+       * </pre>
+       */
+      public com.huinan.proto.CpMsgClub.ClubProtoOrBuilder getClubOrBuilder() {
+        if (clubBuilder_ != null) {
+          return clubBuilder_.getMessageOrBuilder();
+        } else {
+          return club_;
+        }
+      }
+      /**
+       * <code>optional .com.huinan.proto.ClubProto club = 2;</code>
+       *
+       * <pre>
+       *俱乐部信息
+       * </pre>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.huinan.proto.CpMsgClub.ClubProto, com.huinan.proto.CpMsgClub.ClubProto.Builder, com.huinan.proto.CpMsgClub.ClubProtoOrBuilder> 
+          getClubFieldBuilder() {
+        if (clubBuilder_ == null) {
+          clubBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.huinan.proto.CpMsgClub.ClubProto, com.huinan.proto.CpMsgClub.ClubProto.Builder, com.huinan.proto.CpMsgClub.ClubProtoOrBuilder>(
+                  getClub(),
+                  getParentForChildren(),
+                  isClean());
+          club_ = null;
+        }
+        return clubBuilder_;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.huinan.proto.CSResponseClubCreate)
+    }
+
+    static {
+      defaultInstance = new CSResponseClubCreate(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.huinan.proto.CSResponseClubCreate)
+  }
+
+  public interface CSRequestClubApplyOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.huinan.proto.CSRequestClubApply)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>required int32 club_id = 1;</code>
+     *
+     * <pre>
+     *id
+     * </pre>
+     */
+    boolean hasClubId();
+    /**
+     * <code>required int32 club_id = 1;</code>
+     *
+     * <pre>
+     *id
+     * </pre>
+     */
+    int getClubId();
+  }
+  /**
+   * Protobuf type {@code com.huinan.proto.CSRequestClubApply}
+   *
+   * <pre>
+   *协议二：申请加入俱乐部
+   * </pre>
+   */
+  public static final class CSRequestClubApply extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.huinan.proto.CSRequestClubApply)
+      CSRequestClubApplyOrBuilder {
+    // Use CSRequestClubApply.newBuilder() to construct.
+    private CSRequestClubApply(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private CSRequestClubApply(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final CSRequestClubApply defaultInstance;
+    public static CSRequestClubApply getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public CSRequestClubApply getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private CSRequestClubApply(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              clubId_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.huinan.proto.CpMsgClub.internal_static_com_huinan_proto_CSRequestClubApply_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.huinan.proto.CpMsgClub.internal_static_com_huinan_proto_CSRequestClubApply_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.huinan.proto.CpMsgClub.CSRequestClubApply.class, com.huinan.proto.CpMsgClub.CSRequestClubApply.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<CSRequestClubApply> PARSER =
+        new com.google.protobuf.AbstractParser<CSRequestClubApply>() {
+      public CSRequestClubApply parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new CSRequestClubApply(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<CSRequestClubApply> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int CLUB_ID_FIELD_NUMBER = 1;
+    private int clubId_;
+    /**
+     * <code>required int32 club_id = 1;</code>
+     *
+     * <pre>
+     *id
+     * </pre>
+     */
+    public boolean hasClubId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required int32 club_id = 1;</code>
+     *
+     * <pre>
+     *id
+     * </pre>
+     */
+    public int getClubId() {
+      return clubId_;
+    }
+
+    private void initFields() {
+      clubId_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasClubId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, clubId_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, clubId_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.huinan.proto.CpMsgClub.CSRequestClubApply parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.huinan.proto.CpMsgClub.CSRequestClubApply parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.huinan.proto.CpMsgClub.CSRequestClubApply parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.huinan.proto.CpMsgClub.CSRequestClubApply parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.huinan.proto.CpMsgClub.CSRequestClubApply parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.huinan.proto.CpMsgClub.CSRequestClubApply parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.huinan.proto.CpMsgClub.CSRequestClubApply parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.huinan.proto.CpMsgClub.CSRequestClubApply parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.huinan.proto.CpMsgClub.CSRequestClubApply parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.huinan.proto.CpMsgClub.CSRequestClubApply parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.huinan.proto.CpMsgClub.CSRequestClubApply prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.huinan.proto.CSRequestClubApply}
+     *
+     * <pre>
+     *协议二：申请加入俱乐部
+     * </pre>
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.huinan.proto.CSRequestClubApply)
+        com.huinan.proto.CpMsgClub.CSRequestClubApplyOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.huinan.proto.CpMsgClub.internal_static_com_huinan_proto_CSRequestClubApply_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.huinan.proto.CpMsgClub.internal_static_com_huinan_proto_CSRequestClubApply_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.huinan.proto.CpMsgClub.CSRequestClubApply.class, com.huinan.proto.CpMsgClub.CSRequestClubApply.Builder.class);
+      }
+
+      // Construct using com.huinan.proto.CpMsgClub.CSRequestClubApply.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        clubId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.huinan.proto.CpMsgClub.internal_static_com_huinan_proto_CSRequestClubApply_descriptor;
+      }
+
+      public com.huinan.proto.CpMsgClub.CSRequestClubApply getDefaultInstanceForType() {
+        return com.huinan.proto.CpMsgClub.CSRequestClubApply.getDefaultInstance();
+      }
+
+      public com.huinan.proto.CpMsgClub.CSRequestClubApply build() {
+        com.huinan.proto.CpMsgClub.CSRequestClubApply result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.huinan.proto.CpMsgClub.CSRequestClubApply buildPartial() {
+        com.huinan.proto.CpMsgClub.CSRequestClubApply result = new com.huinan.proto.CpMsgClub.CSRequestClubApply(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.clubId_ = clubId_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.huinan.proto.CpMsgClub.CSRequestClubApply) {
+          return mergeFrom((com.huinan.proto.CpMsgClub.CSRequestClubApply)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.huinan.proto.CpMsgClub.CSRequestClubApply other) {
+        if (other == com.huinan.proto.CpMsgClub.CSRequestClubApply.getDefaultInstance()) return this;
+        if (other.hasClubId()) {
+          setClubId(other.getClubId());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasClubId()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.huinan.proto.CpMsgClub.CSRequestClubApply parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.huinan.proto.CpMsgClub.CSRequestClubApply) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private int clubId_ ;
+      /**
+       * <code>required int32 club_id = 1;</code>
+       *
+       * <pre>
+       *id
+       * </pre>
+       */
+      public boolean hasClubId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required int32 club_id = 1;</code>
+       *
+       * <pre>
+       *id
+       * </pre>
+       */
+      public int getClubId() {
+        return clubId_;
+      }
+      /**
+       * <code>required int32 club_id = 1;</code>
+       *
+       * <pre>
+       *id
+       * </pre>
+       */
+      public Builder setClubId(int value) {
+        bitField0_ |= 0x00000001;
+        clubId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 club_id = 1;</code>
+       *
+       * <pre>
+       *id
+       * </pre>
+       */
+      public Builder clearClubId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        clubId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.huinan.proto.CSRequestClubApply)
+    }
+
+    static {
+      defaultInstance = new CSRequestClubApply(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.huinan.proto.CSRequestClubApply)
+  }
+
+  public interface CSResponseClubApplyOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.huinan.proto.CSResponseClubApply)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional .com.huinan.proto.ENMessageError result = 1;</code>
+     *
+     * <pre>
+     *结果
+     * </pre>
+     */
+    boolean hasResult();
+    /**
+     * <code>optional .com.huinan.proto.ENMessageError result = 1;</code>
+     *
+     * <pre>
+     *结果
+     * </pre>
+     */
+    com.huinan.proto.CpMsgCs.ENMessageError getResult();
+  }
+  /**
+   * Protobuf type {@code com.huinan.proto.CSResponseClubApply}
+   */
+  public static final class CSResponseClubApply extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.huinan.proto.CSResponseClubApply)
+      CSResponseClubApplyOrBuilder {
+    // Use CSResponseClubApply.newBuilder() to construct.
+    private CSResponseClubApply(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private CSResponseClubApply(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final CSResponseClubApply defaultInstance;
+    public static CSResponseClubApply getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public CSResponseClubApply getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private CSResponseClubApply(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              int rawValue = input.readEnum();
+              com.huinan.proto.CpMsgCs.ENMessageError value = com.huinan.proto.CpMsgCs.ENMessageError.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(1, rawValue);
+              } else {
+                bitField0_ |= 0x00000001;
+                result_ = value;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.huinan.proto.CpMsgClub.internal_static_com_huinan_proto_CSResponseClubApply_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.huinan.proto.CpMsgClub.internal_static_com_huinan_proto_CSResponseClubApply_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.huinan.proto.CpMsgClub.CSResponseClubApply.class, com.huinan.proto.CpMsgClub.CSResponseClubApply.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<CSResponseClubApply> PARSER =
+        new com.google.protobuf.AbstractParser<CSResponseClubApply>() {
+      public CSResponseClubApply parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new CSResponseClubApply(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<CSResponseClubApply> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int RESULT_FIELD_NUMBER = 1;
+    private com.huinan.proto.CpMsgCs.ENMessageError result_;
+    /**
+     * <code>optional .com.huinan.proto.ENMessageError result = 1;</code>
+     *
+     * <pre>
+     *结果
+     * </pre>
+     */
+    public boolean hasResult() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional .com.huinan.proto.ENMessageError result = 1;</code>
+     *
+     * <pre>
+     *结果
+     * </pre>
+     */
+    public com.huinan.proto.CpMsgCs.ENMessageError getResult() {
+      return result_;
+    }
+
+    private void initFields() {
+      result_ = com.huinan.proto.CpMsgCs.ENMessageError.RESPONSE_SUCCESS;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeEnum(1, result_.getNumber());
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(1, result_.getNumber());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.huinan.proto.CpMsgClub.CSResponseClubApply parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.huinan.proto.CpMsgClub.CSResponseClubApply parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.huinan.proto.CpMsgClub.CSResponseClubApply parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.huinan.proto.CpMsgClub.CSResponseClubApply parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.huinan.proto.CpMsgClub.CSResponseClubApply parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.huinan.proto.CpMsgClub.CSResponseClubApply parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.huinan.proto.CpMsgClub.CSResponseClubApply parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.huinan.proto.CpMsgClub.CSResponseClubApply parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.huinan.proto.CpMsgClub.CSResponseClubApply parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.huinan.proto.CpMsgClub.CSResponseClubApply parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.huinan.proto.CpMsgClub.CSResponseClubApply prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.huinan.proto.CSResponseClubApply}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.huinan.proto.CSResponseClubApply)
+        com.huinan.proto.CpMsgClub.CSResponseClubApplyOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.huinan.proto.CpMsgClub.internal_static_com_huinan_proto_CSResponseClubApply_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.huinan.proto.CpMsgClub.internal_static_com_huinan_proto_CSResponseClubApply_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.huinan.proto.CpMsgClub.CSResponseClubApply.class, com.huinan.proto.CpMsgClub.CSResponseClubApply.Builder.class);
+      }
+
+      // Construct using com.huinan.proto.CpMsgClub.CSResponseClubApply.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        result_ = com.huinan.proto.CpMsgCs.ENMessageError.RESPONSE_SUCCESS;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.huinan.proto.CpMsgClub.internal_static_com_huinan_proto_CSResponseClubApply_descriptor;
+      }
+
+      public com.huinan.proto.CpMsgClub.CSResponseClubApply getDefaultInstanceForType() {
+        return com.huinan.proto.CpMsgClub.CSResponseClubApply.getDefaultInstance();
+      }
+
+      public com.huinan.proto.CpMsgClub.CSResponseClubApply build() {
+        com.huinan.proto.CpMsgClub.CSResponseClubApply result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.huinan.proto.CpMsgClub.CSResponseClubApply buildPartial() {
+        com.huinan.proto.CpMsgClub.CSResponseClubApply result = new com.huinan.proto.CpMsgClub.CSResponseClubApply(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.result_ = result_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.huinan.proto.CpMsgClub.CSResponseClubApply) {
+          return mergeFrom((com.huinan.proto.CpMsgClub.CSResponseClubApply)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.huinan.proto.CpMsgClub.CSResponseClubApply other) {
+        if (other == com.huinan.proto.CpMsgClub.CSResponseClubApply.getDefaultInstance()) return this;
+        if (other.hasResult()) {
+          setResult(other.getResult());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.huinan.proto.CpMsgClub.CSResponseClubApply parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.huinan.proto.CpMsgClub.CSResponseClubApply) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private com.huinan.proto.CpMsgCs.ENMessageError result_ = com.huinan.proto.CpMsgCs.ENMessageError.RESPONSE_SUCCESS;
+      /**
+       * <code>optional .com.huinan.proto.ENMessageError result = 1;</code>
+       *
+       * <pre>
+       *结果
+       * </pre>
+       */
+      public boolean hasResult() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional .com.huinan.proto.ENMessageError result = 1;</code>
+       *
+       * <pre>
+       *结果
+       * </pre>
+       */
+      public com.huinan.proto.CpMsgCs.ENMessageError getResult() {
+        return result_;
+      }
+      /**
+       * <code>optional .com.huinan.proto.ENMessageError result = 1;</code>
+       *
+       * <pre>
+       *结果
+       * </pre>
+       */
+      public Builder setResult(com.huinan.proto.CpMsgCs.ENMessageError value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000001;
+        result_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .com.huinan.proto.ENMessageError result = 1;</code>
+       *
+       * <pre>
+       *结果
+       * </pre>
+       */
+      public Builder clearResult() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        result_ = com.huinan.proto.CpMsgCs.ENMessageError.RESPONSE_SUCCESS;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.huinan.proto.CSResponseClubApply)
+    }
+
+    static {
+      defaultInstance = new CSResponseClubApply(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.huinan.proto.CSResponseClubApply)
+  }
+
   public interface CSRequestClubInfoOrBuilder extends
       // @@protoc_insertion_point(interface_extends:com.huinan.proto.CSRequestClubInfo)
       com.google.protobuf.MessageOrBuilder {
@@ -2808,7 +5393,7 @@ public final class CpMsgClub {
    * Protobuf type {@code com.huinan.proto.CSRequestClubInfo}
    *
    * <pre>
-   *协议一：获取俱乐部:列表
+   *协议三：获取俱乐部:列表
    * </pre>
    */
   public static final class CSRequestClubInfo extends
@@ -3004,7 +5589,7 @@ public final class CpMsgClub {
      * Protobuf type {@code com.huinan.proto.CSRequestClubInfo}
      *
      * <pre>
-     *协议一：获取俱乐部:列表
+     *协议三：获取俱乐部:列表
      * </pre>
      */
     public static final class Builder extends
@@ -4036,7 +6621,7 @@ public final class CpMsgClub {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional int32 club_id = 1;</code>
+     * <code>required int32 club_id = 1;</code>
      *
      * <pre>
      *俱乐部id
@@ -4044,7 +6629,7 @@ public final class CpMsgClub {
      */
     boolean hasClubId();
     /**
-     * <code>optional int32 club_id = 1;</code>
+     * <code>required int32 club_id = 1;</code>
      *
      * <pre>
      *俱乐部id
@@ -4056,7 +6641,7 @@ public final class CpMsgClub {
    * Protobuf type {@code com.huinan.proto.CSRequestClubRoom}
    *
    * <pre>
-   *协议二：获取俱乐部:房间(刷新)
+   *协议四：获取俱乐部:房间(刷新)
    * </pre>
    */
   public static final class CSRequestClubRoom extends
@@ -4156,7 +6741,7 @@ public final class CpMsgClub {
     public static final int CLUB_ID_FIELD_NUMBER = 1;
     private int clubId_;
     /**
-     * <code>optional int32 club_id = 1;</code>
+     * <code>required int32 club_id = 1;</code>
      *
      * <pre>
      *俱乐部id
@@ -4166,7 +6751,7 @@ public final class CpMsgClub {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional int32 club_id = 1;</code>
+     * <code>required int32 club_id = 1;</code>
      *
      * <pre>
      *俱乐部id
@@ -4185,6 +6770,10 @@ public final class CpMsgClub {
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
 
+      if (!hasClubId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -4290,7 +6879,7 @@ public final class CpMsgClub {
      * Protobuf type {@code com.huinan.proto.CSRequestClubRoom}
      *
      * <pre>
-     *协议二：获取俱乐部:房间(刷新)
+     *协议四：获取俱乐部:房间(刷新)
      * </pre>
      */
     public static final class Builder extends
@@ -4387,6 +6976,10 @@ public final class CpMsgClub {
       }
 
       public final boolean isInitialized() {
+        if (!hasClubId()) {
+          
+          return false;
+        }
         return true;
       }
 
@@ -4411,7 +7004,7 @@ public final class CpMsgClub {
 
       private int clubId_ ;
       /**
-       * <code>optional int32 club_id = 1;</code>
+       * <code>required int32 club_id = 1;</code>
        *
        * <pre>
        *俱乐部id
@@ -4421,7 +7014,7 @@ public final class CpMsgClub {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional int32 club_id = 1;</code>
+       * <code>required int32 club_id = 1;</code>
        *
        * <pre>
        *俱乐部id
@@ -4431,7 +7024,7 @@ public final class CpMsgClub {
         return clubId_;
       }
       /**
-       * <code>optional int32 club_id = 1;</code>
+       * <code>required int32 club_id = 1;</code>
        *
        * <pre>
        *俱乐部id
@@ -4444,7 +7037,7 @@ public final class CpMsgClub {
         return this;
       }
       /**
-       * <code>optional int32 club_id = 1;</code>
+       * <code>required int32 club_id = 1;</code>
        *
        * <pre>
        *俱乐部id
@@ -5493,7 +8086,7 @@ public final class CpMsgClub {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional int32 club_id = 1;</code>
+     * <code>required int32 club_id = 1;</code>
      *
      * <pre>
      *俱乐部id
@@ -5501,7 +8094,7 @@ public final class CpMsgClub {
      */
     boolean hasClubId();
     /**
-     * <code>optional int32 club_id = 1;</code>
+     * <code>required int32 club_id = 1;</code>
      *
      * <pre>
      *俱乐部id
@@ -5513,7 +8106,7 @@ public final class CpMsgClub {
    * Protobuf type {@code com.huinan.proto.CSRequestClubMember}
    *
    * <pre>
-   *协议三：获取俱乐部:成员
+   *协议五：获取俱乐部:成员
    * </pre>
    */
   public static final class CSRequestClubMember extends
@@ -5613,7 +8206,7 @@ public final class CpMsgClub {
     public static final int CLUB_ID_FIELD_NUMBER = 1;
     private int clubId_;
     /**
-     * <code>optional int32 club_id = 1;</code>
+     * <code>required int32 club_id = 1;</code>
      *
      * <pre>
      *俱乐部id
@@ -5623,7 +8216,7 @@ public final class CpMsgClub {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional int32 club_id = 1;</code>
+     * <code>required int32 club_id = 1;</code>
      *
      * <pre>
      *俱乐部id
@@ -5642,6 +8235,10 @@ public final class CpMsgClub {
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
 
+      if (!hasClubId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -5747,7 +8344,7 @@ public final class CpMsgClub {
      * Protobuf type {@code com.huinan.proto.CSRequestClubMember}
      *
      * <pre>
-     *协议三：获取俱乐部:成员
+     *协议五：获取俱乐部:成员
      * </pre>
      */
     public static final class Builder extends
@@ -5844,6 +8441,10 @@ public final class CpMsgClub {
       }
 
       public final boolean isInitialized() {
+        if (!hasClubId()) {
+          
+          return false;
+        }
         return true;
       }
 
@@ -5868,7 +8469,7 @@ public final class CpMsgClub {
 
       private int clubId_ ;
       /**
-       * <code>optional int32 club_id = 1;</code>
+       * <code>required int32 club_id = 1;</code>
        *
        * <pre>
        *俱乐部id
@@ -5878,7 +8479,7 @@ public final class CpMsgClub {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional int32 club_id = 1;</code>
+       * <code>required int32 club_id = 1;</code>
        *
        * <pre>
        *俱乐部id
@@ -5888,7 +8489,7 @@ public final class CpMsgClub {
         return clubId_;
       }
       /**
-       * <code>optional int32 club_id = 1;</code>
+       * <code>required int32 club_id = 1;</code>
        *
        * <pre>
        *俱乐部id
@@ -5901,7 +8502,7 @@ public final class CpMsgClub {
         return this;
       }
       /**
-       * <code>optional int32 club_id = 1;</code>
+       * <code>required int32 club_id = 1;</code>
        *
        * <pre>
        *俱乐部id
@@ -6840,7 +9441,7 @@ public final class CpMsgClub {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional int32 club_id = 1;</code>
+     * <code>required int32 club_id = 1;</code>
      *
      * <pre>
      *俱乐部id
@@ -6848,7 +9449,7 @@ public final class CpMsgClub {
      */
     boolean hasClubId();
     /**
-     * <code>optional int32 club_id = 1;</code>
+     * <code>required int32 club_id = 1;</code>
      *
      * <pre>
      *俱乐部id
@@ -6860,7 +9461,7 @@ public final class CpMsgClub {
    * Protobuf type {@code com.huinan.proto.CSRequestClubMessage}
    *
    * <pre>
-   *协议四：获取俱乐部:申请消息
+   *协议六：获取俱乐部:申请消息
    * </pre>
    */
   public static final class CSRequestClubMessage extends
@@ -6960,7 +9561,7 @@ public final class CpMsgClub {
     public static final int CLUB_ID_FIELD_NUMBER = 1;
     private int clubId_;
     /**
-     * <code>optional int32 club_id = 1;</code>
+     * <code>required int32 club_id = 1;</code>
      *
      * <pre>
      *俱乐部id
@@ -6970,7 +9571,7 @@ public final class CpMsgClub {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional int32 club_id = 1;</code>
+     * <code>required int32 club_id = 1;</code>
      *
      * <pre>
      *俱乐部id
@@ -6989,6 +9590,10 @@ public final class CpMsgClub {
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
 
+      if (!hasClubId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -7094,7 +9699,7 @@ public final class CpMsgClub {
      * Protobuf type {@code com.huinan.proto.CSRequestClubMessage}
      *
      * <pre>
-     *协议四：获取俱乐部:申请消息
+     *协议六：获取俱乐部:申请消息
      * </pre>
      */
     public static final class Builder extends
@@ -7191,6 +9796,10 @@ public final class CpMsgClub {
       }
 
       public final boolean isInitialized() {
+        if (!hasClubId()) {
+          
+          return false;
+        }
         return true;
       }
 
@@ -7215,7 +9824,7 @@ public final class CpMsgClub {
 
       private int clubId_ ;
       /**
-       * <code>optional int32 club_id = 1;</code>
+       * <code>required int32 club_id = 1;</code>
        *
        * <pre>
        *俱乐部id
@@ -7225,7 +9834,7 @@ public final class CpMsgClub {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional int32 club_id = 1;</code>
+       * <code>required int32 club_id = 1;</code>
        *
        * <pre>
        *俱乐部id
@@ -7235,7 +9844,7 @@ public final class CpMsgClub {
         return clubId_;
       }
       /**
-       * <code>optional int32 club_id = 1;</code>
+       * <code>required int32 club_id = 1;</code>
        *
        * <pre>
        *俱乐部id
@@ -7248,7 +9857,7 @@ public final class CpMsgClub {
         return this;
       }
       /**
-       * <code>optional int32 club_id = 1;</code>
+       * <code>required int32 club_id = 1;</code>
        *
        * <pre>
        *俱乐部id
@@ -8187,7 +10796,7 @@ public final class CpMsgClub {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional int32 club_id = 1;</code>
+     * <code>required int32 club_id = 1;</code>
      *
      * <pre>
      *俱乐部id
@@ -8195,7 +10804,7 @@ public final class CpMsgClub {
      */
     boolean hasClubId();
     /**
-     * <code>optional int32 club_id = 1;</code>
+     * <code>required int32 club_id = 1;</code>
      *
      * <pre>
      *俱乐部id
@@ -8204,7 +10813,7 @@ public final class CpMsgClub {
     int getClubId();
 
     /**
-     * <code>optional bool have = 2;</code>
+     * <code>required bool have = 2;</code>
      *
      * <pre>
      *是否有申请消息
@@ -8212,7 +10821,7 @@ public final class CpMsgClub {
      */
     boolean hasHave();
     /**
-     * <code>optional bool have = 2;</code>
+     * <code>required bool have = 2;</code>
      *
      * <pre>
      *是否有申请消息
@@ -8224,7 +10833,7 @@ public final class CpMsgClub {
    * Protobuf type {@code com.huinan.proto.CSNotifyClubApply}
    *
    * <pre>
-   *协议五：推送：俱乐部申请消息
+   *协议七：推送：俱乐部申请消息
    * </pre>
    */
   public static final class CSNotifyClubApply extends
@@ -8329,7 +10938,7 @@ public final class CpMsgClub {
     public static final int CLUB_ID_FIELD_NUMBER = 1;
     private int clubId_;
     /**
-     * <code>optional int32 club_id = 1;</code>
+     * <code>required int32 club_id = 1;</code>
      *
      * <pre>
      *俱乐部id
@@ -8339,7 +10948,7 @@ public final class CpMsgClub {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional int32 club_id = 1;</code>
+     * <code>required int32 club_id = 1;</code>
      *
      * <pre>
      *俱乐部id
@@ -8352,7 +10961,7 @@ public final class CpMsgClub {
     public static final int HAVE_FIELD_NUMBER = 2;
     private boolean have_;
     /**
-     * <code>optional bool have = 2;</code>
+     * <code>required bool have = 2;</code>
      *
      * <pre>
      *是否有申请消息
@@ -8362,7 +10971,7 @@ public final class CpMsgClub {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional bool have = 2;</code>
+     * <code>required bool have = 2;</code>
      *
      * <pre>
      *是否有申请消息
@@ -8382,6 +10991,14 @@ public final class CpMsgClub {
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
 
+      if (!hasClubId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasHave()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -8494,7 +11111,7 @@ public final class CpMsgClub {
      * Protobuf type {@code com.huinan.proto.CSNotifyClubApply}
      *
      * <pre>
-     *协议五：推送：俱乐部申请消息
+     *协议七：推送：俱乐部申请消息
      * </pre>
      */
     public static final class Builder extends
@@ -8600,6 +11217,14 @@ public final class CpMsgClub {
       }
 
       public final boolean isInitialized() {
+        if (!hasClubId()) {
+          
+          return false;
+        }
+        if (!hasHave()) {
+          
+          return false;
+        }
         return true;
       }
 
@@ -8624,7 +11249,7 @@ public final class CpMsgClub {
 
       private int clubId_ ;
       /**
-       * <code>optional int32 club_id = 1;</code>
+       * <code>required int32 club_id = 1;</code>
        *
        * <pre>
        *俱乐部id
@@ -8634,7 +11259,7 @@ public final class CpMsgClub {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional int32 club_id = 1;</code>
+       * <code>required int32 club_id = 1;</code>
        *
        * <pre>
        *俱乐部id
@@ -8644,7 +11269,7 @@ public final class CpMsgClub {
         return clubId_;
       }
       /**
-       * <code>optional int32 club_id = 1;</code>
+       * <code>required int32 club_id = 1;</code>
        *
        * <pre>
        *俱乐部id
@@ -8657,7 +11282,7 @@ public final class CpMsgClub {
         return this;
       }
       /**
-       * <code>optional int32 club_id = 1;</code>
+       * <code>required int32 club_id = 1;</code>
        *
        * <pre>
        *俱乐部id
@@ -8672,7 +11297,7 @@ public final class CpMsgClub {
 
       private boolean have_ ;
       /**
-       * <code>optional bool have = 2;</code>
+       * <code>required bool have = 2;</code>
        *
        * <pre>
        *是否有申请消息
@@ -8682,7 +11307,7 @@ public final class CpMsgClub {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional bool have = 2;</code>
+       * <code>required bool have = 2;</code>
        *
        * <pre>
        *是否有申请消息
@@ -8692,7 +11317,7 @@ public final class CpMsgClub {
         return have_;
       }
       /**
-       * <code>optional bool have = 2;</code>
+       * <code>required bool have = 2;</code>
        *
        * <pre>
        *是否有申请消息
@@ -8705,7 +11330,7 @@ public final class CpMsgClub {
         return this;
       }
       /**
-       * <code>optional bool have = 2;</code>
+       * <code>required bool have = 2;</code>
        *
        * <pre>
        *是否有申请消息
@@ -8734,7 +11359,7 @@ public final class CpMsgClub {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional int32 club_id = 1;</code>
+     * <code>required int32 club_id = 1;</code>
      *
      * <pre>
      *俱乐部id
@@ -8742,7 +11367,7 @@ public final class CpMsgClub {
      */
     boolean hasClubId();
     /**
-     * <code>optional int32 club_id = 1;</code>
+     * <code>required int32 club_id = 1;</code>
      *
      * <pre>
      *俱乐部id
@@ -8751,7 +11376,7 @@ public final class CpMsgClub {
     int getClubId();
 
     /**
-     * <code>optional int32 room_id = 2;</code>
+     * <code>required int32 room_id = 2;</code>
      *
      * <pre>
      *房间id
@@ -8759,7 +11384,7 @@ public final class CpMsgClub {
      */
     boolean hasRoomId();
     /**
-     * <code>optional int32 room_id = 2;</code>
+     * <code>required int32 room_id = 2;</code>
      *
      * <pre>
      *房间id
@@ -8771,7 +11396,7 @@ public final class CpMsgClub {
    * Protobuf type {@code com.huinan.proto.CSRequestClubRemoveRoom}
    *
    * <pre>
-   *协议六：移除俱乐部房间
+   *协议八：移除俱乐部房间
    * </pre>
    */
   public static final class CSRequestClubRemoveRoom extends
@@ -8876,7 +11501,7 @@ public final class CpMsgClub {
     public static final int CLUB_ID_FIELD_NUMBER = 1;
     private int clubId_;
     /**
-     * <code>optional int32 club_id = 1;</code>
+     * <code>required int32 club_id = 1;</code>
      *
      * <pre>
      *俱乐部id
@@ -8886,7 +11511,7 @@ public final class CpMsgClub {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional int32 club_id = 1;</code>
+     * <code>required int32 club_id = 1;</code>
      *
      * <pre>
      *俱乐部id
@@ -8899,7 +11524,7 @@ public final class CpMsgClub {
     public static final int ROOM_ID_FIELD_NUMBER = 2;
     private int roomId_;
     /**
-     * <code>optional int32 room_id = 2;</code>
+     * <code>required int32 room_id = 2;</code>
      *
      * <pre>
      *房间id
@@ -8909,7 +11534,7 @@ public final class CpMsgClub {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional int32 room_id = 2;</code>
+     * <code>required int32 room_id = 2;</code>
      *
      * <pre>
      *房间id
@@ -8929,6 +11554,14 @@ public final class CpMsgClub {
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
 
+      if (!hasClubId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasRoomId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -9041,7 +11674,7 @@ public final class CpMsgClub {
      * Protobuf type {@code com.huinan.proto.CSRequestClubRemoveRoom}
      *
      * <pre>
-     *协议六：移除俱乐部房间
+     *协议八：移除俱乐部房间
      * </pre>
      */
     public static final class Builder extends
@@ -9147,6 +11780,14 @@ public final class CpMsgClub {
       }
 
       public final boolean isInitialized() {
+        if (!hasClubId()) {
+          
+          return false;
+        }
+        if (!hasRoomId()) {
+          
+          return false;
+        }
         return true;
       }
 
@@ -9171,7 +11812,7 @@ public final class CpMsgClub {
 
       private int clubId_ ;
       /**
-       * <code>optional int32 club_id = 1;</code>
+       * <code>required int32 club_id = 1;</code>
        *
        * <pre>
        *俱乐部id
@@ -9181,7 +11822,7 @@ public final class CpMsgClub {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional int32 club_id = 1;</code>
+       * <code>required int32 club_id = 1;</code>
        *
        * <pre>
        *俱乐部id
@@ -9191,7 +11832,7 @@ public final class CpMsgClub {
         return clubId_;
       }
       /**
-       * <code>optional int32 club_id = 1;</code>
+       * <code>required int32 club_id = 1;</code>
        *
        * <pre>
        *俱乐部id
@@ -9204,7 +11845,7 @@ public final class CpMsgClub {
         return this;
       }
       /**
-       * <code>optional int32 club_id = 1;</code>
+       * <code>required int32 club_id = 1;</code>
        *
        * <pre>
        *俱乐部id
@@ -9219,7 +11860,7 @@ public final class CpMsgClub {
 
       private int roomId_ ;
       /**
-       * <code>optional int32 room_id = 2;</code>
+       * <code>required int32 room_id = 2;</code>
        *
        * <pre>
        *房间id
@@ -9229,7 +11870,7 @@ public final class CpMsgClub {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional int32 room_id = 2;</code>
+       * <code>required int32 room_id = 2;</code>
        *
        * <pre>
        *房间id
@@ -9239,7 +11880,7 @@ public final class CpMsgClub {
         return roomId_;
       }
       /**
-       * <code>optional int32 room_id = 2;</code>
+       * <code>required int32 room_id = 2;</code>
        *
        * <pre>
        *房间id
@@ -9252,7 +11893,7 @@ public final class CpMsgClub {
         return this;
       }
       /**
-       * <code>optional int32 room_id = 2;</code>
+       * <code>required int32 room_id = 2;</code>
        *
        * <pre>
        *房间id
@@ -9719,7 +12360,7 @@ public final class CpMsgClub {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional int32 club_id = 1;</code>
+     * <code>required int32 club_id = 1;</code>
      *
      * <pre>
      *俱乐部id
@@ -9727,7 +12368,7 @@ public final class CpMsgClub {
      */
     boolean hasClubId();
     /**
-     * <code>optional int32 club_id = 1;</code>
+     * <code>required int32 club_id = 1;</code>
      *
      * <pre>
      *俱乐部id
@@ -9736,7 +12377,7 @@ public final class CpMsgClub {
     int getClubId();
 
     /**
-     * <code>optional string uid = 2;</code>
+     * <code>required string uid = 2;</code>
      *
      * <pre>
      *用户唯一标识符
@@ -9744,7 +12385,7 @@ public final class CpMsgClub {
      */
     boolean hasUid();
     /**
-     * <code>optional string uid = 2;</code>
+     * <code>required string uid = 2;</code>
      *
      * <pre>
      *用户唯一标识符
@@ -9752,7 +12393,7 @@ public final class CpMsgClub {
      */
     java.lang.String getUid();
     /**
-     * <code>optional string uid = 2;</code>
+     * <code>required string uid = 2;</code>
      *
      * <pre>
      *用户唯一标识符
@@ -9765,7 +12406,7 @@ public final class CpMsgClub {
    * Protobuf type {@code com.huinan.proto.CSRequestClubKick}
    *
    * <pre>
-   *协议七：请求俱乐部:踢人
+   *协议九：请求俱乐部:踢人
    * </pre>
    */
   public static final class CSRequestClubKick extends
@@ -9871,7 +12512,7 @@ public final class CpMsgClub {
     public static final int CLUB_ID_FIELD_NUMBER = 1;
     private int clubId_;
     /**
-     * <code>optional int32 club_id = 1;</code>
+     * <code>required int32 club_id = 1;</code>
      *
      * <pre>
      *俱乐部id
@@ -9881,7 +12522,7 @@ public final class CpMsgClub {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional int32 club_id = 1;</code>
+     * <code>required int32 club_id = 1;</code>
      *
      * <pre>
      *俱乐部id
@@ -9894,7 +12535,7 @@ public final class CpMsgClub {
     public static final int UID_FIELD_NUMBER = 2;
     private java.lang.Object uid_;
     /**
-     * <code>optional string uid = 2;</code>
+     * <code>required string uid = 2;</code>
      *
      * <pre>
      *用户唯一标识符
@@ -9904,7 +12545,7 @@ public final class CpMsgClub {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional string uid = 2;</code>
+     * <code>required string uid = 2;</code>
      *
      * <pre>
      *用户唯一标识符
@@ -9925,7 +12566,7 @@ public final class CpMsgClub {
       }
     }
     /**
-     * <code>optional string uid = 2;</code>
+     * <code>required string uid = 2;</code>
      *
      * <pre>
      *用户唯一标识符
@@ -9955,6 +12596,14 @@ public final class CpMsgClub {
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
 
+      if (!hasClubId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasUid()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -10067,7 +12716,7 @@ public final class CpMsgClub {
      * Protobuf type {@code com.huinan.proto.CSRequestClubKick}
      *
      * <pre>
-     *协议七：请求俱乐部:踢人
+     *协议九：请求俱乐部:踢人
      * </pre>
      */
     public static final class Builder extends
@@ -10175,6 +12824,14 @@ public final class CpMsgClub {
       }
 
       public final boolean isInitialized() {
+        if (!hasClubId()) {
+          
+          return false;
+        }
+        if (!hasUid()) {
+          
+          return false;
+        }
         return true;
       }
 
@@ -10199,7 +12856,7 @@ public final class CpMsgClub {
 
       private int clubId_ ;
       /**
-       * <code>optional int32 club_id = 1;</code>
+       * <code>required int32 club_id = 1;</code>
        *
        * <pre>
        *俱乐部id
@@ -10209,7 +12866,7 @@ public final class CpMsgClub {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional int32 club_id = 1;</code>
+       * <code>required int32 club_id = 1;</code>
        *
        * <pre>
        *俱乐部id
@@ -10219,7 +12876,7 @@ public final class CpMsgClub {
         return clubId_;
       }
       /**
-       * <code>optional int32 club_id = 1;</code>
+       * <code>required int32 club_id = 1;</code>
        *
        * <pre>
        *俱乐部id
@@ -10232,7 +12889,7 @@ public final class CpMsgClub {
         return this;
       }
       /**
-       * <code>optional int32 club_id = 1;</code>
+       * <code>required int32 club_id = 1;</code>
        *
        * <pre>
        *俱乐部id
@@ -10247,7 +12904,7 @@ public final class CpMsgClub {
 
       private java.lang.Object uid_ = "";
       /**
-       * <code>optional string uid = 2;</code>
+       * <code>required string uid = 2;</code>
        *
        * <pre>
        *用户唯一标识符
@@ -10257,7 +12914,7 @@ public final class CpMsgClub {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional string uid = 2;</code>
+       * <code>required string uid = 2;</code>
        *
        * <pre>
        *用户唯一标识符
@@ -10278,7 +12935,7 @@ public final class CpMsgClub {
         }
       }
       /**
-       * <code>optional string uid = 2;</code>
+       * <code>required string uid = 2;</code>
        *
        * <pre>
        *用户唯一标识符
@@ -10298,7 +12955,7 @@ public final class CpMsgClub {
         }
       }
       /**
-       * <code>optional string uid = 2;</code>
+       * <code>required string uid = 2;</code>
        *
        * <pre>
        *用户唯一标识符
@@ -10315,7 +12972,7 @@ public final class CpMsgClub {
         return this;
       }
       /**
-       * <code>optional string uid = 2;</code>
+       * <code>required string uid = 2;</code>
        *
        * <pre>
        *用户唯一标识符
@@ -10328,7 +12985,7 @@ public final class CpMsgClub {
         return this;
       }
       /**
-       * <code>optional string uid = 2;</code>
+       * <code>required string uid = 2;</code>
        *
        * <pre>
        *用户唯一标识符
@@ -10799,7 +13456,7 @@ public final class CpMsgClub {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional int32 club_id = 1;</code>
+     * <code>required int32 club_id = 1;</code>
      *
      * <pre>
      *俱乐部id
@@ -10807,7 +13464,7 @@ public final class CpMsgClub {
      */
     boolean hasClubId();
     /**
-     * <code>optional int32 club_id = 1;</code>
+     * <code>required int32 club_id = 1;</code>
      *
      * <pre>
      *俱乐部id
@@ -10816,7 +13473,7 @@ public final class CpMsgClub {
     int getClubId();
 
     /**
-     * <code>optional string uid = 2;</code>
+     * <code>required string uid = 2;</code>
      *
      * <pre>
      *用户唯一标识符
@@ -10824,7 +13481,7 @@ public final class CpMsgClub {
      */
     boolean hasUid();
     /**
-     * <code>optional string uid = 2;</code>
+     * <code>required string uid = 2;</code>
      *
      * <pre>
      *用户唯一标识符
@@ -10832,7 +13489,7 @@ public final class CpMsgClub {
      */
     java.lang.String getUid();
     /**
-     * <code>optional string uid = 2;</code>
+     * <code>required string uid = 2;</code>
      *
      * <pre>
      *用户唯一标识符
@@ -10842,7 +13499,7 @@ public final class CpMsgClub {
         getUidBytes();
 
     /**
-     * <code>optional bool agree = 3;</code>
+     * <code>required bool agree = 3;</code>
      *
      * <pre>
      *是否同意：true=同意，false=拒绝
@@ -10850,7 +13507,7 @@ public final class CpMsgClub {
      */
     boolean hasAgree();
     /**
-     * <code>optional bool agree = 3;</code>
+     * <code>required bool agree = 3;</code>
      *
      * <pre>
      *是否同意：true=同意，false=拒绝
@@ -10862,7 +13519,7 @@ public final class CpMsgClub {
    * Protobuf type {@code com.huinan.proto.CSRequestClubIsAgree}
    *
    * <pre>
-   *协议八：审核：同意、拒绝
+   *协议十：审核：同意、拒绝
    * </pre>
    */
   public static final class CSRequestClubIsAgree extends
@@ -10973,7 +13630,7 @@ public final class CpMsgClub {
     public static final int CLUB_ID_FIELD_NUMBER = 1;
     private int clubId_;
     /**
-     * <code>optional int32 club_id = 1;</code>
+     * <code>required int32 club_id = 1;</code>
      *
      * <pre>
      *俱乐部id
@@ -10983,7 +13640,7 @@ public final class CpMsgClub {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional int32 club_id = 1;</code>
+     * <code>required int32 club_id = 1;</code>
      *
      * <pre>
      *俱乐部id
@@ -10996,7 +13653,7 @@ public final class CpMsgClub {
     public static final int UID_FIELD_NUMBER = 2;
     private java.lang.Object uid_;
     /**
-     * <code>optional string uid = 2;</code>
+     * <code>required string uid = 2;</code>
      *
      * <pre>
      *用户唯一标识符
@@ -11006,7 +13663,7 @@ public final class CpMsgClub {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional string uid = 2;</code>
+     * <code>required string uid = 2;</code>
      *
      * <pre>
      *用户唯一标识符
@@ -11027,7 +13684,7 @@ public final class CpMsgClub {
       }
     }
     /**
-     * <code>optional string uid = 2;</code>
+     * <code>required string uid = 2;</code>
      *
      * <pre>
      *用户唯一标识符
@@ -11050,7 +13707,7 @@ public final class CpMsgClub {
     public static final int AGREE_FIELD_NUMBER = 3;
     private boolean agree_;
     /**
-     * <code>optional bool agree = 3;</code>
+     * <code>required bool agree = 3;</code>
      *
      * <pre>
      *是否同意：true=同意，false=拒绝
@@ -11060,7 +13717,7 @@ public final class CpMsgClub {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional bool agree = 3;</code>
+     * <code>required bool agree = 3;</code>
      *
      * <pre>
      *是否同意：true=同意，false=拒绝
@@ -11081,6 +13738,18 @@ public final class CpMsgClub {
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
 
+      if (!hasClubId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasUid()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasAgree()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -11200,7 +13869,7 @@ public final class CpMsgClub {
      * Protobuf type {@code com.huinan.proto.CSRequestClubIsAgree}
      *
      * <pre>
-     *协议八：审核：同意、拒绝
+     *协议十：审核：同意、拒绝
      * </pre>
      */
     public static final class Builder extends
@@ -11317,6 +13986,18 @@ public final class CpMsgClub {
       }
 
       public final boolean isInitialized() {
+        if (!hasClubId()) {
+          
+          return false;
+        }
+        if (!hasUid()) {
+          
+          return false;
+        }
+        if (!hasAgree()) {
+          
+          return false;
+        }
         return true;
       }
 
@@ -11341,7 +14022,7 @@ public final class CpMsgClub {
 
       private int clubId_ ;
       /**
-       * <code>optional int32 club_id = 1;</code>
+       * <code>required int32 club_id = 1;</code>
        *
        * <pre>
        *俱乐部id
@@ -11351,7 +14032,7 @@ public final class CpMsgClub {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional int32 club_id = 1;</code>
+       * <code>required int32 club_id = 1;</code>
        *
        * <pre>
        *俱乐部id
@@ -11361,7 +14042,7 @@ public final class CpMsgClub {
         return clubId_;
       }
       /**
-       * <code>optional int32 club_id = 1;</code>
+       * <code>required int32 club_id = 1;</code>
        *
        * <pre>
        *俱乐部id
@@ -11374,7 +14055,7 @@ public final class CpMsgClub {
         return this;
       }
       /**
-       * <code>optional int32 club_id = 1;</code>
+       * <code>required int32 club_id = 1;</code>
        *
        * <pre>
        *俱乐部id
@@ -11389,7 +14070,7 @@ public final class CpMsgClub {
 
       private java.lang.Object uid_ = "";
       /**
-       * <code>optional string uid = 2;</code>
+       * <code>required string uid = 2;</code>
        *
        * <pre>
        *用户唯一标识符
@@ -11399,7 +14080,7 @@ public final class CpMsgClub {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional string uid = 2;</code>
+       * <code>required string uid = 2;</code>
        *
        * <pre>
        *用户唯一标识符
@@ -11420,7 +14101,7 @@ public final class CpMsgClub {
         }
       }
       /**
-       * <code>optional string uid = 2;</code>
+       * <code>required string uid = 2;</code>
        *
        * <pre>
        *用户唯一标识符
@@ -11440,7 +14121,7 @@ public final class CpMsgClub {
         }
       }
       /**
-       * <code>optional string uid = 2;</code>
+       * <code>required string uid = 2;</code>
        *
        * <pre>
        *用户唯一标识符
@@ -11457,7 +14138,7 @@ public final class CpMsgClub {
         return this;
       }
       /**
-       * <code>optional string uid = 2;</code>
+       * <code>required string uid = 2;</code>
        *
        * <pre>
        *用户唯一标识符
@@ -11470,7 +14151,7 @@ public final class CpMsgClub {
         return this;
       }
       /**
-       * <code>optional string uid = 2;</code>
+       * <code>required string uid = 2;</code>
        *
        * <pre>
        *用户唯一标识符
@@ -11489,7 +14170,7 @@ public final class CpMsgClub {
 
       private boolean agree_ ;
       /**
-       * <code>optional bool agree = 3;</code>
+       * <code>required bool agree = 3;</code>
        *
        * <pre>
        *是否同意：true=同意，false=拒绝
@@ -11499,7 +14180,7 @@ public final class CpMsgClub {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional bool agree = 3;</code>
+       * <code>required bool agree = 3;</code>
        *
        * <pre>
        *是否同意：true=同意，false=拒绝
@@ -11509,7 +14190,7 @@ public final class CpMsgClub {
         return agree_;
       }
       /**
-       * <code>optional bool agree = 3;</code>
+       * <code>required bool agree = 3;</code>
        *
        * <pre>
        *是否同意：true=同意，false=拒绝
@@ -11522,7 +14203,7 @@ public final class CpMsgClub {
         return this;
       }
       /**
-       * <code>optional bool agree = 3;</code>
+       * <code>required bool agree = 3;</code>
        *
        * <pre>
        *是否同意：true=同意，false=拒绝
@@ -11984,6 +14665,327 @@ public final class CpMsgClub {
     // @@protoc_insertion_point(class_scope:com.huinan.proto.CSResponseClubIsAgree)
   }
 
+  public interface CSNotifyClubRefreshOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.huinan.proto.CSNotifyClubRefresh)
+      com.google.protobuf.MessageOrBuilder {
+  }
+  /**
+   * Protobuf type {@code com.huinan.proto.CSNotifyClubRefresh}
+   *
+   * <pre>
+   *协议十一：刷新俱乐部列表
+   * </pre>
+   */
+  public static final class CSNotifyClubRefresh extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.huinan.proto.CSNotifyClubRefresh)
+      CSNotifyClubRefreshOrBuilder {
+    // Use CSNotifyClubRefresh.newBuilder() to construct.
+    private CSNotifyClubRefresh(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private CSNotifyClubRefresh(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final CSNotifyClubRefresh defaultInstance;
+    public static CSNotifyClubRefresh getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public CSNotifyClubRefresh getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private CSNotifyClubRefresh(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.huinan.proto.CpMsgClub.internal_static_com_huinan_proto_CSNotifyClubRefresh_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.huinan.proto.CpMsgClub.internal_static_com_huinan_proto_CSNotifyClubRefresh_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.huinan.proto.CpMsgClub.CSNotifyClubRefresh.class, com.huinan.proto.CpMsgClub.CSNotifyClubRefresh.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<CSNotifyClubRefresh> PARSER =
+        new com.google.protobuf.AbstractParser<CSNotifyClubRefresh>() {
+      public CSNotifyClubRefresh parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new CSNotifyClubRefresh(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<CSNotifyClubRefresh> getParserForType() {
+      return PARSER;
+    }
+
+    private void initFields() {
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.huinan.proto.CpMsgClub.CSNotifyClubRefresh parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.huinan.proto.CpMsgClub.CSNotifyClubRefresh parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.huinan.proto.CpMsgClub.CSNotifyClubRefresh parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.huinan.proto.CpMsgClub.CSNotifyClubRefresh parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.huinan.proto.CpMsgClub.CSNotifyClubRefresh parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.huinan.proto.CpMsgClub.CSNotifyClubRefresh parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.huinan.proto.CpMsgClub.CSNotifyClubRefresh parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.huinan.proto.CpMsgClub.CSNotifyClubRefresh parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.huinan.proto.CpMsgClub.CSNotifyClubRefresh parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.huinan.proto.CpMsgClub.CSNotifyClubRefresh parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.huinan.proto.CpMsgClub.CSNotifyClubRefresh prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.huinan.proto.CSNotifyClubRefresh}
+     *
+     * <pre>
+     *协议十一：刷新俱乐部列表
+     * </pre>
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.huinan.proto.CSNotifyClubRefresh)
+        com.huinan.proto.CpMsgClub.CSNotifyClubRefreshOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.huinan.proto.CpMsgClub.internal_static_com_huinan_proto_CSNotifyClubRefresh_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.huinan.proto.CpMsgClub.internal_static_com_huinan_proto_CSNotifyClubRefresh_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.huinan.proto.CpMsgClub.CSNotifyClubRefresh.class, com.huinan.proto.CpMsgClub.CSNotifyClubRefresh.Builder.class);
+      }
+
+      // Construct using com.huinan.proto.CpMsgClub.CSNotifyClubRefresh.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.huinan.proto.CpMsgClub.internal_static_com_huinan_proto_CSNotifyClubRefresh_descriptor;
+      }
+
+      public com.huinan.proto.CpMsgClub.CSNotifyClubRefresh getDefaultInstanceForType() {
+        return com.huinan.proto.CpMsgClub.CSNotifyClubRefresh.getDefaultInstance();
+      }
+
+      public com.huinan.proto.CpMsgClub.CSNotifyClubRefresh build() {
+        com.huinan.proto.CpMsgClub.CSNotifyClubRefresh result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.huinan.proto.CpMsgClub.CSNotifyClubRefresh buildPartial() {
+        com.huinan.proto.CpMsgClub.CSNotifyClubRefresh result = new com.huinan.proto.CpMsgClub.CSNotifyClubRefresh(this);
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.huinan.proto.CpMsgClub.CSNotifyClubRefresh) {
+          return mergeFrom((com.huinan.proto.CpMsgClub.CSNotifyClubRefresh)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.huinan.proto.CpMsgClub.CSNotifyClubRefresh other) {
+        if (other == com.huinan.proto.CpMsgClub.CSNotifyClubRefresh.getDefaultInstance()) return this;
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.huinan.proto.CpMsgClub.CSNotifyClubRefresh parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.huinan.proto.CpMsgClub.CSNotifyClubRefresh) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.huinan.proto.CSNotifyClubRefresh)
+    }
+
+    static {
+      defaultInstance = new CSNotifyClubRefresh(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.huinan.proto.CSNotifyClubRefresh)
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_huinan_proto_ClubRoomProto_descriptor;
   private static
@@ -11999,6 +15001,26 @@ public final class CpMsgClub {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_huinan_proto_ClubProto_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_huinan_proto_CSRequestClubCreate_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_huinan_proto_CSRequestClubCreate_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_huinan_proto_CSResponseClubCreate_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_huinan_proto_CSResponseClubCreate_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_huinan_proto_CSRequestClubApply_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_huinan_proto_CSRequestClubApply_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_huinan_proto_CSResponseClubApply_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_huinan_proto_CSResponseClubApply_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_huinan_proto_CSRequestClubInfo_descriptor;
   private static
@@ -12074,6 +15096,11 @@ public final class CpMsgClub {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_huinan_proto_CSResponseClubIsAgree_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_huinan_proto_CSNotifyClubRefresh_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_huinan_proto_CSNotifyClubRefresh_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -12084,43 +15111,54 @@ public final class CpMsgClub {
   static {
     java.lang.String[] descriptorData = {
       "\n\021cp_msg_club.proto\022\020com.huinan.proto\032\017c" +
-      "p_msg_cs.proto\"\217\001\n\rClubRoomProto\022:\n\ntabl" +
+      "p_msg_cs.proto\"\307\001\n\rClubRoomProto\022:\n\ntabl" +
       "e_info\030\001 \001(\0132&.com.huinan.proto.CSReques" +
       "tCreateTable\022-\n\tuser_info\030\002 \003(\0132\032.com.hu" +
       "inan.proto.UserInfo\022\023\n\013table_state\030\003 \001(\005" +
-      "\"c\n\017ClubMemberProto\022-\n\tuser_info\030\001 \001(\0132\032" +
-      ".com.huinan.proto.UserInfo\022\016\n\006online\030\002 \001" +
-      "(\010\022\021\n\tis_master\030\003 \001(\010\"J\n\tClubProto\022\n\n\002id" +
-      "\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\021\n\tgame_type\030\003 \001(\005\022" +
-      "\020\n\010room_num\030\004 \001(\005\"\023\n\021CSRequestClubInfo\"q",
-      "\n\022CSResponseClubInfo\0220\n\006result\030\001 \001(\0162 .c" +
-      "om.huinan.proto.ENMessageError\022)\n\004club\030\002" +
-      " \003(\0132\033.com.huinan.proto.ClubProto\"$\n\021CSR" +
-      "equestClubRoom\022\017\n\007club_id\030\001 \001(\005\"\216\001\n\022CSRe" +
-      "sponseClubRoom\0220\n\006result\030\001 \001(\0162 .com.hui" +
-      "nan.proto.ENMessageError\0222\n\tclub_room\030\002 " +
-      "\003(\0132\037.com.huinan.proto.ClubRoomProto\022\022\n\n" +
-      "have_apply\030\003 \001(\010\"&\n\023CSRequestClubMember\022" +
-      "\017\n\007club_id\030\001 \001(\005\"\200\001\n\024CSResponseClubMembe" +
-      "r\0220\n\006result\030\001 \001(\0162 .com.huinan.proto.ENM",
-      "essageError\0226\n\013club_member\030\002 \003(\0132!.com.h" +
-      "uinan.proto.ClubMemberProto\"\'\n\024CSRequest" +
-      "ClubMessage\022\017\n\007club_id\030\001 \001(\005\"y\n\025CSRespon" +
-      "seClubMessage\0220\n\006result\030\001 \001(\0162 .com.huin" +
-      "an.proto.ENMessageError\022.\n\napply_user\030\002 " +
-      "\003(\0132\032.com.huinan.proto.UserInfo\"2\n\021CSNot" +
-      "ifyClubApply\022\017\n\007club_id\030\001 \001(\005\022\014\n\004have\030\002 " +
-      "\001(\010\";\n\027CSRequestClubRemoveRoom\022\017\n\007club_i" +
-      "d\030\001 \001(\005\022\017\n\007room_id\030\002 \001(\005\"L\n\030CSResponseCl" +
-      "ubRemoveRoom\0220\n\006result\030\001 \001(\0162 .com.huina",
-      "n.proto.ENMessageError\"1\n\021CSRequestClubK" +
-      "ick\022\017\n\007club_id\030\001 \001(\005\022\013\n\003uid\030\002 \001(\t\"F\n\022CSR" +
-      "esponseClubKick\0220\n\006result\030\001 \001(\0162 .com.hu" +
-      "inan.proto.ENMessageError\"C\n\024CSRequestCl" +
-      "ubIsAgree\022\017\n\007club_id\030\001 \001(\005\022\013\n\003uid\030\002 \001(\t\022" +
-      "\r\n\005agree\030\003 \001(\010\"I\n\025CSResponseClubIsAgree\022" +
-      "0\n\006result\030\001 \001(\0162 .com.huinan.proto.ENMes" +
-      "sageError"
+      "\0226\n\nbig_reslut\030\004 \001(\0132\".com.huinan.proto." +
+      "CSNotifyGameOver\"c\n\017ClubMemberProto\022-\n\tu" +
+      "ser_info\030\001 \001(\0132\032.com.huinan.proto.UserIn" +
+      "fo\022\016\n\006online\030\002 \001(\010\022\021\n\tis_master\030\003 \001(\010\"l\n" +
+      "\tClubProto\022\n\n\002id\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\0223\n\t",
+      "game_type\030\003 \001(\0162 .com.huinan.proto.ENClu" +
+      "bGameType\022\020\n\010room_num\030\004 \001(\005\"X\n\023CSRequest" +
+      "ClubCreate\022\014\n\004name\030\001 \002(\t\0223\n\tgame_type\030\002 " +
+      "\001(\0162 .com.huinan.proto.ENClubGameType\"s\n" +
+      "\024CSResponseClubCreate\0220\n\006result\030\001 \001(\0162 ." +
+      "com.huinan.proto.ENMessageError\022)\n\004club\030" +
+      "\002 \001(\0132\033.com.huinan.proto.ClubProto\"%\n\022CS" +
+      "RequestClubApply\022\017\n\007club_id\030\001 \002(\005\"G\n\023CSR" +
+      "esponseClubApply\0220\n\006result\030\001 \001(\0162 .com.h" +
+      "uinan.proto.ENMessageError\"\023\n\021CSRequestC",
+      "lubInfo\"q\n\022CSResponseClubInfo\0220\n\006result\030" +
+      "\001 \001(\0162 .com.huinan.proto.ENMessageError\022" +
+      ")\n\004club\030\002 \003(\0132\033.com.huinan.proto.ClubPro" +
+      "to\"$\n\021CSRequestClubRoom\022\017\n\007club_id\030\001 \002(\005" +
+      "\"\216\001\n\022CSResponseClubRoom\0220\n\006result\030\001 \001(\0162" +
+      " .com.huinan.proto.ENMessageError\0222\n\tclu" +
+      "b_room\030\002 \003(\0132\037.com.huinan.proto.ClubRoom" +
+      "Proto\022\022\n\nhave_apply\030\003 \001(\010\"&\n\023CSRequestCl" +
+      "ubMember\022\017\n\007club_id\030\001 \002(\005\"\200\001\n\024CSResponse" +
+      "ClubMember\0220\n\006result\030\001 \001(\0162 .com.huinan.",
+      "proto.ENMessageError\0226\n\013club_member\030\002 \003(" +
+      "\0132!.com.huinan.proto.ClubMemberProto\"\'\n\024" +
+      "CSRequestClubMessage\022\017\n\007club_id\030\001 \002(\005\"y\n" +
+      "\025CSResponseClubMessage\0220\n\006result\030\001 \001(\0162 " +
+      ".com.huinan.proto.ENMessageError\022.\n\nappl" +
+      "y_user\030\002 \003(\0132\032.com.huinan.proto.UserInfo" +
+      "\"2\n\021CSNotifyClubApply\022\017\n\007club_id\030\001 \002(\005\022\014" +
+      "\n\004have\030\002 \002(\010\";\n\027CSRequestClubRemoveRoom\022" +
+      "\017\n\007club_id\030\001 \002(\005\022\017\n\007room_id\030\002 \002(\005\"L\n\030CSR" +
+      "esponseClubRemoveRoom\0220\n\006result\030\001 \001(\0162 .",
+      "com.huinan.proto.ENMessageError\"1\n\021CSReq" +
+      "uestClubKick\022\017\n\007club_id\030\001 \002(\005\022\013\n\003uid\030\002 \002" +
+      "(\t\"F\n\022CSResponseClubKick\0220\n\006result\030\001 \001(\016" +
+      "2 .com.huinan.proto.ENMessageError\"C\n\024CS" +
+      "RequestClubIsAgree\022\017\n\007club_id\030\001 \002(\005\022\013\n\003u" +
+      "id\030\002 \002(\t\022\r\n\005agree\030\003 \002(\010\"I\n\025CSResponseClu" +
+      "bIsAgree\0220\n\006result\030\001 \001(\0162 .com.huinan.pr" +
+      "oto.ENMessageError\"\025\n\023CSNotifyClubRefres" +
+      "h* \n\016ENClubGameType\022\006\n\002CP\020\001\022\006\n\002MJ\020\002"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -12140,7 +15178,7 @@ public final class CpMsgClub {
     internal_static_com_huinan_proto_ClubRoomProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_huinan_proto_ClubRoomProto_descriptor,
-        new java.lang.String[] { "TableInfo", "UserInfo", "TableState", });
+        new java.lang.String[] { "TableInfo", "UserInfo", "TableState", "BigReslut", });
     internal_static_com_huinan_proto_ClubMemberProto_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_com_huinan_proto_ClubMemberProto_fieldAccessorTable = new
@@ -12153,96 +15191,126 @@ public final class CpMsgClub {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_huinan_proto_ClubProto_descriptor,
         new java.lang.String[] { "Id", "Name", "GameType", "RoomNum", });
-    internal_static_com_huinan_proto_CSRequestClubInfo_descriptor =
+    internal_static_com_huinan_proto_CSRequestClubCreate_descriptor =
       getDescriptor().getMessageTypes().get(3);
+    internal_static_com_huinan_proto_CSRequestClubCreate_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_huinan_proto_CSRequestClubCreate_descriptor,
+        new java.lang.String[] { "Name", "GameType", });
+    internal_static_com_huinan_proto_CSResponseClubCreate_descriptor =
+      getDescriptor().getMessageTypes().get(4);
+    internal_static_com_huinan_proto_CSResponseClubCreate_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_huinan_proto_CSResponseClubCreate_descriptor,
+        new java.lang.String[] { "Result", "Club", });
+    internal_static_com_huinan_proto_CSRequestClubApply_descriptor =
+      getDescriptor().getMessageTypes().get(5);
+    internal_static_com_huinan_proto_CSRequestClubApply_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_huinan_proto_CSRequestClubApply_descriptor,
+        new java.lang.String[] { "ClubId", });
+    internal_static_com_huinan_proto_CSResponseClubApply_descriptor =
+      getDescriptor().getMessageTypes().get(6);
+    internal_static_com_huinan_proto_CSResponseClubApply_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_huinan_proto_CSResponseClubApply_descriptor,
+        new java.lang.String[] { "Result", });
+    internal_static_com_huinan_proto_CSRequestClubInfo_descriptor =
+      getDescriptor().getMessageTypes().get(7);
     internal_static_com_huinan_proto_CSRequestClubInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_huinan_proto_CSRequestClubInfo_descriptor,
         new java.lang.String[] { });
     internal_static_com_huinan_proto_CSResponseClubInfo_descriptor =
-      getDescriptor().getMessageTypes().get(4);
+      getDescriptor().getMessageTypes().get(8);
     internal_static_com_huinan_proto_CSResponseClubInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_huinan_proto_CSResponseClubInfo_descriptor,
         new java.lang.String[] { "Result", "Club", });
     internal_static_com_huinan_proto_CSRequestClubRoom_descriptor =
-      getDescriptor().getMessageTypes().get(5);
+      getDescriptor().getMessageTypes().get(9);
     internal_static_com_huinan_proto_CSRequestClubRoom_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_huinan_proto_CSRequestClubRoom_descriptor,
         new java.lang.String[] { "ClubId", });
     internal_static_com_huinan_proto_CSResponseClubRoom_descriptor =
-      getDescriptor().getMessageTypes().get(6);
+      getDescriptor().getMessageTypes().get(10);
     internal_static_com_huinan_proto_CSResponseClubRoom_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_huinan_proto_CSResponseClubRoom_descriptor,
         new java.lang.String[] { "Result", "ClubRoom", "HaveApply", });
     internal_static_com_huinan_proto_CSRequestClubMember_descriptor =
-      getDescriptor().getMessageTypes().get(7);
+      getDescriptor().getMessageTypes().get(11);
     internal_static_com_huinan_proto_CSRequestClubMember_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_huinan_proto_CSRequestClubMember_descriptor,
         new java.lang.String[] { "ClubId", });
     internal_static_com_huinan_proto_CSResponseClubMember_descriptor =
-      getDescriptor().getMessageTypes().get(8);
+      getDescriptor().getMessageTypes().get(12);
     internal_static_com_huinan_proto_CSResponseClubMember_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_huinan_proto_CSResponseClubMember_descriptor,
         new java.lang.String[] { "Result", "ClubMember", });
     internal_static_com_huinan_proto_CSRequestClubMessage_descriptor =
-      getDescriptor().getMessageTypes().get(9);
+      getDescriptor().getMessageTypes().get(13);
     internal_static_com_huinan_proto_CSRequestClubMessage_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_huinan_proto_CSRequestClubMessage_descriptor,
         new java.lang.String[] { "ClubId", });
     internal_static_com_huinan_proto_CSResponseClubMessage_descriptor =
-      getDescriptor().getMessageTypes().get(10);
+      getDescriptor().getMessageTypes().get(14);
     internal_static_com_huinan_proto_CSResponseClubMessage_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_huinan_proto_CSResponseClubMessage_descriptor,
         new java.lang.String[] { "Result", "ApplyUser", });
     internal_static_com_huinan_proto_CSNotifyClubApply_descriptor =
-      getDescriptor().getMessageTypes().get(11);
+      getDescriptor().getMessageTypes().get(15);
     internal_static_com_huinan_proto_CSNotifyClubApply_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_huinan_proto_CSNotifyClubApply_descriptor,
         new java.lang.String[] { "ClubId", "Have", });
     internal_static_com_huinan_proto_CSRequestClubRemoveRoom_descriptor =
-      getDescriptor().getMessageTypes().get(12);
+      getDescriptor().getMessageTypes().get(16);
     internal_static_com_huinan_proto_CSRequestClubRemoveRoom_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_huinan_proto_CSRequestClubRemoveRoom_descriptor,
         new java.lang.String[] { "ClubId", "RoomId", });
     internal_static_com_huinan_proto_CSResponseClubRemoveRoom_descriptor =
-      getDescriptor().getMessageTypes().get(13);
+      getDescriptor().getMessageTypes().get(17);
     internal_static_com_huinan_proto_CSResponseClubRemoveRoom_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_huinan_proto_CSResponseClubRemoveRoom_descriptor,
         new java.lang.String[] { "Result", });
     internal_static_com_huinan_proto_CSRequestClubKick_descriptor =
-      getDescriptor().getMessageTypes().get(14);
+      getDescriptor().getMessageTypes().get(18);
     internal_static_com_huinan_proto_CSRequestClubKick_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_huinan_proto_CSRequestClubKick_descriptor,
         new java.lang.String[] { "ClubId", "Uid", });
     internal_static_com_huinan_proto_CSResponseClubKick_descriptor =
-      getDescriptor().getMessageTypes().get(15);
+      getDescriptor().getMessageTypes().get(19);
     internal_static_com_huinan_proto_CSResponseClubKick_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_huinan_proto_CSResponseClubKick_descriptor,
         new java.lang.String[] { "Result", });
     internal_static_com_huinan_proto_CSRequestClubIsAgree_descriptor =
-      getDescriptor().getMessageTypes().get(16);
+      getDescriptor().getMessageTypes().get(20);
     internal_static_com_huinan_proto_CSRequestClubIsAgree_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_huinan_proto_CSRequestClubIsAgree_descriptor,
         new java.lang.String[] { "ClubId", "Uid", "Agree", });
     internal_static_com_huinan_proto_CSResponseClubIsAgree_descriptor =
-      getDescriptor().getMessageTypes().get(17);
+      getDescriptor().getMessageTypes().get(21);
     internal_static_com_huinan_proto_CSResponseClubIsAgree_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_huinan_proto_CSResponseClubIsAgree_descriptor,
         new java.lang.String[] { "Result", });
+    internal_static_com_huinan_proto_CSNotifyClubRefresh_descriptor =
+      getDescriptor().getMessageTypes().get(22);
+    internal_static_com_huinan_proto_CSNotifyClubRefresh_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_huinan_proto_CSNotifyClubRefresh_descriptor,
+        new java.lang.String[] { });
     com.huinan.proto.CpMsgCs.getDescriptor();
   }
 

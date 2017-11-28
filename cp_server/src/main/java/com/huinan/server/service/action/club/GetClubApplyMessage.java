@@ -32,9 +32,11 @@ public class GetClubApplyMessage extends AbsAction {
 			response.setResult(ENMessageError.valueOf(error));
 		} else {
 			response.setResult(ENMessageError.RESPONSE_SUCCESS);
-			for (String _uid : club.getMembers()) {
-				User user = UserManager.getInstance().getUser(_uid);
-				response.addApplyUser(ProtoBuilder.buildUserInfo(user));
+			if (club.getCreatorId().equals(uid)) {
+				for (String _uid : club.getApplys()) {
+					User user = UserManager.getInstance().getUser(_uid);
+					response.addApplyUser(ProtoBuilder.buildUserInfo(user));
+				}
 			}
 		}
 		msg.setCsResponseClubMessage(response);

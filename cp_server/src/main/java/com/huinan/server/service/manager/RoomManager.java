@@ -1656,14 +1656,14 @@ public class RoomManager {
 				addFightRecord(false, room);
 			}
 			addFightRecord(bigTotal, room);
-			
+
 			if (room.getClubId() != 0) {
 				ClubRoom clubRoom = ClubDAO.getInstance().getClubRoom(
 						room.getClubId(), room.getTid());
 				clubRoom.setStatus(2);
 				ClubDAO.getInstance().updateClubRoom(clubRoom);
 			}
-			
+
 			UserManager.getInstance().updateRankData(room, dissolve);
 		} else {
 			addFightRecord(bigTotal, room);
@@ -1718,6 +1718,12 @@ public class RoomManager {
 	}
 
 	public static void removeRoom(Room room) {
+		if (room.getClubId() != 0) {
+			ClubRoom clubRoom = ClubDAO.getInstance().getClubRoom(
+					room.getClubId(), room.getTid());
+			ClubDAO.getInstance().deleteClubRoom(clubRoom);
+		}
+		
 		for (User user : room.getUsers().values()) {
 			user.clear();
 		}

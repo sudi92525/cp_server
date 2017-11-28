@@ -106,19 +106,26 @@ message CpMsgData
 		CSRequestClubMessage cs_request_club_message = 50;			//获取俱乐部:申请消息
 		CSResponseClubMessage cs_response_club_message  = 51;		//响应俱乐部:申请消息
 		
-		CSNotifyClubApply cs_notify_club_apply = 52;				//推送：俱乐部申请消息
-		
 		CSRequestClubRemoveRoom cs_request_club_re_room = 53;		//移除俱乐部房间
 		CSResponseClubRemoveRoom cs_response_club_re_room  = 54;	//响应移除俱乐部房间
 		
-		CSRequestClubKick cs_request_club_kick = 55;				//请求俱乐部:踢人
-		CSResponseClubKick cs_response_club_kick  = 56;				//响应俱乐部:踢人
+		CSRequestClubKick cs_request_club_kick = 55;				//请求：俱乐部踢人
+		CSResponseClubKick cs_response_club_kick  = 56;				//响应：俱乐部踢人
 		
-		CSRequestClubIsAgree cs_request_club_is_agree = 57;			//请求俱乐部:审批
-		CSResponseClubIsAgree cs_response_club_is_agree  = 58;		//响应俱乐部:审批
+		CSRequestClubIsAgree cs_request_club_is_agree = 57;			//请求：俱乐部审批
+		CSResponseClubIsAgree cs_response_club_is_agree  = 58;		//响应：俱乐部审批
+		
+		//后台接口移过来
+		CSRequestClubCreate cs_request_club_create = 59;			//请求：创建俱乐部
+		CSResponseClubCreate cs_response_club_create = 60;			//响应：创建俱乐部
+		
+		CSRequestClubApply cs_request_club_apply = 61;				//请求：申请俱乐部
+		CSResponseClubApply cs_response_club_apply = 62;			//响应：申请俱乐部
+		CSNotifyClubApply cs_notify_club_apply = 63;				//推送：俱乐部申请消息
+		
+		CSNotifyClubRefresh cs_notify_club_refresh = 64;			//推送：俱乐部刷新俱乐部列表
 		
 		
-		
-		CSNotifyLogout cs_notify_logout = 59;					//登录推送
+		CSNotifyLogout cs_notify_logout = 100;					//登录推送
 	}
 }

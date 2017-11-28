@@ -1,10 +1,12 @@
 package com.huinan.server.db;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -19,6 +21,7 @@ import com.huinan.server.server.db.DBManager;
 import com.huinan.server.service.data.Room;
 import com.huinan.server.service.data.club.Club;
 import com.huinan.server.service.data.club.ClubRoom;
+import com.huinan.server.service.manager.ClubManager;
 import com.huinan.server.service.manager.RoomManager;
 
 public class ClubDAO {
@@ -52,8 +55,10 @@ public class ClubDAO {
 		Club club = clubs.get(Integer.valueOf(cid));
 		if (club == null) {
 			club = loadClubFromDB(cid);
-			loadRoomFromDB(cid);
-			loadMemberFromDB(cid);
+			if (club != null) {
+				loadRoomFromDB(cid);
+				loadMemberFromDB(cid);
+			}
 		}
 		return club;
 	}
@@ -65,6 +70,13 @@ public class ClubDAO {
 				clubs.add(club);
 			}
 		}
+
+		Collections.sort(clubs, (Club c1, Club c2) -> {
+			int lv1 = (int) c1.getCreateTime();
+			int lv2 = (int) c2.getCreateTime();
+			return lv2 - lv1;
+		});
+
 		return clubs;
 	}
 
@@ -73,9 +85,106 @@ public class ClubDAO {
 		return club.getRooms().get(Integer.valueOf(roomId));
 	}
 
-	// --------------------DB-------------------------
+	public int getClubNumber() {
+		int codeNumber = 0;
+		while (true) {
+			codeNumber = (int) ((Math.random() * 9 + 1) * 10000);
+			if (getClubs().get(codeNumber) == null) {
+				break;
+			}
+		}
+		return codeNumber;
+	}
 
-	public void updateClubUser(int clubId, int uid) {
+	// --------------------DB-------------------------
+	public Club createClub(String uid, String name, int type) {
+		Connection conn = null;
+		PreparedStatement sta = null;
+		ResultSet rs = null;
+		Club club = null;
+		try {
+			conn = DBManager.getInstance().getConnection();
+
+			sta = conn.prepareStatement(INSERT_CLUB_SQL);
+			// Cid,Pid,ClubName,CreateDate,ClubType,ClubState
+			int cid = getClubNumber();
+			sta.setInt(1, cid);
+			sta.setInt(2, Integer.valueOf(uid));
+			sta.setString(3, name);
+			sta.setDate(4, new Date(System.currentTimeMillis()));
+			sta.setInt(5, type);
+			sta.setInt(6, 1);// TODO 审核状态
+			sta.setString(7, "test");
+			int row = sta.executeUpdate();
+			if (row > 0) {
+				club = new Club(cid, uid, name, type);
+				club.setCreateTime(System.currentTimeMillis());
+				clubs.put(club.getId(), club);
+			}
+		} catch (SQLException e) {
+			LOGGER.error("createClub error:", e);
+		} finally {
+			DBManager.getInstance().closeConnection(conn);
+			DBManager.getInstance().closeStatement(sta);
+			DBManager.getInstance().closeResultSet(rs);
+		}
+		return club;
+	}
+
+	public void insertClubRoom(ClubRoom clubRoom) {
+		// EXECUTOR.execute(() -> {
+		Connection conn = null;
+		PreparedStatement sta = null;
+		try {
+			conn = DBManager.getInstance().getConnection();
+
+			sta = conn.prepareStatement(INSERT_CLUB_ROOM_SQL);
+			sta.setInt(1, clubRoom.getClubId());
+			sta.setInt(2, clubRoom.getRoomId());
+			sta.setInt(3, clubRoom.getStatus());
+			sta.executeUpdate();
+		} catch (SQLException e) {
+			LOGGER.error("insertClubRoom error:", e);
+		} finally {
+			DBManager.getInstance().closeConnection(conn);
+			DBManager.getInstance().closeStatement(sta);
+		}
+		// });
+	}
+
+	/**
+	 * 
+	 * @param cid
+	 * @param uid
+	 * @param state
+	 *            0=申请，1=成员
+	 */
+	public void insertClubUser(int cid, String uid, String creatorUid, int state) {
+		// EXECUTOR.execute(() -> {
+		Connection conn = null;
+		PreparedStatement sta = null;
+		try {
+			conn = DBManager.getInstance().getConnection();
+
+			sta = conn.prepareStatement(INSERT_CLUB_USER_SQL);
+			sta.setInt(1, cid);
+			sta.setInt(2, Integer.valueOf(uid));
+			sta.setInt(3, state);
+			sta.setDate(4, new Date(System.currentTimeMillis()));
+			int row = sta.executeUpdate();
+			if (row > 0 && state == 0) {
+				ClubManager.notifyClubApply(creatorUid, cid);
+			}
+		} catch (SQLException e) {
+			LOGGER.error("insertClubUser error:", e);
+		} finally {
+			DBManager.getInstance().closeConnection(conn);
+			DBManager.getInstance().closeStatement(sta);
+		}
+		// });
+	}
+
+	public void updateClubUser(Club club, int uid) {
 		EXECUTOR.execute(() -> {
 			Connection conn = null;
 			PreparedStatement sta = null;
@@ -83,12 +192,60 @@ public class ClubDAO {
 				conn = DBManager.getInstance().getConnection();
 
 				sta = conn.prepareStatement(UPDATE_CLUB_USER_SQL);
-				sta.setInt(1, clubId);
-				sta.setInt(2, uid);
-				sta.setInt(3, 1);
-				sta.executeUpdate();
+				sta.setInt(1, 1);
+				sta.setInt(2, club.getId());
+				sta.setInt(3, uid);
+				int row = sta.executeUpdate();
+				if (row > 0) {
+					ClubManager.notifyClubRefresh(String.valueOf(uid), club);
+				}
 			} catch (SQLException e) {
 				LOGGER.error("updateClubUser error:", e);
+			} finally {
+				DBManager.getInstance().closeConnection(conn);
+				DBManager.getInstance().closeStatement(sta);
+			}
+		});
+	}
+
+	public void updateClubRoom(ClubRoom clubRoom) {
+		EXECUTOR.execute(() -> {
+			Connection conn = null;
+			PreparedStatement sta = null;
+			try {
+				conn = DBManager.getInstance().getConnection();
+
+				sta = conn.prepareStatement(UPDATE_CLUB_ROOM_SQL);
+				sta.setInt(1, clubRoom.getStatus());
+				sta.setInt(2, clubRoom.getClubId());
+				sta.setInt(3, clubRoom.getRoomId());
+				sta.executeUpdate();
+			} catch (SQLException e) {
+				LOGGER.error("updateClubRoom error:", e);
+			} finally {
+				DBManager.getInstance().closeConnection(conn);
+				DBManager.getInstance().closeStatement(sta);
+			}
+		});
+	}
+
+	public void deleteClubRoom(ClubRoom clubRoom) {
+		EXECUTOR.execute(() -> {
+			Connection conn = null;
+			PreparedStatement sta = null;
+			try {
+				conn = DBManager.getInstance().getConnection();
+
+				sta = conn.prepareStatement(DELETE_CLUB_ROOM_SQL);
+				sta.setInt(1, clubRoom.getClubId());
+				sta.setInt(2, clubRoom.getRoomId());
+				int row = sta.executeUpdate();
+				if (row > 0) {
+					getClub(clubRoom.getClubId()).getRooms().remove(
+							Integer.valueOf(clubRoom.getRoomId()));
+				}
+			} catch (SQLException e) {
+				LOGGER.error("deleteClubRoom error:", e);
 			} finally {
 				DBManager.getInstance().closeConnection(conn);
 				DBManager.getInstance().closeStatement(sta);
@@ -109,69 +266,6 @@ public class ClubDAO {
 				sta.executeUpdate();
 			} catch (SQLException e) {
 				LOGGER.error("deleteClubUser error:", e);
-			} finally {
-				DBManager.getInstance().closeConnection(conn);
-				DBManager.getInstance().closeStatement(sta);
-			}
-		});
-	}
-
-	public void updateClubRoom(ClubRoom clubRoom) {
-		EXECUTOR.execute(() -> {
-			Connection conn = null;
-			PreparedStatement sta = null;
-			try {
-				conn = DBManager.getInstance().getConnection();
-
-				sta = conn.prepareStatement(UPDATE_CLUB_ROOM_SQL);
-				sta.setInt(1, clubRoom.getClubId());
-				sta.setInt(2, clubRoom.getRoomId());
-				sta.setInt(3, clubRoom.getStatus());
-				sta.executeUpdate();
-			} catch (SQLException e) {
-				LOGGER.error("updateClubRoom error:", e);
-			} finally {
-				DBManager.getInstance().closeConnection(conn);
-				DBManager.getInstance().closeStatement(sta);
-			}
-		});
-	}
-
-	public void insertClubRoom(ClubRoom clubRoom) {
-		EXECUTOR.execute(() -> {
-			Connection conn = null;
-			PreparedStatement sta = null;
-			try {
-				conn = DBManager.getInstance().getConnection();
-
-				sta = conn.prepareStatement(INSERT_CLUB_ROOM_SQL);
-				sta.setInt(1, clubRoom.getClubId());
-				sta.setInt(2, clubRoom.getRoomId());
-				sta.setInt(3, clubRoom.getStatus());
-				sta.executeUpdate();
-			} catch (SQLException e) {
-				LOGGER.error("insertClubRoom error:", e);
-			} finally {
-				DBManager.getInstance().closeConnection(conn);
-				DBManager.getInstance().closeStatement(sta);
-			}
-		});
-
-	}
-
-	public void deleteClubRoom(int clubId, int roomId) {
-		EXECUTOR.execute(() -> {
-			Connection conn = null;
-			PreparedStatement sta = null;
-			try {
-				conn = DBManager.getInstance().getConnection();
-
-				sta = conn.prepareStatement(DELETE_CLUB_ROOM_SQL);
-				sta.setInt(1, clubId);
-				sta.setInt(2, roomId);
-				sta.executeUpdate();
-			} catch (SQLException e) {
-				LOGGER.error("deleteClubRoom error:", e);
 			} finally {
 				DBManager.getInstance().closeConnection(conn);
 				DBManager.getInstance().closeStatement(sta);
@@ -223,9 +317,9 @@ public class ClubDAO {
 				int state = rs.getInt("State");
 				int uid = rs.getInt("Pid");
 				if (state == 0) {
-					club.getApplys().add(String.valueOf(uid));
+					ClubManager.addApplyer(club, String.valueOf(uid));
 				} else if (state == 1) {
-					club.getMembers().add(String.valueOf(uid));
+					ClubManager.addMemeber(club, String.valueOf(uid));
 				}
 			}
 		} catch (SQLException e) {
@@ -237,10 +331,11 @@ public class ClubDAO {
 		}
 	}
 
-	public void loadAllClubFromDB() {
+	public Map<Integer, Club> loadAllClubFromDB() {
 		Connection conn = null;
 		PreparedStatement sta = null;
 		ResultSet rs = null;
+		Map<Integer, Club> clubs = new ConcurrentHashMap<>();
 		Club club = null;
 		try {
 			conn = DBManager.getInstance().getConnection();
@@ -249,7 +344,9 @@ public class ClubDAO {
 			rs = sta.executeQuery();
 			while (rs.next()) {
 				club = new Club(rs.getInt("Cid"), String.valueOf(rs
-						.getInt("Pid")), rs.getString("ClubName"));
+						.getInt("Pid")), rs.getString("ClubName"),
+						rs.getInt("ClubType"));
+				club.setCreateTime(rs.getDate("CreateDate").getTime());
 				clubs.put(club.getId(), club);
 			}
 		} catch (SQLException e) {
@@ -259,6 +356,7 @@ public class ClubDAO {
 			DBManager.getInstance().closeStatement(sta);
 			DBManager.getInstance().closeResultSet(rs);
 		}
+		return clubs;
 	}
 
 	private void loadRoomFromDB(int clubId) {
@@ -305,9 +403,9 @@ public class ClubDAO {
 				int state = rs.getInt("State");
 				int uid = rs.getInt("Pid");
 				if (state == 0) {
-					club.getApplys().add(String.valueOf(uid));
+					ClubManager.addApplyer(club, String.valueOf(uid));
 				} else if (state == 1) {
-					club.getMembers().add(String.valueOf(uid));
+					ClubManager.addMemeber(club, String.valueOf(uid));
 				}
 			}
 		} catch (SQLException e) {
@@ -332,7 +430,9 @@ public class ClubDAO {
 			rs = sta.executeQuery();
 			if (rs.next()) {
 				club = new Club(rs.getInt("Cid"), String.valueOf(rs
-						.getInt("Pid")), rs.getString("ClubName"));
+						.getInt("Pid")), rs.getString("ClubName"),
+						rs.getInt("ClubType"));
+				club.setCreateTime(rs.getDate("CreateDate").getTime());
 				clubs.put(club.getId(), club);
 			}
 		} catch (SQLException e) {
@@ -345,13 +445,15 @@ public class ClubDAO {
 		return club;
 	}
 
+	private static final String INSERT_CLUB_SQL = "INSERT  INTO `sys_club_info`(Cid,Pid,ClubName,CreateDate,ClubType,ClubState,ProxyId) VALUES(?,?,?,?,?,?,?)";
+	private static final String INSERT_CLUB_USER_SQL = "INSERT  INTO `sys_club_user`(Cid,Pid,State,ApplyDate) VALUES(?,?,?,?)";
 	private static final String INSERT_CLUB_ROOM_SQL = "INSERT  INTO `sys_club_room_record`(Cid,RoomId,Status) VALUES(?,?,?)";
 
-	private static final String UPDATE_CLUB_ROOM_SQL = "UPDATE  `sys_club_room_record` SET `Cid`=?,`RoomId`=?,`Status`=?";
-	private static final String UPDATE_CLUB_USER_SQL = "UPDATE  `sys_club_info` SET `Cid`=?,`Pid`=?,`State`=?";
+	private static final String UPDATE_CLUB_ROOM_SQL = "UPDATE  `sys_club_room_record` SET `Status`=? WHERE `Cid`=? AND `RoomId`=?";
+	private static final String UPDATE_CLUB_USER_SQL = "UPDATE  `sys_club_user` SET `State`=? WHERE `Cid`=? AND `Pid`=?";
 
-	private static final String DELETE_CLUB_ROOM_SQL = "DELETE  FROM `sys_club_room_record` WHERE `Cid`=?,`RoomId`=?";
-	private static final String DELETE_CLUB_USER_SQL = "DELETE  FROM `sys_club_info` WHERE `Cid`=?,`Pid`=?";
+	private static final String DELETE_CLUB_ROOM_SQL = "DELETE  FROM `sys_club_room_record` WHERE `Cid`=? AND `RoomId`=?";
+	private static final String DELETE_CLUB_USER_SQL = "DELETE  FROM `sys_club_user` WHERE `Cid`=? AND `Pid`=?";
 
 	private static final String SELECT_ALL_ROOM_SQL = "SELECT * FROM `sys_club_room_record`";
 	private static final String SELECT_ALL_USER_SQL = "SELECT * FROM `sys_club_user`";

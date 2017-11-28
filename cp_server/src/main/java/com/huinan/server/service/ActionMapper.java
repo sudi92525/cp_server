@@ -14,6 +14,8 @@ import com.huinan.server.service.action.RoomCreate;
 import com.huinan.server.service.action.RoomJoin;
 import com.huinan.server.service.action.RoomPleaseOut;
 import com.huinan.server.service.action.RoomQuit;
+import com.huinan.server.service.action.club.ClubApply;
+import com.huinan.server.service.action.club.ClubCreate;
 import com.huinan.server.service.action.club.ClubIsAgree;
 import com.huinan.server.service.action.club.ClubKick;
 import com.huinan.server.service.action.club.GetClubApplyMessage;
@@ -57,6 +59,10 @@ public class ActionMapper {
 		case CpMsgData.CS_REQUEST_PALY_BACK_FIELD_NUMBER:
 			return new GetPlayBack();
 			// club
+		case CpMsgData.CS_REQUEST_CLUB_CREATE_FIELD_NUMBER:
+			return new ClubCreate();
+		case CpMsgData.CS_REQUEST_CLUB_APPLY_FIELD_NUMBER:
+			return new ClubApply();
 		case CpMsgData.CS_REQUEST_CLUB_INFO_FIELD_NUMBER:
 			return new GetClubList();
 		case CpMsgData.CS_REQUEST_CLUB_IS_AGREE_FIELD_NUMBER:

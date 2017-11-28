@@ -3,15 +3,19 @@ package com.huinan.server.service.manager;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.protobuf.InvalidProtocolBufferException;
 import com.huinan.proto.CpMsg.CpHead;
 import com.huinan.proto.CpMsgClub.ClubMemberProto;
 import com.huinan.proto.CpMsgClub.ClubProto;
 import com.huinan.proto.CpMsgClub.ClubRoomProto;
+import com.huinan.proto.CpMsgClub.ENClubGameType;
 import com.huinan.proto.CpMsgCs.CSNotifyDissolveTableOperation;
+import com.huinan.proto.CpMsgCs.CSNotifyGameOver;
 import com.huinan.proto.CpMsgCs.CSNotifyGameStart;
 import com.huinan.proto.CpMsgCs.CSNotifyNextOperation;
 import com.huinan.proto.CpMsgCs.CSNotifyPlayerDealCard;
 import com.huinan.proto.CpMsgCs.CSNotifySeatOperationChoice;
+import com.huinan.proto.CpMsgCs.CSResponsePlayBack;
 import com.huinan.proto.CpMsgCs.ChoiceZhuang;
 import com.huinan.proto.CpMsgCs.DissolveList;
 import com.huinan.proto.CpMsgCs.ENActionType;
@@ -41,7 +45,7 @@ public class ProtoBuilder {
 	public static ClubProto.Builder buildClubProto(Club club) {
 		ClubProto.Builder clubProto = ClubProto.newBuilder();
 		clubProto.setId(club.getId());
-		clubProto.setGameType(club.getGameType());
+		clubProto.setGameType(ENClubGameType.valueOf(club.getGameType()));
 		clubProto.setName(club.getName());
 		clubProto.setRoomNum(club.getRooms().size());
 		return clubProto;
@@ -60,6 +64,16 @@ public class ProtoBuilder {
 		}
 		for (User user : room.getUsers().values()) {
 			clubRoomProto.addUserInfo(buildUserInfo(user));
+		}
+		if (clubRoom.getTotalData() != null) {
+			CSNotifyGameOver.Builder deal = CSNotifyGameOver.newBuilder();
+			try {
+				clubRoomProto.setBigReslut(deal.mergeFrom(
+						clubRoom.getTotalData()).build());
+			} catch (InvalidProtocolBufferException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return clubRoomProto;
 	}

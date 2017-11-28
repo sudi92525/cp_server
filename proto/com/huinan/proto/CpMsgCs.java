@@ -189,6 +189,38 @@ public final class CpMsgCs {
      * </pre>
      */
     RESPONSE_CLUB_ROOM_FULL(21, 22),
+    /**
+     * <code>RESPONSE_CLUB_NOT_IS_PROXY = 23;</code>
+     *
+     * <pre>
+     *不是代理，不能创建俱乐部
+     * </pre>
+     */
+    RESPONSE_CLUB_NOT_IS_PROXY(22, 23),
+    /**
+     * <code>RESPONSE_CLUB_NAME_ISEMPTY = 24;</code>
+     *
+     * <pre>
+     *俱乐部名字不能为空
+     * </pre>
+     */
+    RESPONSE_CLUB_NAME_ISEMPTY(23, 24),
+    /**
+     * <code>RESPONSE_CLUB_NAME_ILLEGAL = 25;</code>
+     *
+     * <pre>
+     *俱乐部名字含有非法字符
+     * </pre>
+     */
+    RESPONSE_CLUB_NAME_ILLEGAL(24, 25),
+    /**
+     * <code>RESPONSE_CLUB_NUM_MAX = 26;</code>
+     *
+     * <pre>
+     *创建的俱乐部达到上限
+     * </pre>
+     */
+    RESPONSE_CLUB_NUM_MAX(25, 26),
     ;
 
     /**
@@ -367,6 +399,38 @@ public final class CpMsgCs {
      * </pre>
      */
     public static final int RESPONSE_CLUB_ROOM_FULL_VALUE = 22;
+    /**
+     * <code>RESPONSE_CLUB_NOT_IS_PROXY = 23;</code>
+     *
+     * <pre>
+     *不是代理，不能创建俱乐部
+     * </pre>
+     */
+    public static final int RESPONSE_CLUB_NOT_IS_PROXY_VALUE = 23;
+    /**
+     * <code>RESPONSE_CLUB_NAME_ISEMPTY = 24;</code>
+     *
+     * <pre>
+     *俱乐部名字不能为空
+     * </pre>
+     */
+    public static final int RESPONSE_CLUB_NAME_ISEMPTY_VALUE = 24;
+    /**
+     * <code>RESPONSE_CLUB_NAME_ILLEGAL = 25;</code>
+     *
+     * <pre>
+     *俱乐部名字含有非法字符
+     * </pre>
+     */
+    public static final int RESPONSE_CLUB_NAME_ILLEGAL_VALUE = 25;
+    /**
+     * <code>RESPONSE_CLUB_NUM_MAX = 26;</code>
+     *
+     * <pre>
+     *创建的俱乐部达到上限
+     * </pre>
+     */
+    public static final int RESPONSE_CLUB_NUM_MAX_VALUE = 26;
 
 
     public final int getNumber() { return value; }
@@ -395,6 +459,10 @@ public final class CpMsgCs {
         case 20: return RESPONSE_CLUB_NOT_IN_APPLY_LIST;
         case 21: return RESPONSE_CLUB_NOT_IN_THIS_CLUB;
         case 22: return RESPONSE_CLUB_ROOM_FULL;
+        case 23: return RESPONSE_CLUB_NOT_IS_PROXY;
+        case 24: return RESPONSE_CLUB_NAME_ISEMPTY;
+        case 25: return RESPONSE_CLUB_NAME_ILLEGAL;
+        case 26: return RESPONSE_CLUB_NUM_MAX;
         default: return null;
       }
     }
@@ -52505,7 +52573,7 @@ public final class CpMsgCs {
       "an.proto.CSNotifyActionFlow\0225\n\tgame_over" +
       "\030\005 \001(\0132\".com.huinan.proto.CSNotifyGameOv" +
       "er\"\"\n\022CSNotifyOpenTouPai\022\014\n\004open\030\001 \001(\010\"\020" +
-      "\n\016CSNotifyLogout*\231\005\n\016ENMessageError\022\024\n\020R" +
+      "\n\016CSNotifyLogout*\224\006\n\016ENMessageError\022\024\n\020R" +
       "ESPONSE_SUCCESS\020\001\022\021\n\rRESPONSE_FAIL\020\002\022\034\n\030" +
       "RESPONSE_SEATINDEX_ERROR\020\003\022\032\n\026RESPONSE_A" +
       "CTTYPE_ERROR\020\004\022\033\n\027RESPONSE_DESTCARD_ERRO",
@@ -52522,33 +52590,36 @@ public final class CpMsgCs {
       "SE_CLUB_IN_THIS_CLUB\020\023\022#\n\037RESPONSE_CLUB_" +
       "NOT_IN_APPLY_LIST\020\024\022\"\n\036RESPONSE_CLUB_NOT" +
       "_IN_THIS_CLUB\020\025\022\033\n\027RESPONSE_CLUB_ROOM_FU" +
-      "LL\020\026*4\n\017ENOperationType\022\020\n\014LOGOUT_TABLE\020" +
-      "\001\022\017\n\013OWNER_TIREN\020\002*\214\001\n\tENColType\022\023\n\017EN_C" +
-      "OL_TYPE_TOU\020\001\022\024\n\020EN_COL_TYPE_PENG\020\002\022\023\n\017E" +
-      "N_COL_TYPE_CHI\020\003\022\024\n\020EN_COL_TYPE_ZHAO\020\004\022\024" +
-      "\n\020EN_COL_TYPE_LONG\020\005\022\023\n\017EN_COL_TYPE_KOU\020" +
-      "\006*N\n\nENZhaoType\022\024\n\020EN_ZHAO_TYPE_CHI\020\001\022\024\n" +
-      "\020EN_ZHAO_TYPE_CHE\020\002\022\024\n\020EN_ZHAO_TYPE_ALL\020",
-      "\003*\305\004\n\014ENActionType\022\025\n\021EN_ACTION_UNKNOWN\020" +
-      "\001\022\023\n\017EN_ACTION_NAPAI\020\002\022\024\n\020EN_ACTION_CHUP" +
-      "AI\020\003\022\021\n\rEN_ACTION_GUO\020\004\022\021\n\rEN_ACTION_TOU" +
-      "\020\005\022\022\n\016EN_ACTION_PENG\020\006\022\021\n\rEN_ACTION_CHI\020" +
-      "\007\022\020\n\014EN_ACTION_HU\020\010\022\022\n\016EN_ACTION_ZHAO\020\t\022" +
-      "\023\n\017EN_ACTION_SIGEN\020\n\022\021\n\rEN_ACTION_TUI\020\013\022" +
-      "\024\n\020EN_ACTION_NO_CHU\020\014\022\021\n\rEN_ACTION_KAN\020\r" +
-      "\022\024\n\020EN_ACTION_XIATOU\020\016\022\024\n\020EN_ACTION_HUAD" +
-      "UI\020\017\022\024\n\020EN_ACTION_CHIKAN\020\020\022\023\n\017EN_ACTION_" +
-      "DAKAN\020\021\022\027\n\023EN_ACTION_CHI_SIGEN\020\022\022\026\n\022EN_A",
-      "CTION_HU_SIGEN\020\023\022\022\n\016EN_ACTION_PIAO\020\024\022\025\n\021" +
-      "EN_ACTION_NO_PIAO\020\025\022\022\n\016EN_ACTION_DANG\020\026\022" +
-      "\025\n\021EN_ACTION_NO_DANG\020\027\022\022\n\016EN_ACTION_NEXT" +
-      "\020\030\022\022\n\016EN_ACTION_DEAL\020\031\022\021\n\rEN_ACTION_KOU\020" +
-      "\032\022\026\n\022EN_ACTION_KOU_LIST\020\033*Z\n\nENChatType\022" +
-      "\032\n\026EN_CHAT_TYPE_CHARACTER\020\000\022\030\n\024EN_CHAT_T" +
-      "YPE_BIGFACE\020\001\022\026\n\022EN_CHAT_TYPE_VOICE\020\002*u\n" +
-      "\nENRoomType\022\023\n\017EN_ROOM_TYPE_GY\020\001\022\023\n\017EN_R" +
-      "OOM_TYPE_NC\020\002\022\023\n\017EN_ROOM_TYPE_XC\020\003\022\023\n\017EN" +
-      "_ROOM_TYPE_MY\020\004\022\023\n\017EN_ROOM_TYPE_CX\020\005"
+      "LL\020\026\022\036\n\032RESPONSE_CLUB_NOT_IS_PROXY\020\027\022\036\n\032" +
+      "RESPONSE_CLUB_NAME_ISEMPTY\020\030\022\036\n\032RESPONSE" +
+      "_CLUB_NAME_ILLEGAL\020\031\022\031\n\025RESPONSE_CLUB_NU" +
+      "M_MAX\020\032*4\n\017ENOperationType\022\020\n\014LOGOUT_TAB" +
+      "LE\020\001\022\017\n\013OWNER_TIREN\020\002*\214\001\n\tENColType\022\023\n\017E" +
+      "N_COL_TYPE_TOU\020\001\022\024\n\020EN_COL_TYPE_PENG\020\002\022\023" +
+      "\n\017EN_COL_TYPE_CHI\020\003\022\024\n\020EN_COL_TYPE_ZHAO\020",
+      "\004\022\024\n\020EN_COL_TYPE_LONG\020\005\022\023\n\017EN_COL_TYPE_K" +
+      "OU\020\006*N\n\nENZhaoType\022\024\n\020EN_ZHAO_TYPE_CHI\020\001" +
+      "\022\024\n\020EN_ZHAO_TYPE_CHE\020\002\022\024\n\020EN_ZHAO_TYPE_A" +
+      "LL\020\003*\305\004\n\014ENActionType\022\025\n\021EN_ACTION_UNKNO" +
+      "WN\020\001\022\023\n\017EN_ACTION_NAPAI\020\002\022\024\n\020EN_ACTION_C" +
+      "HUPAI\020\003\022\021\n\rEN_ACTION_GUO\020\004\022\021\n\rEN_ACTION_" +
+      "TOU\020\005\022\022\n\016EN_ACTION_PENG\020\006\022\021\n\rEN_ACTION_C" +
+      "HI\020\007\022\020\n\014EN_ACTION_HU\020\010\022\022\n\016EN_ACTION_ZHAO" +
+      "\020\t\022\023\n\017EN_ACTION_SIGEN\020\n\022\021\n\rEN_ACTION_TUI" +
+      "\020\013\022\024\n\020EN_ACTION_NO_CHU\020\014\022\021\n\rEN_ACTION_KA",
+      "N\020\r\022\024\n\020EN_ACTION_XIATOU\020\016\022\024\n\020EN_ACTION_H" +
+      "UADUI\020\017\022\024\n\020EN_ACTION_CHIKAN\020\020\022\023\n\017EN_ACTI" +
+      "ON_DAKAN\020\021\022\027\n\023EN_ACTION_CHI_SIGEN\020\022\022\026\n\022E" +
+      "N_ACTION_HU_SIGEN\020\023\022\022\n\016EN_ACTION_PIAO\020\024\022" +
+      "\025\n\021EN_ACTION_NO_PIAO\020\025\022\022\n\016EN_ACTION_DANG" +
+      "\020\026\022\025\n\021EN_ACTION_NO_DANG\020\027\022\022\n\016EN_ACTION_N" +
+      "EXT\020\030\022\022\n\016EN_ACTION_DEAL\020\031\022\021\n\rEN_ACTION_K" +
+      "OU\020\032\022\026\n\022EN_ACTION_KOU_LIST\020\033*Z\n\nENChatTy" +
+      "pe\022\032\n\026EN_CHAT_TYPE_CHARACTER\020\000\022\030\n\024EN_CHA" +
+      "T_TYPE_BIGFACE\020\001\022\026\n\022EN_CHAT_TYPE_VOICE\020\002",
+      "*u\n\nENRoomType\022\023\n\017EN_ROOM_TYPE_GY\020\001\022\023\n\017E" +
+      "N_ROOM_TYPE_NC\020\002\022\023\n\017EN_ROOM_TYPE_XC\020\003\022\023\n" +
+      "\017EN_ROOM_TYPE_MY\020\004\022\023\n\017EN_ROOM_TYPE_CX\020\005"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

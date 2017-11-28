@@ -9,6 +9,7 @@ import com.huinan.server.db.ClubDAO;
 import com.huinan.server.net.ClientRequest;
 import com.huinan.server.service.AbsAction;
 import com.huinan.server.service.data.club.Club;
+import com.huinan.server.service.manager.ClubManager;
 
 public class ClubIsAgree extends AbsAction {
 
@@ -35,10 +36,11 @@ public class ClubIsAgree extends AbsAction {
 
 			club.getApplys().remove(applyUId);
 			if (agree) {
-				club.getMembers().add(applyUId);
-				ClubDAO.getInstance().updateClubUser(clubId,
+				ClubManager.addMemeber(club, String.valueOf(applyUId));
+				ClubDAO.getInstance().updateClubUser(club,
 						Integer.valueOf(applyUId));
 			} else {
+				// TODO
 				ClubDAO.getInstance().deleteClubUser(clubId,
 						Integer.valueOf(applyUId));
 			}

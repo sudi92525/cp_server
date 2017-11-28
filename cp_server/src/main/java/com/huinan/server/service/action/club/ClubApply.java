@@ -2,8 +2,8 @@ package com.huinan.server.service.action.club;
 
 import com.huinan.proto.CpMsg.CpHead;
 import com.huinan.proto.CpMsg.CpMsgData;
-import com.huinan.proto.CpMsgClub.CSRequestClubKick;
-import com.huinan.proto.CpMsgClub.CSResponseClubKick;
+import com.huinan.proto.CpMsgClub.CSRequestClubApply;
+import com.huinan.proto.CpMsgClub.CSResponseClubApply;
 import com.huinan.proto.CpMsgCs.ENMessageError;
 import com.huinan.server.db.ClubDAO;
 import com.huinan.server.net.ClientRequest;
@@ -11,45 +11,41 @@ import com.huinan.server.service.AbsAction;
 import com.huinan.server.service.data.club.Club;
 import com.huinan.server.service.manager.ClubManager;
 
-public class ClubKick extends AbsAction {
+public class ClubApply extends AbsAction {
 
 	@Override
 	public void Action(ClientRequest request) throws Exception {
 		String uid = request.getUid();
-		CSRequestClubKick requestBody = request.getMsg().getCsRequestClubKick();
+		CSRequestClubApply requestBody = request.getMsg()
+				.getCsRequestClubApply();
 		int clubId = requestBody.getClubId();
-		String kickUId = requestBody.getUid();
-
 		Club club = ClubDAO.getInstance().getClub(clubId);
 
 		CpMsgData.Builder msg = CpMsgData.newBuilder();
-		CSResponseClubKick.Builder response = CSResponseClubKick.newBuilder();
+		CSResponseClubApply.Builder response = CSResponseClubApply.newBuilder();
 
-		int error = check(club, uid, kickUId);
+		int error = check(uid, club);
 		if (error != 0) {
 			response.setResult(ENMessageError.valueOf(error));
 		} else {
 			response.setResult(ENMessageError.RESPONSE_SUCCESS);
-
-			ClubManager.addMemeber(club, String.valueOf(uid));
-			ClubDAO.getInstance().deleteClubUser(clubId,
-					Integer.valueOf(kickUId));
+			ClubManager.addApplyer(club, String.valueOf(uid));
+			ClubDAO.getInstance().insertClubUser(club.getId(), uid,
+					club.getCreatorId(), 0);// TODO 0
+			// ClubManager.addMemeber(club, String.valueOf(uid));// TODO shanchu
 		}
-		msg.setCsResponseClubKick(response);
+		msg.setCsResponseClubApply(response);
 		request.getClient().sendMessage(
-				CpMsgData.CS_RESPONSE_CLUB_KICK_FIELD_NUMBER, uid,
+				CpMsgData.CS_RESPONSE_CLUB_APPLY_FIELD_NUMBER, uid,
 				(CpHead) request.getHeadLite(), msg.build());
 	}
 
-	private int check(Club club, String uid, String applyUId) {
+	private int check(String uid, Club club) {
 		if (club == null) {
 			return ENMessageError.RESPONSE_CLUB_IS_NULL_VALUE;
 		}
-		if (!club.getCreatorId().equals(uid)) {
-			return ENMessageError.RESPONSE_CLUB_NOT_CREATOR_VALUE;
-		}
-		if (!club.getMembers().contains(applyUId)) {
-			return ENMessageError.RESPONSE_CLUB_NOT_IN_THIS_CLUB_VALUE;
+		if (club.getMembers().contains(uid)) {
+			return ENMessageError.RESPONSE_CLUB_IN_THIS_CLUB_VALUE;
 		}
 		return 0;
 	}

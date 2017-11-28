@@ -33,8 +33,8 @@ public class RemoveClubRoom extends AbsAction {
 			response.setResult(ENMessageError.RESPONSE_SUCCESS);
 			for (ClubRoom clubRoom : club.getRooms().values()) {
 				if (clubRoom.getRoomId() == roomId) {
-					club.getRooms().remove(clubRoom);
-					ClubDAO.getInstance().deleteClubRoom(clubId, roomId);
+//					club.getRooms().remove(clubRoom);
+					ClubDAO.getInstance().deleteClubRoom(clubRoom);
 					break;
 				}
 			}

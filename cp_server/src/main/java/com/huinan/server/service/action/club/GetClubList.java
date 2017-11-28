@@ -23,13 +23,15 @@ public class GetClubList extends AbsAction {
 		CpMsgData.Builder msg = CpMsgData.newBuilder();
 		CSResponseClubInfo.Builder response = CSResponseClubInfo.newBuilder();
 		response.setResult(ENMessageError.RESPONSE_SUCCESS);
-		for (Club club : clubs) {
+		for (int i = 0; i < clubs.size(); i++) {
+			Club club = clubs.get(i);
 			response.addClub(ProtoBuilder.buildClubProto(club));
 		}
 		msg.setCsResponseClubInfo(response);
 		request.getClient().sendMessage(
 				CpMsgData.CS_RESPONSE_CLUB_INFO_FIELD_NUMBER, uid,
 				(CpHead) request.getHeadLite(), msg.build());
+		
 	}
 
 }

@@ -34,7 +34,7 @@ public class GameServer {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-						RedisDAO.insertToRedis();
+						// RedisDAO.insertToRedis();
 						LogManager.getLogger(GameServer.class).info(
 								"GameServer Shutdown!!!");
 					}));
@@ -48,12 +48,12 @@ public class GameServer {
 			}
 			int tcpPort = Integer.parseInt(args[0]);
 			// init redis
-			RedisManager.init();
+			// RedisManager.init();
 			// init mysql
 			DBManager.init();
-			RedisDAO.loadFromRedis();
+			// RedisDAO.loadFromRedis();
 			// init rabbitMQ
-			RabbitMQManager.init();
+			// RabbitMQManager.init();
 
 			GYcpInfoDAO.loadHorseNotice();
 			ClubDAO.getInstance().init();

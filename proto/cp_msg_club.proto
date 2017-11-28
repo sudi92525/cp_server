@@ -2,13 +2,18 @@ package com.huinan.proto;
 import "cp_msg_cs.proto";
 
 
-
+enum ENClubGameType
+{
+	CP = 1;								//长牌
+	MJ = 2;								//麻将
+}
 
 
 message ClubRoomProto{
 	optional CSRequestCreateTable table_info = 1;		//房间信息
 	repeated UserInfo user_info = 2;					//房间其他用户信息
 	optional int32 table_state = 3;						//房间状态:0等待，1开始，2结算中
+	optional CSNotifyGameOver big_reslut = 4; 			//大结算
 }
 
 
@@ -22,13 +27,37 @@ message ClubMemberProto{
 message ClubProto{
 	optional int32 id = 1;								//id
 	optional string name = 2;							//名称
-	optional int32 game_type = 3;						//游戏类型：加枚举
+	optional ENClubGameType game_type = 3;				//游戏类型：加枚举
 	optional int32 room_num = 4;						//已开房间数
 	//....
 }
 
+		
+		
+//协议一：创建俱乐部
+message CSRequestClubCreate {
+	required string name = 1;							//名称
+	optional ENClubGameType game_type = 2;				//游戏类型：加枚举
+}
 
-//协议一：获取俱乐部:列表
+message CSResponseClubCreate {
+	optional ENMessageError result = 1; 				//结果
+	optional ClubProto club = 2;						//俱乐部信息
+}
+
+		
+//协议二：申请加入俱乐部
+message CSRequestClubApply {
+	required int32 club_id = 1;							//id
+}
+
+message CSResponseClubApply {
+	optional ENMessageError result = 1; 				//结果
+}
+
+
+
+//协议三：获取俱乐部:列表
 message CSRequestClubInfo {
 
 }
@@ -39,9 +68,9 @@ message CSResponseClubInfo {
 }
 
 
-//协议二：获取俱乐部:房间(刷新)
+//协议四：获取俱乐部:房间(刷新)
 message CSRequestClubRoom {
-	optional int32 club_id = 1;							//俱乐部id
+	required int32 club_id = 1;							//俱乐部id
 }
 
 
@@ -53,9 +82,9 @@ message CSResponseClubRoom {
 
 
 
-//协议三：获取俱乐部:成员
+//协议五：获取俱乐部:成员
 message CSRequestClubMember {
-	optional int32 club_id = 1;							//俱乐部id
+	required int32 club_id = 1;							//俱乐部id
 }
 
 message CSResponseClubMember {
@@ -64,9 +93,9 @@ message CSResponseClubMember {
 }
 
 
-//协议四：获取俱乐部:申请消息
+//协议六：获取俱乐部:申请消息
 message CSRequestClubMessage {
-	optional int32 club_id = 1;							//俱乐部id
+	required int32 club_id = 1;							//俱乐部id
 }
 
 message CSResponseClubMessage {
@@ -75,17 +104,17 @@ message CSResponseClubMessage {
 }
 
 
-//协议五：推送：俱乐部申请消息
+//协议七：推送：俱乐部申请消息
 message CSNotifyClubApply{
-	optional int32 club_id = 1;							//俱乐部id
-	optional bool have = 2;								//是否有申请消息
+	required int32 club_id = 1;							//俱乐部id
+	required bool have = 2;								//是否有申请消息
 }
 
 
-//协议六：移除俱乐部房间
+//协议八：移除俱乐部房间
 message CSRequestClubRemoveRoom{
-	optional int32 club_id = 1;							//俱乐部id
-	optional int32 room_id = 2;							//房间id
+	required int32 club_id = 1;							//俱乐部id
+	required int32 room_id = 2;							//房间id
 }
 
 message CSResponseClubRemoveRoom{
@@ -93,10 +122,10 @@ message CSResponseClubRemoveRoom{
 }
 
 
-//协议七：请求俱乐部:踢人
+//协议九：请求俱乐部:踢人
 message CSRequestClubKick{
-	optional int32 club_id = 1;							//俱乐部id
-	optional string uid = 2;							//用户唯一标识符
+	required int32 club_id = 1;							//俱乐部id
+	required string uid = 2;							//用户唯一标识符
 }
 
 message CSResponseClubKick{
@@ -104,15 +133,21 @@ message CSResponseClubKick{
 }
 
 
-//协议八：审核：同意、拒绝
+//协议十：审核：同意、拒绝
 message CSRequestClubIsAgree{
-	optional int32 club_id = 1;							//俱乐部id
-	optional string uid = 2;							//用户唯一标识符
-	optional bool agree = 3;							//是否同意：true=同意，false=拒绝
+	required int32 club_id = 1;							//俱乐部id
+	required string uid = 2;							//用户唯一标识符
+	required bool agree = 3;							//是否同意：true=同意，false=拒绝
 }
 
 message CSResponseClubIsAgree{
 	optional ENMessageError result = 1; 				//结果
+}
+
+
+//协议十一：刷新俱乐部列表
+message CSNotifyClubRefresh{
+	
 }
 
 

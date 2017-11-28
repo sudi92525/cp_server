@@ -11,6 +11,7 @@ import com.huinan.server.service.AbsAction;
 import com.huinan.server.service.data.Room;
 import com.huinan.server.service.data.club.Club;
 import com.huinan.server.service.data.club.ClubRoom;
+import com.huinan.server.service.manager.ClubManager;
 import com.huinan.server.service.manager.ProtoBuilder;
 import com.huinan.server.service.manager.RoomManager;
 
@@ -43,6 +44,10 @@ public class GetClueRoom extends AbsAction {
 		request.getClient().sendMessage(
 				CpMsgData.CS_RESPONSE_CLUB_ROOM_FIELD_NUMBER, uid,
 				(CpHead) request.getHeadLite(), msg.build());
+
+		if (club.getCreatorId().equals(uid) && !club.getApplys().isEmpty()) {
+			ClubManager.notifyClubApply(uid, clubId);
+		}
 	}
 
 	private int check(Club club, String uid) {

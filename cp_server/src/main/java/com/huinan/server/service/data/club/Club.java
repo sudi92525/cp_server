@@ -15,6 +15,8 @@ public class Club {
 	private String name;
 	/** 俱乐部游戏类型：长牌，麻将 */
 	private int gameType;
+	/** 俱乐部创建时间 */
+	private long createTime;
 	/** 俱乐部成员uid */
 	private List<String> members = new ArrayList<>();
 	/** 申请uid */
@@ -22,10 +24,11 @@ public class Club {
 	/** 房间列表 */
 	private ConcurrentMap<Integer, ClubRoom> rooms = new ConcurrentHashMap<>();
 
-	public Club(int id, String creatorId, String name) {
+	public Club(int id, String creatorId, String name,int gameType) {
 		this.id = id;
 		this.creatorId = creatorId;
 		this.name = name;
+		this.gameType = gameType;
 	}
 
 	public int getId() {
@@ -82,6 +85,14 @@ public class Club {
 
 	public void setRooms(ConcurrentMap<Integer, ClubRoom> rooms) {
 		this.rooms = rooms;
+	}
+
+	public long getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(long createTime) {
+		this.createTime = createTime;
 	}
 
 

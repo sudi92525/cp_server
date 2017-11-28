@@ -4016,31 +4016,6 @@ public final class CpMsg {
     com.huinan.proto.CpMsgClub.CSResponseClubMessageOrBuilder getCsResponseClubMessageOrBuilder();
 
     /**
-     * <code>optional .com.huinan.proto.CSNotifyClubApply cs_notify_club_apply = 52;</code>
-     *
-     * <pre>
-     *推送：俱乐部申请消息
-     * </pre>
-     */
-    boolean hasCsNotifyClubApply();
-    /**
-     * <code>optional .com.huinan.proto.CSNotifyClubApply cs_notify_club_apply = 52;</code>
-     *
-     * <pre>
-     *推送：俱乐部申请消息
-     * </pre>
-     */
-    com.huinan.proto.CpMsgClub.CSNotifyClubApply getCsNotifyClubApply();
-    /**
-     * <code>optional .com.huinan.proto.CSNotifyClubApply cs_notify_club_apply = 52;</code>
-     *
-     * <pre>
-     *推送：俱乐部申请消息
-     * </pre>
-     */
-    com.huinan.proto.CpMsgClub.CSNotifyClubApplyOrBuilder getCsNotifyClubApplyOrBuilder();
-
-    /**
      * <code>optional .com.huinan.proto.CSRequestClubRemoveRoom cs_request_club_re_room = 53;</code>
      *
      * <pre>
@@ -4094,7 +4069,7 @@ public final class CpMsg {
      * <code>optional .com.huinan.proto.CSRequestClubKick cs_request_club_kick = 55;</code>
      *
      * <pre>
-     *请求俱乐部:踢人
+     *请求：俱乐部踢人
      * </pre>
      */
     boolean hasCsRequestClubKick();
@@ -4102,7 +4077,7 @@ public final class CpMsg {
      * <code>optional .com.huinan.proto.CSRequestClubKick cs_request_club_kick = 55;</code>
      *
      * <pre>
-     *请求俱乐部:踢人
+     *请求：俱乐部踢人
      * </pre>
      */
     com.huinan.proto.CpMsgClub.CSRequestClubKick getCsRequestClubKick();
@@ -4110,7 +4085,7 @@ public final class CpMsg {
      * <code>optional .com.huinan.proto.CSRequestClubKick cs_request_club_kick = 55;</code>
      *
      * <pre>
-     *请求俱乐部:踢人
+     *请求：俱乐部踢人
      * </pre>
      */
     com.huinan.proto.CpMsgClub.CSRequestClubKickOrBuilder getCsRequestClubKickOrBuilder();
@@ -4119,7 +4094,7 @@ public final class CpMsg {
      * <code>optional .com.huinan.proto.CSResponseClubKick cs_response_club_kick = 56;</code>
      *
      * <pre>
-     *响应俱乐部:踢人
+     *响应：俱乐部踢人
      * </pre>
      */
     boolean hasCsResponseClubKick();
@@ -4127,7 +4102,7 @@ public final class CpMsg {
      * <code>optional .com.huinan.proto.CSResponseClubKick cs_response_club_kick = 56;</code>
      *
      * <pre>
-     *响应俱乐部:踢人
+     *响应：俱乐部踢人
      * </pre>
      */
     com.huinan.proto.CpMsgClub.CSResponseClubKick getCsResponseClubKick();
@@ -4135,7 +4110,7 @@ public final class CpMsg {
      * <code>optional .com.huinan.proto.CSResponseClubKick cs_response_club_kick = 56;</code>
      *
      * <pre>
-     *响应俱乐部:踢人
+     *响应：俱乐部踢人
      * </pre>
      */
     com.huinan.proto.CpMsgClub.CSResponseClubKickOrBuilder getCsResponseClubKickOrBuilder();
@@ -4144,7 +4119,7 @@ public final class CpMsg {
      * <code>optional .com.huinan.proto.CSRequestClubIsAgree cs_request_club_is_agree = 57;</code>
      *
      * <pre>
-     *请求俱乐部:审批
+     *请求：俱乐部审批
      * </pre>
      */
     boolean hasCsRequestClubIsAgree();
@@ -4152,7 +4127,7 @@ public final class CpMsg {
      * <code>optional .com.huinan.proto.CSRequestClubIsAgree cs_request_club_is_agree = 57;</code>
      *
      * <pre>
-     *请求俱乐部:审批
+     *请求：俱乐部审批
      * </pre>
      */
     com.huinan.proto.CpMsgClub.CSRequestClubIsAgree getCsRequestClubIsAgree();
@@ -4160,7 +4135,7 @@ public final class CpMsg {
      * <code>optional .com.huinan.proto.CSRequestClubIsAgree cs_request_club_is_agree = 57;</code>
      *
      * <pre>
-     *请求俱乐部:审批
+     *请求：俱乐部审批
      * </pre>
      */
     com.huinan.proto.CpMsgClub.CSRequestClubIsAgreeOrBuilder getCsRequestClubIsAgreeOrBuilder();
@@ -4169,7 +4144,7 @@ public final class CpMsg {
      * <code>optional .com.huinan.proto.CSResponseClubIsAgree cs_response_club_is_agree = 58;</code>
      *
      * <pre>
-     *响应俱乐部:审批
+     *响应：俱乐部审批
      * </pre>
      */
     boolean hasCsResponseClubIsAgree();
@@ -4177,7 +4152,7 @@ public final class CpMsg {
      * <code>optional .com.huinan.proto.CSResponseClubIsAgree cs_response_club_is_agree = 58;</code>
      *
      * <pre>
-     *响应俱乐部:审批
+     *响应：俱乐部审批
      * </pre>
      */
     com.huinan.proto.CpMsgClub.CSResponseClubIsAgree getCsResponseClubIsAgree();
@@ -4185,13 +4160,163 @@ public final class CpMsg {
      * <code>optional .com.huinan.proto.CSResponseClubIsAgree cs_response_club_is_agree = 58;</code>
      *
      * <pre>
-     *响应俱乐部:审批
+     *响应：俱乐部审批
      * </pre>
      */
     com.huinan.proto.CpMsgClub.CSResponseClubIsAgreeOrBuilder getCsResponseClubIsAgreeOrBuilder();
 
     /**
-     * <code>optional .com.huinan.proto.CSNotifyLogout cs_notify_logout = 59;</code>
+     * <code>optional .com.huinan.proto.CSRequestClubCreate cs_request_club_create = 59;</code>
+     *
+     * <pre>
+     *后台接口移过来
+     * </pre>
+     */
+    boolean hasCsRequestClubCreate();
+    /**
+     * <code>optional .com.huinan.proto.CSRequestClubCreate cs_request_club_create = 59;</code>
+     *
+     * <pre>
+     *后台接口移过来
+     * </pre>
+     */
+    com.huinan.proto.CpMsgClub.CSRequestClubCreate getCsRequestClubCreate();
+    /**
+     * <code>optional .com.huinan.proto.CSRequestClubCreate cs_request_club_create = 59;</code>
+     *
+     * <pre>
+     *后台接口移过来
+     * </pre>
+     */
+    com.huinan.proto.CpMsgClub.CSRequestClubCreateOrBuilder getCsRequestClubCreateOrBuilder();
+
+    /**
+     * <code>optional .com.huinan.proto.CSResponseClubCreate cs_response_club_create = 60;</code>
+     *
+     * <pre>
+     *响应：创建俱乐部
+     * </pre>
+     */
+    boolean hasCsResponseClubCreate();
+    /**
+     * <code>optional .com.huinan.proto.CSResponseClubCreate cs_response_club_create = 60;</code>
+     *
+     * <pre>
+     *响应：创建俱乐部
+     * </pre>
+     */
+    com.huinan.proto.CpMsgClub.CSResponseClubCreate getCsResponseClubCreate();
+    /**
+     * <code>optional .com.huinan.proto.CSResponseClubCreate cs_response_club_create = 60;</code>
+     *
+     * <pre>
+     *响应：创建俱乐部
+     * </pre>
+     */
+    com.huinan.proto.CpMsgClub.CSResponseClubCreateOrBuilder getCsResponseClubCreateOrBuilder();
+
+    /**
+     * <code>optional .com.huinan.proto.CSRequestClubApply cs_request_club_apply = 61;</code>
+     *
+     * <pre>
+     *请求：申请俱乐部
+     * </pre>
+     */
+    boolean hasCsRequestClubApply();
+    /**
+     * <code>optional .com.huinan.proto.CSRequestClubApply cs_request_club_apply = 61;</code>
+     *
+     * <pre>
+     *请求：申请俱乐部
+     * </pre>
+     */
+    com.huinan.proto.CpMsgClub.CSRequestClubApply getCsRequestClubApply();
+    /**
+     * <code>optional .com.huinan.proto.CSRequestClubApply cs_request_club_apply = 61;</code>
+     *
+     * <pre>
+     *请求：申请俱乐部
+     * </pre>
+     */
+    com.huinan.proto.CpMsgClub.CSRequestClubApplyOrBuilder getCsRequestClubApplyOrBuilder();
+
+    /**
+     * <code>optional .com.huinan.proto.CSResponseClubApply cs_response_club_apply = 62;</code>
+     *
+     * <pre>
+     *响应：申请俱乐部
+     * </pre>
+     */
+    boolean hasCsResponseClubApply();
+    /**
+     * <code>optional .com.huinan.proto.CSResponseClubApply cs_response_club_apply = 62;</code>
+     *
+     * <pre>
+     *响应：申请俱乐部
+     * </pre>
+     */
+    com.huinan.proto.CpMsgClub.CSResponseClubApply getCsResponseClubApply();
+    /**
+     * <code>optional .com.huinan.proto.CSResponseClubApply cs_response_club_apply = 62;</code>
+     *
+     * <pre>
+     *响应：申请俱乐部
+     * </pre>
+     */
+    com.huinan.proto.CpMsgClub.CSResponseClubApplyOrBuilder getCsResponseClubApplyOrBuilder();
+
+    /**
+     * <code>optional .com.huinan.proto.CSNotifyClubApply cs_notify_club_apply = 63;</code>
+     *
+     * <pre>
+     *推送：俱乐部申请消息
+     * </pre>
+     */
+    boolean hasCsNotifyClubApply();
+    /**
+     * <code>optional .com.huinan.proto.CSNotifyClubApply cs_notify_club_apply = 63;</code>
+     *
+     * <pre>
+     *推送：俱乐部申请消息
+     * </pre>
+     */
+    com.huinan.proto.CpMsgClub.CSNotifyClubApply getCsNotifyClubApply();
+    /**
+     * <code>optional .com.huinan.proto.CSNotifyClubApply cs_notify_club_apply = 63;</code>
+     *
+     * <pre>
+     *推送：俱乐部申请消息
+     * </pre>
+     */
+    com.huinan.proto.CpMsgClub.CSNotifyClubApplyOrBuilder getCsNotifyClubApplyOrBuilder();
+
+    /**
+     * <code>optional .com.huinan.proto.CSNotifyClubRefresh cs_notify_club_refresh = 64;</code>
+     *
+     * <pre>
+     *推送：俱乐部刷新俱乐部列表
+     * </pre>
+     */
+    boolean hasCsNotifyClubRefresh();
+    /**
+     * <code>optional .com.huinan.proto.CSNotifyClubRefresh cs_notify_club_refresh = 64;</code>
+     *
+     * <pre>
+     *推送：俱乐部刷新俱乐部列表
+     * </pre>
+     */
+    com.huinan.proto.CpMsgClub.CSNotifyClubRefresh getCsNotifyClubRefresh();
+    /**
+     * <code>optional .com.huinan.proto.CSNotifyClubRefresh cs_notify_club_refresh = 64;</code>
+     *
+     * <pre>
+     *推送：俱乐部刷新俱乐部列表
+     * </pre>
+     */
+    com.huinan.proto.CpMsgClub.CSNotifyClubRefreshOrBuilder getCsNotifyClubRefreshOrBuilder();
+
+    /**
+     * <code>optional .com.huinan.proto.CSNotifyLogout cs_notify_logout = 100;</code>
      *
      * <pre>
      *登录推送
@@ -4199,7 +4324,7 @@ public final class CpMsg {
      */
     boolean hasCsNotifyLogout();
     /**
-     * <code>optional .com.huinan.proto.CSNotifyLogout cs_notify_logout = 59;</code>
+     * <code>optional .com.huinan.proto.CSNotifyLogout cs_notify_logout = 100;</code>
      *
      * <pre>
      *登录推送
@@ -4207,7 +4332,7 @@ public final class CpMsg {
      */
     com.huinan.proto.CpMsgCs.CSNotifyLogout getCsNotifyLogout();
     /**
-     * <code>optional .com.huinan.proto.CSNotifyLogout cs_notify_logout = 59;</code>
+     * <code>optional .com.huinan.proto.CSNotifyLogout cs_notify_logout = 100;</code>
      *
      * <pre>
      *登录推送
@@ -4935,19 +5060,6 @@ public final class CpMsg {
               msgUnionCase_ = 51;
               break;
             }
-            case 418: {
-              com.huinan.proto.CpMsgClub.CSNotifyClubApply.Builder subBuilder = null;
-              if (msgUnionCase_ == 52) {
-                subBuilder = ((com.huinan.proto.CpMsgClub.CSNotifyClubApply) msgUnion_).toBuilder();
-              }
-              msgUnion_ = input.readMessage(com.huinan.proto.CpMsgClub.CSNotifyClubApply.PARSER, extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom((com.huinan.proto.CpMsgClub.CSNotifyClubApply) msgUnion_);
-                msgUnion_ = subBuilder.buildPartial();
-              }
-              msgUnionCase_ = 52;
-              break;
-            }
             case 426: {
               com.huinan.proto.CpMsgClub.CSRequestClubRemoveRoom.Builder subBuilder = null;
               if (msgUnionCase_ == 53) {
@@ -5027,8 +5139,86 @@ public final class CpMsg {
               break;
             }
             case 474: {
-              com.huinan.proto.CpMsgCs.CSNotifyLogout.Builder subBuilder = null;
+              com.huinan.proto.CpMsgClub.CSRequestClubCreate.Builder subBuilder = null;
               if (msgUnionCase_ == 59) {
+                subBuilder = ((com.huinan.proto.CpMsgClub.CSRequestClubCreate) msgUnion_).toBuilder();
+              }
+              msgUnion_ = input.readMessage(com.huinan.proto.CpMsgClub.CSRequestClubCreate.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom((com.huinan.proto.CpMsgClub.CSRequestClubCreate) msgUnion_);
+                msgUnion_ = subBuilder.buildPartial();
+              }
+              msgUnionCase_ = 59;
+              break;
+            }
+            case 482: {
+              com.huinan.proto.CpMsgClub.CSResponseClubCreate.Builder subBuilder = null;
+              if (msgUnionCase_ == 60) {
+                subBuilder = ((com.huinan.proto.CpMsgClub.CSResponseClubCreate) msgUnion_).toBuilder();
+              }
+              msgUnion_ = input.readMessage(com.huinan.proto.CpMsgClub.CSResponseClubCreate.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom((com.huinan.proto.CpMsgClub.CSResponseClubCreate) msgUnion_);
+                msgUnion_ = subBuilder.buildPartial();
+              }
+              msgUnionCase_ = 60;
+              break;
+            }
+            case 490: {
+              com.huinan.proto.CpMsgClub.CSRequestClubApply.Builder subBuilder = null;
+              if (msgUnionCase_ == 61) {
+                subBuilder = ((com.huinan.proto.CpMsgClub.CSRequestClubApply) msgUnion_).toBuilder();
+              }
+              msgUnion_ = input.readMessage(com.huinan.proto.CpMsgClub.CSRequestClubApply.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom((com.huinan.proto.CpMsgClub.CSRequestClubApply) msgUnion_);
+                msgUnion_ = subBuilder.buildPartial();
+              }
+              msgUnionCase_ = 61;
+              break;
+            }
+            case 498: {
+              com.huinan.proto.CpMsgClub.CSResponseClubApply.Builder subBuilder = null;
+              if (msgUnionCase_ == 62) {
+                subBuilder = ((com.huinan.proto.CpMsgClub.CSResponseClubApply) msgUnion_).toBuilder();
+              }
+              msgUnion_ = input.readMessage(com.huinan.proto.CpMsgClub.CSResponseClubApply.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom((com.huinan.proto.CpMsgClub.CSResponseClubApply) msgUnion_);
+                msgUnion_ = subBuilder.buildPartial();
+              }
+              msgUnionCase_ = 62;
+              break;
+            }
+            case 506: {
+              com.huinan.proto.CpMsgClub.CSNotifyClubApply.Builder subBuilder = null;
+              if (msgUnionCase_ == 63) {
+                subBuilder = ((com.huinan.proto.CpMsgClub.CSNotifyClubApply) msgUnion_).toBuilder();
+              }
+              msgUnion_ = input.readMessage(com.huinan.proto.CpMsgClub.CSNotifyClubApply.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom((com.huinan.proto.CpMsgClub.CSNotifyClubApply) msgUnion_);
+                msgUnion_ = subBuilder.buildPartial();
+              }
+              msgUnionCase_ = 63;
+              break;
+            }
+            case 514: {
+              com.huinan.proto.CpMsgClub.CSNotifyClubRefresh.Builder subBuilder = null;
+              if (msgUnionCase_ == 64) {
+                subBuilder = ((com.huinan.proto.CpMsgClub.CSNotifyClubRefresh) msgUnion_).toBuilder();
+              }
+              msgUnion_ = input.readMessage(com.huinan.proto.CpMsgClub.CSNotifyClubRefresh.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom((com.huinan.proto.CpMsgClub.CSNotifyClubRefresh) msgUnion_);
+                msgUnion_ = subBuilder.buildPartial();
+              }
+              msgUnionCase_ = 64;
+              break;
+            }
+            case 802: {
+              com.huinan.proto.CpMsgCs.CSNotifyLogout.Builder subBuilder = null;
+              if (msgUnionCase_ == 100) {
                 subBuilder = ((com.huinan.proto.CpMsgCs.CSNotifyLogout) msgUnion_).toBuilder();
               }
               msgUnion_ = input.readMessage(com.huinan.proto.CpMsgCs.CSNotifyLogout.PARSER, extensionRegistry);
@@ -5036,7 +5226,7 @@ public final class CpMsg {
                 subBuilder.mergeFrom((com.huinan.proto.CpMsgCs.CSNotifyLogout) msgUnion_);
                 msgUnion_ = subBuilder.buildPartial();
               }
-              msgUnionCase_ = 59;
+              msgUnionCase_ = 100;
               break;
             }
           }
@@ -5135,14 +5325,19 @@ public final class CpMsg {
       CS_RESPONSE_CLUB_MEMBER(49),
       CS_REQUEST_CLUB_MESSAGE(50),
       CS_RESPONSE_CLUB_MESSAGE(51),
-      CS_NOTIFY_CLUB_APPLY(52),
       CS_REQUEST_CLUB_RE_ROOM(53),
       CS_RESPONSE_CLUB_RE_ROOM(54),
       CS_REQUEST_CLUB_KICK(55),
       CS_RESPONSE_CLUB_KICK(56),
       CS_REQUEST_CLUB_IS_AGREE(57),
       CS_RESPONSE_CLUB_IS_AGREE(58),
-      CS_NOTIFY_LOGOUT(59),
+      CS_REQUEST_CLUB_CREATE(59),
+      CS_RESPONSE_CLUB_CREATE(60),
+      CS_REQUEST_CLUB_APPLY(61),
+      CS_RESPONSE_CLUB_APPLY(62),
+      CS_NOTIFY_CLUB_APPLY(63),
+      CS_NOTIFY_CLUB_REFRESH(64),
+      CS_NOTIFY_LOGOUT(100),
       MSGUNION_NOT_SET(0);
       private int value = 0;
       private MsgUnionCase(int value) {
@@ -5201,14 +5396,19 @@ public final class CpMsg {
           case 49: return CS_RESPONSE_CLUB_MEMBER;
           case 50: return CS_REQUEST_CLUB_MESSAGE;
           case 51: return CS_RESPONSE_CLUB_MESSAGE;
-          case 52: return CS_NOTIFY_CLUB_APPLY;
           case 53: return CS_REQUEST_CLUB_RE_ROOM;
           case 54: return CS_RESPONSE_CLUB_RE_ROOM;
           case 55: return CS_REQUEST_CLUB_KICK;
           case 56: return CS_RESPONSE_CLUB_KICK;
           case 57: return CS_REQUEST_CLUB_IS_AGREE;
           case 58: return CS_RESPONSE_CLUB_IS_AGREE;
-          case 59: return CS_NOTIFY_LOGOUT;
+          case 59: return CS_REQUEST_CLUB_CREATE;
+          case 60: return CS_RESPONSE_CLUB_CREATE;
+          case 61: return CS_REQUEST_CLUB_APPLY;
+          case 62: return CS_RESPONSE_CLUB_APPLY;
+          case 63: return CS_NOTIFY_CLUB_APPLY;
+          case 64: return CS_NOTIFY_CLUB_REFRESH;
+          case 100: return CS_NOTIFY_LOGOUT;
           case 0: return MSGUNION_NOT_SET;
           default: throw new java.lang.IllegalArgumentException(
             "Value is undefined for this oneof enum.");
@@ -7163,44 +7363,6 @@ public final class CpMsg {
       return com.huinan.proto.CpMsgClub.CSResponseClubMessage.getDefaultInstance();
     }
 
-    public static final int CS_NOTIFY_CLUB_APPLY_FIELD_NUMBER = 52;
-    /**
-     * <code>optional .com.huinan.proto.CSNotifyClubApply cs_notify_club_apply = 52;</code>
-     *
-     * <pre>
-     *推送：俱乐部申请消息
-     * </pre>
-     */
-    public boolean hasCsNotifyClubApply() {
-      return msgUnionCase_ == 52;
-    }
-    /**
-     * <code>optional .com.huinan.proto.CSNotifyClubApply cs_notify_club_apply = 52;</code>
-     *
-     * <pre>
-     *推送：俱乐部申请消息
-     * </pre>
-     */
-    public com.huinan.proto.CpMsgClub.CSNotifyClubApply getCsNotifyClubApply() {
-      if (msgUnionCase_ == 52) {
-         return (com.huinan.proto.CpMsgClub.CSNotifyClubApply) msgUnion_;
-      }
-      return com.huinan.proto.CpMsgClub.CSNotifyClubApply.getDefaultInstance();
-    }
-    /**
-     * <code>optional .com.huinan.proto.CSNotifyClubApply cs_notify_club_apply = 52;</code>
-     *
-     * <pre>
-     *推送：俱乐部申请消息
-     * </pre>
-     */
-    public com.huinan.proto.CpMsgClub.CSNotifyClubApplyOrBuilder getCsNotifyClubApplyOrBuilder() {
-      if (msgUnionCase_ == 52) {
-         return (com.huinan.proto.CpMsgClub.CSNotifyClubApply) msgUnion_;
-      }
-      return com.huinan.proto.CpMsgClub.CSNotifyClubApply.getDefaultInstance();
-    }
-
     public static final int CS_REQUEST_CLUB_RE_ROOM_FIELD_NUMBER = 53;
     /**
      * <code>optional .com.huinan.proto.CSRequestClubRemoveRoom cs_request_club_re_room = 53;</code>
@@ -7282,7 +7444,7 @@ public final class CpMsg {
      * <code>optional .com.huinan.proto.CSRequestClubKick cs_request_club_kick = 55;</code>
      *
      * <pre>
-     *请求俱乐部:踢人
+     *请求：俱乐部踢人
      * </pre>
      */
     public boolean hasCsRequestClubKick() {
@@ -7292,7 +7454,7 @@ public final class CpMsg {
      * <code>optional .com.huinan.proto.CSRequestClubKick cs_request_club_kick = 55;</code>
      *
      * <pre>
-     *请求俱乐部:踢人
+     *请求：俱乐部踢人
      * </pre>
      */
     public com.huinan.proto.CpMsgClub.CSRequestClubKick getCsRequestClubKick() {
@@ -7305,7 +7467,7 @@ public final class CpMsg {
      * <code>optional .com.huinan.proto.CSRequestClubKick cs_request_club_kick = 55;</code>
      *
      * <pre>
-     *请求俱乐部:踢人
+     *请求：俱乐部踢人
      * </pre>
      */
     public com.huinan.proto.CpMsgClub.CSRequestClubKickOrBuilder getCsRequestClubKickOrBuilder() {
@@ -7320,7 +7482,7 @@ public final class CpMsg {
      * <code>optional .com.huinan.proto.CSResponseClubKick cs_response_club_kick = 56;</code>
      *
      * <pre>
-     *响应俱乐部:踢人
+     *响应：俱乐部踢人
      * </pre>
      */
     public boolean hasCsResponseClubKick() {
@@ -7330,7 +7492,7 @@ public final class CpMsg {
      * <code>optional .com.huinan.proto.CSResponseClubKick cs_response_club_kick = 56;</code>
      *
      * <pre>
-     *响应俱乐部:踢人
+     *响应：俱乐部踢人
      * </pre>
      */
     public com.huinan.proto.CpMsgClub.CSResponseClubKick getCsResponseClubKick() {
@@ -7343,7 +7505,7 @@ public final class CpMsg {
      * <code>optional .com.huinan.proto.CSResponseClubKick cs_response_club_kick = 56;</code>
      *
      * <pre>
-     *响应俱乐部:踢人
+     *响应：俱乐部踢人
      * </pre>
      */
     public com.huinan.proto.CpMsgClub.CSResponseClubKickOrBuilder getCsResponseClubKickOrBuilder() {
@@ -7358,7 +7520,7 @@ public final class CpMsg {
      * <code>optional .com.huinan.proto.CSRequestClubIsAgree cs_request_club_is_agree = 57;</code>
      *
      * <pre>
-     *请求俱乐部:审批
+     *请求：俱乐部审批
      * </pre>
      */
     public boolean hasCsRequestClubIsAgree() {
@@ -7368,7 +7530,7 @@ public final class CpMsg {
      * <code>optional .com.huinan.proto.CSRequestClubIsAgree cs_request_club_is_agree = 57;</code>
      *
      * <pre>
-     *请求俱乐部:审批
+     *请求：俱乐部审批
      * </pre>
      */
     public com.huinan.proto.CpMsgClub.CSRequestClubIsAgree getCsRequestClubIsAgree() {
@@ -7381,7 +7543,7 @@ public final class CpMsg {
      * <code>optional .com.huinan.proto.CSRequestClubIsAgree cs_request_club_is_agree = 57;</code>
      *
      * <pre>
-     *请求俱乐部:审批
+     *请求：俱乐部审批
      * </pre>
      */
     public com.huinan.proto.CpMsgClub.CSRequestClubIsAgreeOrBuilder getCsRequestClubIsAgreeOrBuilder() {
@@ -7396,7 +7558,7 @@ public final class CpMsg {
      * <code>optional .com.huinan.proto.CSResponseClubIsAgree cs_response_club_is_agree = 58;</code>
      *
      * <pre>
-     *响应俱乐部:审批
+     *响应：俱乐部审批
      * </pre>
      */
     public boolean hasCsResponseClubIsAgree() {
@@ -7406,7 +7568,7 @@ public final class CpMsg {
      * <code>optional .com.huinan.proto.CSResponseClubIsAgree cs_response_club_is_agree = 58;</code>
      *
      * <pre>
-     *响应俱乐部:审批
+     *响应：俱乐部审批
      * </pre>
      */
     public com.huinan.proto.CpMsgClub.CSResponseClubIsAgree getCsResponseClubIsAgree() {
@@ -7419,7 +7581,7 @@ public final class CpMsg {
      * <code>optional .com.huinan.proto.CSResponseClubIsAgree cs_response_club_is_agree = 58;</code>
      *
      * <pre>
-     *响应俱乐部:审批
+     *响应：俱乐部审批
      * </pre>
      */
     public com.huinan.proto.CpMsgClub.CSResponseClubIsAgreeOrBuilder getCsResponseClubIsAgreeOrBuilder() {
@@ -7429,39 +7591,267 @@ public final class CpMsg {
       return com.huinan.proto.CpMsgClub.CSResponseClubIsAgree.getDefaultInstance();
     }
 
-    public static final int CS_NOTIFY_LOGOUT_FIELD_NUMBER = 59;
+    public static final int CS_REQUEST_CLUB_CREATE_FIELD_NUMBER = 59;
     /**
-     * <code>optional .com.huinan.proto.CSNotifyLogout cs_notify_logout = 59;</code>
+     * <code>optional .com.huinan.proto.CSRequestClubCreate cs_request_club_create = 59;</code>
+     *
+     * <pre>
+     *后台接口移过来
+     * </pre>
+     */
+    public boolean hasCsRequestClubCreate() {
+      return msgUnionCase_ == 59;
+    }
+    /**
+     * <code>optional .com.huinan.proto.CSRequestClubCreate cs_request_club_create = 59;</code>
+     *
+     * <pre>
+     *后台接口移过来
+     * </pre>
+     */
+    public com.huinan.proto.CpMsgClub.CSRequestClubCreate getCsRequestClubCreate() {
+      if (msgUnionCase_ == 59) {
+         return (com.huinan.proto.CpMsgClub.CSRequestClubCreate) msgUnion_;
+      }
+      return com.huinan.proto.CpMsgClub.CSRequestClubCreate.getDefaultInstance();
+    }
+    /**
+     * <code>optional .com.huinan.proto.CSRequestClubCreate cs_request_club_create = 59;</code>
+     *
+     * <pre>
+     *后台接口移过来
+     * </pre>
+     */
+    public com.huinan.proto.CpMsgClub.CSRequestClubCreateOrBuilder getCsRequestClubCreateOrBuilder() {
+      if (msgUnionCase_ == 59) {
+         return (com.huinan.proto.CpMsgClub.CSRequestClubCreate) msgUnion_;
+      }
+      return com.huinan.proto.CpMsgClub.CSRequestClubCreate.getDefaultInstance();
+    }
+
+    public static final int CS_RESPONSE_CLUB_CREATE_FIELD_NUMBER = 60;
+    /**
+     * <code>optional .com.huinan.proto.CSResponseClubCreate cs_response_club_create = 60;</code>
+     *
+     * <pre>
+     *响应：创建俱乐部
+     * </pre>
+     */
+    public boolean hasCsResponseClubCreate() {
+      return msgUnionCase_ == 60;
+    }
+    /**
+     * <code>optional .com.huinan.proto.CSResponseClubCreate cs_response_club_create = 60;</code>
+     *
+     * <pre>
+     *响应：创建俱乐部
+     * </pre>
+     */
+    public com.huinan.proto.CpMsgClub.CSResponseClubCreate getCsResponseClubCreate() {
+      if (msgUnionCase_ == 60) {
+         return (com.huinan.proto.CpMsgClub.CSResponseClubCreate) msgUnion_;
+      }
+      return com.huinan.proto.CpMsgClub.CSResponseClubCreate.getDefaultInstance();
+    }
+    /**
+     * <code>optional .com.huinan.proto.CSResponseClubCreate cs_response_club_create = 60;</code>
+     *
+     * <pre>
+     *响应：创建俱乐部
+     * </pre>
+     */
+    public com.huinan.proto.CpMsgClub.CSResponseClubCreateOrBuilder getCsResponseClubCreateOrBuilder() {
+      if (msgUnionCase_ == 60) {
+         return (com.huinan.proto.CpMsgClub.CSResponseClubCreate) msgUnion_;
+      }
+      return com.huinan.proto.CpMsgClub.CSResponseClubCreate.getDefaultInstance();
+    }
+
+    public static final int CS_REQUEST_CLUB_APPLY_FIELD_NUMBER = 61;
+    /**
+     * <code>optional .com.huinan.proto.CSRequestClubApply cs_request_club_apply = 61;</code>
+     *
+     * <pre>
+     *请求：申请俱乐部
+     * </pre>
+     */
+    public boolean hasCsRequestClubApply() {
+      return msgUnionCase_ == 61;
+    }
+    /**
+     * <code>optional .com.huinan.proto.CSRequestClubApply cs_request_club_apply = 61;</code>
+     *
+     * <pre>
+     *请求：申请俱乐部
+     * </pre>
+     */
+    public com.huinan.proto.CpMsgClub.CSRequestClubApply getCsRequestClubApply() {
+      if (msgUnionCase_ == 61) {
+         return (com.huinan.proto.CpMsgClub.CSRequestClubApply) msgUnion_;
+      }
+      return com.huinan.proto.CpMsgClub.CSRequestClubApply.getDefaultInstance();
+    }
+    /**
+     * <code>optional .com.huinan.proto.CSRequestClubApply cs_request_club_apply = 61;</code>
+     *
+     * <pre>
+     *请求：申请俱乐部
+     * </pre>
+     */
+    public com.huinan.proto.CpMsgClub.CSRequestClubApplyOrBuilder getCsRequestClubApplyOrBuilder() {
+      if (msgUnionCase_ == 61) {
+         return (com.huinan.proto.CpMsgClub.CSRequestClubApply) msgUnion_;
+      }
+      return com.huinan.proto.CpMsgClub.CSRequestClubApply.getDefaultInstance();
+    }
+
+    public static final int CS_RESPONSE_CLUB_APPLY_FIELD_NUMBER = 62;
+    /**
+     * <code>optional .com.huinan.proto.CSResponseClubApply cs_response_club_apply = 62;</code>
+     *
+     * <pre>
+     *响应：申请俱乐部
+     * </pre>
+     */
+    public boolean hasCsResponseClubApply() {
+      return msgUnionCase_ == 62;
+    }
+    /**
+     * <code>optional .com.huinan.proto.CSResponseClubApply cs_response_club_apply = 62;</code>
+     *
+     * <pre>
+     *响应：申请俱乐部
+     * </pre>
+     */
+    public com.huinan.proto.CpMsgClub.CSResponseClubApply getCsResponseClubApply() {
+      if (msgUnionCase_ == 62) {
+         return (com.huinan.proto.CpMsgClub.CSResponseClubApply) msgUnion_;
+      }
+      return com.huinan.proto.CpMsgClub.CSResponseClubApply.getDefaultInstance();
+    }
+    /**
+     * <code>optional .com.huinan.proto.CSResponseClubApply cs_response_club_apply = 62;</code>
+     *
+     * <pre>
+     *响应：申请俱乐部
+     * </pre>
+     */
+    public com.huinan.proto.CpMsgClub.CSResponseClubApplyOrBuilder getCsResponseClubApplyOrBuilder() {
+      if (msgUnionCase_ == 62) {
+         return (com.huinan.proto.CpMsgClub.CSResponseClubApply) msgUnion_;
+      }
+      return com.huinan.proto.CpMsgClub.CSResponseClubApply.getDefaultInstance();
+    }
+
+    public static final int CS_NOTIFY_CLUB_APPLY_FIELD_NUMBER = 63;
+    /**
+     * <code>optional .com.huinan.proto.CSNotifyClubApply cs_notify_club_apply = 63;</code>
+     *
+     * <pre>
+     *推送：俱乐部申请消息
+     * </pre>
+     */
+    public boolean hasCsNotifyClubApply() {
+      return msgUnionCase_ == 63;
+    }
+    /**
+     * <code>optional .com.huinan.proto.CSNotifyClubApply cs_notify_club_apply = 63;</code>
+     *
+     * <pre>
+     *推送：俱乐部申请消息
+     * </pre>
+     */
+    public com.huinan.proto.CpMsgClub.CSNotifyClubApply getCsNotifyClubApply() {
+      if (msgUnionCase_ == 63) {
+         return (com.huinan.proto.CpMsgClub.CSNotifyClubApply) msgUnion_;
+      }
+      return com.huinan.proto.CpMsgClub.CSNotifyClubApply.getDefaultInstance();
+    }
+    /**
+     * <code>optional .com.huinan.proto.CSNotifyClubApply cs_notify_club_apply = 63;</code>
+     *
+     * <pre>
+     *推送：俱乐部申请消息
+     * </pre>
+     */
+    public com.huinan.proto.CpMsgClub.CSNotifyClubApplyOrBuilder getCsNotifyClubApplyOrBuilder() {
+      if (msgUnionCase_ == 63) {
+         return (com.huinan.proto.CpMsgClub.CSNotifyClubApply) msgUnion_;
+      }
+      return com.huinan.proto.CpMsgClub.CSNotifyClubApply.getDefaultInstance();
+    }
+
+    public static final int CS_NOTIFY_CLUB_REFRESH_FIELD_NUMBER = 64;
+    /**
+     * <code>optional .com.huinan.proto.CSNotifyClubRefresh cs_notify_club_refresh = 64;</code>
+     *
+     * <pre>
+     *推送：俱乐部刷新俱乐部列表
+     * </pre>
+     */
+    public boolean hasCsNotifyClubRefresh() {
+      return msgUnionCase_ == 64;
+    }
+    /**
+     * <code>optional .com.huinan.proto.CSNotifyClubRefresh cs_notify_club_refresh = 64;</code>
+     *
+     * <pre>
+     *推送：俱乐部刷新俱乐部列表
+     * </pre>
+     */
+    public com.huinan.proto.CpMsgClub.CSNotifyClubRefresh getCsNotifyClubRefresh() {
+      if (msgUnionCase_ == 64) {
+         return (com.huinan.proto.CpMsgClub.CSNotifyClubRefresh) msgUnion_;
+      }
+      return com.huinan.proto.CpMsgClub.CSNotifyClubRefresh.getDefaultInstance();
+    }
+    /**
+     * <code>optional .com.huinan.proto.CSNotifyClubRefresh cs_notify_club_refresh = 64;</code>
+     *
+     * <pre>
+     *推送：俱乐部刷新俱乐部列表
+     * </pre>
+     */
+    public com.huinan.proto.CpMsgClub.CSNotifyClubRefreshOrBuilder getCsNotifyClubRefreshOrBuilder() {
+      if (msgUnionCase_ == 64) {
+         return (com.huinan.proto.CpMsgClub.CSNotifyClubRefresh) msgUnion_;
+      }
+      return com.huinan.proto.CpMsgClub.CSNotifyClubRefresh.getDefaultInstance();
+    }
+
+    public static final int CS_NOTIFY_LOGOUT_FIELD_NUMBER = 100;
+    /**
+     * <code>optional .com.huinan.proto.CSNotifyLogout cs_notify_logout = 100;</code>
      *
      * <pre>
      *登录推送
      * </pre>
      */
     public boolean hasCsNotifyLogout() {
-      return msgUnionCase_ == 59;
+      return msgUnionCase_ == 100;
     }
     /**
-     * <code>optional .com.huinan.proto.CSNotifyLogout cs_notify_logout = 59;</code>
+     * <code>optional .com.huinan.proto.CSNotifyLogout cs_notify_logout = 100;</code>
      *
      * <pre>
      *登录推送
      * </pre>
      */
     public com.huinan.proto.CpMsgCs.CSNotifyLogout getCsNotifyLogout() {
-      if (msgUnionCase_ == 59) {
+      if (msgUnionCase_ == 100) {
          return (com.huinan.proto.CpMsgCs.CSNotifyLogout) msgUnion_;
       }
       return com.huinan.proto.CpMsgCs.CSNotifyLogout.getDefaultInstance();
     }
     /**
-     * <code>optional .com.huinan.proto.CSNotifyLogout cs_notify_logout = 59;</code>
+     * <code>optional .com.huinan.proto.CSNotifyLogout cs_notify_logout = 100;</code>
      *
      * <pre>
      *登录推送
      * </pre>
      */
     public com.huinan.proto.CpMsgCs.CSNotifyLogoutOrBuilder getCsNotifyLogoutOrBuilder() {
-      if (msgUnionCase_ == 59) {
+      if (msgUnionCase_ == 100) {
          return (com.huinan.proto.CpMsgCs.CSNotifyLogout) msgUnion_;
       }
       return com.huinan.proto.CpMsgCs.CSNotifyLogout.getDefaultInstance();
@@ -7475,6 +7865,60 @@ public final class CpMsg {
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
 
+      if (hasCsRequestClubRoom()) {
+        if (!getCsRequestClubRoom().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      if (hasCsRequestClubMember()) {
+        if (!getCsRequestClubMember().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      if (hasCsRequestClubMessage()) {
+        if (!getCsRequestClubMessage().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      if (hasCsRequestClubReRoom()) {
+        if (!getCsRequestClubReRoom().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      if (hasCsRequestClubKick()) {
+        if (!getCsRequestClubKick().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      if (hasCsRequestClubIsAgree()) {
+        if (!getCsRequestClubIsAgree().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      if (hasCsRequestClubCreate()) {
+        if (!getCsRequestClubCreate().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      if (hasCsRequestClubApply()) {
+        if (!getCsRequestClubApply().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      if (hasCsNotifyClubApply()) {
+        if (!getCsNotifyClubApply().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -7635,9 +8079,6 @@ public final class CpMsg {
       if (msgUnionCase_ == 51) {
         output.writeMessage(51, (com.huinan.proto.CpMsgClub.CSResponseClubMessage) msgUnion_);
       }
-      if (msgUnionCase_ == 52) {
-        output.writeMessage(52, (com.huinan.proto.CpMsgClub.CSNotifyClubApply) msgUnion_);
-      }
       if (msgUnionCase_ == 53) {
         output.writeMessage(53, (com.huinan.proto.CpMsgClub.CSRequestClubRemoveRoom) msgUnion_);
       }
@@ -7657,7 +8098,25 @@ public final class CpMsg {
         output.writeMessage(58, (com.huinan.proto.CpMsgClub.CSResponseClubIsAgree) msgUnion_);
       }
       if (msgUnionCase_ == 59) {
-        output.writeMessage(59, (com.huinan.proto.CpMsgCs.CSNotifyLogout) msgUnion_);
+        output.writeMessage(59, (com.huinan.proto.CpMsgClub.CSRequestClubCreate) msgUnion_);
+      }
+      if (msgUnionCase_ == 60) {
+        output.writeMessage(60, (com.huinan.proto.CpMsgClub.CSResponseClubCreate) msgUnion_);
+      }
+      if (msgUnionCase_ == 61) {
+        output.writeMessage(61, (com.huinan.proto.CpMsgClub.CSRequestClubApply) msgUnion_);
+      }
+      if (msgUnionCase_ == 62) {
+        output.writeMessage(62, (com.huinan.proto.CpMsgClub.CSResponseClubApply) msgUnion_);
+      }
+      if (msgUnionCase_ == 63) {
+        output.writeMessage(63, (com.huinan.proto.CpMsgClub.CSNotifyClubApply) msgUnion_);
+      }
+      if (msgUnionCase_ == 64) {
+        output.writeMessage(64, (com.huinan.proto.CpMsgClub.CSNotifyClubRefresh) msgUnion_);
+      }
+      if (msgUnionCase_ == 100) {
+        output.writeMessage(100, (com.huinan.proto.CpMsgCs.CSNotifyLogout) msgUnion_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -7872,10 +8331,6 @@ public final class CpMsg {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(51, (com.huinan.proto.CpMsgClub.CSResponseClubMessage) msgUnion_);
       }
-      if (msgUnionCase_ == 52) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(52, (com.huinan.proto.CpMsgClub.CSNotifyClubApply) msgUnion_);
-      }
       if (msgUnionCase_ == 53) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(53, (com.huinan.proto.CpMsgClub.CSRequestClubRemoveRoom) msgUnion_);
@@ -7902,7 +8357,31 @@ public final class CpMsg {
       }
       if (msgUnionCase_ == 59) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(59, (com.huinan.proto.CpMsgCs.CSNotifyLogout) msgUnion_);
+          .computeMessageSize(59, (com.huinan.proto.CpMsgClub.CSRequestClubCreate) msgUnion_);
+      }
+      if (msgUnionCase_ == 60) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(60, (com.huinan.proto.CpMsgClub.CSResponseClubCreate) msgUnion_);
+      }
+      if (msgUnionCase_ == 61) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(61, (com.huinan.proto.CpMsgClub.CSRequestClubApply) msgUnion_);
+      }
+      if (msgUnionCase_ == 62) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(62, (com.huinan.proto.CpMsgClub.CSResponseClubApply) msgUnion_);
+      }
+      if (msgUnionCase_ == 63) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(63, (com.huinan.proto.CpMsgClub.CSNotifyClubApply) msgUnion_);
+      }
+      if (msgUnionCase_ == 64) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(64, (com.huinan.proto.CpMsgClub.CSNotifyClubRefresh) msgUnion_);
+      }
+      if (msgUnionCase_ == 100) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(100, (com.huinan.proto.CpMsgCs.CSNotifyLogout) msgUnion_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -8414,13 +8893,6 @@ public final class CpMsg {
             result.msgUnion_ = csResponseClubMessageBuilder_.build();
           }
         }
-        if (msgUnionCase_ == 52) {
-          if (csNotifyClubApplyBuilder_ == null) {
-            result.msgUnion_ = msgUnion_;
-          } else {
-            result.msgUnion_ = csNotifyClubApplyBuilder_.build();
-          }
-        }
         if (msgUnionCase_ == 53) {
           if (csRequestClubReRoomBuilder_ == null) {
             result.msgUnion_ = msgUnion_;
@@ -8464,6 +8936,48 @@ public final class CpMsg {
           }
         }
         if (msgUnionCase_ == 59) {
+          if (csRequestClubCreateBuilder_ == null) {
+            result.msgUnion_ = msgUnion_;
+          } else {
+            result.msgUnion_ = csRequestClubCreateBuilder_.build();
+          }
+        }
+        if (msgUnionCase_ == 60) {
+          if (csResponseClubCreateBuilder_ == null) {
+            result.msgUnion_ = msgUnion_;
+          } else {
+            result.msgUnion_ = csResponseClubCreateBuilder_.build();
+          }
+        }
+        if (msgUnionCase_ == 61) {
+          if (csRequestClubApplyBuilder_ == null) {
+            result.msgUnion_ = msgUnion_;
+          } else {
+            result.msgUnion_ = csRequestClubApplyBuilder_.build();
+          }
+        }
+        if (msgUnionCase_ == 62) {
+          if (csResponseClubApplyBuilder_ == null) {
+            result.msgUnion_ = msgUnion_;
+          } else {
+            result.msgUnion_ = csResponseClubApplyBuilder_.build();
+          }
+        }
+        if (msgUnionCase_ == 63) {
+          if (csNotifyClubApplyBuilder_ == null) {
+            result.msgUnion_ = msgUnion_;
+          } else {
+            result.msgUnion_ = csNotifyClubApplyBuilder_.build();
+          }
+        }
+        if (msgUnionCase_ == 64) {
+          if (csNotifyClubRefreshBuilder_ == null) {
+            result.msgUnion_ = msgUnion_;
+          } else {
+            result.msgUnion_ = csNotifyClubRefreshBuilder_.build();
+          }
+        }
+        if (msgUnionCase_ == 100) {
           if (csNotifyLogoutBuilder_ == null) {
             result.msgUnion_ = msgUnion_;
           } else {
@@ -8693,10 +9207,6 @@ public final class CpMsg {
             mergeCsResponseClubMessage(other.getCsResponseClubMessage());
             break;
           }
-          case CS_NOTIFY_CLUB_APPLY: {
-            mergeCsNotifyClubApply(other.getCsNotifyClubApply());
-            break;
-          }
           case CS_REQUEST_CLUB_RE_ROOM: {
             mergeCsRequestClubReRoom(other.getCsRequestClubReRoom());
             break;
@@ -8721,6 +9231,30 @@ public final class CpMsg {
             mergeCsResponseClubIsAgree(other.getCsResponseClubIsAgree());
             break;
           }
+          case CS_REQUEST_CLUB_CREATE: {
+            mergeCsRequestClubCreate(other.getCsRequestClubCreate());
+            break;
+          }
+          case CS_RESPONSE_CLUB_CREATE: {
+            mergeCsResponseClubCreate(other.getCsResponseClubCreate());
+            break;
+          }
+          case CS_REQUEST_CLUB_APPLY: {
+            mergeCsRequestClubApply(other.getCsRequestClubApply());
+            break;
+          }
+          case CS_RESPONSE_CLUB_APPLY: {
+            mergeCsResponseClubApply(other.getCsResponseClubApply());
+            break;
+          }
+          case CS_NOTIFY_CLUB_APPLY: {
+            mergeCsNotifyClubApply(other.getCsNotifyClubApply());
+            break;
+          }
+          case CS_NOTIFY_CLUB_REFRESH: {
+            mergeCsNotifyClubRefresh(other.getCsNotifyClubRefresh());
+            break;
+          }
           case CS_NOTIFY_LOGOUT: {
             mergeCsNotifyLogout(other.getCsNotifyLogout());
             break;
@@ -8734,6 +9268,60 @@ public final class CpMsg {
       }
 
       public final boolean isInitialized() {
+        if (hasCsRequestClubRoom()) {
+          if (!getCsRequestClubRoom().isInitialized()) {
+            
+            return false;
+          }
+        }
+        if (hasCsRequestClubMember()) {
+          if (!getCsRequestClubMember().isInitialized()) {
+            
+            return false;
+          }
+        }
+        if (hasCsRequestClubMessage()) {
+          if (!getCsRequestClubMessage().isInitialized()) {
+            
+            return false;
+          }
+        }
+        if (hasCsRequestClubReRoom()) {
+          if (!getCsRequestClubReRoom().isInitialized()) {
+            
+            return false;
+          }
+        }
+        if (hasCsRequestClubKick()) {
+          if (!getCsRequestClubKick().isInitialized()) {
+            
+            return false;
+          }
+        }
+        if (hasCsRequestClubIsAgree()) {
+          if (!getCsRequestClubIsAgree().isInitialized()) {
+            
+            return false;
+          }
+        }
+        if (hasCsRequestClubCreate()) {
+          if (!getCsRequestClubCreate().isInitialized()) {
+            
+            return false;
+          }
+        }
+        if (hasCsRequestClubApply()) {
+          if (!getCsRequestClubApply().isInitialized()) {
+            
+            return false;
+          }
+        }
+        if (hasCsNotifyClubApply()) {
+          if (!getCsNotifyClubApply().isInitialized()) {
+            
+            return false;
+          }
+        }
         return true;
       }
 
@@ -17494,177 +18082,6 @@ public final class CpMsg {
       }
 
       private com.google.protobuf.SingleFieldBuilder<
-          com.huinan.proto.CpMsgClub.CSNotifyClubApply, com.huinan.proto.CpMsgClub.CSNotifyClubApply.Builder, com.huinan.proto.CpMsgClub.CSNotifyClubApplyOrBuilder> csNotifyClubApplyBuilder_;
-      /**
-       * <code>optional .com.huinan.proto.CSNotifyClubApply cs_notify_club_apply = 52;</code>
-       *
-       * <pre>
-       *推送：俱乐部申请消息
-       * </pre>
-       */
-      public boolean hasCsNotifyClubApply() {
-        return msgUnionCase_ == 52;
-      }
-      /**
-       * <code>optional .com.huinan.proto.CSNotifyClubApply cs_notify_club_apply = 52;</code>
-       *
-       * <pre>
-       *推送：俱乐部申请消息
-       * </pre>
-       */
-      public com.huinan.proto.CpMsgClub.CSNotifyClubApply getCsNotifyClubApply() {
-        if (csNotifyClubApplyBuilder_ == null) {
-          if (msgUnionCase_ == 52) {
-            return (com.huinan.proto.CpMsgClub.CSNotifyClubApply) msgUnion_;
-          }
-          return com.huinan.proto.CpMsgClub.CSNotifyClubApply.getDefaultInstance();
-        } else {
-          if (msgUnionCase_ == 52) {
-            return csNotifyClubApplyBuilder_.getMessage();
-          }
-          return com.huinan.proto.CpMsgClub.CSNotifyClubApply.getDefaultInstance();
-        }
-      }
-      /**
-       * <code>optional .com.huinan.proto.CSNotifyClubApply cs_notify_club_apply = 52;</code>
-       *
-       * <pre>
-       *推送：俱乐部申请消息
-       * </pre>
-       */
-      public Builder setCsNotifyClubApply(com.huinan.proto.CpMsgClub.CSNotifyClubApply value) {
-        if (csNotifyClubApplyBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          msgUnion_ = value;
-          onChanged();
-        } else {
-          csNotifyClubApplyBuilder_.setMessage(value);
-        }
-        msgUnionCase_ = 52;
-        return this;
-      }
-      /**
-       * <code>optional .com.huinan.proto.CSNotifyClubApply cs_notify_club_apply = 52;</code>
-       *
-       * <pre>
-       *推送：俱乐部申请消息
-       * </pre>
-       */
-      public Builder setCsNotifyClubApply(
-          com.huinan.proto.CpMsgClub.CSNotifyClubApply.Builder builderForValue) {
-        if (csNotifyClubApplyBuilder_ == null) {
-          msgUnion_ = builderForValue.build();
-          onChanged();
-        } else {
-          csNotifyClubApplyBuilder_.setMessage(builderForValue.build());
-        }
-        msgUnionCase_ = 52;
-        return this;
-      }
-      /**
-       * <code>optional .com.huinan.proto.CSNotifyClubApply cs_notify_club_apply = 52;</code>
-       *
-       * <pre>
-       *推送：俱乐部申请消息
-       * </pre>
-       */
-      public Builder mergeCsNotifyClubApply(com.huinan.proto.CpMsgClub.CSNotifyClubApply value) {
-        if (csNotifyClubApplyBuilder_ == null) {
-          if (msgUnionCase_ == 52 &&
-              msgUnion_ != com.huinan.proto.CpMsgClub.CSNotifyClubApply.getDefaultInstance()) {
-            msgUnion_ = com.huinan.proto.CpMsgClub.CSNotifyClubApply.newBuilder((com.huinan.proto.CpMsgClub.CSNotifyClubApply) msgUnion_)
-                .mergeFrom(value).buildPartial();
-          } else {
-            msgUnion_ = value;
-          }
-          onChanged();
-        } else {
-          if (msgUnionCase_ == 52) {
-            csNotifyClubApplyBuilder_.mergeFrom(value);
-          }
-          csNotifyClubApplyBuilder_.setMessage(value);
-        }
-        msgUnionCase_ = 52;
-        return this;
-      }
-      /**
-       * <code>optional .com.huinan.proto.CSNotifyClubApply cs_notify_club_apply = 52;</code>
-       *
-       * <pre>
-       *推送：俱乐部申请消息
-       * </pre>
-       */
-      public Builder clearCsNotifyClubApply() {
-        if (csNotifyClubApplyBuilder_ == null) {
-          if (msgUnionCase_ == 52) {
-            msgUnionCase_ = 0;
-            msgUnion_ = null;
-            onChanged();
-          }
-        } else {
-          if (msgUnionCase_ == 52) {
-            msgUnionCase_ = 0;
-            msgUnion_ = null;
-          }
-          csNotifyClubApplyBuilder_.clear();
-        }
-        return this;
-      }
-      /**
-       * <code>optional .com.huinan.proto.CSNotifyClubApply cs_notify_club_apply = 52;</code>
-       *
-       * <pre>
-       *推送：俱乐部申请消息
-       * </pre>
-       */
-      public com.huinan.proto.CpMsgClub.CSNotifyClubApply.Builder getCsNotifyClubApplyBuilder() {
-        return getCsNotifyClubApplyFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>optional .com.huinan.proto.CSNotifyClubApply cs_notify_club_apply = 52;</code>
-       *
-       * <pre>
-       *推送：俱乐部申请消息
-       * </pre>
-       */
-      public com.huinan.proto.CpMsgClub.CSNotifyClubApplyOrBuilder getCsNotifyClubApplyOrBuilder() {
-        if ((msgUnionCase_ == 52) && (csNotifyClubApplyBuilder_ != null)) {
-          return csNotifyClubApplyBuilder_.getMessageOrBuilder();
-        } else {
-          if (msgUnionCase_ == 52) {
-            return (com.huinan.proto.CpMsgClub.CSNotifyClubApply) msgUnion_;
-          }
-          return com.huinan.proto.CpMsgClub.CSNotifyClubApply.getDefaultInstance();
-        }
-      }
-      /**
-       * <code>optional .com.huinan.proto.CSNotifyClubApply cs_notify_club_apply = 52;</code>
-       *
-       * <pre>
-       *推送：俱乐部申请消息
-       * </pre>
-       */
-      private com.google.protobuf.SingleFieldBuilder<
-          com.huinan.proto.CpMsgClub.CSNotifyClubApply, com.huinan.proto.CpMsgClub.CSNotifyClubApply.Builder, com.huinan.proto.CpMsgClub.CSNotifyClubApplyOrBuilder> 
-          getCsNotifyClubApplyFieldBuilder() {
-        if (csNotifyClubApplyBuilder_ == null) {
-          if (!(msgUnionCase_ == 52)) {
-            msgUnion_ = com.huinan.proto.CpMsgClub.CSNotifyClubApply.getDefaultInstance();
-          }
-          csNotifyClubApplyBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.huinan.proto.CpMsgClub.CSNotifyClubApply, com.huinan.proto.CpMsgClub.CSNotifyClubApply.Builder, com.huinan.proto.CpMsgClub.CSNotifyClubApplyOrBuilder>(
-                  (com.huinan.proto.CpMsgClub.CSNotifyClubApply) msgUnion_,
-                  getParentForChildren(),
-                  isClean());
-          msgUnion_ = null;
-        }
-        msgUnionCase_ = 52;
-        return csNotifyClubApplyBuilder_;
-      }
-
-      private com.google.protobuf.SingleFieldBuilder<
           com.huinan.proto.CpMsgClub.CSRequestClubRemoveRoom, com.huinan.proto.CpMsgClub.CSRequestClubRemoveRoom.Builder, com.huinan.proto.CpMsgClub.CSRequestClubRemoveRoomOrBuilder> csRequestClubReRoomBuilder_;
       /**
        * <code>optional .com.huinan.proto.CSRequestClubRemoveRoom cs_request_club_re_room = 53;</code>
@@ -18012,7 +18429,7 @@ public final class CpMsg {
        * <code>optional .com.huinan.proto.CSRequestClubKick cs_request_club_kick = 55;</code>
        *
        * <pre>
-       *请求俱乐部:踢人
+       *请求：俱乐部踢人
        * </pre>
        */
       public boolean hasCsRequestClubKick() {
@@ -18022,7 +18439,7 @@ public final class CpMsg {
        * <code>optional .com.huinan.proto.CSRequestClubKick cs_request_club_kick = 55;</code>
        *
        * <pre>
-       *请求俱乐部:踢人
+       *请求：俱乐部踢人
        * </pre>
        */
       public com.huinan.proto.CpMsgClub.CSRequestClubKick getCsRequestClubKick() {
@@ -18042,7 +18459,7 @@ public final class CpMsg {
        * <code>optional .com.huinan.proto.CSRequestClubKick cs_request_club_kick = 55;</code>
        *
        * <pre>
-       *请求俱乐部:踢人
+       *请求：俱乐部踢人
        * </pre>
        */
       public Builder setCsRequestClubKick(com.huinan.proto.CpMsgClub.CSRequestClubKick value) {
@@ -18062,7 +18479,7 @@ public final class CpMsg {
        * <code>optional .com.huinan.proto.CSRequestClubKick cs_request_club_kick = 55;</code>
        *
        * <pre>
-       *请求俱乐部:踢人
+       *请求：俱乐部踢人
        * </pre>
        */
       public Builder setCsRequestClubKick(
@@ -18080,7 +18497,7 @@ public final class CpMsg {
        * <code>optional .com.huinan.proto.CSRequestClubKick cs_request_club_kick = 55;</code>
        *
        * <pre>
-       *请求俱乐部:踢人
+       *请求：俱乐部踢人
        * </pre>
        */
       public Builder mergeCsRequestClubKick(com.huinan.proto.CpMsgClub.CSRequestClubKick value) {
@@ -18106,7 +18523,7 @@ public final class CpMsg {
        * <code>optional .com.huinan.proto.CSRequestClubKick cs_request_club_kick = 55;</code>
        *
        * <pre>
-       *请求俱乐部:踢人
+       *请求：俱乐部踢人
        * </pre>
        */
       public Builder clearCsRequestClubKick() {
@@ -18129,7 +18546,7 @@ public final class CpMsg {
        * <code>optional .com.huinan.proto.CSRequestClubKick cs_request_club_kick = 55;</code>
        *
        * <pre>
-       *请求俱乐部:踢人
+       *请求：俱乐部踢人
        * </pre>
        */
       public com.huinan.proto.CpMsgClub.CSRequestClubKick.Builder getCsRequestClubKickBuilder() {
@@ -18139,7 +18556,7 @@ public final class CpMsg {
        * <code>optional .com.huinan.proto.CSRequestClubKick cs_request_club_kick = 55;</code>
        *
        * <pre>
-       *请求俱乐部:踢人
+       *请求：俱乐部踢人
        * </pre>
        */
       public com.huinan.proto.CpMsgClub.CSRequestClubKickOrBuilder getCsRequestClubKickOrBuilder() {
@@ -18156,7 +18573,7 @@ public final class CpMsg {
        * <code>optional .com.huinan.proto.CSRequestClubKick cs_request_club_kick = 55;</code>
        *
        * <pre>
-       *请求俱乐部:踢人
+       *请求：俱乐部踢人
        * </pre>
        */
       private com.google.protobuf.SingleFieldBuilder<
@@ -18183,7 +18600,7 @@ public final class CpMsg {
        * <code>optional .com.huinan.proto.CSResponseClubKick cs_response_club_kick = 56;</code>
        *
        * <pre>
-       *响应俱乐部:踢人
+       *响应：俱乐部踢人
        * </pre>
        */
       public boolean hasCsResponseClubKick() {
@@ -18193,7 +18610,7 @@ public final class CpMsg {
        * <code>optional .com.huinan.proto.CSResponseClubKick cs_response_club_kick = 56;</code>
        *
        * <pre>
-       *响应俱乐部:踢人
+       *响应：俱乐部踢人
        * </pre>
        */
       public com.huinan.proto.CpMsgClub.CSResponseClubKick getCsResponseClubKick() {
@@ -18213,7 +18630,7 @@ public final class CpMsg {
        * <code>optional .com.huinan.proto.CSResponseClubKick cs_response_club_kick = 56;</code>
        *
        * <pre>
-       *响应俱乐部:踢人
+       *响应：俱乐部踢人
        * </pre>
        */
       public Builder setCsResponseClubKick(com.huinan.proto.CpMsgClub.CSResponseClubKick value) {
@@ -18233,7 +18650,7 @@ public final class CpMsg {
        * <code>optional .com.huinan.proto.CSResponseClubKick cs_response_club_kick = 56;</code>
        *
        * <pre>
-       *响应俱乐部:踢人
+       *响应：俱乐部踢人
        * </pre>
        */
       public Builder setCsResponseClubKick(
@@ -18251,7 +18668,7 @@ public final class CpMsg {
        * <code>optional .com.huinan.proto.CSResponseClubKick cs_response_club_kick = 56;</code>
        *
        * <pre>
-       *响应俱乐部:踢人
+       *响应：俱乐部踢人
        * </pre>
        */
       public Builder mergeCsResponseClubKick(com.huinan.proto.CpMsgClub.CSResponseClubKick value) {
@@ -18277,7 +18694,7 @@ public final class CpMsg {
        * <code>optional .com.huinan.proto.CSResponseClubKick cs_response_club_kick = 56;</code>
        *
        * <pre>
-       *响应俱乐部:踢人
+       *响应：俱乐部踢人
        * </pre>
        */
       public Builder clearCsResponseClubKick() {
@@ -18300,7 +18717,7 @@ public final class CpMsg {
        * <code>optional .com.huinan.proto.CSResponseClubKick cs_response_club_kick = 56;</code>
        *
        * <pre>
-       *响应俱乐部:踢人
+       *响应：俱乐部踢人
        * </pre>
        */
       public com.huinan.proto.CpMsgClub.CSResponseClubKick.Builder getCsResponseClubKickBuilder() {
@@ -18310,7 +18727,7 @@ public final class CpMsg {
        * <code>optional .com.huinan.proto.CSResponseClubKick cs_response_club_kick = 56;</code>
        *
        * <pre>
-       *响应俱乐部:踢人
+       *响应：俱乐部踢人
        * </pre>
        */
       public com.huinan.proto.CpMsgClub.CSResponseClubKickOrBuilder getCsResponseClubKickOrBuilder() {
@@ -18327,7 +18744,7 @@ public final class CpMsg {
        * <code>optional .com.huinan.proto.CSResponseClubKick cs_response_club_kick = 56;</code>
        *
        * <pre>
-       *响应俱乐部:踢人
+       *响应：俱乐部踢人
        * </pre>
        */
       private com.google.protobuf.SingleFieldBuilder<
@@ -18354,7 +18771,7 @@ public final class CpMsg {
        * <code>optional .com.huinan.proto.CSRequestClubIsAgree cs_request_club_is_agree = 57;</code>
        *
        * <pre>
-       *请求俱乐部:审批
+       *请求：俱乐部审批
        * </pre>
        */
       public boolean hasCsRequestClubIsAgree() {
@@ -18364,7 +18781,7 @@ public final class CpMsg {
        * <code>optional .com.huinan.proto.CSRequestClubIsAgree cs_request_club_is_agree = 57;</code>
        *
        * <pre>
-       *请求俱乐部:审批
+       *请求：俱乐部审批
        * </pre>
        */
       public com.huinan.proto.CpMsgClub.CSRequestClubIsAgree getCsRequestClubIsAgree() {
@@ -18384,7 +18801,7 @@ public final class CpMsg {
        * <code>optional .com.huinan.proto.CSRequestClubIsAgree cs_request_club_is_agree = 57;</code>
        *
        * <pre>
-       *请求俱乐部:审批
+       *请求：俱乐部审批
        * </pre>
        */
       public Builder setCsRequestClubIsAgree(com.huinan.proto.CpMsgClub.CSRequestClubIsAgree value) {
@@ -18404,7 +18821,7 @@ public final class CpMsg {
        * <code>optional .com.huinan.proto.CSRequestClubIsAgree cs_request_club_is_agree = 57;</code>
        *
        * <pre>
-       *请求俱乐部:审批
+       *请求：俱乐部审批
        * </pre>
        */
       public Builder setCsRequestClubIsAgree(
@@ -18422,7 +18839,7 @@ public final class CpMsg {
        * <code>optional .com.huinan.proto.CSRequestClubIsAgree cs_request_club_is_agree = 57;</code>
        *
        * <pre>
-       *请求俱乐部:审批
+       *请求：俱乐部审批
        * </pre>
        */
       public Builder mergeCsRequestClubIsAgree(com.huinan.proto.CpMsgClub.CSRequestClubIsAgree value) {
@@ -18448,7 +18865,7 @@ public final class CpMsg {
        * <code>optional .com.huinan.proto.CSRequestClubIsAgree cs_request_club_is_agree = 57;</code>
        *
        * <pre>
-       *请求俱乐部:审批
+       *请求：俱乐部审批
        * </pre>
        */
       public Builder clearCsRequestClubIsAgree() {
@@ -18471,7 +18888,7 @@ public final class CpMsg {
        * <code>optional .com.huinan.proto.CSRequestClubIsAgree cs_request_club_is_agree = 57;</code>
        *
        * <pre>
-       *请求俱乐部:审批
+       *请求：俱乐部审批
        * </pre>
        */
       public com.huinan.proto.CpMsgClub.CSRequestClubIsAgree.Builder getCsRequestClubIsAgreeBuilder() {
@@ -18481,7 +18898,7 @@ public final class CpMsg {
        * <code>optional .com.huinan.proto.CSRequestClubIsAgree cs_request_club_is_agree = 57;</code>
        *
        * <pre>
-       *请求俱乐部:审批
+       *请求：俱乐部审批
        * </pre>
        */
       public com.huinan.proto.CpMsgClub.CSRequestClubIsAgreeOrBuilder getCsRequestClubIsAgreeOrBuilder() {
@@ -18498,7 +18915,7 @@ public final class CpMsg {
        * <code>optional .com.huinan.proto.CSRequestClubIsAgree cs_request_club_is_agree = 57;</code>
        *
        * <pre>
-       *请求俱乐部:审批
+       *请求：俱乐部审批
        * </pre>
        */
       private com.google.protobuf.SingleFieldBuilder<
@@ -18525,7 +18942,7 @@ public final class CpMsg {
        * <code>optional .com.huinan.proto.CSResponseClubIsAgree cs_response_club_is_agree = 58;</code>
        *
        * <pre>
-       *响应俱乐部:审批
+       *响应：俱乐部审批
        * </pre>
        */
       public boolean hasCsResponseClubIsAgree() {
@@ -18535,7 +18952,7 @@ public final class CpMsg {
        * <code>optional .com.huinan.proto.CSResponseClubIsAgree cs_response_club_is_agree = 58;</code>
        *
        * <pre>
-       *响应俱乐部:审批
+       *响应：俱乐部审批
        * </pre>
        */
       public com.huinan.proto.CpMsgClub.CSResponseClubIsAgree getCsResponseClubIsAgree() {
@@ -18555,7 +18972,7 @@ public final class CpMsg {
        * <code>optional .com.huinan.proto.CSResponseClubIsAgree cs_response_club_is_agree = 58;</code>
        *
        * <pre>
-       *响应俱乐部:审批
+       *响应：俱乐部审批
        * </pre>
        */
       public Builder setCsResponseClubIsAgree(com.huinan.proto.CpMsgClub.CSResponseClubIsAgree value) {
@@ -18575,7 +18992,7 @@ public final class CpMsg {
        * <code>optional .com.huinan.proto.CSResponseClubIsAgree cs_response_club_is_agree = 58;</code>
        *
        * <pre>
-       *响应俱乐部:审批
+       *响应：俱乐部审批
        * </pre>
        */
       public Builder setCsResponseClubIsAgree(
@@ -18593,7 +19010,7 @@ public final class CpMsg {
        * <code>optional .com.huinan.proto.CSResponseClubIsAgree cs_response_club_is_agree = 58;</code>
        *
        * <pre>
-       *响应俱乐部:审批
+       *响应：俱乐部审批
        * </pre>
        */
       public Builder mergeCsResponseClubIsAgree(com.huinan.proto.CpMsgClub.CSResponseClubIsAgree value) {
@@ -18619,7 +19036,7 @@ public final class CpMsg {
        * <code>optional .com.huinan.proto.CSResponseClubIsAgree cs_response_club_is_agree = 58;</code>
        *
        * <pre>
-       *响应俱乐部:审批
+       *响应：俱乐部审批
        * </pre>
        */
       public Builder clearCsResponseClubIsAgree() {
@@ -18642,7 +19059,7 @@ public final class CpMsg {
        * <code>optional .com.huinan.proto.CSResponseClubIsAgree cs_response_club_is_agree = 58;</code>
        *
        * <pre>
-       *响应俱乐部:审批
+       *响应：俱乐部审批
        * </pre>
        */
       public com.huinan.proto.CpMsgClub.CSResponseClubIsAgree.Builder getCsResponseClubIsAgreeBuilder() {
@@ -18652,7 +19069,7 @@ public final class CpMsg {
        * <code>optional .com.huinan.proto.CSResponseClubIsAgree cs_response_club_is_agree = 58;</code>
        *
        * <pre>
-       *响应俱乐部:审批
+       *响应：俱乐部审批
        * </pre>
        */
       public com.huinan.proto.CpMsgClub.CSResponseClubIsAgreeOrBuilder getCsResponseClubIsAgreeOrBuilder() {
@@ -18669,7 +19086,7 @@ public final class CpMsg {
        * <code>optional .com.huinan.proto.CSResponseClubIsAgree cs_response_club_is_agree = 58;</code>
        *
        * <pre>
-       *响应俱乐部:审批
+       *响应：俱乐部审批
        * </pre>
        */
       private com.google.protobuf.SingleFieldBuilder<
@@ -18691,19 +19108,1045 @@ public final class CpMsg {
       }
 
       private com.google.protobuf.SingleFieldBuilder<
+          com.huinan.proto.CpMsgClub.CSRequestClubCreate, com.huinan.proto.CpMsgClub.CSRequestClubCreate.Builder, com.huinan.proto.CpMsgClub.CSRequestClubCreateOrBuilder> csRequestClubCreateBuilder_;
+      /**
+       * <code>optional .com.huinan.proto.CSRequestClubCreate cs_request_club_create = 59;</code>
+       *
+       * <pre>
+       *后台接口移过来
+       * </pre>
+       */
+      public boolean hasCsRequestClubCreate() {
+        return msgUnionCase_ == 59;
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSRequestClubCreate cs_request_club_create = 59;</code>
+       *
+       * <pre>
+       *后台接口移过来
+       * </pre>
+       */
+      public com.huinan.proto.CpMsgClub.CSRequestClubCreate getCsRequestClubCreate() {
+        if (csRequestClubCreateBuilder_ == null) {
+          if (msgUnionCase_ == 59) {
+            return (com.huinan.proto.CpMsgClub.CSRequestClubCreate) msgUnion_;
+          }
+          return com.huinan.proto.CpMsgClub.CSRequestClubCreate.getDefaultInstance();
+        } else {
+          if (msgUnionCase_ == 59) {
+            return csRequestClubCreateBuilder_.getMessage();
+          }
+          return com.huinan.proto.CpMsgClub.CSRequestClubCreate.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSRequestClubCreate cs_request_club_create = 59;</code>
+       *
+       * <pre>
+       *后台接口移过来
+       * </pre>
+       */
+      public Builder setCsRequestClubCreate(com.huinan.proto.CpMsgClub.CSRequestClubCreate value) {
+        if (csRequestClubCreateBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          msgUnion_ = value;
+          onChanged();
+        } else {
+          csRequestClubCreateBuilder_.setMessage(value);
+        }
+        msgUnionCase_ = 59;
+        return this;
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSRequestClubCreate cs_request_club_create = 59;</code>
+       *
+       * <pre>
+       *后台接口移过来
+       * </pre>
+       */
+      public Builder setCsRequestClubCreate(
+          com.huinan.proto.CpMsgClub.CSRequestClubCreate.Builder builderForValue) {
+        if (csRequestClubCreateBuilder_ == null) {
+          msgUnion_ = builderForValue.build();
+          onChanged();
+        } else {
+          csRequestClubCreateBuilder_.setMessage(builderForValue.build());
+        }
+        msgUnionCase_ = 59;
+        return this;
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSRequestClubCreate cs_request_club_create = 59;</code>
+       *
+       * <pre>
+       *后台接口移过来
+       * </pre>
+       */
+      public Builder mergeCsRequestClubCreate(com.huinan.proto.CpMsgClub.CSRequestClubCreate value) {
+        if (csRequestClubCreateBuilder_ == null) {
+          if (msgUnionCase_ == 59 &&
+              msgUnion_ != com.huinan.proto.CpMsgClub.CSRequestClubCreate.getDefaultInstance()) {
+            msgUnion_ = com.huinan.proto.CpMsgClub.CSRequestClubCreate.newBuilder((com.huinan.proto.CpMsgClub.CSRequestClubCreate) msgUnion_)
+                .mergeFrom(value).buildPartial();
+          } else {
+            msgUnion_ = value;
+          }
+          onChanged();
+        } else {
+          if (msgUnionCase_ == 59) {
+            csRequestClubCreateBuilder_.mergeFrom(value);
+          }
+          csRequestClubCreateBuilder_.setMessage(value);
+        }
+        msgUnionCase_ = 59;
+        return this;
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSRequestClubCreate cs_request_club_create = 59;</code>
+       *
+       * <pre>
+       *后台接口移过来
+       * </pre>
+       */
+      public Builder clearCsRequestClubCreate() {
+        if (csRequestClubCreateBuilder_ == null) {
+          if (msgUnionCase_ == 59) {
+            msgUnionCase_ = 0;
+            msgUnion_ = null;
+            onChanged();
+          }
+        } else {
+          if (msgUnionCase_ == 59) {
+            msgUnionCase_ = 0;
+            msgUnion_ = null;
+          }
+          csRequestClubCreateBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSRequestClubCreate cs_request_club_create = 59;</code>
+       *
+       * <pre>
+       *后台接口移过来
+       * </pre>
+       */
+      public com.huinan.proto.CpMsgClub.CSRequestClubCreate.Builder getCsRequestClubCreateBuilder() {
+        return getCsRequestClubCreateFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSRequestClubCreate cs_request_club_create = 59;</code>
+       *
+       * <pre>
+       *后台接口移过来
+       * </pre>
+       */
+      public com.huinan.proto.CpMsgClub.CSRequestClubCreateOrBuilder getCsRequestClubCreateOrBuilder() {
+        if ((msgUnionCase_ == 59) && (csRequestClubCreateBuilder_ != null)) {
+          return csRequestClubCreateBuilder_.getMessageOrBuilder();
+        } else {
+          if (msgUnionCase_ == 59) {
+            return (com.huinan.proto.CpMsgClub.CSRequestClubCreate) msgUnion_;
+          }
+          return com.huinan.proto.CpMsgClub.CSRequestClubCreate.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSRequestClubCreate cs_request_club_create = 59;</code>
+       *
+       * <pre>
+       *后台接口移过来
+       * </pre>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.huinan.proto.CpMsgClub.CSRequestClubCreate, com.huinan.proto.CpMsgClub.CSRequestClubCreate.Builder, com.huinan.proto.CpMsgClub.CSRequestClubCreateOrBuilder> 
+          getCsRequestClubCreateFieldBuilder() {
+        if (csRequestClubCreateBuilder_ == null) {
+          if (!(msgUnionCase_ == 59)) {
+            msgUnion_ = com.huinan.proto.CpMsgClub.CSRequestClubCreate.getDefaultInstance();
+          }
+          csRequestClubCreateBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.huinan.proto.CpMsgClub.CSRequestClubCreate, com.huinan.proto.CpMsgClub.CSRequestClubCreate.Builder, com.huinan.proto.CpMsgClub.CSRequestClubCreateOrBuilder>(
+                  (com.huinan.proto.CpMsgClub.CSRequestClubCreate) msgUnion_,
+                  getParentForChildren(),
+                  isClean());
+          msgUnion_ = null;
+        }
+        msgUnionCase_ = 59;
+        return csRequestClubCreateBuilder_;
+      }
+
+      private com.google.protobuf.SingleFieldBuilder<
+          com.huinan.proto.CpMsgClub.CSResponseClubCreate, com.huinan.proto.CpMsgClub.CSResponseClubCreate.Builder, com.huinan.proto.CpMsgClub.CSResponseClubCreateOrBuilder> csResponseClubCreateBuilder_;
+      /**
+       * <code>optional .com.huinan.proto.CSResponseClubCreate cs_response_club_create = 60;</code>
+       *
+       * <pre>
+       *响应：创建俱乐部
+       * </pre>
+       */
+      public boolean hasCsResponseClubCreate() {
+        return msgUnionCase_ == 60;
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSResponseClubCreate cs_response_club_create = 60;</code>
+       *
+       * <pre>
+       *响应：创建俱乐部
+       * </pre>
+       */
+      public com.huinan.proto.CpMsgClub.CSResponseClubCreate getCsResponseClubCreate() {
+        if (csResponseClubCreateBuilder_ == null) {
+          if (msgUnionCase_ == 60) {
+            return (com.huinan.proto.CpMsgClub.CSResponseClubCreate) msgUnion_;
+          }
+          return com.huinan.proto.CpMsgClub.CSResponseClubCreate.getDefaultInstance();
+        } else {
+          if (msgUnionCase_ == 60) {
+            return csResponseClubCreateBuilder_.getMessage();
+          }
+          return com.huinan.proto.CpMsgClub.CSResponseClubCreate.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSResponseClubCreate cs_response_club_create = 60;</code>
+       *
+       * <pre>
+       *响应：创建俱乐部
+       * </pre>
+       */
+      public Builder setCsResponseClubCreate(com.huinan.proto.CpMsgClub.CSResponseClubCreate value) {
+        if (csResponseClubCreateBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          msgUnion_ = value;
+          onChanged();
+        } else {
+          csResponseClubCreateBuilder_.setMessage(value);
+        }
+        msgUnionCase_ = 60;
+        return this;
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSResponseClubCreate cs_response_club_create = 60;</code>
+       *
+       * <pre>
+       *响应：创建俱乐部
+       * </pre>
+       */
+      public Builder setCsResponseClubCreate(
+          com.huinan.proto.CpMsgClub.CSResponseClubCreate.Builder builderForValue) {
+        if (csResponseClubCreateBuilder_ == null) {
+          msgUnion_ = builderForValue.build();
+          onChanged();
+        } else {
+          csResponseClubCreateBuilder_.setMessage(builderForValue.build());
+        }
+        msgUnionCase_ = 60;
+        return this;
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSResponseClubCreate cs_response_club_create = 60;</code>
+       *
+       * <pre>
+       *响应：创建俱乐部
+       * </pre>
+       */
+      public Builder mergeCsResponseClubCreate(com.huinan.proto.CpMsgClub.CSResponseClubCreate value) {
+        if (csResponseClubCreateBuilder_ == null) {
+          if (msgUnionCase_ == 60 &&
+              msgUnion_ != com.huinan.proto.CpMsgClub.CSResponseClubCreate.getDefaultInstance()) {
+            msgUnion_ = com.huinan.proto.CpMsgClub.CSResponseClubCreate.newBuilder((com.huinan.proto.CpMsgClub.CSResponseClubCreate) msgUnion_)
+                .mergeFrom(value).buildPartial();
+          } else {
+            msgUnion_ = value;
+          }
+          onChanged();
+        } else {
+          if (msgUnionCase_ == 60) {
+            csResponseClubCreateBuilder_.mergeFrom(value);
+          }
+          csResponseClubCreateBuilder_.setMessage(value);
+        }
+        msgUnionCase_ = 60;
+        return this;
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSResponseClubCreate cs_response_club_create = 60;</code>
+       *
+       * <pre>
+       *响应：创建俱乐部
+       * </pre>
+       */
+      public Builder clearCsResponseClubCreate() {
+        if (csResponseClubCreateBuilder_ == null) {
+          if (msgUnionCase_ == 60) {
+            msgUnionCase_ = 0;
+            msgUnion_ = null;
+            onChanged();
+          }
+        } else {
+          if (msgUnionCase_ == 60) {
+            msgUnionCase_ = 0;
+            msgUnion_ = null;
+          }
+          csResponseClubCreateBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSResponseClubCreate cs_response_club_create = 60;</code>
+       *
+       * <pre>
+       *响应：创建俱乐部
+       * </pre>
+       */
+      public com.huinan.proto.CpMsgClub.CSResponseClubCreate.Builder getCsResponseClubCreateBuilder() {
+        return getCsResponseClubCreateFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSResponseClubCreate cs_response_club_create = 60;</code>
+       *
+       * <pre>
+       *响应：创建俱乐部
+       * </pre>
+       */
+      public com.huinan.proto.CpMsgClub.CSResponseClubCreateOrBuilder getCsResponseClubCreateOrBuilder() {
+        if ((msgUnionCase_ == 60) && (csResponseClubCreateBuilder_ != null)) {
+          return csResponseClubCreateBuilder_.getMessageOrBuilder();
+        } else {
+          if (msgUnionCase_ == 60) {
+            return (com.huinan.proto.CpMsgClub.CSResponseClubCreate) msgUnion_;
+          }
+          return com.huinan.proto.CpMsgClub.CSResponseClubCreate.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSResponseClubCreate cs_response_club_create = 60;</code>
+       *
+       * <pre>
+       *响应：创建俱乐部
+       * </pre>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.huinan.proto.CpMsgClub.CSResponseClubCreate, com.huinan.proto.CpMsgClub.CSResponseClubCreate.Builder, com.huinan.proto.CpMsgClub.CSResponseClubCreateOrBuilder> 
+          getCsResponseClubCreateFieldBuilder() {
+        if (csResponseClubCreateBuilder_ == null) {
+          if (!(msgUnionCase_ == 60)) {
+            msgUnion_ = com.huinan.proto.CpMsgClub.CSResponseClubCreate.getDefaultInstance();
+          }
+          csResponseClubCreateBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.huinan.proto.CpMsgClub.CSResponseClubCreate, com.huinan.proto.CpMsgClub.CSResponseClubCreate.Builder, com.huinan.proto.CpMsgClub.CSResponseClubCreateOrBuilder>(
+                  (com.huinan.proto.CpMsgClub.CSResponseClubCreate) msgUnion_,
+                  getParentForChildren(),
+                  isClean());
+          msgUnion_ = null;
+        }
+        msgUnionCase_ = 60;
+        return csResponseClubCreateBuilder_;
+      }
+
+      private com.google.protobuf.SingleFieldBuilder<
+          com.huinan.proto.CpMsgClub.CSRequestClubApply, com.huinan.proto.CpMsgClub.CSRequestClubApply.Builder, com.huinan.proto.CpMsgClub.CSRequestClubApplyOrBuilder> csRequestClubApplyBuilder_;
+      /**
+       * <code>optional .com.huinan.proto.CSRequestClubApply cs_request_club_apply = 61;</code>
+       *
+       * <pre>
+       *请求：申请俱乐部
+       * </pre>
+       */
+      public boolean hasCsRequestClubApply() {
+        return msgUnionCase_ == 61;
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSRequestClubApply cs_request_club_apply = 61;</code>
+       *
+       * <pre>
+       *请求：申请俱乐部
+       * </pre>
+       */
+      public com.huinan.proto.CpMsgClub.CSRequestClubApply getCsRequestClubApply() {
+        if (csRequestClubApplyBuilder_ == null) {
+          if (msgUnionCase_ == 61) {
+            return (com.huinan.proto.CpMsgClub.CSRequestClubApply) msgUnion_;
+          }
+          return com.huinan.proto.CpMsgClub.CSRequestClubApply.getDefaultInstance();
+        } else {
+          if (msgUnionCase_ == 61) {
+            return csRequestClubApplyBuilder_.getMessage();
+          }
+          return com.huinan.proto.CpMsgClub.CSRequestClubApply.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSRequestClubApply cs_request_club_apply = 61;</code>
+       *
+       * <pre>
+       *请求：申请俱乐部
+       * </pre>
+       */
+      public Builder setCsRequestClubApply(com.huinan.proto.CpMsgClub.CSRequestClubApply value) {
+        if (csRequestClubApplyBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          msgUnion_ = value;
+          onChanged();
+        } else {
+          csRequestClubApplyBuilder_.setMessage(value);
+        }
+        msgUnionCase_ = 61;
+        return this;
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSRequestClubApply cs_request_club_apply = 61;</code>
+       *
+       * <pre>
+       *请求：申请俱乐部
+       * </pre>
+       */
+      public Builder setCsRequestClubApply(
+          com.huinan.proto.CpMsgClub.CSRequestClubApply.Builder builderForValue) {
+        if (csRequestClubApplyBuilder_ == null) {
+          msgUnion_ = builderForValue.build();
+          onChanged();
+        } else {
+          csRequestClubApplyBuilder_.setMessage(builderForValue.build());
+        }
+        msgUnionCase_ = 61;
+        return this;
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSRequestClubApply cs_request_club_apply = 61;</code>
+       *
+       * <pre>
+       *请求：申请俱乐部
+       * </pre>
+       */
+      public Builder mergeCsRequestClubApply(com.huinan.proto.CpMsgClub.CSRequestClubApply value) {
+        if (csRequestClubApplyBuilder_ == null) {
+          if (msgUnionCase_ == 61 &&
+              msgUnion_ != com.huinan.proto.CpMsgClub.CSRequestClubApply.getDefaultInstance()) {
+            msgUnion_ = com.huinan.proto.CpMsgClub.CSRequestClubApply.newBuilder((com.huinan.proto.CpMsgClub.CSRequestClubApply) msgUnion_)
+                .mergeFrom(value).buildPartial();
+          } else {
+            msgUnion_ = value;
+          }
+          onChanged();
+        } else {
+          if (msgUnionCase_ == 61) {
+            csRequestClubApplyBuilder_.mergeFrom(value);
+          }
+          csRequestClubApplyBuilder_.setMessage(value);
+        }
+        msgUnionCase_ = 61;
+        return this;
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSRequestClubApply cs_request_club_apply = 61;</code>
+       *
+       * <pre>
+       *请求：申请俱乐部
+       * </pre>
+       */
+      public Builder clearCsRequestClubApply() {
+        if (csRequestClubApplyBuilder_ == null) {
+          if (msgUnionCase_ == 61) {
+            msgUnionCase_ = 0;
+            msgUnion_ = null;
+            onChanged();
+          }
+        } else {
+          if (msgUnionCase_ == 61) {
+            msgUnionCase_ = 0;
+            msgUnion_ = null;
+          }
+          csRequestClubApplyBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSRequestClubApply cs_request_club_apply = 61;</code>
+       *
+       * <pre>
+       *请求：申请俱乐部
+       * </pre>
+       */
+      public com.huinan.proto.CpMsgClub.CSRequestClubApply.Builder getCsRequestClubApplyBuilder() {
+        return getCsRequestClubApplyFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSRequestClubApply cs_request_club_apply = 61;</code>
+       *
+       * <pre>
+       *请求：申请俱乐部
+       * </pre>
+       */
+      public com.huinan.proto.CpMsgClub.CSRequestClubApplyOrBuilder getCsRequestClubApplyOrBuilder() {
+        if ((msgUnionCase_ == 61) && (csRequestClubApplyBuilder_ != null)) {
+          return csRequestClubApplyBuilder_.getMessageOrBuilder();
+        } else {
+          if (msgUnionCase_ == 61) {
+            return (com.huinan.proto.CpMsgClub.CSRequestClubApply) msgUnion_;
+          }
+          return com.huinan.proto.CpMsgClub.CSRequestClubApply.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSRequestClubApply cs_request_club_apply = 61;</code>
+       *
+       * <pre>
+       *请求：申请俱乐部
+       * </pre>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.huinan.proto.CpMsgClub.CSRequestClubApply, com.huinan.proto.CpMsgClub.CSRequestClubApply.Builder, com.huinan.proto.CpMsgClub.CSRequestClubApplyOrBuilder> 
+          getCsRequestClubApplyFieldBuilder() {
+        if (csRequestClubApplyBuilder_ == null) {
+          if (!(msgUnionCase_ == 61)) {
+            msgUnion_ = com.huinan.proto.CpMsgClub.CSRequestClubApply.getDefaultInstance();
+          }
+          csRequestClubApplyBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.huinan.proto.CpMsgClub.CSRequestClubApply, com.huinan.proto.CpMsgClub.CSRequestClubApply.Builder, com.huinan.proto.CpMsgClub.CSRequestClubApplyOrBuilder>(
+                  (com.huinan.proto.CpMsgClub.CSRequestClubApply) msgUnion_,
+                  getParentForChildren(),
+                  isClean());
+          msgUnion_ = null;
+        }
+        msgUnionCase_ = 61;
+        return csRequestClubApplyBuilder_;
+      }
+
+      private com.google.protobuf.SingleFieldBuilder<
+          com.huinan.proto.CpMsgClub.CSResponseClubApply, com.huinan.proto.CpMsgClub.CSResponseClubApply.Builder, com.huinan.proto.CpMsgClub.CSResponseClubApplyOrBuilder> csResponseClubApplyBuilder_;
+      /**
+       * <code>optional .com.huinan.proto.CSResponseClubApply cs_response_club_apply = 62;</code>
+       *
+       * <pre>
+       *响应：申请俱乐部
+       * </pre>
+       */
+      public boolean hasCsResponseClubApply() {
+        return msgUnionCase_ == 62;
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSResponseClubApply cs_response_club_apply = 62;</code>
+       *
+       * <pre>
+       *响应：申请俱乐部
+       * </pre>
+       */
+      public com.huinan.proto.CpMsgClub.CSResponseClubApply getCsResponseClubApply() {
+        if (csResponseClubApplyBuilder_ == null) {
+          if (msgUnionCase_ == 62) {
+            return (com.huinan.proto.CpMsgClub.CSResponseClubApply) msgUnion_;
+          }
+          return com.huinan.proto.CpMsgClub.CSResponseClubApply.getDefaultInstance();
+        } else {
+          if (msgUnionCase_ == 62) {
+            return csResponseClubApplyBuilder_.getMessage();
+          }
+          return com.huinan.proto.CpMsgClub.CSResponseClubApply.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSResponseClubApply cs_response_club_apply = 62;</code>
+       *
+       * <pre>
+       *响应：申请俱乐部
+       * </pre>
+       */
+      public Builder setCsResponseClubApply(com.huinan.proto.CpMsgClub.CSResponseClubApply value) {
+        if (csResponseClubApplyBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          msgUnion_ = value;
+          onChanged();
+        } else {
+          csResponseClubApplyBuilder_.setMessage(value);
+        }
+        msgUnionCase_ = 62;
+        return this;
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSResponseClubApply cs_response_club_apply = 62;</code>
+       *
+       * <pre>
+       *响应：申请俱乐部
+       * </pre>
+       */
+      public Builder setCsResponseClubApply(
+          com.huinan.proto.CpMsgClub.CSResponseClubApply.Builder builderForValue) {
+        if (csResponseClubApplyBuilder_ == null) {
+          msgUnion_ = builderForValue.build();
+          onChanged();
+        } else {
+          csResponseClubApplyBuilder_.setMessage(builderForValue.build());
+        }
+        msgUnionCase_ = 62;
+        return this;
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSResponseClubApply cs_response_club_apply = 62;</code>
+       *
+       * <pre>
+       *响应：申请俱乐部
+       * </pre>
+       */
+      public Builder mergeCsResponseClubApply(com.huinan.proto.CpMsgClub.CSResponseClubApply value) {
+        if (csResponseClubApplyBuilder_ == null) {
+          if (msgUnionCase_ == 62 &&
+              msgUnion_ != com.huinan.proto.CpMsgClub.CSResponseClubApply.getDefaultInstance()) {
+            msgUnion_ = com.huinan.proto.CpMsgClub.CSResponseClubApply.newBuilder((com.huinan.proto.CpMsgClub.CSResponseClubApply) msgUnion_)
+                .mergeFrom(value).buildPartial();
+          } else {
+            msgUnion_ = value;
+          }
+          onChanged();
+        } else {
+          if (msgUnionCase_ == 62) {
+            csResponseClubApplyBuilder_.mergeFrom(value);
+          }
+          csResponseClubApplyBuilder_.setMessage(value);
+        }
+        msgUnionCase_ = 62;
+        return this;
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSResponseClubApply cs_response_club_apply = 62;</code>
+       *
+       * <pre>
+       *响应：申请俱乐部
+       * </pre>
+       */
+      public Builder clearCsResponseClubApply() {
+        if (csResponseClubApplyBuilder_ == null) {
+          if (msgUnionCase_ == 62) {
+            msgUnionCase_ = 0;
+            msgUnion_ = null;
+            onChanged();
+          }
+        } else {
+          if (msgUnionCase_ == 62) {
+            msgUnionCase_ = 0;
+            msgUnion_ = null;
+          }
+          csResponseClubApplyBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSResponseClubApply cs_response_club_apply = 62;</code>
+       *
+       * <pre>
+       *响应：申请俱乐部
+       * </pre>
+       */
+      public com.huinan.proto.CpMsgClub.CSResponseClubApply.Builder getCsResponseClubApplyBuilder() {
+        return getCsResponseClubApplyFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSResponseClubApply cs_response_club_apply = 62;</code>
+       *
+       * <pre>
+       *响应：申请俱乐部
+       * </pre>
+       */
+      public com.huinan.proto.CpMsgClub.CSResponseClubApplyOrBuilder getCsResponseClubApplyOrBuilder() {
+        if ((msgUnionCase_ == 62) && (csResponseClubApplyBuilder_ != null)) {
+          return csResponseClubApplyBuilder_.getMessageOrBuilder();
+        } else {
+          if (msgUnionCase_ == 62) {
+            return (com.huinan.proto.CpMsgClub.CSResponseClubApply) msgUnion_;
+          }
+          return com.huinan.proto.CpMsgClub.CSResponseClubApply.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSResponseClubApply cs_response_club_apply = 62;</code>
+       *
+       * <pre>
+       *响应：申请俱乐部
+       * </pre>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.huinan.proto.CpMsgClub.CSResponseClubApply, com.huinan.proto.CpMsgClub.CSResponseClubApply.Builder, com.huinan.proto.CpMsgClub.CSResponseClubApplyOrBuilder> 
+          getCsResponseClubApplyFieldBuilder() {
+        if (csResponseClubApplyBuilder_ == null) {
+          if (!(msgUnionCase_ == 62)) {
+            msgUnion_ = com.huinan.proto.CpMsgClub.CSResponseClubApply.getDefaultInstance();
+          }
+          csResponseClubApplyBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.huinan.proto.CpMsgClub.CSResponseClubApply, com.huinan.proto.CpMsgClub.CSResponseClubApply.Builder, com.huinan.proto.CpMsgClub.CSResponseClubApplyOrBuilder>(
+                  (com.huinan.proto.CpMsgClub.CSResponseClubApply) msgUnion_,
+                  getParentForChildren(),
+                  isClean());
+          msgUnion_ = null;
+        }
+        msgUnionCase_ = 62;
+        return csResponseClubApplyBuilder_;
+      }
+
+      private com.google.protobuf.SingleFieldBuilder<
+          com.huinan.proto.CpMsgClub.CSNotifyClubApply, com.huinan.proto.CpMsgClub.CSNotifyClubApply.Builder, com.huinan.proto.CpMsgClub.CSNotifyClubApplyOrBuilder> csNotifyClubApplyBuilder_;
+      /**
+       * <code>optional .com.huinan.proto.CSNotifyClubApply cs_notify_club_apply = 63;</code>
+       *
+       * <pre>
+       *推送：俱乐部申请消息
+       * </pre>
+       */
+      public boolean hasCsNotifyClubApply() {
+        return msgUnionCase_ == 63;
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSNotifyClubApply cs_notify_club_apply = 63;</code>
+       *
+       * <pre>
+       *推送：俱乐部申请消息
+       * </pre>
+       */
+      public com.huinan.proto.CpMsgClub.CSNotifyClubApply getCsNotifyClubApply() {
+        if (csNotifyClubApplyBuilder_ == null) {
+          if (msgUnionCase_ == 63) {
+            return (com.huinan.proto.CpMsgClub.CSNotifyClubApply) msgUnion_;
+          }
+          return com.huinan.proto.CpMsgClub.CSNotifyClubApply.getDefaultInstance();
+        } else {
+          if (msgUnionCase_ == 63) {
+            return csNotifyClubApplyBuilder_.getMessage();
+          }
+          return com.huinan.proto.CpMsgClub.CSNotifyClubApply.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSNotifyClubApply cs_notify_club_apply = 63;</code>
+       *
+       * <pre>
+       *推送：俱乐部申请消息
+       * </pre>
+       */
+      public Builder setCsNotifyClubApply(com.huinan.proto.CpMsgClub.CSNotifyClubApply value) {
+        if (csNotifyClubApplyBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          msgUnion_ = value;
+          onChanged();
+        } else {
+          csNotifyClubApplyBuilder_.setMessage(value);
+        }
+        msgUnionCase_ = 63;
+        return this;
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSNotifyClubApply cs_notify_club_apply = 63;</code>
+       *
+       * <pre>
+       *推送：俱乐部申请消息
+       * </pre>
+       */
+      public Builder setCsNotifyClubApply(
+          com.huinan.proto.CpMsgClub.CSNotifyClubApply.Builder builderForValue) {
+        if (csNotifyClubApplyBuilder_ == null) {
+          msgUnion_ = builderForValue.build();
+          onChanged();
+        } else {
+          csNotifyClubApplyBuilder_.setMessage(builderForValue.build());
+        }
+        msgUnionCase_ = 63;
+        return this;
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSNotifyClubApply cs_notify_club_apply = 63;</code>
+       *
+       * <pre>
+       *推送：俱乐部申请消息
+       * </pre>
+       */
+      public Builder mergeCsNotifyClubApply(com.huinan.proto.CpMsgClub.CSNotifyClubApply value) {
+        if (csNotifyClubApplyBuilder_ == null) {
+          if (msgUnionCase_ == 63 &&
+              msgUnion_ != com.huinan.proto.CpMsgClub.CSNotifyClubApply.getDefaultInstance()) {
+            msgUnion_ = com.huinan.proto.CpMsgClub.CSNotifyClubApply.newBuilder((com.huinan.proto.CpMsgClub.CSNotifyClubApply) msgUnion_)
+                .mergeFrom(value).buildPartial();
+          } else {
+            msgUnion_ = value;
+          }
+          onChanged();
+        } else {
+          if (msgUnionCase_ == 63) {
+            csNotifyClubApplyBuilder_.mergeFrom(value);
+          }
+          csNotifyClubApplyBuilder_.setMessage(value);
+        }
+        msgUnionCase_ = 63;
+        return this;
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSNotifyClubApply cs_notify_club_apply = 63;</code>
+       *
+       * <pre>
+       *推送：俱乐部申请消息
+       * </pre>
+       */
+      public Builder clearCsNotifyClubApply() {
+        if (csNotifyClubApplyBuilder_ == null) {
+          if (msgUnionCase_ == 63) {
+            msgUnionCase_ = 0;
+            msgUnion_ = null;
+            onChanged();
+          }
+        } else {
+          if (msgUnionCase_ == 63) {
+            msgUnionCase_ = 0;
+            msgUnion_ = null;
+          }
+          csNotifyClubApplyBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSNotifyClubApply cs_notify_club_apply = 63;</code>
+       *
+       * <pre>
+       *推送：俱乐部申请消息
+       * </pre>
+       */
+      public com.huinan.proto.CpMsgClub.CSNotifyClubApply.Builder getCsNotifyClubApplyBuilder() {
+        return getCsNotifyClubApplyFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSNotifyClubApply cs_notify_club_apply = 63;</code>
+       *
+       * <pre>
+       *推送：俱乐部申请消息
+       * </pre>
+       */
+      public com.huinan.proto.CpMsgClub.CSNotifyClubApplyOrBuilder getCsNotifyClubApplyOrBuilder() {
+        if ((msgUnionCase_ == 63) && (csNotifyClubApplyBuilder_ != null)) {
+          return csNotifyClubApplyBuilder_.getMessageOrBuilder();
+        } else {
+          if (msgUnionCase_ == 63) {
+            return (com.huinan.proto.CpMsgClub.CSNotifyClubApply) msgUnion_;
+          }
+          return com.huinan.proto.CpMsgClub.CSNotifyClubApply.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSNotifyClubApply cs_notify_club_apply = 63;</code>
+       *
+       * <pre>
+       *推送：俱乐部申请消息
+       * </pre>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.huinan.proto.CpMsgClub.CSNotifyClubApply, com.huinan.proto.CpMsgClub.CSNotifyClubApply.Builder, com.huinan.proto.CpMsgClub.CSNotifyClubApplyOrBuilder> 
+          getCsNotifyClubApplyFieldBuilder() {
+        if (csNotifyClubApplyBuilder_ == null) {
+          if (!(msgUnionCase_ == 63)) {
+            msgUnion_ = com.huinan.proto.CpMsgClub.CSNotifyClubApply.getDefaultInstance();
+          }
+          csNotifyClubApplyBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.huinan.proto.CpMsgClub.CSNotifyClubApply, com.huinan.proto.CpMsgClub.CSNotifyClubApply.Builder, com.huinan.proto.CpMsgClub.CSNotifyClubApplyOrBuilder>(
+                  (com.huinan.proto.CpMsgClub.CSNotifyClubApply) msgUnion_,
+                  getParentForChildren(),
+                  isClean());
+          msgUnion_ = null;
+        }
+        msgUnionCase_ = 63;
+        return csNotifyClubApplyBuilder_;
+      }
+
+      private com.google.protobuf.SingleFieldBuilder<
+          com.huinan.proto.CpMsgClub.CSNotifyClubRefresh, com.huinan.proto.CpMsgClub.CSNotifyClubRefresh.Builder, com.huinan.proto.CpMsgClub.CSNotifyClubRefreshOrBuilder> csNotifyClubRefreshBuilder_;
+      /**
+       * <code>optional .com.huinan.proto.CSNotifyClubRefresh cs_notify_club_refresh = 64;</code>
+       *
+       * <pre>
+       *推送：俱乐部刷新俱乐部列表
+       * </pre>
+       */
+      public boolean hasCsNotifyClubRefresh() {
+        return msgUnionCase_ == 64;
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSNotifyClubRefresh cs_notify_club_refresh = 64;</code>
+       *
+       * <pre>
+       *推送：俱乐部刷新俱乐部列表
+       * </pre>
+       */
+      public com.huinan.proto.CpMsgClub.CSNotifyClubRefresh getCsNotifyClubRefresh() {
+        if (csNotifyClubRefreshBuilder_ == null) {
+          if (msgUnionCase_ == 64) {
+            return (com.huinan.proto.CpMsgClub.CSNotifyClubRefresh) msgUnion_;
+          }
+          return com.huinan.proto.CpMsgClub.CSNotifyClubRefresh.getDefaultInstance();
+        } else {
+          if (msgUnionCase_ == 64) {
+            return csNotifyClubRefreshBuilder_.getMessage();
+          }
+          return com.huinan.proto.CpMsgClub.CSNotifyClubRefresh.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSNotifyClubRefresh cs_notify_club_refresh = 64;</code>
+       *
+       * <pre>
+       *推送：俱乐部刷新俱乐部列表
+       * </pre>
+       */
+      public Builder setCsNotifyClubRefresh(com.huinan.proto.CpMsgClub.CSNotifyClubRefresh value) {
+        if (csNotifyClubRefreshBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          msgUnion_ = value;
+          onChanged();
+        } else {
+          csNotifyClubRefreshBuilder_.setMessage(value);
+        }
+        msgUnionCase_ = 64;
+        return this;
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSNotifyClubRefresh cs_notify_club_refresh = 64;</code>
+       *
+       * <pre>
+       *推送：俱乐部刷新俱乐部列表
+       * </pre>
+       */
+      public Builder setCsNotifyClubRefresh(
+          com.huinan.proto.CpMsgClub.CSNotifyClubRefresh.Builder builderForValue) {
+        if (csNotifyClubRefreshBuilder_ == null) {
+          msgUnion_ = builderForValue.build();
+          onChanged();
+        } else {
+          csNotifyClubRefreshBuilder_.setMessage(builderForValue.build());
+        }
+        msgUnionCase_ = 64;
+        return this;
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSNotifyClubRefresh cs_notify_club_refresh = 64;</code>
+       *
+       * <pre>
+       *推送：俱乐部刷新俱乐部列表
+       * </pre>
+       */
+      public Builder mergeCsNotifyClubRefresh(com.huinan.proto.CpMsgClub.CSNotifyClubRefresh value) {
+        if (csNotifyClubRefreshBuilder_ == null) {
+          if (msgUnionCase_ == 64 &&
+              msgUnion_ != com.huinan.proto.CpMsgClub.CSNotifyClubRefresh.getDefaultInstance()) {
+            msgUnion_ = com.huinan.proto.CpMsgClub.CSNotifyClubRefresh.newBuilder((com.huinan.proto.CpMsgClub.CSNotifyClubRefresh) msgUnion_)
+                .mergeFrom(value).buildPartial();
+          } else {
+            msgUnion_ = value;
+          }
+          onChanged();
+        } else {
+          if (msgUnionCase_ == 64) {
+            csNotifyClubRefreshBuilder_.mergeFrom(value);
+          }
+          csNotifyClubRefreshBuilder_.setMessage(value);
+        }
+        msgUnionCase_ = 64;
+        return this;
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSNotifyClubRefresh cs_notify_club_refresh = 64;</code>
+       *
+       * <pre>
+       *推送：俱乐部刷新俱乐部列表
+       * </pre>
+       */
+      public Builder clearCsNotifyClubRefresh() {
+        if (csNotifyClubRefreshBuilder_ == null) {
+          if (msgUnionCase_ == 64) {
+            msgUnionCase_ = 0;
+            msgUnion_ = null;
+            onChanged();
+          }
+        } else {
+          if (msgUnionCase_ == 64) {
+            msgUnionCase_ = 0;
+            msgUnion_ = null;
+          }
+          csNotifyClubRefreshBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSNotifyClubRefresh cs_notify_club_refresh = 64;</code>
+       *
+       * <pre>
+       *推送：俱乐部刷新俱乐部列表
+       * </pre>
+       */
+      public com.huinan.proto.CpMsgClub.CSNotifyClubRefresh.Builder getCsNotifyClubRefreshBuilder() {
+        return getCsNotifyClubRefreshFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSNotifyClubRefresh cs_notify_club_refresh = 64;</code>
+       *
+       * <pre>
+       *推送：俱乐部刷新俱乐部列表
+       * </pre>
+       */
+      public com.huinan.proto.CpMsgClub.CSNotifyClubRefreshOrBuilder getCsNotifyClubRefreshOrBuilder() {
+        if ((msgUnionCase_ == 64) && (csNotifyClubRefreshBuilder_ != null)) {
+          return csNotifyClubRefreshBuilder_.getMessageOrBuilder();
+        } else {
+          if (msgUnionCase_ == 64) {
+            return (com.huinan.proto.CpMsgClub.CSNotifyClubRefresh) msgUnion_;
+          }
+          return com.huinan.proto.CpMsgClub.CSNotifyClubRefresh.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSNotifyClubRefresh cs_notify_club_refresh = 64;</code>
+       *
+       * <pre>
+       *推送：俱乐部刷新俱乐部列表
+       * </pre>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.huinan.proto.CpMsgClub.CSNotifyClubRefresh, com.huinan.proto.CpMsgClub.CSNotifyClubRefresh.Builder, com.huinan.proto.CpMsgClub.CSNotifyClubRefreshOrBuilder> 
+          getCsNotifyClubRefreshFieldBuilder() {
+        if (csNotifyClubRefreshBuilder_ == null) {
+          if (!(msgUnionCase_ == 64)) {
+            msgUnion_ = com.huinan.proto.CpMsgClub.CSNotifyClubRefresh.getDefaultInstance();
+          }
+          csNotifyClubRefreshBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.huinan.proto.CpMsgClub.CSNotifyClubRefresh, com.huinan.proto.CpMsgClub.CSNotifyClubRefresh.Builder, com.huinan.proto.CpMsgClub.CSNotifyClubRefreshOrBuilder>(
+                  (com.huinan.proto.CpMsgClub.CSNotifyClubRefresh) msgUnion_,
+                  getParentForChildren(),
+                  isClean());
+          msgUnion_ = null;
+        }
+        msgUnionCase_ = 64;
+        return csNotifyClubRefreshBuilder_;
+      }
+
+      private com.google.protobuf.SingleFieldBuilder<
           com.huinan.proto.CpMsgCs.CSNotifyLogout, com.huinan.proto.CpMsgCs.CSNotifyLogout.Builder, com.huinan.proto.CpMsgCs.CSNotifyLogoutOrBuilder> csNotifyLogoutBuilder_;
       /**
-       * <code>optional .com.huinan.proto.CSNotifyLogout cs_notify_logout = 59;</code>
+       * <code>optional .com.huinan.proto.CSNotifyLogout cs_notify_logout = 100;</code>
        *
        * <pre>
        *登录推送
        * </pre>
        */
       public boolean hasCsNotifyLogout() {
-        return msgUnionCase_ == 59;
+        return msgUnionCase_ == 100;
       }
       /**
-       * <code>optional .com.huinan.proto.CSNotifyLogout cs_notify_logout = 59;</code>
+       * <code>optional .com.huinan.proto.CSNotifyLogout cs_notify_logout = 100;</code>
        *
        * <pre>
        *登录推送
@@ -18711,19 +20154,19 @@ public final class CpMsg {
        */
       public com.huinan.proto.CpMsgCs.CSNotifyLogout getCsNotifyLogout() {
         if (csNotifyLogoutBuilder_ == null) {
-          if (msgUnionCase_ == 59) {
+          if (msgUnionCase_ == 100) {
             return (com.huinan.proto.CpMsgCs.CSNotifyLogout) msgUnion_;
           }
           return com.huinan.proto.CpMsgCs.CSNotifyLogout.getDefaultInstance();
         } else {
-          if (msgUnionCase_ == 59) {
+          if (msgUnionCase_ == 100) {
             return csNotifyLogoutBuilder_.getMessage();
           }
           return com.huinan.proto.CpMsgCs.CSNotifyLogout.getDefaultInstance();
         }
       }
       /**
-       * <code>optional .com.huinan.proto.CSNotifyLogout cs_notify_logout = 59;</code>
+       * <code>optional .com.huinan.proto.CSNotifyLogout cs_notify_logout = 100;</code>
        *
        * <pre>
        *登录推送
@@ -18739,11 +20182,11 @@ public final class CpMsg {
         } else {
           csNotifyLogoutBuilder_.setMessage(value);
         }
-        msgUnionCase_ = 59;
+        msgUnionCase_ = 100;
         return this;
       }
       /**
-       * <code>optional .com.huinan.proto.CSNotifyLogout cs_notify_logout = 59;</code>
+       * <code>optional .com.huinan.proto.CSNotifyLogout cs_notify_logout = 100;</code>
        *
        * <pre>
        *登录推送
@@ -18757,11 +20200,11 @@ public final class CpMsg {
         } else {
           csNotifyLogoutBuilder_.setMessage(builderForValue.build());
         }
-        msgUnionCase_ = 59;
+        msgUnionCase_ = 100;
         return this;
       }
       /**
-       * <code>optional .com.huinan.proto.CSNotifyLogout cs_notify_logout = 59;</code>
+       * <code>optional .com.huinan.proto.CSNotifyLogout cs_notify_logout = 100;</code>
        *
        * <pre>
        *登录推送
@@ -18769,7 +20212,7 @@ public final class CpMsg {
        */
       public Builder mergeCsNotifyLogout(com.huinan.proto.CpMsgCs.CSNotifyLogout value) {
         if (csNotifyLogoutBuilder_ == null) {
-          if (msgUnionCase_ == 59 &&
+          if (msgUnionCase_ == 100 &&
               msgUnion_ != com.huinan.proto.CpMsgCs.CSNotifyLogout.getDefaultInstance()) {
             msgUnion_ = com.huinan.proto.CpMsgCs.CSNotifyLogout.newBuilder((com.huinan.proto.CpMsgCs.CSNotifyLogout) msgUnion_)
                 .mergeFrom(value).buildPartial();
@@ -18778,16 +20221,16 @@ public final class CpMsg {
           }
           onChanged();
         } else {
-          if (msgUnionCase_ == 59) {
+          if (msgUnionCase_ == 100) {
             csNotifyLogoutBuilder_.mergeFrom(value);
           }
           csNotifyLogoutBuilder_.setMessage(value);
         }
-        msgUnionCase_ = 59;
+        msgUnionCase_ = 100;
         return this;
       }
       /**
-       * <code>optional .com.huinan.proto.CSNotifyLogout cs_notify_logout = 59;</code>
+       * <code>optional .com.huinan.proto.CSNotifyLogout cs_notify_logout = 100;</code>
        *
        * <pre>
        *登录推送
@@ -18795,13 +20238,13 @@ public final class CpMsg {
        */
       public Builder clearCsNotifyLogout() {
         if (csNotifyLogoutBuilder_ == null) {
-          if (msgUnionCase_ == 59) {
+          if (msgUnionCase_ == 100) {
             msgUnionCase_ = 0;
             msgUnion_ = null;
             onChanged();
           }
         } else {
-          if (msgUnionCase_ == 59) {
+          if (msgUnionCase_ == 100) {
             msgUnionCase_ = 0;
             msgUnion_ = null;
           }
@@ -18810,7 +20253,7 @@ public final class CpMsg {
         return this;
       }
       /**
-       * <code>optional .com.huinan.proto.CSNotifyLogout cs_notify_logout = 59;</code>
+       * <code>optional .com.huinan.proto.CSNotifyLogout cs_notify_logout = 100;</code>
        *
        * <pre>
        *登录推送
@@ -18820,24 +20263,24 @@ public final class CpMsg {
         return getCsNotifyLogoutFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .com.huinan.proto.CSNotifyLogout cs_notify_logout = 59;</code>
+       * <code>optional .com.huinan.proto.CSNotifyLogout cs_notify_logout = 100;</code>
        *
        * <pre>
        *登录推送
        * </pre>
        */
       public com.huinan.proto.CpMsgCs.CSNotifyLogoutOrBuilder getCsNotifyLogoutOrBuilder() {
-        if ((msgUnionCase_ == 59) && (csNotifyLogoutBuilder_ != null)) {
+        if ((msgUnionCase_ == 100) && (csNotifyLogoutBuilder_ != null)) {
           return csNotifyLogoutBuilder_.getMessageOrBuilder();
         } else {
-          if (msgUnionCase_ == 59) {
+          if (msgUnionCase_ == 100) {
             return (com.huinan.proto.CpMsgCs.CSNotifyLogout) msgUnion_;
           }
           return com.huinan.proto.CpMsgCs.CSNotifyLogout.getDefaultInstance();
         }
       }
       /**
-       * <code>optional .com.huinan.proto.CSNotifyLogout cs_notify_logout = 59;</code>
+       * <code>optional .com.huinan.proto.CSNotifyLogout cs_notify_logout = 100;</code>
        *
        * <pre>
        *登录推送
@@ -18847,7 +20290,7 @@ public final class CpMsg {
           com.huinan.proto.CpMsgCs.CSNotifyLogout, com.huinan.proto.CpMsgCs.CSNotifyLogout.Builder, com.huinan.proto.CpMsgCs.CSNotifyLogoutOrBuilder> 
           getCsNotifyLogoutFieldBuilder() {
         if (csNotifyLogoutBuilder_ == null) {
-          if (!(msgUnionCase_ == 59)) {
+          if (!(msgUnionCase_ == 100)) {
             msgUnion_ = com.huinan.proto.CpMsgCs.CSNotifyLogout.getDefaultInstance();
           }
           csNotifyLogoutBuilder_ = new com.google.protobuf.SingleFieldBuilder<
@@ -18857,7 +20300,7 @@ public final class CpMsg {
                   isClean());
           msgUnion_ = null;
         }
-        msgUnionCase_ = 59;
+        msgUnionCase_ = 100;
         return csNotifyLogoutBuilder_;
       }
 
@@ -18899,7 +20342,7 @@ public final class CpMsg {
       "\006 \001(\t\022\020\n\010mac_addr\030\007 \001(\t\022\n\n\002os\030\010 \001(\t\022\013\n\003o" +
       "sv\030\t \001(\t\022\014\n\004band\030\n \001(\t\022\014\n\004imei\030\013 \001(\t\022\013\n\003" +
       "cmd\030\014 \001(\003\022\023\n\013json_msg_id\030\r \001(\005\022\020\n\010json_m" +
-      "sg\030\016 \001(\t\022\013\n\003uid\030\017 \001(\t\"\337!\n\tCpMsgData\022<\n\020c" +
+      "sg\030\016 \001(\t\022\013\n\003uid\030\017 \001(\t\"\314$\n\tCpMsgData\022<\n\020c" +
       "s_request_login\030\001 \001(\0132 .com.huinan.proto",
       ".CSRequestLoginH\000\022>\n\021cs_response_login\030\002" +
       " \001(\0132!.com.huinan.proto.CSResponseLoginH" +
@@ -18992,22 +20435,31 @@ public final class CpMsg {
       "s_request_club_message\0302 \001(\0132&.com.huina" +
       "n.proto.CSRequestClubMessageH\000\022K\n\030cs_res",
       "ponse_club_message\0303 \001(\0132\'.com.huinan.pr" +
-      "oto.CSResponseClubMessageH\000\022C\n\024cs_notify" +
-      "_club_apply\0304 \001(\0132#.com.huinan.proto.CSN" +
-      "otifyClubApplyH\000\022L\n\027cs_request_club_re_r" +
-      "oom\0305 \001(\0132).com.huinan.proto.CSRequestCl" +
-      "ubRemoveRoomH\000\022N\n\030cs_response_club_re_ro" +
-      "om\0306 \001(\0132*.com.huinan.proto.CSResponseCl" +
-      "ubRemoveRoomH\000\022C\n\024cs_request_club_kick\0307" +
-      " \001(\0132#.com.huinan.proto.CSRequestClubKic" +
-      "kH\000\022E\n\025cs_response_club_kick\0308 \001(\0132$.com",
-      ".huinan.proto.CSResponseClubKickH\000\022J\n\030cs" +
-      "_request_club_is_agree\0309 \001(\0132&.com.huina" +
-      "n.proto.CSRequestClubIsAgreeH\000\022L\n\031cs_res" +
-      "ponse_club_is_agree\030: \001(\0132\'.com.huinan.p" +
-      "roto.CSResponseClubIsAgreeH\000\022<\n\020cs_notif" +
-      "y_logout\030; \001(\0132 .com.huinan.proto.CSNoti" +
-      "fyLogoutH\000B\013\n\tmsg_union"
+      "oto.CSResponseClubMessageH\000\022L\n\027cs_reques" +
+      "t_club_re_room\0305 \001(\0132).com.huinan.proto." +
+      "CSRequestClubRemoveRoomH\000\022N\n\030cs_response" +
+      "_club_re_room\0306 \001(\0132*.com.huinan.proto.C" +
+      "SResponseClubRemoveRoomH\000\022C\n\024cs_request_" +
+      "club_kick\0307 \001(\0132#.com.huinan.proto.CSReq" +
+      "uestClubKickH\000\022E\n\025cs_response_club_kick\030" +
+      "8 \001(\0132$.com.huinan.proto.CSResponseClubK" +
+      "ickH\000\022J\n\030cs_request_club_is_agree\0309 \001(\0132",
+      "&.com.huinan.proto.CSRequestClubIsAgreeH" +
+      "\000\022L\n\031cs_response_club_is_agree\030: \001(\0132\'.c" +
+      "om.huinan.proto.CSResponseClubIsAgreeH\000\022" +
+      "G\n\026cs_request_club_create\030; \001(\0132%.com.hu" +
+      "inan.proto.CSRequestClubCreateH\000\022I\n\027cs_r" +
+      "esponse_club_create\030< \001(\0132&.com.huinan.p" +
+      "roto.CSResponseClubCreateH\000\022E\n\025cs_reques" +
+      "t_club_apply\030= \001(\0132$.com.huinan.proto.CS" +
+      "RequestClubApplyH\000\022G\n\026cs_response_club_a" +
+      "pply\030> \001(\0132%.com.huinan.proto.CSResponse",
+      "ClubApplyH\000\022C\n\024cs_notify_club_apply\030? \001(" +
+      "\0132#.com.huinan.proto.CSNotifyClubApplyH\000" +
+      "\022G\n\026cs_notify_club_refresh\030@ \001(\0132%.com.h" +
+      "uinan.proto.CSNotifyClubRefreshH\000\022<\n\020cs_" +
+      "notify_logout\030d \001(\0132 .com.huinan.proto.C" +
+      "SNotifyLogoutH\000B\013\n\tmsg_union"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -19034,7 +20486,7 @@ public final class CpMsg {
     internal_static_com_huinan_proto_CpMsgData_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_huinan_proto_CpMsgData_descriptor,
-        new java.lang.String[] { "CsRequestLogin", "CsResponseLogin", "CsRequestCreateTable", "CsResponseCreateTable", "CsRequestEnterTable", "CsResponseEnterTable", "CsNotifyEnterTable", "CsRequestLogoutTable", "CsResponseLogoutTable", "CsNotifyLogoutTable", "CsRequestOwnerTiren", "CsResponseOwnerTiren", "CsNotifyOwnerTiren", "CsRequestDissolveTable", "CsResponseDissolveTable", "CsNotifyDissolveTableOperation", "CsNotifyTableDissolved", "CsRequestReadyForGame", "CsResponseReadyForGame", "CsNotifyReadyForGame", "CsNotifyGameStart", "CsNotifySeatOperationChoice", "CsRequestDoAction", "CsResponseDoAction", "CsNotifyActionFlow", "CsNotifyPlayerDealCard", "CsNotifyNextOperation", "CsNotifyGameOver", "CsRequestReconnect", "CsResponseReconnect", "CsRequestHeartBeat", "CsResponseHeartBeat", "CsRequestChat", "CsResponseChat", "CsNotifyChat", "CsRequestIsOnline", "CsResponseIsOnline", "CsNotifyIsOnline", "CsNotifyRoomCardChange", "CsRequestPalyBack", "CsResponsePalyBack", "CsNotifyNotice", "CsNotifyOpenTouPai", "CsRequestClubInfo", "CsResponseClubInfo", "CsRequestClubRoom", "CsResponseClubRoom", "CsRequestClubMember", "CsResponseClubMember", "CsRequestClubMessage", "CsResponseClubMessage", "CsNotifyClubApply", "CsRequestClubReRoom", "CsResponseClubReRoom", "CsRequestClubKick", "CsResponseClubKick", "CsRequestClubIsAgree", "CsResponseClubIsAgree", "CsNotifyLogout", "MsgUnion", });
+        new java.lang.String[] { "CsRequestLogin", "CsResponseLogin", "CsRequestCreateTable", "CsResponseCreateTable", "CsRequestEnterTable", "CsResponseEnterTable", "CsNotifyEnterTable", "CsRequestLogoutTable", "CsResponseLogoutTable", "CsNotifyLogoutTable", "CsRequestOwnerTiren", "CsResponseOwnerTiren", "CsNotifyOwnerTiren", "CsRequestDissolveTable", "CsResponseDissolveTable", "CsNotifyDissolveTableOperation", "CsNotifyTableDissolved", "CsRequestReadyForGame", "CsResponseReadyForGame", "CsNotifyReadyForGame", "CsNotifyGameStart", "CsNotifySeatOperationChoice", "CsRequestDoAction", "CsResponseDoAction", "CsNotifyActionFlow", "CsNotifyPlayerDealCard", "CsNotifyNextOperation", "CsNotifyGameOver", "CsRequestReconnect", "CsResponseReconnect", "CsRequestHeartBeat", "CsResponseHeartBeat", "CsRequestChat", "CsResponseChat", "CsNotifyChat", "CsRequestIsOnline", "CsResponseIsOnline", "CsNotifyIsOnline", "CsNotifyRoomCardChange", "CsRequestPalyBack", "CsResponsePalyBack", "CsNotifyNotice", "CsNotifyOpenTouPai", "CsRequestClubInfo", "CsResponseClubInfo", "CsRequestClubRoom", "CsResponseClubRoom", "CsRequestClubMember", "CsResponseClubMember", "CsRequestClubMessage", "CsResponseClubMessage", "CsRequestClubReRoom", "CsResponseClubReRoom", "CsRequestClubKick", "CsResponseClubKick", "CsRequestClubIsAgree", "CsResponseClubIsAgree", "CsRequestClubCreate", "CsResponseClubCreate", "CsRequestClubApply", "CsResponseClubApply", "CsNotifyClubApply", "CsNotifyClubRefresh", "CsNotifyLogout", "MsgUnion", });
     com.huinan.proto.CpMsgCs.getDescriptor();
     com.huinan.proto.CpMsgClub.getDescriptor();
   }

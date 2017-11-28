@@ -25,7 +25,10 @@ enum ENMessageError
 	RESPONSE_CLUB_NOT_IN_APPLY_LIST = 20;			//不在申请列表
 	RESPONSE_CLUB_NOT_IN_THIS_CLUB = 21;			//不在该俱乐部
 	RESPONSE_CLUB_ROOM_FULL = 22;					//俱乐部房间数达到上限，请清除房间
-	
+	RESPONSE_CLUB_NOT_IS_PROXY = 23;				//不是代理，不能创建俱乐部
+	RESPONSE_CLUB_NAME_ISEMPTY = 24;				//俱乐部名字不能为空
+	RESPONSE_CLUB_NAME_ILLEGAL = 25;				//俱乐部名字含有非法字符
+	RESPONSE_CLUB_NUM_MAX = 26;						//创建的俱乐部达到上限
 	
 }
 
