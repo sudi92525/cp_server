@@ -34,6 +34,8 @@
 		</PlayerPoolConfig>
 <!-- 		<GameCode>xiaonanqipai</GameCode> -->
 		<GameCode>xnsccp</GameCode>
+		<GameInitUrl>http://192.168.0.100:8081/api/GetInitData</GameInitUrl>
+		<LoginApiUrl>http://192.168.0.100:8081/api/Account/Logon</LoginApiUrl>
 <!-- 		<GameCode>xiaonanqipai_4567</GameCode> -->
 	</GameServer>
 </game>

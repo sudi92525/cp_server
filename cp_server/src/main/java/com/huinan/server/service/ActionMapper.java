@@ -14,6 +14,8 @@ import com.huinan.server.service.action.RoomCreate;
 import com.huinan.server.service.action.RoomJoin;
 import com.huinan.server.service.action.RoomPleaseOut;
 import com.huinan.server.service.action.RoomQuit;
+import com.huinan.server.service.action.luanch.LuanchInit;
+import com.huinan.server.service.action.luanch.LuanchWXLogin;
 
 /**
  *
@@ -49,6 +51,11 @@ public class ActionMapper {
 	    return new RoomPleaseOut();
 	case CpMsgData.CS_REQUEST_PALY_BACK_FIELD_NUMBER:
 	    return new GetPlayBack();
+	    
+	case CpMsgData.CS_REQUEST_INIT_FIELD_NUMBER:
+	    return new LuanchInit();
+	case CpMsgData.CS_REQUEST_WX_LOGIN_FIELD_NUMBER:
+	    return new LuanchWXLogin();
 	default:
 	    return null;
 	}

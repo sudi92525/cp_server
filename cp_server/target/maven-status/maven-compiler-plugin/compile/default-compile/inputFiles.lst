@@ -48,6 +48,7 @@ D:\xnqp.git\cp_server\src\main\java\com\huinan\server\service\action\RoomDissolv
 D:\xnqp.git\cp_server\src\main\java\com\huinan\server\service\data\Room.java
 D:\xnqp.git\cp_server\src\main\java\com\huinan\server\server\db\RedisKeyManager.java
 D:\xnqp.git\cp_server\src\main\java\com\huinan\server\server\RabbitMQManager.java
+D:\xnqp.git\cp_server\src\main\java\com\huinan\server\service\action\luanch\LuanchInit.java
 D:\xnqp.git\cp_server\src\main\java\com\huinan\server\net\ClientRequest.java
 D:\xnqp.git\cp_server\src\main\java\com\huinan\server\service\data\ERoomCardCost.java
 D:\xnqp.git\cp_server\src\main\java\com\huinan\server\service\manager\UserUtils.java
@@ -94,4 +95,5 @@ D:\xnqp.git\cp_server\src\main\java\com\huinan\server\server\client\NettyTCPClie
 D:\xnqp.git\cp_server\src\main\java\com\huinan\server\service\manager\TimerTaskManager.java
 D:\xnqp.git\cp_server\src\main\java\com\huinan\server\service\data\BrandEnums.java
 D:\xnqp.git\cp_server\src\main\java\com\huinan\server\service\action\Chat.java
+D:\xnqp.git\cp_server\src\main\java\com\huinan\server\service\action\luanch\LuanchWXLogin.java
 D:\xnqp.git\cp_server\src\main\java\com\huinan\server\service\action\RoomJoin.java

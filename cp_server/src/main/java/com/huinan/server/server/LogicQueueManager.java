@@ -14,6 +14,7 @@ import com.huinan.server.service.AbsAction;
 public class LogicQueueManager {
 	private static final int QUEUE_NUM = 2;
 	private static final int DB_QUEUE_NUM = 2;
+	private static final int LUANCH_QUEUE_NUM = 2;
 
 	public static LogicQueueManager getInstance() {
 		try {
@@ -42,6 +43,12 @@ public class LogicQueueManager {
 		for (int i = 0; i < dbCount; i++) {
 			dbList[i] = new LogicQueue(this, "db_queue_" + i, i);
 		}
+		
+		this.luanchCount = LUANCH_QUEUE_NUM;
+		this.luanchList = new LogicQueue[this.luanchCount];
+		for (int i = 0; i < luanchCount; i++) {
+			luanchList[i] = new LogicQueue(this, "luanch_queue_" + i, i);
+		}
 	}
 
 	/**
@@ -55,6 +62,10 @@ public class LogicQueueManager {
 		}
 		for (LogicQueue dbQueue : dbList) {
 			dbQueue.start();
+		}
+		
+		for (LogicQueue luanchQueue : luanchList) {
+			luanchQueue.start();
 		}
 		LOGGER.info("end logicQueue start");
 	}
@@ -81,6 +92,13 @@ public class LogicQueueManager {
 			}
 		}
 		for (LogicQueue queue : dbList) {
+			try {
+				queue.stop();
+			} catch (Exception e) {
+				LOGGER.error("stop exception", e);
+			}
+		}
+		for (LogicQueue queue : luanchList) {
 			try {
 				queue.stop();
 			} catch (Exception e) {
@@ -116,6 +134,15 @@ public class LogicQueueManager {
 			}
 		}
 	}
+	
+	public void addLuanchJob(int uid, AbsAction job) {
+		if (this.running) {
+			int index = uid % this.luanchCount;
+			if (this.luanchList[index].addJob(job)) {
+				getLuanchCounter().incrementAndGet();
+			}
+		}
+	}
 
 	public static LogicQueue getThread(int threadIndex) {
 		return instance.queueList[threadIndex];
@@ -128,25 +155,40 @@ public class LogicQueueManager {
 	public AtomicLong getDbCounter() {
 		return dbCounter;
 	}
+	
+	public AtomicLong getLuanchCounter() {
+		return luanchCounter;
+	}
 
 	public int getQueueCount() {
 		return queueCount;
 	}
-	
+
 	public int getDBQueueCount() {
 		return dbCount;
+	}
+	
+	public int getLuanchQueueCount() {
+		return luanchCount;
 	}
 
 	/**
 	 * 注意, 在多线程调用的情况下需要对该变量进行原子化 woker线程为多线程
 	 **/
+	private volatile boolean running;
+
 	private AtomicLong counter = new AtomicLong();
 	private AtomicLong dbCounter = new AtomicLong();
-	private volatile boolean running;
+	private AtomicLong luanchCounter = new AtomicLong();
+
 	private int queueCount = 0;
 	private int dbCount = 0;
+	private int luanchCount = 0;
+
 	private LogicQueue[] queueList;
 	private LogicQueue[] dbList;
+	private LogicQueue[] luanchList;
+
 	protected static Logger LOGGER = LogManager
 			.getLogger(LogicQueueManager.class);
 	private static LogicQueueManager instance;

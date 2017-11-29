@@ -51848,6 +51848,2388 @@ public final class CpMsgCs {
     // @@protoc_insertion_point(class_scope:com.huinan.proto.CSNotifyLogout)
   }
 
+  public interface CSRequestInitOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.huinan.proto.CSRequestInit)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>required string init_request_json = 1;</code>
+     *
+     * <pre>
+     *初始化json串
+     * </pre>
+     */
+    boolean hasInitRequestJson();
+    /**
+     * <code>required string init_request_json = 1;</code>
+     *
+     * <pre>
+     *初始化json串
+     * </pre>
+     */
+    java.lang.String getInitRequestJson();
+    /**
+     * <code>required string init_request_json = 1;</code>
+     *
+     * <pre>
+     *初始化json串
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getInitRequestJsonBytes();
+  }
+  /**
+   * Protobuf type {@code com.huinan.proto.CSRequestInit}
+   *
+   * <pre>
+   *初始化，热更新
+   * </pre>
+   */
+  public static final class CSRequestInit extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.huinan.proto.CSRequestInit)
+      CSRequestInitOrBuilder {
+    // Use CSRequestInit.newBuilder() to construct.
+    private CSRequestInit(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private CSRequestInit(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final CSRequestInit defaultInstance;
+    public static CSRequestInit getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public CSRequestInit getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private CSRequestInit(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000001;
+              initRequestJson_ = bs;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.huinan.proto.CpMsgCs.internal_static_com_huinan_proto_CSRequestInit_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.huinan.proto.CpMsgCs.internal_static_com_huinan_proto_CSRequestInit_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.huinan.proto.CpMsgCs.CSRequestInit.class, com.huinan.proto.CpMsgCs.CSRequestInit.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<CSRequestInit> PARSER =
+        new com.google.protobuf.AbstractParser<CSRequestInit>() {
+      public CSRequestInit parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new CSRequestInit(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<CSRequestInit> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int INIT_REQUEST_JSON_FIELD_NUMBER = 1;
+    private java.lang.Object initRequestJson_;
+    /**
+     * <code>required string init_request_json = 1;</code>
+     *
+     * <pre>
+     *初始化json串
+     * </pre>
+     */
+    public boolean hasInitRequestJson() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required string init_request_json = 1;</code>
+     *
+     * <pre>
+     *初始化json串
+     * </pre>
+     */
+    public java.lang.String getInitRequestJson() {
+      java.lang.Object ref = initRequestJson_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          initRequestJson_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string init_request_json = 1;</code>
+     *
+     * <pre>
+     *初始化json串
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getInitRequestJsonBytes() {
+      java.lang.Object ref = initRequestJson_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        initRequestJson_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private void initFields() {
+      initRequestJson_ = "";
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasInitRequestJson()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, getInitRequestJsonBytes());
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, getInitRequestJsonBytes());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.huinan.proto.CpMsgCs.CSRequestInit parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.huinan.proto.CpMsgCs.CSRequestInit parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.huinan.proto.CpMsgCs.CSRequestInit parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.huinan.proto.CpMsgCs.CSRequestInit parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.huinan.proto.CpMsgCs.CSRequestInit parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.huinan.proto.CpMsgCs.CSRequestInit parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.huinan.proto.CpMsgCs.CSRequestInit parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.huinan.proto.CpMsgCs.CSRequestInit parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.huinan.proto.CpMsgCs.CSRequestInit parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.huinan.proto.CpMsgCs.CSRequestInit parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.huinan.proto.CpMsgCs.CSRequestInit prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.huinan.proto.CSRequestInit}
+     *
+     * <pre>
+     *初始化，热更新
+     * </pre>
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.huinan.proto.CSRequestInit)
+        com.huinan.proto.CpMsgCs.CSRequestInitOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.huinan.proto.CpMsgCs.internal_static_com_huinan_proto_CSRequestInit_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.huinan.proto.CpMsgCs.internal_static_com_huinan_proto_CSRequestInit_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.huinan.proto.CpMsgCs.CSRequestInit.class, com.huinan.proto.CpMsgCs.CSRequestInit.Builder.class);
+      }
+
+      // Construct using com.huinan.proto.CpMsgCs.CSRequestInit.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        initRequestJson_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.huinan.proto.CpMsgCs.internal_static_com_huinan_proto_CSRequestInit_descriptor;
+      }
+
+      public com.huinan.proto.CpMsgCs.CSRequestInit getDefaultInstanceForType() {
+        return com.huinan.proto.CpMsgCs.CSRequestInit.getDefaultInstance();
+      }
+
+      public com.huinan.proto.CpMsgCs.CSRequestInit build() {
+        com.huinan.proto.CpMsgCs.CSRequestInit result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.huinan.proto.CpMsgCs.CSRequestInit buildPartial() {
+        com.huinan.proto.CpMsgCs.CSRequestInit result = new com.huinan.proto.CpMsgCs.CSRequestInit(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.initRequestJson_ = initRequestJson_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.huinan.proto.CpMsgCs.CSRequestInit) {
+          return mergeFrom((com.huinan.proto.CpMsgCs.CSRequestInit)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.huinan.proto.CpMsgCs.CSRequestInit other) {
+        if (other == com.huinan.proto.CpMsgCs.CSRequestInit.getDefaultInstance()) return this;
+        if (other.hasInitRequestJson()) {
+          bitField0_ |= 0x00000001;
+          initRequestJson_ = other.initRequestJson_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasInitRequestJson()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.huinan.proto.CpMsgCs.CSRequestInit parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.huinan.proto.CpMsgCs.CSRequestInit) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.lang.Object initRequestJson_ = "";
+      /**
+       * <code>required string init_request_json = 1;</code>
+       *
+       * <pre>
+       *初始化json串
+       * </pre>
+       */
+      public boolean hasInitRequestJson() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required string init_request_json = 1;</code>
+       *
+       * <pre>
+       *初始化json串
+       * </pre>
+       */
+      public java.lang.String getInitRequestJson() {
+        java.lang.Object ref = initRequestJson_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            initRequestJson_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string init_request_json = 1;</code>
+       *
+       * <pre>
+       *初始化json串
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getInitRequestJsonBytes() {
+        java.lang.Object ref = initRequestJson_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          initRequestJson_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string init_request_json = 1;</code>
+       *
+       * <pre>
+       *初始化json串
+       * </pre>
+       */
+      public Builder setInitRequestJson(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        initRequestJson_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string init_request_json = 1;</code>
+       *
+       * <pre>
+       *初始化json串
+       * </pre>
+       */
+      public Builder clearInitRequestJson() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        initRequestJson_ = getDefaultInstance().getInitRequestJson();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string init_request_json = 1;</code>
+       *
+       * <pre>
+       *初始化json串
+       * </pre>
+       */
+      public Builder setInitRequestJsonBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        initRequestJson_ = value;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.huinan.proto.CSRequestInit)
+    }
+
+    static {
+      defaultInstance = new CSRequestInit(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.huinan.proto.CSRequestInit)
+  }
+
+  public interface CSResponseInitOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.huinan.proto.CSResponseInit)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional .com.huinan.proto.ENMessageError result = 1;</code>
+     *
+     * <pre>
+     *成功状态
+     * </pre>
+     */
+    boolean hasResult();
+    /**
+     * <code>optional .com.huinan.proto.ENMessageError result = 1;</code>
+     *
+     * <pre>
+     *成功状态
+     * </pre>
+     */
+    com.huinan.proto.CpMsgCs.ENMessageError getResult();
+
+    /**
+     * <code>required string init_reaponse_json = 2;</code>
+     *
+     * <pre>
+     *初始化json串
+     * </pre>
+     */
+    boolean hasInitReaponseJson();
+    /**
+     * <code>required string init_reaponse_json = 2;</code>
+     *
+     * <pre>
+     *初始化json串
+     * </pre>
+     */
+    java.lang.String getInitReaponseJson();
+    /**
+     * <code>required string init_reaponse_json = 2;</code>
+     *
+     * <pre>
+     *初始化json串
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getInitReaponseJsonBytes();
+  }
+  /**
+   * Protobuf type {@code com.huinan.proto.CSResponseInit}
+   */
+  public static final class CSResponseInit extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.huinan.proto.CSResponseInit)
+      CSResponseInitOrBuilder {
+    // Use CSResponseInit.newBuilder() to construct.
+    private CSResponseInit(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private CSResponseInit(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final CSResponseInit defaultInstance;
+    public static CSResponseInit getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public CSResponseInit getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private CSResponseInit(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              int rawValue = input.readEnum();
+              com.huinan.proto.CpMsgCs.ENMessageError value = com.huinan.proto.CpMsgCs.ENMessageError.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(1, rawValue);
+              } else {
+                bitField0_ |= 0x00000001;
+                result_ = value;
+              }
+              break;
+            }
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000002;
+              initReaponseJson_ = bs;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.huinan.proto.CpMsgCs.internal_static_com_huinan_proto_CSResponseInit_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.huinan.proto.CpMsgCs.internal_static_com_huinan_proto_CSResponseInit_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.huinan.proto.CpMsgCs.CSResponseInit.class, com.huinan.proto.CpMsgCs.CSResponseInit.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<CSResponseInit> PARSER =
+        new com.google.protobuf.AbstractParser<CSResponseInit>() {
+      public CSResponseInit parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new CSResponseInit(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<CSResponseInit> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int RESULT_FIELD_NUMBER = 1;
+    private com.huinan.proto.CpMsgCs.ENMessageError result_;
+    /**
+     * <code>optional .com.huinan.proto.ENMessageError result = 1;</code>
+     *
+     * <pre>
+     *成功状态
+     * </pre>
+     */
+    public boolean hasResult() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional .com.huinan.proto.ENMessageError result = 1;</code>
+     *
+     * <pre>
+     *成功状态
+     * </pre>
+     */
+    public com.huinan.proto.CpMsgCs.ENMessageError getResult() {
+      return result_;
+    }
+
+    public static final int INIT_REAPONSE_JSON_FIELD_NUMBER = 2;
+    private java.lang.Object initReaponseJson_;
+    /**
+     * <code>required string init_reaponse_json = 2;</code>
+     *
+     * <pre>
+     *初始化json串
+     * </pre>
+     */
+    public boolean hasInitReaponseJson() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required string init_reaponse_json = 2;</code>
+     *
+     * <pre>
+     *初始化json串
+     * </pre>
+     */
+    public java.lang.String getInitReaponseJson() {
+      java.lang.Object ref = initReaponseJson_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          initReaponseJson_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string init_reaponse_json = 2;</code>
+     *
+     * <pre>
+     *初始化json串
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getInitReaponseJsonBytes() {
+      java.lang.Object ref = initReaponseJson_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        initReaponseJson_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private void initFields() {
+      result_ = com.huinan.proto.CpMsgCs.ENMessageError.RESPONSE_SUCCESS;
+      initReaponseJson_ = "";
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasInitReaponseJson()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeEnum(1, result_.getNumber());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, getInitReaponseJsonBytes());
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(1, result_.getNumber());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, getInitReaponseJsonBytes());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.huinan.proto.CpMsgCs.CSResponseInit parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.huinan.proto.CpMsgCs.CSResponseInit parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.huinan.proto.CpMsgCs.CSResponseInit parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.huinan.proto.CpMsgCs.CSResponseInit parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.huinan.proto.CpMsgCs.CSResponseInit parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.huinan.proto.CpMsgCs.CSResponseInit parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.huinan.proto.CpMsgCs.CSResponseInit parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.huinan.proto.CpMsgCs.CSResponseInit parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.huinan.proto.CpMsgCs.CSResponseInit parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.huinan.proto.CpMsgCs.CSResponseInit parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.huinan.proto.CpMsgCs.CSResponseInit prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.huinan.proto.CSResponseInit}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.huinan.proto.CSResponseInit)
+        com.huinan.proto.CpMsgCs.CSResponseInitOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.huinan.proto.CpMsgCs.internal_static_com_huinan_proto_CSResponseInit_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.huinan.proto.CpMsgCs.internal_static_com_huinan_proto_CSResponseInit_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.huinan.proto.CpMsgCs.CSResponseInit.class, com.huinan.proto.CpMsgCs.CSResponseInit.Builder.class);
+      }
+
+      // Construct using com.huinan.proto.CpMsgCs.CSResponseInit.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        result_ = com.huinan.proto.CpMsgCs.ENMessageError.RESPONSE_SUCCESS;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        initReaponseJson_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.huinan.proto.CpMsgCs.internal_static_com_huinan_proto_CSResponseInit_descriptor;
+      }
+
+      public com.huinan.proto.CpMsgCs.CSResponseInit getDefaultInstanceForType() {
+        return com.huinan.proto.CpMsgCs.CSResponseInit.getDefaultInstance();
+      }
+
+      public com.huinan.proto.CpMsgCs.CSResponseInit build() {
+        com.huinan.proto.CpMsgCs.CSResponseInit result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.huinan.proto.CpMsgCs.CSResponseInit buildPartial() {
+        com.huinan.proto.CpMsgCs.CSResponseInit result = new com.huinan.proto.CpMsgCs.CSResponseInit(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.result_ = result_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.initReaponseJson_ = initReaponseJson_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.huinan.proto.CpMsgCs.CSResponseInit) {
+          return mergeFrom((com.huinan.proto.CpMsgCs.CSResponseInit)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.huinan.proto.CpMsgCs.CSResponseInit other) {
+        if (other == com.huinan.proto.CpMsgCs.CSResponseInit.getDefaultInstance()) return this;
+        if (other.hasResult()) {
+          setResult(other.getResult());
+        }
+        if (other.hasInitReaponseJson()) {
+          bitField0_ |= 0x00000002;
+          initReaponseJson_ = other.initReaponseJson_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasInitReaponseJson()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.huinan.proto.CpMsgCs.CSResponseInit parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.huinan.proto.CpMsgCs.CSResponseInit) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private com.huinan.proto.CpMsgCs.ENMessageError result_ = com.huinan.proto.CpMsgCs.ENMessageError.RESPONSE_SUCCESS;
+      /**
+       * <code>optional .com.huinan.proto.ENMessageError result = 1;</code>
+       *
+       * <pre>
+       *成功状态
+       * </pre>
+       */
+      public boolean hasResult() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional .com.huinan.proto.ENMessageError result = 1;</code>
+       *
+       * <pre>
+       *成功状态
+       * </pre>
+       */
+      public com.huinan.proto.CpMsgCs.ENMessageError getResult() {
+        return result_;
+      }
+      /**
+       * <code>optional .com.huinan.proto.ENMessageError result = 1;</code>
+       *
+       * <pre>
+       *成功状态
+       * </pre>
+       */
+      public Builder setResult(com.huinan.proto.CpMsgCs.ENMessageError value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000001;
+        result_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .com.huinan.proto.ENMessageError result = 1;</code>
+       *
+       * <pre>
+       *成功状态
+       * </pre>
+       */
+      public Builder clearResult() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        result_ = com.huinan.proto.CpMsgCs.ENMessageError.RESPONSE_SUCCESS;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object initReaponseJson_ = "";
+      /**
+       * <code>required string init_reaponse_json = 2;</code>
+       *
+       * <pre>
+       *初始化json串
+       * </pre>
+       */
+      public boolean hasInitReaponseJson() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required string init_reaponse_json = 2;</code>
+       *
+       * <pre>
+       *初始化json串
+       * </pre>
+       */
+      public java.lang.String getInitReaponseJson() {
+        java.lang.Object ref = initReaponseJson_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            initReaponseJson_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string init_reaponse_json = 2;</code>
+       *
+       * <pre>
+       *初始化json串
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getInitReaponseJsonBytes() {
+        java.lang.Object ref = initReaponseJson_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          initReaponseJson_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string init_reaponse_json = 2;</code>
+       *
+       * <pre>
+       *初始化json串
+       * </pre>
+       */
+      public Builder setInitReaponseJson(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        initReaponseJson_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string init_reaponse_json = 2;</code>
+       *
+       * <pre>
+       *初始化json串
+       * </pre>
+       */
+      public Builder clearInitReaponseJson() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        initReaponseJson_ = getDefaultInstance().getInitReaponseJson();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string init_reaponse_json = 2;</code>
+       *
+       * <pre>
+       *初始化json串
+       * </pre>
+       */
+      public Builder setInitReaponseJsonBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        initReaponseJson_ = value;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.huinan.proto.CSResponseInit)
+    }
+
+    static {
+      defaultInstance = new CSResponseInit(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.huinan.proto.CSResponseInit)
+  }
+
+  public interface CSRequestWeiChatLoginOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.huinan.proto.CSRequestWeiChatLogin)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>required string request_json = 1;</code>
+     *
+     * <pre>
+     *微信登录json串
+     * </pre>
+     */
+    boolean hasRequestJson();
+    /**
+     * <code>required string request_json = 1;</code>
+     *
+     * <pre>
+     *微信登录json串
+     * </pre>
+     */
+    java.lang.String getRequestJson();
+    /**
+     * <code>required string request_json = 1;</code>
+     *
+     * <pre>
+     *微信登录json串
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getRequestJsonBytes();
+  }
+  /**
+   * Protobuf type {@code com.huinan.proto.CSRequestWeiChatLogin}
+   *
+   * <pre>
+   *微信登录
+   * </pre>
+   */
+  public static final class CSRequestWeiChatLogin extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.huinan.proto.CSRequestWeiChatLogin)
+      CSRequestWeiChatLoginOrBuilder {
+    // Use CSRequestWeiChatLogin.newBuilder() to construct.
+    private CSRequestWeiChatLogin(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private CSRequestWeiChatLogin(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final CSRequestWeiChatLogin defaultInstance;
+    public static CSRequestWeiChatLogin getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public CSRequestWeiChatLogin getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private CSRequestWeiChatLogin(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000001;
+              requestJson_ = bs;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.huinan.proto.CpMsgCs.internal_static_com_huinan_proto_CSRequestWeiChatLogin_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.huinan.proto.CpMsgCs.internal_static_com_huinan_proto_CSRequestWeiChatLogin_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.huinan.proto.CpMsgCs.CSRequestWeiChatLogin.class, com.huinan.proto.CpMsgCs.CSRequestWeiChatLogin.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<CSRequestWeiChatLogin> PARSER =
+        new com.google.protobuf.AbstractParser<CSRequestWeiChatLogin>() {
+      public CSRequestWeiChatLogin parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new CSRequestWeiChatLogin(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<CSRequestWeiChatLogin> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int REQUEST_JSON_FIELD_NUMBER = 1;
+    private java.lang.Object requestJson_;
+    /**
+     * <code>required string request_json = 1;</code>
+     *
+     * <pre>
+     *微信登录json串
+     * </pre>
+     */
+    public boolean hasRequestJson() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required string request_json = 1;</code>
+     *
+     * <pre>
+     *微信登录json串
+     * </pre>
+     */
+    public java.lang.String getRequestJson() {
+      java.lang.Object ref = requestJson_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          requestJson_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string request_json = 1;</code>
+     *
+     * <pre>
+     *微信登录json串
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getRequestJsonBytes() {
+      java.lang.Object ref = requestJson_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        requestJson_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private void initFields() {
+      requestJson_ = "";
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasRequestJson()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, getRequestJsonBytes());
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, getRequestJsonBytes());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.huinan.proto.CpMsgCs.CSRequestWeiChatLogin parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.huinan.proto.CpMsgCs.CSRequestWeiChatLogin parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.huinan.proto.CpMsgCs.CSRequestWeiChatLogin parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.huinan.proto.CpMsgCs.CSRequestWeiChatLogin parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.huinan.proto.CpMsgCs.CSRequestWeiChatLogin parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.huinan.proto.CpMsgCs.CSRequestWeiChatLogin parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.huinan.proto.CpMsgCs.CSRequestWeiChatLogin parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.huinan.proto.CpMsgCs.CSRequestWeiChatLogin parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.huinan.proto.CpMsgCs.CSRequestWeiChatLogin parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.huinan.proto.CpMsgCs.CSRequestWeiChatLogin parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.huinan.proto.CpMsgCs.CSRequestWeiChatLogin prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.huinan.proto.CSRequestWeiChatLogin}
+     *
+     * <pre>
+     *微信登录
+     * </pre>
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.huinan.proto.CSRequestWeiChatLogin)
+        com.huinan.proto.CpMsgCs.CSRequestWeiChatLoginOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.huinan.proto.CpMsgCs.internal_static_com_huinan_proto_CSRequestWeiChatLogin_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.huinan.proto.CpMsgCs.internal_static_com_huinan_proto_CSRequestWeiChatLogin_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.huinan.proto.CpMsgCs.CSRequestWeiChatLogin.class, com.huinan.proto.CpMsgCs.CSRequestWeiChatLogin.Builder.class);
+      }
+
+      // Construct using com.huinan.proto.CpMsgCs.CSRequestWeiChatLogin.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        requestJson_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.huinan.proto.CpMsgCs.internal_static_com_huinan_proto_CSRequestWeiChatLogin_descriptor;
+      }
+
+      public com.huinan.proto.CpMsgCs.CSRequestWeiChatLogin getDefaultInstanceForType() {
+        return com.huinan.proto.CpMsgCs.CSRequestWeiChatLogin.getDefaultInstance();
+      }
+
+      public com.huinan.proto.CpMsgCs.CSRequestWeiChatLogin build() {
+        com.huinan.proto.CpMsgCs.CSRequestWeiChatLogin result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.huinan.proto.CpMsgCs.CSRequestWeiChatLogin buildPartial() {
+        com.huinan.proto.CpMsgCs.CSRequestWeiChatLogin result = new com.huinan.proto.CpMsgCs.CSRequestWeiChatLogin(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.requestJson_ = requestJson_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.huinan.proto.CpMsgCs.CSRequestWeiChatLogin) {
+          return mergeFrom((com.huinan.proto.CpMsgCs.CSRequestWeiChatLogin)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.huinan.proto.CpMsgCs.CSRequestWeiChatLogin other) {
+        if (other == com.huinan.proto.CpMsgCs.CSRequestWeiChatLogin.getDefaultInstance()) return this;
+        if (other.hasRequestJson()) {
+          bitField0_ |= 0x00000001;
+          requestJson_ = other.requestJson_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasRequestJson()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.huinan.proto.CpMsgCs.CSRequestWeiChatLogin parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.huinan.proto.CpMsgCs.CSRequestWeiChatLogin) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.lang.Object requestJson_ = "";
+      /**
+       * <code>required string request_json = 1;</code>
+       *
+       * <pre>
+       *微信登录json串
+       * </pre>
+       */
+      public boolean hasRequestJson() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required string request_json = 1;</code>
+       *
+       * <pre>
+       *微信登录json串
+       * </pre>
+       */
+      public java.lang.String getRequestJson() {
+        java.lang.Object ref = requestJson_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            requestJson_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string request_json = 1;</code>
+       *
+       * <pre>
+       *微信登录json串
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getRequestJsonBytes() {
+        java.lang.Object ref = requestJson_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          requestJson_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string request_json = 1;</code>
+       *
+       * <pre>
+       *微信登录json串
+       * </pre>
+       */
+      public Builder setRequestJson(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        requestJson_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string request_json = 1;</code>
+       *
+       * <pre>
+       *微信登录json串
+       * </pre>
+       */
+      public Builder clearRequestJson() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        requestJson_ = getDefaultInstance().getRequestJson();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string request_json = 1;</code>
+       *
+       * <pre>
+       *微信登录json串
+       * </pre>
+       */
+      public Builder setRequestJsonBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        requestJson_ = value;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.huinan.proto.CSRequestWeiChatLogin)
+    }
+
+    static {
+      defaultInstance = new CSRequestWeiChatLogin(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.huinan.proto.CSRequestWeiChatLogin)
+  }
+
+  public interface CSResponseWeiChatLoginOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.huinan.proto.CSResponseWeiChatLogin)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional .com.huinan.proto.ENMessageError result = 1;</code>
+     *
+     * <pre>
+     *成功状态
+     * </pre>
+     */
+    boolean hasResult();
+    /**
+     * <code>optional .com.huinan.proto.ENMessageError result = 1;</code>
+     *
+     * <pre>
+     *成功状态
+     * </pre>
+     */
+    com.huinan.proto.CpMsgCs.ENMessageError getResult();
+
+    /**
+     * <code>required string reaponse_json = 2;</code>
+     *
+     * <pre>
+     *微信登录json串
+     * </pre>
+     */
+    boolean hasReaponseJson();
+    /**
+     * <code>required string reaponse_json = 2;</code>
+     *
+     * <pre>
+     *微信登录json串
+     * </pre>
+     */
+    java.lang.String getReaponseJson();
+    /**
+     * <code>required string reaponse_json = 2;</code>
+     *
+     * <pre>
+     *微信登录json串
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getReaponseJsonBytes();
+  }
+  /**
+   * Protobuf type {@code com.huinan.proto.CSResponseWeiChatLogin}
+   */
+  public static final class CSResponseWeiChatLogin extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.huinan.proto.CSResponseWeiChatLogin)
+      CSResponseWeiChatLoginOrBuilder {
+    // Use CSResponseWeiChatLogin.newBuilder() to construct.
+    private CSResponseWeiChatLogin(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private CSResponseWeiChatLogin(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final CSResponseWeiChatLogin defaultInstance;
+    public static CSResponseWeiChatLogin getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public CSResponseWeiChatLogin getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private CSResponseWeiChatLogin(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              int rawValue = input.readEnum();
+              com.huinan.proto.CpMsgCs.ENMessageError value = com.huinan.proto.CpMsgCs.ENMessageError.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(1, rawValue);
+              } else {
+                bitField0_ |= 0x00000001;
+                result_ = value;
+              }
+              break;
+            }
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000002;
+              reaponseJson_ = bs;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.huinan.proto.CpMsgCs.internal_static_com_huinan_proto_CSResponseWeiChatLogin_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.huinan.proto.CpMsgCs.internal_static_com_huinan_proto_CSResponseWeiChatLogin_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.huinan.proto.CpMsgCs.CSResponseWeiChatLogin.class, com.huinan.proto.CpMsgCs.CSResponseWeiChatLogin.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<CSResponseWeiChatLogin> PARSER =
+        new com.google.protobuf.AbstractParser<CSResponseWeiChatLogin>() {
+      public CSResponseWeiChatLogin parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new CSResponseWeiChatLogin(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<CSResponseWeiChatLogin> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int RESULT_FIELD_NUMBER = 1;
+    private com.huinan.proto.CpMsgCs.ENMessageError result_;
+    /**
+     * <code>optional .com.huinan.proto.ENMessageError result = 1;</code>
+     *
+     * <pre>
+     *成功状态
+     * </pre>
+     */
+    public boolean hasResult() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional .com.huinan.proto.ENMessageError result = 1;</code>
+     *
+     * <pre>
+     *成功状态
+     * </pre>
+     */
+    public com.huinan.proto.CpMsgCs.ENMessageError getResult() {
+      return result_;
+    }
+
+    public static final int REAPONSE_JSON_FIELD_NUMBER = 2;
+    private java.lang.Object reaponseJson_;
+    /**
+     * <code>required string reaponse_json = 2;</code>
+     *
+     * <pre>
+     *微信登录json串
+     * </pre>
+     */
+    public boolean hasReaponseJson() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required string reaponse_json = 2;</code>
+     *
+     * <pre>
+     *微信登录json串
+     * </pre>
+     */
+    public java.lang.String getReaponseJson() {
+      java.lang.Object ref = reaponseJson_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          reaponseJson_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string reaponse_json = 2;</code>
+     *
+     * <pre>
+     *微信登录json串
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getReaponseJsonBytes() {
+      java.lang.Object ref = reaponseJson_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        reaponseJson_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private void initFields() {
+      result_ = com.huinan.proto.CpMsgCs.ENMessageError.RESPONSE_SUCCESS;
+      reaponseJson_ = "";
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasReaponseJson()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeEnum(1, result_.getNumber());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, getReaponseJsonBytes());
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(1, result_.getNumber());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, getReaponseJsonBytes());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.huinan.proto.CpMsgCs.CSResponseWeiChatLogin parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.huinan.proto.CpMsgCs.CSResponseWeiChatLogin parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.huinan.proto.CpMsgCs.CSResponseWeiChatLogin parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.huinan.proto.CpMsgCs.CSResponseWeiChatLogin parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.huinan.proto.CpMsgCs.CSResponseWeiChatLogin parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.huinan.proto.CpMsgCs.CSResponseWeiChatLogin parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.huinan.proto.CpMsgCs.CSResponseWeiChatLogin parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.huinan.proto.CpMsgCs.CSResponseWeiChatLogin parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.huinan.proto.CpMsgCs.CSResponseWeiChatLogin parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.huinan.proto.CpMsgCs.CSResponseWeiChatLogin parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.huinan.proto.CpMsgCs.CSResponseWeiChatLogin prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.huinan.proto.CSResponseWeiChatLogin}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.huinan.proto.CSResponseWeiChatLogin)
+        com.huinan.proto.CpMsgCs.CSResponseWeiChatLoginOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.huinan.proto.CpMsgCs.internal_static_com_huinan_proto_CSResponseWeiChatLogin_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.huinan.proto.CpMsgCs.internal_static_com_huinan_proto_CSResponseWeiChatLogin_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.huinan.proto.CpMsgCs.CSResponseWeiChatLogin.class, com.huinan.proto.CpMsgCs.CSResponseWeiChatLogin.Builder.class);
+      }
+
+      // Construct using com.huinan.proto.CpMsgCs.CSResponseWeiChatLogin.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        result_ = com.huinan.proto.CpMsgCs.ENMessageError.RESPONSE_SUCCESS;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        reaponseJson_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.huinan.proto.CpMsgCs.internal_static_com_huinan_proto_CSResponseWeiChatLogin_descriptor;
+      }
+
+      public com.huinan.proto.CpMsgCs.CSResponseWeiChatLogin getDefaultInstanceForType() {
+        return com.huinan.proto.CpMsgCs.CSResponseWeiChatLogin.getDefaultInstance();
+      }
+
+      public com.huinan.proto.CpMsgCs.CSResponseWeiChatLogin build() {
+        com.huinan.proto.CpMsgCs.CSResponseWeiChatLogin result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.huinan.proto.CpMsgCs.CSResponseWeiChatLogin buildPartial() {
+        com.huinan.proto.CpMsgCs.CSResponseWeiChatLogin result = new com.huinan.proto.CpMsgCs.CSResponseWeiChatLogin(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.result_ = result_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.reaponseJson_ = reaponseJson_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.huinan.proto.CpMsgCs.CSResponseWeiChatLogin) {
+          return mergeFrom((com.huinan.proto.CpMsgCs.CSResponseWeiChatLogin)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.huinan.proto.CpMsgCs.CSResponseWeiChatLogin other) {
+        if (other == com.huinan.proto.CpMsgCs.CSResponseWeiChatLogin.getDefaultInstance()) return this;
+        if (other.hasResult()) {
+          setResult(other.getResult());
+        }
+        if (other.hasReaponseJson()) {
+          bitField0_ |= 0x00000002;
+          reaponseJson_ = other.reaponseJson_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasReaponseJson()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.huinan.proto.CpMsgCs.CSResponseWeiChatLogin parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.huinan.proto.CpMsgCs.CSResponseWeiChatLogin) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private com.huinan.proto.CpMsgCs.ENMessageError result_ = com.huinan.proto.CpMsgCs.ENMessageError.RESPONSE_SUCCESS;
+      /**
+       * <code>optional .com.huinan.proto.ENMessageError result = 1;</code>
+       *
+       * <pre>
+       *成功状态
+       * </pre>
+       */
+      public boolean hasResult() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional .com.huinan.proto.ENMessageError result = 1;</code>
+       *
+       * <pre>
+       *成功状态
+       * </pre>
+       */
+      public com.huinan.proto.CpMsgCs.ENMessageError getResult() {
+        return result_;
+      }
+      /**
+       * <code>optional .com.huinan.proto.ENMessageError result = 1;</code>
+       *
+       * <pre>
+       *成功状态
+       * </pre>
+       */
+      public Builder setResult(com.huinan.proto.CpMsgCs.ENMessageError value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000001;
+        result_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .com.huinan.proto.ENMessageError result = 1;</code>
+       *
+       * <pre>
+       *成功状态
+       * </pre>
+       */
+      public Builder clearResult() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        result_ = com.huinan.proto.CpMsgCs.ENMessageError.RESPONSE_SUCCESS;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object reaponseJson_ = "";
+      /**
+       * <code>required string reaponse_json = 2;</code>
+       *
+       * <pre>
+       *微信登录json串
+       * </pre>
+       */
+      public boolean hasReaponseJson() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required string reaponse_json = 2;</code>
+       *
+       * <pre>
+       *微信登录json串
+       * </pre>
+       */
+      public java.lang.String getReaponseJson() {
+        java.lang.Object ref = reaponseJson_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            reaponseJson_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string reaponse_json = 2;</code>
+       *
+       * <pre>
+       *微信登录json串
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getReaponseJsonBytes() {
+        java.lang.Object ref = reaponseJson_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          reaponseJson_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string reaponse_json = 2;</code>
+       *
+       * <pre>
+       *微信登录json串
+       * </pre>
+       */
+      public Builder setReaponseJson(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        reaponseJson_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string reaponse_json = 2;</code>
+       *
+       * <pre>
+       *微信登录json串
+       * </pre>
+       */
+      public Builder clearReaponseJson() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        reaponseJson_ = getDefaultInstance().getReaponseJson();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string reaponse_json = 2;</code>
+       *
+       * <pre>
+       *微信登录json串
+       * </pre>
+       */
+      public Builder setReaponseJsonBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        reaponseJson_ = value;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.huinan.proto.CSResponseWeiChatLogin)
+    }
+
+    static {
+      defaultInstance = new CSResponseWeiChatLogin(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.huinan.proto.CSResponseWeiChatLogin)
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_huinan_proto_UserInfo_descriptor;
   private static
@@ -52118,6 +54500,26 @@ public final class CpMsgCs {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_huinan_proto_CSNotifyLogout_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_huinan_proto_CSRequestInit_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_huinan_proto_CSRequestInit_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_huinan_proto_CSResponseInit_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_huinan_proto_CSResponseInit_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_huinan_proto_CSRequestWeiChatLogin_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_huinan_proto_CSRequestWeiChatLogin_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_huinan_proto_CSResponseWeiChatLogin_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_huinan_proto_CSResponseWeiChatLogin_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -52292,46 +54694,53 @@ public final class CpMsgCs {
       "\005flows\030\004 \003(\0132$.com.huinan.proto.CSNotify" +
       "ActionFlow\0225\n\tgame_over\030\005 \001(\0132\".com.huin" +
       "an.proto.CSNotifyGameOver\"\"\n\022CSNotifyOpe" +
-      "nTouPai\022\014\n\004open\030\001 \001(\010\"\020\n\016CSNotifyLogout*" +
-      "\331\003\n\016ENMessageError\022\024\n\020RESPONSE_SUCCESS\020\001" +
-      "\022\021\n\rRESPONSE_FAIL\020\002\022\034\n\030RESPONSE_SEATINDE" +
-      "X_ERROR\020\003\022\032\n\026RESPONSE_ACTTYPE_ERROR\020\004\022\033\n" +
-      "\027RESPONSE_DESTCARD_ERROR\020\005\022\026\n\022RESPONSE_R",
-      "OOM_FULL\020\006\022\035\n\031RESPONSE_ROOM_INEXISTENCE\020" +
-      "\007\022\032\n\026RESPONSE_ROOM_ID_ERROR\020\010\022\033\n\027RESPONS" +
-      "E_ROOMCARD_LIMIT\020\t\022\032\n\026RESPONSE_IN_OTHER_" +
-      "ROOM\020\n\022\024\n\020RESPONSE_PLAYING\020\013\022 \n\034RESPONSE" +
-      "_DEALER_CAN_NOT_QUIT\020\014\022-\n)RESPONSE_FIRST" +
-      "_DISSOLVE_ROOM_CHOICE_ERROR\020\r\022\032\n\026RESPONS" +
-      "E_ALREADY_READY\020\016\022\027\n\023RESPONSE_IS_IN_ROOM" +
-      "\020\017\022\037\n\033RESPONSE_NOT_CAN_XIA_JIAO_7\020\020*4\n\017E" +
-      "NOperationType\022\020\n\014LOGOUT_TABLE\020\001\022\017\n\013OWNE" +
-      "R_TIREN\020\002*\214\001\n\tENColType\022\023\n\017EN_COL_TYPE_T",
-      "OU\020\001\022\024\n\020EN_COL_TYPE_PENG\020\002\022\023\n\017EN_COL_TYP" +
-      "E_CHI\020\003\022\024\n\020EN_COL_TYPE_ZHAO\020\004\022\024\n\020EN_COL_" +
-      "TYPE_LONG\020\005\022\023\n\017EN_COL_TYPE_KOU\020\006*N\n\nENZh" +
-      "aoType\022\024\n\020EN_ZHAO_TYPE_CHI\020\001\022\024\n\020EN_ZHAO_" +
-      "TYPE_CHE\020\002\022\024\n\020EN_ZHAO_TYPE_ALL\020\003*\305\004\n\014ENA" +
-      "ctionType\022\025\n\021EN_ACTION_UNKNOWN\020\001\022\023\n\017EN_A" +
-      "CTION_NAPAI\020\002\022\024\n\020EN_ACTION_CHUPAI\020\003\022\021\n\rE" +
-      "N_ACTION_GUO\020\004\022\021\n\rEN_ACTION_TOU\020\005\022\022\n\016EN_" +
-      "ACTION_PENG\020\006\022\021\n\rEN_ACTION_CHI\020\007\022\020\n\014EN_A" +
-      "CTION_HU\020\010\022\022\n\016EN_ACTION_ZHAO\020\t\022\023\n\017EN_ACT",
-      "ION_SIGEN\020\n\022\021\n\rEN_ACTION_TUI\020\013\022\024\n\020EN_ACT" +
-      "ION_NO_CHU\020\014\022\021\n\rEN_ACTION_KAN\020\r\022\024\n\020EN_AC" +
-      "TION_XIATOU\020\016\022\024\n\020EN_ACTION_HUADUI\020\017\022\024\n\020E" +
-      "N_ACTION_CHIKAN\020\020\022\023\n\017EN_ACTION_DAKAN\020\021\022\027" +
-      "\n\023EN_ACTION_CHI_SIGEN\020\022\022\026\n\022EN_ACTION_HU_" +
-      "SIGEN\020\023\022\022\n\016EN_ACTION_PIAO\020\024\022\025\n\021EN_ACTION" +
-      "_NO_PIAO\020\025\022\022\n\016EN_ACTION_DANG\020\026\022\025\n\021EN_ACT" +
-      "ION_NO_DANG\020\027\022\022\n\016EN_ACTION_NEXT\020\030\022\022\n\016EN_" +
-      "ACTION_DEAL\020\031\022\021\n\rEN_ACTION_KOU\020\032\022\026\n\022EN_A" +
-      "CTION_KOU_LIST\020\033*Z\n\nENChatType\022\032\n\026EN_CHA",
-      "T_TYPE_CHARACTER\020\000\022\030\n\024EN_CHAT_TYPE_BIGFA" +
-      "CE\020\001\022\026\n\022EN_CHAT_TYPE_VOICE\020\002*u\n\nENRoomTy" +
-      "pe\022\023\n\017EN_ROOM_TYPE_GY\020\001\022\023\n\017EN_ROOM_TYPE_" +
-      "NC\020\002\022\023\n\017EN_ROOM_TYPE_XC\020\003\022\023\n\017EN_ROOM_TYP" +
-      "E_MY\020\004\022\023\n\017EN_ROOM_TYPE_CX\020\005"
+      "nTouPai\022\014\n\004open\030\001 \001(\010\"\020\n\016CSNotifyLogout\"" +
+      "*\n\rCSRequestInit\022\031\n\021init_request_json\030\001 " +
+      "\002(\t\"^\n\016CSResponseInit\0220\n\006result\030\001 \001(\0162 ." +
+      "com.huinan.proto.ENMessageError\022\032\n\022init_" +
+      "reaponse_json\030\002 \002(\t\"-\n\025CSRequestWeiChatL",
+      "ogin\022\024\n\014request_json\030\001 \002(\t\"a\n\026CSResponse" +
+      "WeiChatLogin\0220\n\006result\030\001 \001(\0162 .com.huina" +
+      "n.proto.ENMessageError\022\025\n\rreaponse_json\030" +
+      "\002 \002(\t*\331\003\n\016ENMessageError\022\024\n\020RESPONSE_SUC" +
+      "CESS\020\001\022\021\n\rRESPONSE_FAIL\020\002\022\034\n\030RESPONSE_SE" +
+      "ATINDEX_ERROR\020\003\022\032\n\026RESPONSE_ACTTYPE_ERRO" +
+      "R\020\004\022\033\n\027RESPONSE_DESTCARD_ERROR\020\005\022\026\n\022RESP" +
+      "ONSE_ROOM_FULL\020\006\022\035\n\031RESPONSE_ROOM_INEXIS" +
+      "TENCE\020\007\022\032\n\026RESPONSE_ROOM_ID_ERROR\020\010\022\033\n\027R" +
+      "ESPONSE_ROOMCARD_LIMIT\020\t\022\032\n\026RESPONSE_IN_",
+      "OTHER_ROOM\020\n\022\024\n\020RESPONSE_PLAYING\020\013\022 \n\034RE" +
+      "SPONSE_DEALER_CAN_NOT_QUIT\020\014\022-\n)RESPONSE" +
+      "_FIRST_DISSOLVE_ROOM_CHOICE_ERROR\020\r\022\032\n\026R" +
+      "ESPONSE_ALREADY_READY\020\016\022\027\n\023RESPONSE_IS_I" +
+      "N_ROOM\020\017\022\037\n\033RESPONSE_NOT_CAN_XIA_JIAO_7\020" +
+      "\020*4\n\017ENOperationType\022\020\n\014LOGOUT_TABLE\020\001\022\017" +
+      "\n\013OWNER_TIREN\020\002*\214\001\n\tENColType\022\023\n\017EN_COL_" +
+      "TYPE_TOU\020\001\022\024\n\020EN_COL_TYPE_PENG\020\002\022\023\n\017EN_C" +
+      "OL_TYPE_CHI\020\003\022\024\n\020EN_COL_TYPE_ZHAO\020\004\022\024\n\020E" +
+      "N_COL_TYPE_LONG\020\005\022\023\n\017EN_COL_TYPE_KOU\020\006*N",
+      "\n\nENZhaoType\022\024\n\020EN_ZHAO_TYPE_CHI\020\001\022\024\n\020EN" +
+      "_ZHAO_TYPE_CHE\020\002\022\024\n\020EN_ZHAO_TYPE_ALL\020\003*\305" +
+      "\004\n\014ENActionType\022\025\n\021EN_ACTION_UNKNOWN\020\001\022\023" +
+      "\n\017EN_ACTION_NAPAI\020\002\022\024\n\020EN_ACTION_CHUPAI\020" +
+      "\003\022\021\n\rEN_ACTION_GUO\020\004\022\021\n\rEN_ACTION_TOU\020\005\022" +
+      "\022\n\016EN_ACTION_PENG\020\006\022\021\n\rEN_ACTION_CHI\020\007\022\020" +
+      "\n\014EN_ACTION_HU\020\010\022\022\n\016EN_ACTION_ZHAO\020\t\022\023\n\017" +
+      "EN_ACTION_SIGEN\020\n\022\021\n\rEN_ACTION_TUI\020\013\022\024\n\020" +
+      "EN_ACTION_NO_CHU\020\014\022\021\n\rEN_ACTION_KAN\020\r\022\024\n" +
+      "\020EN_ACTION_XIATOU\020\016\022\024\n\020EN_ACTION_HUADUI\020",
+      "\017\022\024\n\020EN_ACTION_CHIKAN\020\020\022\023\n\017EN_ACTION_DAK" +
+      "AN\020\021\022\027\n\023EN_ACTION_CHI_SIGEN\020\022\022\026\n\022EN_ACTI" +
+      "ON_HU_SIGEN\020\023\022\022\n\016EN_ACTION_PIAO\020\024\022\025\n\021EN_" +
+      "ACTION_NO_PIAO\020\025\022\022\n\016EN_ACTION_DANG\020\026\022\025\n\021" +
+      "EN_ACTION_NO_DANG\020\027\022\022\n\016EN_ACTION_NEXT\020\030\022" +
+      "\022\n\016EN_ACTION_DEAL\020\031\022\021\n\rEN_ACTION_KOU\020\032\022\026" +
+      "\n\022EN_ACTION_KOU_LIST\020\033*Z\n\nENChatType\022\032\n\026" +
+      "EN_CHAT_TYPE_CHARACTER\020\000\022\030\n\024EN_CHAT_TYPE" +
+      "_BIGFACE\020\001\022\026\n\022EN_CHAT_TYPE_VOICE\020\002*u\n\nEN" +
+      "RoomType\022\023\n\017EN_ROOM_TYPE_GY\020\001\022\023\n\017EN_ROOM",
+      "_TYPE_NC\020\002\022\023\n\017EN_ROOM_TYPE_XC\020\003\022\023\n\017EN_RO" +
+      "OM_TYPE_MY\020\004\022\023\n\017EN_ROOM_TYPE_CX\020\005"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -52669,6 +55078,30 @@ public final class CpMsgCs {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_huinan_proto_CSNotifyLogout_descriptor,
         new java.lang.String[] { });
+    internal_static_com_huinan_proto_CSRequestInit_descriptor =
+      getDescriptor().getMessageTypes().get(54);
+    internal_static_com_huinan_proto_CSRequestInit_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_huinan_proto_CSRequestInit_descriptor,
+        new java.lang.String[] { "InitRequestJson", });
+    internal_static_com_huinan_proto_CSResponseInit_descriptor =
+      getDescriptor().getMessageTypes().get(55);
+    internal_static_com_huinan_proto_CSResponseInit_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_huinan_proto_CSResponseInit_descriptor,
+        new java.lang.String[] { "Result", "InitReaponseJson", });
+    internal_static_com_huinan_proto_CSRequestWeiChatLogin_descriptor =
+      getDescriptor().getMessageTypes().get(56);
+    internal_static_com_huinan_proto_CSRequestWeiChatLogin_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_huinan_proto_CSRequestWeiChatLogin_descriptor,
+        new java.lang.String[] { "RequestJson", });
+    internal_static_com_huinan_proto_CSResponseWeiChatLogin_descriptor =
+      getDescriptor().getMessageTypes().get(57);
+    internal_static_com_huinan_proto_CSResponseWeiChatLogin_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_huinan_proto_CSResponseWeiChatLogin_descriptor,
+        new java.lang.String[] { "Result", "ReaponseJson", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

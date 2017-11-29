@@ -92,5 +92,11 @@ message CpMsgData
 		CSNotifyOpenTouPai cs_notify_open_tou_pai = 43;				//推送翻开偷牌
 		
 		CSNotifyLogout cs_notify_logout = 44;					//登录推送
+		
+		CSRequestInit cs_request_init = 101;					//登录初始化请求(热跟新)
+		CSResponseInit cs_response_init = 102;					//登录初始化响应
+		
+		CSRequestWeiChatLogin cs_request_wx_login = 103;		//登录微信请求
+		CSResponseWeiChatLogin cs_response_wx_login = 104;		//登录微信响应
 	}
 }

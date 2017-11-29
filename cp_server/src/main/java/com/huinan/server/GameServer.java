@@ -28,7 +28,7 @@ public class GameServer {
 						try {
 							LogManager.getLogger(GameServer.class).info(
 									"wait: logic queue deal over......");
-							Thread.sleep(1000);
+							Thread.sleep(5000);
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();

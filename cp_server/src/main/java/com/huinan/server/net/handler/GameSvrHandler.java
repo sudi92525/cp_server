@@ -6,6 +6,7 @@ import io.netty.handler.timeout.ReadTimeoutException;
 
 import java.net.SocketAddress;
 
+import org.apache.commons.lang.math.RandomUtils;
 import org.apache.logging.log4j.Marker;
 import org.apache.logging.log4j.MarkerManager;
 
@@ -108,7 +109,9 @@ public class GameSvrHandler extends ProtoHandler {
 			LOGGER.info("uid:" + cpHead.getUid() + ",data:"
 					+ dataLite.toString());
 		}
-		if (cpHead.getCmd() != CpMsgData.CS_REQUEST_LOGIN_FIELD_NUMBER) {
+		if (cpHead.getCmd() != CpMsgData.CS_REQUEST_LOGIN_FIELD_NUMBER
+				&& cpHead.getCmd() != CpMsgData.CS_REQUEST_INIT_FIELD_NUMBER
+				&& cpHead.getCmd() != CpMsgData.CS_REQUEST_WX_LOGIN_FIELD_NUMBER) {
 			GamePlayer player = GameSvrPlayerManager.findPlayerByUID(cpHead
 					.getUid());
 			if (player == null) {
@@ -130,6 +133,10 @@ public class GameSvrHandler extends ProtoHandler {
 			int index = 0;
 			if (cpHead.getCmd() == CpMsgData.CS_REQUEST_LOGIN_FIELD_NUMBER) {
 				index = Integer.valueOf(cpHead.getUid());
+			} else if (cpHead.getCmd() != CpMsgData.CS_REQUEST_INIT_FIELD_NUMBER
+					|| cpHead.getCmd() != CpMsgData.CS_REQUEST_WX_LOGIN_FIELD_NUMBER) {
+				index = RandomUtils.nextInt(LogicQueueManager.getInstance()
+						.getLuanchQueueCount());
 			} else {
 				User user = UserManager.getInstance().getUser(cpHead.getUid());
 				if (user == null) {
@@ -144,10 +151,15 @@ public class GameSvrHandler extends ProtoHandler {
 			AbsAction actor = ActionMapper.getActor((int) cpHead.getCmd());
 			if (actor != null) {
 				actor.setClientRequest(request);
-				int _index = index
-						% LogicQueueManager.getInstance().getQueueCount();
-				request.setThreadIndex(_index);
-				LogicQueueManager.getInstance().addJob(_index, actor);
+				if (cpHead.getCmd() != CpMsgData.CS_REQUEST_INIT_FIELD_NUMBER
+						|| cpHead.getCmd() != CpMsgData.CS_REQUEST_WX_LOGIN_FIELD_NUMBER) {
+					LogicQueueManager.getInstance().addLuanchJob(index, actor);
+				} else {
+					int _index = index
+							% LogicQueueManager.getInstance().getQueueCount();
+					request.setThreadIndex(_index);
+					LogicQueueManager.getInstance().addJob(_index, actor);
+				}
 				actor = null;
 			} else {
 				LOGGER.error("actor is null,cmd=" + cpHead.getCmd());
