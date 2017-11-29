@@ -217,8 +217,9 @@ public class ClubDAO {
 
 				sta = conn.prepareStatement(UPDATE_CLUB_ROOM_SQL);
 				sta.setInt(1, clubRoom.getStatus());
-				sta.setInt(2, clubRoom.getClubId());
-				sta.setInt(3, clubRoom.getRoomId());
+				sta.setBytes(2, clubRoom.getTotalData());
+				sta.setInt(3, clubRoom.getClubId());
+				sta.setInt(4, clubRoom.getRoomId());
 				sta.executeUpdate();
 			} catch (SQLException e) {
 				LOGGER.error("updateClubRoom error:", e);
@@ -449,7 +450,7 @@ public class ClubDAO {
 	private static final String INSERT_CLUB_USER_SQL = "INSERT  INTO `sys_club_user`(Cid,Pid,State,ApplyDate) VALUES(?,?,?,?)";
 	private static final String INSERT_CLUB_ROOM_SQL = "INSERT  INTO `sys_club_room_record`(Cid,RoomId,Status) VALUES(?,?,?)";
 
-	private static final String UPDATE_CLUB_ROOM_SQL = "UPDATE  `sys_club_room_record` SET `Status`=? WHERE `Cid`=? AND `RoomId`=?";
+	private static final String UPDATE_CLUB_ROOM_SQL = "UPDATE  `sys_club_room_record` SET `Status`=?,`RoomData`=? WHERE `Cid`=? AND `RoomId`=?";
 	private static final String UPDATE_CLUB_USER_SQL = "UPDATE  `sys_club_user` SET `State`=? WHERE `Cid`=? AND `Pid`=?";
 
 	private static final String DELETE_CLUB_ROOM_SQL = "DELETE  FROM `sys_club_room_record` WHERE `Cid`=? AND `RoomId`=?";

@@ -1661,6 +1661,7 @@ public class RoomManager {
 				ClubRoom clubRoom = ClubDAO.getInstance().getClubRoom(
 						room.getClubId(), room.getTid());
 				clubRoom.setStatus(2);
+				clubRoom.setTotalData(overNotify.build().toByteArray());
 				ClubDAO.getInstance().updateClubRoom(clubRoom);
 			}
 
@@ -1718,17 +1719,19 @@ public class RoomManager {
 	}
 
 	public static void removeRoom(Room room) {
-		if (room.getClubId() != 0) {
+		if (!room.isStart() && room.getClubId() != 0) {
 			ClubRoom clubRoom = ClubDAO.getInstance().getClubRoom(
 					room.getClubId(), room.getTid());
 			ClubDAO.getInstance().deleteClubRoom(clubRoom);
+
+			for (User user : room.getUsers().values()) {
+				user.clear();
+			}
+			getRooms().remove(Integer.valueOf(room.getTid()));
+			room = null;
+		} else {
+			room.setOver(true);
 		}
-		
-		for (User user : room.getUsers().values()) {
-			user.clear();
-		}
-		getRooms().remove(Integer.valueOf(room.getTid()));
-		room = null;
 	}
 
 	/**

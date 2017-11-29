@@ -78,7 +78,9 @@ public class TimerTaskManager {
 							} else if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX_VALUE) {
 								cxNum++;
 							}
-							if (room.isStart() && room.getUsers().size() == room.getUserNum()) {
+							if (room.isStart()
+									&& room.getUsers().size() == room
+											.getUserNum()) {
 								playRoomNum++;
 								if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_GY_VALUE) {
 									gyPlayNum++;
@@ -115,7 +117,8 @@ public class TimerTaskManager {
 						long startDissolveTime = room.getStartDissolveTime();
 						if (startDissolveTime != 0) {
 							int sec = (int) ((nowTime - startDissolveTime) / 1000);
-							if (sec >= Constant.cp_dis_timeNum) {
+							if (!room.isOver()
+									&& sec >= Constant.cp_dis_timeNum) {
 								RoomManager.gameOverTotal(room, true, true,
 										true);
 							}

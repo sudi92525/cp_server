@@ -126,6 +126,7 @@ public class Room implements Serializable {
 	/** 同意解散的玩家 */
 	private Map<String, Boolean> agreeDissolveUsers = new ConcurrentHashMap<>();
 	private boolean start;
+	private boolean over;
 	// ----------执行了过后清除以下数据-----------------
 	/** 当前打出的牌 */
 	private Card currentCard;
@@ -910,6 +911,14 @@ public class Room implements Serializable {
 
 	public void setClubId(int clubId) {
 		this.clubId = clubId;
+	}
+
+	public boolean isOver() {
+		return over;
+	}
+
+	public void setOver(boolean over) {
+		this.over = over;
 	}
 
 }

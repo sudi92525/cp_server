@@ -8,8 +8,10 @@ import com.huinan.proto.CpMsgCs.ENMessageError;
 import com.huinan.server.db.ClubDAO;
 import com.huinan.server.net.ClientRequest;
 import com.huinan.server.service.AbsAction;
+import com.huinan.server.service.data.Room;
 import com.huinan.server.service.data.club.Club;
 import com.huinan.server.service.data.club.ClubRoom;
+import com.huinan.server.service.manager.RoomManager;
 
 public class RemoveClubRoom extends AbsAction {
 
@@ -33,7 +35,10 @@ public class RemoveClubRoom extends AbsAction {
 			response.setResult(ENMessageError.RESPONSE_SUCCESS);
 			for (ClubRoom clubRoom : club.getRooms().values()) {
 				if (clubRoom.getRoomId() == roomId) {
-//					club.getRooms().remove(clubRoom);
+					Room room = RoomManager.getInstance().getRoom(roomId);
+					room.setStart(false);
+					RoomManager.removeRoom(room);
+					// club.getRooms().remove(clubRoom);
 					ClubDAO.getInstance().deleteClubRoom(clubRoom);
 					break;
 				}
