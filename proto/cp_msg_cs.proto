@@ -443,8 +443,14 @@ message CSNotifyGameOver
 {
 	repeated UserInfo user_score_info = 1;				//各用户积分情况
 	optional SmallResult small_result = 2;				//小计算信息
-	repeated BigResult big_result = 3;				//大结算信息
-	optional bool ishuang = 4;					//是否慌庄
+	repeated BigResult big_result = 3;					//大结算信息
+	optional bool ishuang = 4;							//是否慌庄
+	
+	optional string creator_uid = 5;					//房主uid
+	optional int32 all_round = 6;						//总局数
+	optional int32 round = 7;							//打了几局
+	optional string createTime = 8;						//创建时间
+	optional int32 room_id = 9;							//房间号
 }
 
 //加入房间响应

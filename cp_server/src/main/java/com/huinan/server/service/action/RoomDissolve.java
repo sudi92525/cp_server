@@ -43,7 +43,7 @@ public class RoomDissolve extends AbsAction {
 
 			if (!room.isStart()) {
 				// 游戏还没开始,直接解散
-				RoomManager.removeRoom(room);
+				// RoomManager.removeRoom(room);
 				dissolveNotify(room, user, true);
 			} else {
 				// 游戏中的解散,发大结算

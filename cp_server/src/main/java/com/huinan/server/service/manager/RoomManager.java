@@ -1,6 +1,7 @@
 package com.huinan.server.service.manager;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -16,6 +17,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.alibaba.fastjson.JSON;
 import com.huinan.proto.CpMsg.CpMsgData;
+import com.huinan.proto.CpMsgClub.ClubRoomProto;
 import com.huinan.proto.CpMsgCs.BigResult;
 import com.huinan.proto.CpMsgCs.CSNotifyGameOver;
 import com.huinan.proto.CpMsgCs.CSNotifyGameStart;
@@ -44,6 +46,7 @@ import com.huinan.server.service.data.Room;
 import com.huinan.server.service.data.User;
 import com.huinan.server.service.data.UserInfoDto;
 import com.huinan.server.service.data.UserScoreRecord;
+import com.huinan.server.service.data.club.Club;
 import com.huinan.server.service.data.club.ClubRoom;
 
 /**
@@ -1645,6 +1648,16 @@ public class RoomManager {
 				overNotify.setSmallResult(roundResult.build());
 			}
 			overNotify.setIshuang(huang);
+			overNotify.setCreatorUid(room.getRoomTable().getCreatorUid());
+			overNotify.setAllRound(room.getRoomTable().getGameNum());
+			overNotify.setRound(room.getRound() - 1);
+			overNotify.setRoomId(room.getTid());
+
+			SimpleDateFormat tempDate = new SimpleDateFormat(
+					"yyyy-MM-dd HH:mm:ss");
+			String datetime = tempDate.format(new java.util.Date());
+			overNotify.setCreateTime(datetime);
+
 			CpMsgData.Builder msg = CpMsgData.newBuilder();
 			msg.setCsNotifyGameOver(overNotify);
 			NotifyHandler.notifyOne(user.getUuid(),
@@ -1661,7 +1674,15 @@ public class RoomManager {
 				ClubRoom clubRoom = ClubDAO.getInstance().getClubRoom(
 						room.getClubId(), room.getTid());
 				clubRoom.setStatus(2);
-				clubRoom.setTotalData(overNotify.build().toByteArray());
+				ClubRoomProto.Builder clubRoomProto = ClubRoomProto
+						.newBuilder();
+				clubRoomProto.setTableInfo(room.getRoomTable());
+				clubRoomProto.setTableState(clubRoom.getStatus());
+				for (User user : room.getUsers().values()) {
+					clubRoomProto.addUserInfo(ProtoBuilder.buildUserInfo(user));
+				}
+				clubRoomProto.setBigResult(overNotify);
+				clubRoom.setTotalData(clubRoomProto.build().toByteArray());
 				ClubDAO.getInstance().updateClubRoom(clubRoom);
 			}
 
@@ -1719,19 +1740,18 @@ public class RoomManager {
 	}
 
 	public static void removeRoom(Room room) {
-		if (!room.isStart() && room.getClubId() != 0) {
+		if (room.getClubId() != 0 && !room.isStart()) {
 			ClubRoom clubRoom = ClubDAO.getInstance().getClubRoom(
 					room.getClubId(), room.getTid());
-			ClubDAO.getInstance().deleteClubRoom(clubRoom);
-
-			for (User user : room.getUsers().values()) {
-				user.clear();
-			}
-			getRooms().remove(Integer.valueOf(room.getTid()));
-			room = null;
-		} else {
-			room.setOver(true);
+			Club club = ClubDAO.getInstance().getClub(room.getClubId());
+			ClubDAO.getInstance().deleteClubRoom(club, clubRoom);
 		}
+
+		for (User user : room.getUsers().values()) {
+			user.clear();
+		}
+		getRooms().remove(Integer.valueOf(room.getTid()));
+		room = null;
 	}
 
 	/**

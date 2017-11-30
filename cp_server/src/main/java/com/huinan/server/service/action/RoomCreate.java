@@ -131,6 +131,9 @@ public class RoomCreate extends AbsAction {
 			if (club == null) {
 				return ENMessageError.RESPONSE_CLUB_IS_NULL_VALUE;
 			}
+			if (!club.getMembers().contains(user.getUuid())) {
+				return ENMessageError.RESPONSE_CLUB_NOT_IN_THIS_CLUB_VALUE;
+			}
 			if (club.getRooms().size() >= Constant.CLUB_MAX_ROOM_NUM) {
 				return ENMessageError.RESPONSE_CLUB_ROOM_FULL_VALUE;
 			}

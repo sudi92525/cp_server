@@ -117,8 +117,7 @@ public class TimerTaskManager {
 						long startDissolveTime = room.getStartDissolveTime();
 						if (startDissolveTime != 0) {
 							int sec = (int) ((nowTime - startDissolveTime) / 1000);
-							if (!room.isOver()
-									&& sec >= Constant.cp_dis_timeNum) {
+							if (sec >= Constant.cp_dis_timeNum) {
 								RoomManager.gameOverTotal(room, true, true,
 										true);
 							}

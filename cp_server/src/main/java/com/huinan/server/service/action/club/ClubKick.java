@@ -30,8 +30,7 @@ public class ClubKick extends AbsAction {
 			response.setResult(ENMessageError.valueOf(error));
 		} else {
 			response.setResult(ENMessageError.RESPONSE_SUCCESS);
-
-			ClubManager.addMemeber(club, String.valueOf(uid));
+			ClubManager.deleteMemeber(club, String.valueOf(kickUId));
 			ClubDAO.getInstance().deleteClubUser(clubId,
 					Integer.valueOf(kickUId));
 		}

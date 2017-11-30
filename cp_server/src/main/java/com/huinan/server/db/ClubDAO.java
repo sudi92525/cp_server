@@ -230,7 +230,7 @@ public class ClubDAO {
 		});
 	}
 
-	public void deleteClubRoom(ClubRoom clubRoom) {
+	public void deleteClubRoom(Club club, ClubRoom clubRoom) {
 		EXECUTOR.execute(() -> {
 			Connection conn = null;
 			PreparedStatement sta = null;
@@ -242,7 +242,7 @@ public class ClubDAO {
 				sta.setInt(2, clubRoom.getRoomId());
 				int row = sta.executeUpdate();
 				if (row > 0) {
-					getClub(clubRoom.getClubId()).getRooms().remove(
+					club.getRooms().remove(
 							Integer.valueOf(clubRoom.getRoomId()));
 				}
 			} catch (SQLException e) {

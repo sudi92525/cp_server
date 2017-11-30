@@ -10,12 +10,10 @@ import com.huinan.proto.CpMsgClub.ClubProto;
 import com.huinan.proto.CpMsgClub.ClubRoomProto;
 import com.huinan.proto.CpMsgClub.ENClubGameType;
 import com.huinan.proto.CpMsgCs.CSNotifyDissolveTableOperation;
-import com.huinan.proto.CpMsgCs.CSNotifyGameOver;
 import com.huinan.proto.CpMsgCs.CSNotifyGameStart;
 import com.huinan.proto.CpMsgCs.CSNotifyNextOperation;
 import com.huinan.proto.CpMsgCs.CSNotifyPlayerDealCard;
 import com.huinan.proto.CpMsgCs.CSNotifySeatOperationChoice;
-import com.huinan.proto.CpMsgCs.CSResponsePlayBack;
 import com.huinan.proto.CpMsgCs.ChoiceZhuang;
 import com.huinan.proto.CpMsgCs.DissolveList;
 import com.huinan.proto.CpMsgCs.ENActionType;
@@ -48,31 +46,28 @@ public class ProtoBuilder {
 		clubProto.setGameType(ENClubGameType.valueOf(club.getGameType()));
 		clubProto.setName(club.getName());
 		clubProto.setRoomNum(club.getRooms().size());
+		clubProto.setCreatorUid(club.getCreatorId());
 		return clubProto;
 	}
 
 	public static ClubRoomProto.Builder buildClubRoomProto(ClubRoom clubRoom,
 			Room room) {
 		ClubRoomProto.Builder clubRoomProto = ClubRoomProto.newBuilder();
-		clubRoomProto.setTableInfo(room.getRoomTable());
 		if (clubRoom.getTotalData() != null) {
-			clubRoomProto.setTableState(2);// 结算中...
-		} else if (!room.isStart()) {
-			clubRoomProto.setTableState(Constant.cp_status_wait);
-		} else {
-			clubRoomProto.setTableState(Constant.cp_status_started);
-		}
-		for (User user : room.getUsers().values()) {
-			clubRoomProto.addUserInfo(buildUserInfo(user));
-		}
-		if (clubRoom.getTotalData() != null) {
-			CSNotifyGameOver.Builder deal = CSNotifyGameOver.newBuilder();
 			try {
-				clubRoomProto.setBigReslut(deal.mergeFrom(
-						clubRoom.getTotalData()).build());
+				return clubRoomProto.mergeFrom(clubRoom.getTotalData());
 			} catch (InvalidProtocolBufferException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
+			}
+		} else {
+			clubRoomProto.setTableInfo(room.getRoomTable());
+			if (!room.isStart()) {
+				clubRoomProto.setTableState(Constant.cp_status_wait);
+			} else {
+				clubRoomProto.setTableState(Constant.cp_status_started);
+			}
+			for (User user : room.getUsers().values()) {
+				clubRoomProto.addUserInfo(buildUserInfo(user));
 			}
 		}
 		return clubRoomProto;

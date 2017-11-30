@@ -13,7 +13,7 @@ message ClubRoomProto{
 	optional CSRequestCreateTable table_info = 1;		//房间信息
 	repeated UserInfo user_info = 2;					//房间其他用户信息
 	optional int32 table_state = 3;						//房间状态:0等待，1开始，2结算中
-	optional CSNotifyGameOver big_reslut = 4; 			//大结算
+	optional CSNotifyGameOver big_result = 4; 			//大结算
 }
 
 
@@ -29,6 +29,7 @@ message ClubProto{
 	optional string name = 2;							//名称
 	optional ENClubGameType game_type = 3;				//游戏类型：加枚举
 	optional int32 room_num = 4;						//已开房间数
+	optional string creator_uid = 5;					//群主uid
 	//....
 }
 

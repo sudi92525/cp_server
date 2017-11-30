@@ -197,29 +197,29 @@ public final class CpMsgClub {
     int getTableState();
 
     /**
-     * <code>optional .com.huinan.proto.CSNotifyGameOver big_reslut = 4;</code>
+     * <code>optional .com.huinan.proto.CSNotifyGameOver big_result = 4;</code>
      *
      * <pre>
      *大结算
      * </pre>
      */
-    boolean hasBigReslut();
+    boolean hasBigResult();
     /**
-     * <code>optional .com.huinan.proto.CSNotifyGameOver big_reslut = 4;</code>
+     * <code>optional .com.huinan.proto.CSNotifyGameOver big_result = 4;</code>
      *
      * <pre>
      *大结算
      * </pre>
      */
-    com.huinan.proto.CpMsgCs.CSNotifyGameOver getBigReslut();
+    com.huinan.proto.CpMsgCs.CSNotifyGameOver getBigResult();
     /**
-     * <code>optional .com.huinan.proto.CSNotifyGameOver big_reslut = 4;</code>
+     * <code>optional .com.huinan.proto.CSNotifyGameOver big_result = 4;</code>
      *
      * <pre>
      *大结算
      * </pre>
      */
-    com.huinan.proto.CpMsgCs.CSNotifyGameOverOrBuilder getBigReslutOrBuilder();
+    com.huinan.proto.CpMsgCs.CSNotifyGameOverOrBuilder getBigResultOrBuilder();
   }
   /**
    * Protobuf type {@code com.huinan.proto.ClubRoomProto}
@@ -302,12 +302,12 @@ public final class CpMsgClub {
             case 34: {
               com.huinan.proto.CpMsgCs.CSNotifyGameOver.Builder subBuilder = null;
               if (((bitField0_ & 0x00000004) == 0x00000004)) {
-                subBuilder = bigReslut_.toBuilder();
+                subBuilder = bigResult_.toBuilder();
               }
-              bigReslut_ = input.readMessage(com.huinan.proto.CpMsgCs.CSNotifyGameOver.PARSER, extensionRegistry);
+              bigResult_ = input.readMessage(com.huinan.proto.CpMsgCs.CSNotifyGameOver.PARSER, extensionRegistry);
               if (subBuilder != null) {
-                subBuilder.mergeFrom(bigReslut_);
-                bigReslut_ = subBuilder.buildPartial();
+                subBuilder.mergeFrom(bigResult_);
+                bigResult_ = subBuilder.buildPartial();
               }
               bitField0_ |= 0x00000004;
               break;
@@ -466,44 +466,44 @@ public final class CpMsgClub {
       return tableState_;
     }
 
-    public static final int BIG_RESLUT_FIELD_NUMBER = 4;
-    private com.huinan.proto.CpMsgCs.CSNotifyGameOver bigReslut_;
+    public static final int BIG_RESULT_FIELD_NUMBER = 4;
+    private com.huinan.proto.CpMsgCs.CSNotifyGameOver bigResult_;
     /**
-     * <code>optional .com.huinan.proto.CSNotifyGameOver big_reslut = 4;</code>
+     * <code>optional .com.huinan.proto.CSNotifyGameOver big_result = 4;</code>
      *
      * <pre>
      *大结算
      * </pre>
      */
-    public boolean hasBigReslut() {
+    public boolean hasBigResult() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional .com.huinan.proto.CSNotifyGameOver big_reslut = 4;</code>
+     * <code>optional .com.huinan.proto.CSNotifyGameOver big_result = 4;</code>
      *
      * <pre>
      *大结算
      * </pre>
      */
-    public com.huinan.proto.CpMsgCs.CSNotifyGameOver getBigReslut() {
-      return bigReslut_;
+    public com.huinan.proto.CpMsgCs.CSNotifyGameOver getBigResult() {
+      return bigResult_;
     }
     /**
-     * <code>optional .com.huinan.proto.CSNotifyGameOver big_reslut = 4;</code>
+     * <code>optional .com.huinan.proto.CSNotifyGameOver big_result = 4;</code>
      *
      * <pre>
      *大结算
      * </pre>
      */
-    public com.huinan.proto.CpMsgCs.CSNotifyGameOverOrBuilder getBigReslutOrBuilder() {
-      return bigReslut_;
+    public com.huinan.proto.CpMsgCs.CSNotifyGameOverOrBuilder getBigResultOrBuilder() {
+      return bigResult_;
     }
 
     private void initFields() {
       tableInfo_ = com.huinan.proto.CpMsgCs.CSRequestCreateTable.getDefaultInstance();
       userInfo_ = java.util.Collections.emptyList();
       tableState_ = 0;
-      bigReslut_ = com.huinan.proto.CpMsgCs.CSNotifyGameOver.getDefaultInstance();
+      bigResult_ = com.huinan.proto.CpMsgCs.CSNotifyGameOver.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -528,7 +528,7 @@ public final class CpMsgClub {
         output.writeInt32(3, tableState_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeMessage(4, bigReslut_);
+        output.writeMessage(4, bigResult_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -553,7 +553,7 @@ public final class CpMsgClub {
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, bigReslut_);
+          .computeMessageSize(4, bigResult_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -666,7 +666,7 @@ public final class CpMsgClub {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getTableInfoFieldBuilder();
           getUserInfoFieldBuilder();
-          getBigReslutFieldBuilder();
+          getBigResultFieldBuilder();
         }
       }
       private static Builder create() {
@@ -689,10 +689,10 @@ public final class CpMsgClub {
         }
         tableState_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
-        if (bigReslutBuilder_ == null) {
-          bigReslut_ = com.huinan.proto.CpMsgCs.CSNotifyGameOver.getDefaultInstance();
+        if (bigResultBuilder_ == null) {
+          bigResult_ = com.huinan.proto.CpMsgCs.CSNotifyGameOver.getDefaultInstance();
         } else {
-          bigReslutBuilder_.clear();
+          bigResultBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000008);
         return this;
@@ -747,10 +747,10 @@ public final class CpMsgClub {
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000004;
         }
-        if (bigReslutBuilder_ == null) {
-          result.bigReslut_ = bigReslut_;
+        if (bigResultBuilder_ == null) {
+          result.bigResult_ = bigResult_;
         } else {
-          result.bigReslut_ = bigReslutBuilder_.build();
+          result.bigResult_ = bigResultBuilder_.build();
         }
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -800,8 +800,8 @@ public final class CpMsgClub {
         if (other.hasTableState()) {
           setTableState(other.getTableState());
         }
-        if (other.hasBigReslut()) {
-          mergeBigReslut(other.getBigReslut());
+        if (other.hasBigResult()) {
+          mergeBigResult(other.getBigResult());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -1342,139 +1342,139 @@ public final class CpMsgClub {
         return this;
       }
 
-      private com.huinan.proto.CpMsgCs.CSNotifyGameOver bigReslut_ = com.huinan.proto.CpMsgCs.CSNotifyGameOver.getDefaultInstance();
+      private com.huinan.proto.CpMsgCs.CSNotifyGameOver bigResult_ = com.huinan.proto.CpMsgCs.CSNotifyGameOver.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          com.huinan.proto.CpMsgCs.CSNotifyGameOver, com.huinan.proto.CpMsgCs.CSNotifyGameOver.Builder, com.huinan.proto.CpMsgCs.CSNotifyGameOverOrBuilder> bigReslutBuilder_;
+          com.huinan.proto.CpMsgCs.CSNotifyGameOver, com.huinan.proto.CpMsgCs.CSNotifyGameOver.Builder, com.huinan.proto.CpMsgCs.CSNotifyGameOverOrBuilder> bigResultBuilder_;
       /**
-       * <code>optional .com.huinan.proto.CSNotifyGameOver big_reslut = 4;</code>
+       * <code>optional .com.huinan.proto.CSNotifyGameOver big_result = 4;</code>
        *
        * <pre>
        *大结算
        * </pre>
        */
-      public boolean hasBigReslut() {
+      public boolean hasBigResult() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
-       * <code>optional .com.huinan.proto.CSNotifyGameOver big_reslut = 4;</code>
+       * <code>optional .com.huinan.proto.CSNotifyGameOver big_result = 4;</code>
        *
        * <pre>
        *大结算
        * </pre>
        */
-      public com.huinan.proto.CpMsgCs.CSNotifyGameOver getBigReslut() {
-        if (bigReslutBuilder_ == null) {
-          return bigReslut_;
+      public com.huinan.proto.CpMsgCs.CSNotifyGameOver getBigResult() {
+        if (bigResultBuilder_ == null) {
+          return bigResult_;
         } else {
-          return bigReslutBuilder_.getMessage();
+          return bigResultBuilder_.getMessage();
         }
       }
       /**
-       * <code>optional .com.huinan.proto.CSNotifyGameOver big_reslut = 4;</code>
+       * <code>optional .com.huinan.proto.CSNotifyGameOver big_result = 4;</code>
        *
        * <pre>
        *大结算
        * </pre>
        */
-      public Builder setBigReslut(com.huinan.proto.CpMsgCs.CSNotifyGameOver value) {
-        if (bigReslutBuilder_ == null) {
+      public Builder setBigResult(com.huinan.proto.CpMsgCs.CSNotifyGameOver value) {
+        if (bigResultBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          bigReslut_ = value;
+          bigResult_ = value;
           onChanged();
         } else {
-          bigReslutBuilder_.setMessage(value);
+          bigResultBuilder_.setMessage(value);
         }
         bitField0_ |= 0x00000008;
         return this;
       }
       /**
-       * <code>optional .com.huinan.proto.CSNotifyGameOver big_reslut = 4;</code>
+       * <code>optional .com.huinan.proto.CSNotifyGameOver big_result = 4;</code>
        *
        * <pre>
        *大结算
        * </pre>
        */
-      public Builder setBigReslut(
+      public Builder setBigResult(
           com.huinan.proto.CpMsgCs.CSNotifyGameOver.Builder builderForValue) {
-        if (bigReslutBuilder_ == null) {
-          bigReslut_ = builderForValue.build();
+        if (bigResultBuilder_ == null) {
+          bigResult_ = builderForValue.build();
           onChanged();
         } else {
-          bigReslutBuilder_.setMessage(builderForValue.build());
+          bigResultBuilder_.setMessage(builderForValue.build());
         }
         bitField0_ |= 0x00000008;
         return this;
       }
       /**
-       * <code>optional .com.huinan.proto.CSNotifyGameOver big_reslut = 4;</code>
+       * <code>optional .com.huinan.proto.CSNotifyGameOver big_result = 4;</code>
        *
        * <pre>
        *大结算
        * </pre>
        */
-      public Builder mergeBigReslut(com.huinan.proto.CpMsgCs.CSNotifyGameOver value) {
-        if (bigReslutBuilder_ == null) {
+      public Builder mergeBigResult(com.huinan.proto.CpMsgCs.CSNotifyGameOver value) {
+        if (bigResultBuilder_ == null) {
           if (((bitField0_ & 0x00000008) == 0x00000008) &&
-              bigReslut_ != com.huinan.proto.CpMsgCs.CSNotifyGameOver.getDefaultInstance()) {
-            bigReslut_ =
-              com.huinan.proto.CpMsgCs.CSNotifyGameOver.newBuilder(bigReslut_).mergeFrom(value).buildPartial();
+              bigResult_ != com.huinan.proto.CpMsgCs.CSNotifyGameOver.getDefaultInstance()) {
+            bigResult_ =
+              com.huinan.proto.CpMsgCs.CSNotifyGameOver.newBuilder(bigResult_).mergeFrom(value).buildPartial();
           } else {
-            bigReslut_ = value;
+            bigResult_ = value;
           }
           onChanged();
         } else {
-          bigReslutBuilder_.mergeFrom(value);
+          bigResultBuilder_.mergeFrom(value);
         }
         bitField0_ |= 0x00000008;
         return this;
       }
       /**
-       * <code>optional .com.huinan.proto.CSNotifyGameOver big_reslut = 4;</code>
+       * <code>optional .com.huinan.proto.CSNotifyGameOver big_result = 4;</code>
        *
        * <pre>
        *大结算
        * </pre>
        */
-      public Builder clearBigReslut() {
-        if (bigReslutBuilder_ == null) {
-          bigReslut_ = com.huinan.proto.CpMsgCs.CSNotifyGameOver.getDefaultInstance();
+      public Builder clearBigResult() {
+        if (bigResultBuilder_ == null) {
+          bigResult_ = com.huinan.proto.CpMsgCs.CSNotifyGameOver.getDefaultInstance();
           onChanged();
         } else {
-          bigReslutBuilder_.clear();
+          bigResultBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
       /**
-       * <code>optional .com.huinan.proto.CSNotifyGameOver big_reslut = 4;</code>
+       * <code>optional .com.huinan.proto.CSNotifyGameOver big_result = 4;</code>
        *
        * <pre>
        *大结算
        * </pre>
        */
-      public com.huinan.proto.CpMsgCs.CSNotifyGameOver.Builder getBigReslutBuilder() {
+      public com.huinan.proto.CpMsgCs.CSNotifyGameOver.Builder getBigResultBuilder() {
         bitField0_ |= 0x00000008;
         onChanged();
-        return getBigReslutFieldBuilder().getBuilder();
+        return getBigResultFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .com.huinan.proto.CSNotifyGameOver big_reslut = 4;</code>
+       * <code>optional .com.huinan.proto.CSNotifyGameOver big_result = 4;</code>
        *
        * <pre>
        *大结算
        * </pre>
        */
-      public com.huinan.proto.CpMsgCs.CSNotifyGameOverOrBuilder getBigReslutOrBuilder() {
-        if (bigReslutBuilder_ != null) {
-          return bigReslutBuilder_.getMessageOrBuilder();
+      public com.huinan.proto.CpMsgCs.CSNotifyGameOverOrBuilder getBigResultOrBuilder() {
+        if (bigResultBuilder_ != null) {
+          return bigResultBuilder_.getMessageOrBuilder();
         } else {
-          return bigReslut_;
+          return bigResult_;
         }
       }
       /**
-       * <code>optional .com.huinan.proto.CSNotifyGameOver big_reslut = 4;</code>
+       * <code>optional .com.huinan.proto.CSNotifyGameOver big_result = 4;</code>
        *
        * <pre>
        *大结算
@@ -1482,16 +1482,16 @@ public final class CpMsgClub {
        */
       private com.google.protobuf.SingleFieldBuilder<
           com.huinan.proto.CpMsgCs.CSNotifyGameOver, com.huinan.proto.CpMsgCs.CSNotifyGameOver.Builder, com.huinan.proto.CpMsgCs.CSNotifyGameOverOrBuilder> 
-          getBigReslutFieldBuilder() {
-        if (bigReslutBuilder_ == null) {
-          bigReslutBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+          getBigResultFieldBuilder() {
+        if (bigResultBuilder_ == null) {
+          bigResultBuilder_ = new com.google.protobuf.SingleFieldBuilder<
               com.huinan.proto.CpMsgCs.CSNotifyGameOver, com.huinan.proto.CpMsgCs.CSNotifyGameOver.Builder, com.huinan.proto.CpMsgCs.CSNotifyGameOverOrBuilder>(
-                  getBigReslut(),
+                  getBigResult(),
                   getParentForChildren(),
                   isClean());
-          bigReslut_ = null;
+          bigResult_ = null;
         }
-        return bigReslutBuilder_;
+        return bigResultBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:com.huinan.proto.ClubRoomProto)
@@ -2373,6 +2373,32 @@ public final class CpMsgClub {
      * </pre>
      */
     int getRoomNum();
+
+    /**
+     * <code>optional string creator_uid = 5;</code>
+     *
+     * <pre>
+     *群主uid
+     * </pre>
+     */
+    boolean hasCreatorUid();
+    /**
+     * <code>optional string creator_uid = 5;</code>
+     *
+     * <pre>
+     *群主uid
+     * </pre>
+     */
+    java.lang.String getCreatorUid();
+    /**
+     * <code>optional string creator_uid = 5;</code>
+     *
+     * <pre>
+     *群主uid
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getCreatorUidBytes();
   }
   /**
    * Protobuf type {@code com.huinan.proto.ClubProto}
@@ -2451,6 +2477,12 @@ public final class CpMsgClub {
             case 32: {
               bitField0_ |= 0x00000008;
               roomNum_ = input.readInt32();
+              break;
+            }
+            case 42: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000010;
+              creatorUid_ = bs;
               break;
             }
           }
@@ -2616,11 +2648,66 @@ public final class CpMsgClub {
       return roomNum_;
     }
 
+    public static final int CREATOR_UID_FIELD_NUMBER = 5;
+    private java.lang.Object creatorUid_;
+    /**
+     * <code>optional string creator_uid = 5;</code>
+     *
+     * <pre>
+     *群主uid
+     * </pre>
+     */
+    public boolean hasCreatorUid() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional string creator_uid = 5;</code>
+     *
+     * <pre>
+     *群主uid
+     * </pre>
+     */
+    public java.lang.String getCreatorUid() {
+      java.lang.Object ref = creatorUid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          creatorUid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string creator_uid = 5;</code>
+     *
+     * <pre>
+     *群主uid
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getCreatorUidBytes() {
+      java.lang.Object ref = creatorUid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        creatorUid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private void initFields() {
       id_ = 0;
       name_ = "";
       gameType_ = com.huinan.proto.CpMsgClub.ENClubGameType.CP;
       roomNum_ = 0;
+      creatorUid_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2647,6 +2734,9 @@ public final class CpMsgClub {
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeInt32(4, roomNum_);
       }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeBytes(5, getCreatorUidBytes());
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -2671,6 +2761,10 @@ public final class CpMsgClub {
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(4, roomNum_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(5, getCreatorUidBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2797,6 +2891,8 @@ public final class CpMsgClub {
         bitField0_ = (bitField0_ & ~0x00000004);
         roomNum_ = 0;
         bitField0_ = (bitField0_ & ~0x00000008);
+        creatorUid_ = "";
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
 
@@ -2841,6 +2937,10 @@ public final class CpMsgClub {
           to_bitField0_ |= 0x00000008;
         }
         result.roomNum_ = roomNum_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.creatorUid_ = creatorUid_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -2870,6 +2970,11 @@ public final class CpMsgClub {
         }
         if (other.hasRoomNum()) {
           setRoomNum(other.getRoomNum());
+        }
+        if (other.hasCreatorUid()) {
+          bitField0_ |= 0x00000010;
+          creatorUid_ = other.creatorUid_;
+          onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -3141,6 +3246,106 @@ public final class CpMsgClub {
       public Builder clearRoomNum() {
         bitField0_ = (bitField0_ & ~0x00000008);
         roomNum_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object creatorUid_ = "";
+      /**
+       * <code>optional string creator_uid = 5;</code>
+       *
+       * <pre>
+       *群主uid
+       * </pre>
+       */
+      public boolean hasCreatorUid() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional string creator_uid = 5;</code>
+       *
+       * <pre>
+       *群主uid
+       * </pre>
+       */
+      public java.lang.String getCreatorUid() {
+        java.lang.Object ref = creatorUid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            creatorUid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string creator_uid = 5;</code>
+       *
+       * <pre>
+       *群主uid
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getCreatorUidBytes() {
+        java.lang.Object ref = creatorUid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          creatorUid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string creator_uid = 5;</code>
+       *
+       * <pre>
+       *群主uid
+       * </pre>
+       */
+      public Builder setCreatorUid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
+        creatorUid_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string creator_uid = 5;</code>
+       *
+       * <pre>
+       *群主uid
+       * </pre>
+       */
+      public Builder clearCreatorUid() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        creatorUid_ = getDefaultInstance().getCreatorUid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string creator_uid = 5;</code>
+       *
+       * <pre>
+       *群主uid
+       * </pre>
+       */
+      public Builder setCreatorUidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
+        creatorUid_ = value;
         onChanged();
         return this;
       }
@@ -15115,50 +15320,51 @@ public final class CpMsgClub {
       "e_info\030\001 \001(\0132&.com.huinan.proto.CSReques" +
       "tCreateTable\022-\n\tuser_info\030\002 \003(\0132\032.com.hu" +
       "inan.proto.UserInfo\022\023\n\013table_state\030\003 \001(\005" +
-      "\0226\n\nbig_reslut\030\004 \001(\0132\".com.huinan.proto." +
+      "\0226\n\nbig_result\030\004 \001(\0132\".com.huinan.proto." +
       "CSNotifyGameOver\"c\n\017ClubMemberProto\022-\n\tu" +
       "ser_info\030\001 \001(\0132\032.com.huinan.proto.UserIn" +
-      "fo\022\016\n\006online\030\002 \001(\010\022\021\n\tis_master\030\003 \001(\010\"l\n" +
-      "\tClubProto\022\n\n\002id\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\0223\n\t",
-      "game_type\030\003 \001(\0162 .com.huinan.proto.ENClu" +
-      "bGameType\022\020\n\010room_num\030\004 \001(\005\"X\n\023CSRequest" +
-      "ClubCreate\022\014\n\004name\030\001 \002(\t\0223\n\tgame_type\030\002 " +
-      "\001(\0162 .com.huinan.proto.ENClubGameType\"s\n" +
-      "\024CSResponseClubCreate\0220\n\006result\030\001 \001(\0162 ." +
-      "com.huinan.proto.ENMessageError\022)\n\004club\030" +
-      "\002 \001(\0132\033.com.huinan.proto.ClubProto\"%\n\022CS" +
-      "RequestClubApply\022\017\n\007club_id\030\001 \002(\005\"G\n\023CSR" +
-      "esponseClubApply\0220\n\006result\030\001 \001(\0162 .com.h" +
-      "uinan.proto.ENMessageError\"\023\n\021CSRequestC",
-      "lubInfo\"q\n\022CSResponseClubInfo\0220\n\006result\030" +
-      "\001 \001(\0162 .com.huinan.proto.ENMessageError\022" +
-      ")\n\004club\030\002 \003(\0132\033.com.huinan.proto.ClubPro" +
-      "to\"$\n\021CSRequestClubRoom\022\017\n\007club_id\030\001 \002(\005" +
-      "\"\216\001\n\022CSResponseClubRoom\0220\n\006result\030\001 \001(\0162" +
-      " .com.huinan.proto.ENMessageError\0222\n\tclu" +
-      "b_room\030\002 \003(\0132\037.com.huinan.proto.ClubRoom" +
-      "Proto\022\022\n\nhave_apply\030\003 \001(\010\"&\n\023CSRequestCl" +
-      "ubMember\022\017\n\007club_id\030\001 \002(\005\"\200\001\n\024CSResponse" +
-      "ClubMember\0220\n\006result\030\001 \001(\0162 .com.huinan.",
-      "proto.ENMessageError\0226\n\013club_member\030\002 \003(" +
-      "\0132!.com.huinan.proto.ClubMemberProto\"\'\n\024" +
-      "CSRequestClubMessage\022\017\n\007club_id\030\001 \002(\005\"y\n" +
-      "\025CSResponseClubMessage\0220\n\006result\030\001 \001(\0162 " +
-      ".com.huinan.proto.ENMessageError\022.\n\nappl" +
-      "y_user\030\002 \003(\0132\032.com.huinan.proto.UserInfo" +
-      "\"2\n\021CSNotifyClubApply\022\017\n\007club_id\030\001 \002(\005\022\014" +
-      "\n\004have\030\002 \002(\010\";\n\027CSRequestClubRemoveRoom\022" +
-      "\017\n\007club_id\030\001 \002(\005\022\017\n\007room_id\030\002 \002(\005\"L\n\030CSR" +
-      "esponseClubRemoveRoom\0220\n\006result\030\001 \001(\0162 .",
-      "com.huinan.proto.ENMessageError\"1\n\021CSReq" +
-      "uestClubKick\022\017\n\007club_id\030\001 \002(\005\022\013\n\003uid\030\002 \002" +
-      "(\t\"F\n\022CSResponseClubKick\0220\n\006result\030\001 \001(\016" +
-      "2 .com.huinan.proto.ENMessageError\"C\n\024CS" +
-      "RequestClubIsAgree\022\017\n\007club_id\030\001 \002(\005\022\013\n\003u" +
-      "id\030\002 \002(\t\022\r\n\005agree\030\003 \002(\010\"I\n\025CSResponseClu" +
-      "bIsAgree\0220\n\006result\030\001 \001(\0162 .com.huinan.pr" +
-      "oto.ENMessageError\"\025\n\023CSNotifyClubRefres" +
-      "h* \n\016ENClubGameType\022\006\n\002CP\020\001\022\006\n\002MJ\020\002"
+      "fo\022\016\n\006online\030\002 \001(\010\022\021\n\tis_master\030\003 \001(\010\"\201\001" +
+      "\n\tClubProto\022\n\n\002id\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\0223\n",
+      "\tgame_type\030\003 \001(\0162 .com.huinan.proto.ENCl" +
+      "ubGameType\022\020\n\010room_num\030\004 \001(\005\022\023\n\013creator_" +
+      "uid\030\005 \001(\t\"X\n\023CSRequestClubCreate\022\014\n\004name" +
+      "\030\001 \002(\t\0223\n\tgame_type\030\002 \001(\0162 .com.huinan.p" +
+      "roto.ENClubGameType\"s\n\024CSResponseClubCre" +
+      "ate\0220\n\006result\030\001 \001(\0162 .com.huinan.proto.E" +
+      "NMessageError\022)\n\004club\030\002 \001(\0132\033.com.huinan" +
+      ".proto.ClubProto\"%\n\022CSRequestClubApply\022\017" +
+      "\n\007club_id\030\001 \002(\005\"G\n\023CSResponseClubApply\0220" +
+      "\n\006result\030\001 \001(\0162 .com.huinan.proto.ENMess",
+      "ageError\"\023\n\021CSRequestClubInfo\"q\n\022CSRespo" +
+      "nseClubInfo\0220\n\006result\030\001 \001(\0162 .com.huinan" +
+      ".proto.ENMessageError\022)\n\004club\030\002 \003(\0132\033.co" +
+      "m.huinan.proto.ClubProto\"$\n\021CSRequestClu" +
+      "bRoom\022\017\n\007club_id\030\001 \002(\005\"\216\001\n\022CSResponseClu" +
+      "bRoom\0220\n\006result\030\001 \001(\0162 .com.huinan.proto" +
+      ".ENMessageError\0222\n\tclub_room\030\002 \003(\0132\037.com" +
+      ".huinan.proto.ClubRoomProto\022\022\n\nhave_appl" +
+      "y\030\003 \001(\010\"&\n\023CSRequestClubMember\022\017\n\007club_i" +
+      "d\030\001 \002(\005\"\200\001\n\024CSResponseClubMember\0220\n\006resu",
+      "lt\030\001 \001(\0162 .com.huinan.proto.ENMessageErr" +
+      "or\0226\n\013club_member\030\002 \003(\0132!.com.huinan.pro" +
+      "to.ClubMemberProto\"\'\n\024CSRequestClubMessa" +
+      "ge\022\017\n\007club_id\030\001 \002(\005\"y\n\025CSResponseClubMes" +
+      "sage\0220\n\006result\030\001 \001(\0162 .com.huinan.proto." +
+      "ENMessageError\022.\n\napply_user\030\002 \003(\0132\032.com" +
+      ".huinan.proto.UserInfo\"2\n\021CSNotifyClubAp" +
+      "ply\022\017\n\007club_id\030\001 \002(\005\022\014\n\004have\030\002 \002(\010\";\n\027CS" +
+      "RequestClubRemoveRoom\022\017\n\007club_id\030\001 \002(\005\022\017" +
+      "\n\007room_id\030\002 \002(\005\"L\n\030CSResponseClubRemoveR",
+      "oom\0220\n\006result\030\001 \001(\0162 .com.huinan.proto.E" +
+      "NMessageError\"1\n\021CSRequestClubKick\022\017\n\007cl" +
+      "ub_id\030\001 \002(\005\022\013\n\003uid\030\002 \002(\t\"F\n\022CSResponseCl" +
+      "ubKick\0220\n\006result\030\001 \001(\0162 .com.huinan.prot" +
+      "o.ENMessageError\"C\n\024CSRequestClubIsAgree" +
+      "\022\017\n\007club_id\030\001 \002(\005\022\013\n\003uid\030\002 \002(\t\022\r\n\005agree\030" +
+      "\003 \002(\010\"I\n\025CSResponseClubIsAgree\0220\n\006result" +
+      "\030\001 \001(\0162 .com.huinan.proto.ENMessageError" +
+      "\"\025\n\023CSNotifyClubRefresh* \n\016ENClubGameTyp" +
+      "e\022\006\n\002CP\020\001\022\006\n\002MJ\020\002"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -15178,7 +15384,7 @@ public final class CpMsgClub {
     internal_static_com_huinan_proto_ClubRoomProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_huinan_proto_ClubRoomProto_descriptor,
-        new java.lang.String[] { "TableInfo", "UserInfo", "TableState", "BigReslut", });
+        new java.lang.String[] { "TableInfo", "UserInfo", "TableState", "BigResult", });
     internal_static_com_huinan_proto_ClubMemberProto_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_com_huinan_proto_ClubMemberProto_fieldAccessorTable = new
@@ -15190,7 +15396,7 @@ public final class CpMsgClub {
     internal_static_com_huinan_proto_ClubProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_huinan_proto_ClubProto_descriptor,
-        new java.lang.String[] { "Id", "Name", "GameType", "RoomNum", });
+        new java.lang.String[] { "Id", "Name", "GameType", "RoomNum", "CreatorUid", });
     internal_static_com_huinan_proto_CSRequestClubCreate_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_com_huinan_proto_CSRequestClubCreate_fieldAccessorTable = new

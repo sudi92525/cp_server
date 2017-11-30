@@ -51,6 +51,12 @@ public class ClubManager {
 		log.info("applyClub,clubId=" + clubId + ",uid=" + uid);
 	}
 
+	public static void deleteMemeber(Club club, String uid) {
+		if (club.getMembers().contains(uid)) {
+			club.getMembers().remove(uid);
+		}
+	}
+
 	public static void addMemeber(Club club, String uid) {
 		if (!club.getMembers().contains(uid)) {
 			club.getMembers().add(uid);

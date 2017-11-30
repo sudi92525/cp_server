@@ -64,6 +64,8 @@ public class Room implements Serializable {
 	/** 俱乐部 */
 	private int clubId;
 
+	private long createTime;
+
 	// -------------------------创房选项----------------------------------
 	/** GY:是否有包翻的功能 */
 	private boolean baoFan;
@@ -126,7 +128,6 @@ public class Room implements Serializable {
 	/** 同意解散的玩家 */
 	private Map<String, Boolean> agreeDissolveUsers = new ConcurrentHashMap<>();
 	private boolean start;
-	private boolean over;
 	// ----------执行了过后清除以下数据-----------------
 	/** 当前打出的牌 */
 	private Card currentCard;
@@ -223,6 +224,7 @@ public class Room implements Serializable {
 		}
 
 		this.lastEnterTime = System.currentTimeMillis();
+		this.createTime = System.currentTimeMillis();
 	}
 
 	public int getFirstCard() {
@@ -913,12 +915,12 @@ public class Room implements Serializable {
 		this.clubId = clubId;
 	}
 
-	public boolean isOver() {
-		return over;
+	public long getCreateTime() {
+		return createTime;
 	}
 
-	public void setOver(boolean over) {
-		this.over = over;
+	public void setCreateTime(long createTime) {
+		this.createTime = createTime;
 	}
 
 }

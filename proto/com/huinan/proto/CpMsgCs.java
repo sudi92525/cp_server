@@ -37595,6 +37595,109 @@ public final class CpMsgCs {
      * </pre>
      */
     boolean getIshuang();
+
+    /**
+     * <code>optional string creator_uid = 5;</code>
+     *
+     * <pre>
+     *房主uid
+     * </pre>
+     */
+    boolean hasCreatorUid();
+    /**
+     * <code>optional string creator_uid = 5;</code>
+     *
+     * <pre>
+     *房主uid
+     * </pre>
+     */
+    java.lang.String getCreatorUid();
+    /**
+     * <code>optional string creator_uid = 5;</code>
+     *
+     * <pre>
+     *房主uid
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getCreatorUidBytes();
+
+    /**
+     * <code>optional int32 all_round = 6;</code>
+     *
+     * <pre>
+     *总局数
+     * </pre>
+     */
+    boolean hasAllRound();
+    /**
+     * <code>optional int32 all_round = 6;</code>
+     *
+     * <pre>
+     *总局数
+     * </pre>
+     */
+    int getAllRound();
+
+    /**
+     * <code>optional int32 round = 7;</code>
+     *
+     * <pre>
+     *打了几局
+     * </pre>
+     */
+    boolean hasRound();
+    /**
+     * <code>optional int32 round = 7;</code>
+     *
+     * <pre>
+     *打了几局
+     * </pre>
+     */
+    int getRound();
+
+    /**
+     * <code>optional string createTime = 8;</code>
+     *
+     * <pre>
+     *创建时间
+     * </pre>
+     */
+    boolean hasCreateTime();
+    /**
+     * <code>optional string createTime = 8;</code>
+     *
+     * <pre>
+     *创建时间
+     * </pre>
+     */
+    java.lang.String getCreateTime();
+    /**
+     * <code>optional string createTime = 8;</code>
+     *
+     * <pre>
+     *创建时间
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getCreateTimeBytes();
+
+    /**
+     * <code>optional int32 room_id = 9;</code>
+     *
+     * <pre>
+     *房间号
+     * </pre>
+     */
+    boolean hasRoomId();
+    /**
+     * <code>optional int32 room_id = 9;</code>
+     *
+     * <pre>
+     *房间号
+     * </pre>
+     */
+    int getRoomId();
   }
   /**
    * Protobuf type {@code com.huinan.proto.CSNotifyGameOver}
@@ -37684,6 +37787,33 @@ public final class CpMsgCs {
             case 32: {
               bitField0_ |= 0x00000002;
               ishuang_ = input.readBool();
+              break;
+            }
+            case 42: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000004;
+              creatorUid_ = bs;
+              break;
+            }
+            case 48: {
+              bitField0_ |= 0x00000008;
+              allRound_ = input.readInt32();
+              break;
+            }
+            case 56: {
+              bitField0_ |= 0x00000010;
+              round_ = input.readInt32();
+              break;
+            }
+            case 66: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000020;
+              createTime_ = bs;
+              break;
+            }
+            case 72: {
+              bitField0_ |= 0x00000040;
+              roomId_ = input.readInt32();
               break;
             }
           }
@@ -37898,11 +38028,193 @@ public final class CpMsgCs {
       return ishuang_;
     }
 
+    public static final int CREATOR_UID_FIELD_NUMBER = 5;
+    private java.lang.Object creatorUid_;
+    /**
+     * <code>optional string creator_uid = 5;</code>
+     *
+     * <pre>
+     *房主uid
+     * </pre>
+     */
+    public boolean hasCreatorUid() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional string creator_uid = 5;</code>
+     *
+     * <pre>
+     *房主uid
+     * </pre>
+     */
+    public java.lang.String getCreatorUid() {
+      java.lang.Object ref = creatorUid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          creatorUid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string creator_uid = 5;</code>
+     *
+     * <pre>
+     *房主uid
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getCreatorUidBytes() {
+      java.lang.Object ref = creatorUid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        creatorUid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int ALL_ROUND_FIELD_NUMBER = 6;
+    private int allRound_;
+    /**
+     * <code>optional int32 all_round = 6;</code>
+     *
+     * <pre>
+     *总局数
+     * </pre>
+     */
+    public boolean hasAllRound() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional int32 all_round = 6;</code>
+     *
+     * <pre>
+     *总局数
+     * </pre>
+     */
+    public int getAllRound() {
+      return allRound_;
+    }
+
+    public static final int ROUND_FIELD_NUMBER = 7;
+    private int round_;
+    /**
+     * <code>optional int32 round = 7;</code>
+     *
+     * <pre>
+     *打了几局
+     * </pre>
+     */
+    public boolean hasRound() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional int32 round = 7;</code>
+     *
+     * <pre>
+     *打了几局
+     * </pre>
+     */
+    public int getRound() {
+      return round_;
+    }
+
+    public static final int CREATETIME_FIELD_NUMBER = 8;
+    private java.lang.Object createTime_;
+    /**
+     * <code>optional string createTime = 8;</code>
+     *
+     * <pre>
+     *创建时间
+     * </pre>
+     */
+    public boolean hasCreateTime() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional string createTime = 8;</code>
+     *
+     * <pre>
+     *创建时间
+     * </pre>
+     */
+    public java.lang.String getCreateTime() {
+      java.lang.Object ref = createTime_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          createTime_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string createTime = 8;</code>
+     *
+     * <pre>
+     *创建时间
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getCreateTimeBytes() {
+      java.lang.Object ref = createTime_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        createTime_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int ROOM_ID_FIELD_NUMBER = 9;
+    private int roomId_;
+    /**
+     * <code>optional int32 room_id = 9;</code>
+     *
+     * <pre>
+     *房间号
+     * </pre>
+     */
+    public boolean hasRoomId() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <code>optional int32 room_id = 9;</code>
+     *
+     * <pre>
+     *房间号
+     * </pre>
+     */
+    public int getRoomId() {
+      return roomId_;
+    }
+
     private void initFields() {
       userScoreInfo_ = java.util.Collections.emptyList();
       smallResult_ = com.huinan.proto.CpMsgCs.SmallResult.getDefaultInstance();
       bigResult_ = java.util.Collections.emptyList();
       ishuang_ = false;
+      creatorUid_ = "";
+      allRound_ = 0;
+      round_ = 0;
+      createTime_ = "";
+      roomId_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -37929,6 +38241,21 @@ public final class CpMsgCs {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeBool(4, ishuang_);
       }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(5, getCreatorUidBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(6, allRound_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt32(7, round_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeBytes(8, getCreateTimeBytes());
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeInt32(9, roomId_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -37953,6 +38280,26 @@ public final class CpMsgCs {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(4, ishuang_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(5, getCreatorUidBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(6, allRound_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(7, round_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(8, getCreateTimeBytes());
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(9, roomId_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -38098,6 +38445,16 @@ public final class CpMsgCs {
         }
         ishuang_ = false;
         bitField0_ = (bitField0_ & ~0x00000008);
+        creatorUid_ = "";
+        bitField0_ = (bitField0_ & ~0x00000010);
+        allRound_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        round_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000040);
+        createTime_ = "";
+        bitField0_ = (bitField0_ & ~0x00000080);
+        roomId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000100);
         return this;
       }
 
@@ -38156,6 +38513,26 @@ public final class CpMsgCs {
           to_bitField0_ |= 0x00000002;
         }
         result.ishuang_ = ishuang_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.creatorUid_ = creatorUid_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.allRound_ = allRound_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.round_ = round_;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.createTime_ = createTime_;
+        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.roomId_ = roomId_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -38229,6 +38606,25 @@ public final class CpMsgCs {
         }
         if (other.hasIshuang()) {
           setIshuang(other.getIshuang());
+        }
+        if (other.hasCreatorUid()) {
+          bitField0_ |= 0x00000010;
+          creatorUid_ = other.creatorUid_;
+          onChanged();
+        }
+        if (other.hasAllRound()) {
+          setAllRound(other.getAllRound());
+        }
+        if (other.hasRound()) {
+          setRound(other.getRound());
+        }
+        if (other.hasCreateTime()) {
+          bitField0_ |= 0x00000080;
+          createTime_ = other.createTime_;
+          onChanged();
+        }
+        if (other.hasRoomId()) {
+          setRoomId(other.getRoomId());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -39077,6 +39473,350 @@ public final class CpMsgCs {
       public Builder clearIshuang() {
         bitField0_ = (bitField0_ & ~0x00000008);
         ishuang_ = false;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object creatorUid_ = "";
+      /**
+       * <code>optional string creator_uid = 5;</code>
+       *
+       * <pre>
+       *房主uid
+       * </pre>
+       */
+      public boolean hasCreatorUid() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional string creator_uid = 5;</code>
+       *
+       * <pre>
+       *房主uid
+       * </pre>
+       */
+      public java.lang.String getCreatorUid() {
+        java.lang.Object ref = creatorUid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            creatorUid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string creator_uid = 5;</code>
+       *
+       * <pre>
+       *房主uid
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getCreatorUidBytes() {
+        java.lang.Object ref = creatorUid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          creatorUid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string creator_uid = 5;</code>
+       *
+       * <pre>
+       *房主uid
+       * </pre>
+       */
+      public Builder setCreatorUid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
+        creatorUid_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string creator_uid = 5;</code>
+       *
+       * <pre>
+       *房主uid
+       * </pre>
+       */
+      public Builder clearCreatorUid() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        creatorUid_ = getDefaultInstance().getCreatorUid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string creator_uid = 5;</code>
+       *
+       * <pre>
+       *房主uid
+       * </pre>
+       */
+      public Builder setCreatorUidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
+        creatorUid_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int allRound_ ;
+      /**
+       * <code>optional int32 all_round = 6;</code>
+       *
+       * <pre>
+       *总局数
+       * </pre>
+       */
+      public boolean hasAllRound() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>optional int32 all_round = 6;</code>
+       *
+       * <pre>
+       *总局数
+       * </pre>
+       */
+      public int getAllRound() {
+        return allRound_;
+      }
+      /**
+       * <code>optional int32 all_round = 6;</code>
+       *
+       * <pre>
+       *总局数
+       * </pre>
+       */
+      public Builder setAllRound(int value) {
+        bitField0_ |= 0x00000020;
+        allRound_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 all_round = 6;</code>
+       *
+       * <pre>
+       *总局数
+       * </pre>
+       */
+      public Builder clearAllRound() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        allRound_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int round_ ;
+      /**
+       * <code>optional int32 round = 7;</code>
+       *
+       * <pre>
+       *打了几局
+       * </pre>
+       */
+      public boolean hasRound() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>optional int32 round = 7;</code>
+       *
+       * <pre>
+       *打了几局
+       * </pre>
+       */
+      public int getRound() {
+        return round_;
+      }
+      /**
+       * <code>optional int32 round = 7;</code>
+       *
+       * <pre>
+       *打了几局
+       * </pre>
+       */
+      public Builder setRound(int value) {
+        bitField0_ |= 0x00000040;
+        round_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 round = 7;</code>
+       *
+       * <pre>
+       *打了几局
+       * </pre>
+       */
+      public Builder clearRound() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        round_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object createTime_ = "";
+      /**
+       * <code>optional string createTime = 8;</code>
+       *
+       * <pre>
+       *创建时间
+       * </pre>
+       */
+      public boolean hasCreateTime() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      /**
+       * <code>optional string createTime = 8;</code>
+       *
+       * <pre>
+       *创建时间
+       * </pre>
+       */
+      public java.lang.String getCreateTime() {
+        java.lang.Object ref = createTime_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            createTime_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string createTime = 8;</code>
+       *
+       * <pre>
+       *创建时间
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getCreateTimeBytes() {
+        java.lang.Object ref = createTime_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          createTime_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string createTime = 8;</code>
+       *
+       * <pre>
+       *创建时间
+       * </pre>
+       */
+      public Builder setCreateTime(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000080;
+        createTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string createTime = 8;</code>
+       *
+       * <pre>
+       *创建时间
+       * </pre>
+       */
+      public Builder clearCreateTime() {
+        bitField0_ = (bitField0_ & ~0x00000080);
+        createTime_ = getDefaultInstance().getCreateTime();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string createTime = 8;</code>
+       *
+       * <pre>
+       *创建时间
+       * </pre>
+       */
+      public Builder setCreateTimeBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000080;
+        createTime_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int roomId_ ;
+      /**
+       * <code>optional int32 room_id = 9;</code>
+       *
+       * <pre>
+       *房间号
+       * </pre>
+       */
+      public boolean hasRoomId() {
+        return ((bitField0_ & 0x00000100) == 0x00000100);
+      }
+      /**
+       * <code>optional int32 room_id = 9;</code>
+       *
+       * <pre>
+       *房间号
+       * </pre>
+       */
+      public int getRoomId() {
+        return roomId_;
+      }
+      /**
+       * <code>optional int32 room_id = 9;</code>
+       *
+       * <pre>
+       *房间号
+       * </pre>
+       */
+      public Builder setRoomId(int value) {
+        bitField0_ |= 0x00000100;
+        roomId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 room_id = 9;</code>
+       *
+       * <pre>
+       *房间号
+       * </pre>
+       */
+      public Builder clearRoomId() {
+        bitField0_ = (bitField0_ & ~0x00000100);
+        roomId_ = 0;
         onChanged();
         return this;
       }
@@ -52523,103 +53263,106 @@ public final class CpMsgCs {
       "(\0132\035.com.huinan.proto.HuUserBrand\022\017\n\007hu_" +
       "type\030\004 \001(\005\"c\n\tBigResult\022\013\n\003uid\030\001 \001(\t\022\016\n\006" +
       "hu_num\030\002 \001(\005\022\020\n\010zimo_num\030\003 \001(\005\022\023\n\013dianpa" +
-      "o_num\030\004 \001(\005\022\022\n\nsanfan_num\030\005 \001(\005\"\276\001\n\020CSNo" +
+      "o_num\030\004 \001(\005\022\022\n\nsanfan_num\030\005 \001(\005\"\232\002\n\020CSNo" +
       "tifyGameOver\0223\n\017user_score_info\030\001 \003(\0132\032." +
       "com.huinan.proto.UserInfo\0223\n\014small_resul" +
       "t\030\002 \001(\0132\035.com.huinan.proto.SmallResult\022/",
       "\n\nbig_result\030\003 \003(\0132\033.com.huinan.proto.Bi" +
-      "gResult\022\017\n\007ishuang\030\004 \001(\010\"\251\005\n\024CSResponseE" +
-      "nterTable\0220\n\006result\030\001 \001(\0162 .com.huinan.p" +
-      "roto.ENMessageError\022-\n\tuser_info\030\002 \003(\0132\032" +
-      ".com.huinan.proto.UserInfo\0226\n\tgameStart\030" +
-      "\003 \001(\0132#.com.huinan.proto.CSNotifyGameSta" +
-      "rt\022:\n\ntable_info\030\004 \001(\0132&.com.huinan.prot" +
-      "o.CSRequestCreateTable\022H\n\016dissolve_infos" +
-      "\030\005 \001(\01320.com.huinan.proto.CSNotifyDissol" +
-      "veTableOperation\0223\n\005flows\030\006 \003(\0132$.com.hu",
-      "inan.proto.CSNotifyActionFlow\022=\n\006choice\030" +
-      "\007 \001(\0132-.com.huinan.proto.CSNotifySeatOpe" +
-      "rationChoice\0225\n\004next\030\010 \001(\0132\'.com.huinan." +
-      "proto.CSNotifyNextOperation\0226\n\004deal\030\t \001(" +
-      "\0132(.com.huinan.proto.CSNotifyPlayerDealC" +
-      "ard\0224\n\010gameOver\030\n \001(\0132\".com.huinan.proto" +
-      ".CSNotifyGameOver\022\021\n\tdest_card\030\013 \001(\005\022\022\n\n" +
-      "seat_index\030\014 \001(\005\022\r\n\005is_mo\030\r \001(\010\022\016\n\006is_fa" +
-      "n\030\016 \001(\010\022\023\n\013table_state\030\017 \001(\005\"!\n\022CSReques" +
-      "tReconnect\022\013\n\003uid\030\001 \001(\t\"$\n\023CSResponseRec",
-      "onnect\022\r\n\005state\030\001 \001(\010\"!\n\022CSRequestHeartB" +
-      "eat\022\013\n\003uid\030\001 \001(\t\"$\n\023CSResponseHeartBeat\022" +
-      "\r\n\005state\030\001 \001(\010\"x\n\rCSRequestChat\022+\n\005ctype" +
-      "\030\001 \001(\0162\034.com.huinan.proto.ENChatType\022\017\n\007" +
-      "message\030\002 \001(\t\022\026\n\016BigFaceChannel\030\003 \001(\005\022\021\n" +
-      "\tBigFaceID\030\004 \001(\005\"B\n\016CSResponseChat\0220\n\006re" +
-      "sult\030\001 \001(\0162 .com.huinan.proto.ENMessageE" +
-      "rror\"\204\001\n\014CSNotifyChat\022\013\n\003uid\030\001 \001(\t\022+\n\005ct" +
-      "ype\030\002 \001(\0162\034.com.huinan.proto.ENChatType\022" +
-      "\017\n\007message\030\003 \001(\t\022\026\n\016BigFaceChannel\030\004 \001(\005",
-      "\022\021\n\tBigFaceID\030\005 \001(\005\"#\n\021CSRequestIsOnline" +
-      "\022\016\n\006online\030\001 \001(\010\"V\n\022CSResponseIsOnline\0220" +
-      "\n\006result\030\001 \001(\0162 .com.huinan.proto.ENMess" +
-      "ageError\022\016\n\006online\030\002 \001(\010\"6\n\020CSNotifyIsOn" +
-      "line\022\022\n\nseat_index\030\001 \001(\005\022\016\n\006online\030\002 \001(\010" +
-      "\"/\n\026CSNotifyRoomCardChange\022\025\n\rroom_card_" +
-      "num\030\001 \001(\005\":\n\016CSNotifyNotice\022\r\n\005title\030\001 \001" +
-      "(\t\022\013\n\003msg\030\002 \001(\t\022\014\n\004data\030\003 \001(\t\"\242\002\n\022CSResp" +
-      "onsePlayBack\0220\n\006result\030\001 \001(\0162 .com.huina" +
-      "n.proto.ENMessageError\0225\n\005table\030\002 \001(\0132&.",
-      "com.huinan.proto.CSRequestCreateTable\0227\n" +
-      "\ngame_start\030\003 \001(\0132#.com.huinan.proto.CSN" +
-      "otifyGameStart\0223\n\005flows\030\004 \003(\0132$.com.huin" +
-      "an.proto.CSNotifyActionFlow\0225\n\tgame_over" +
-      "\030\005 \001(\0132\".com.huinan.proto.CSNotifyGameOv" +
-      "er\"\"\n\022CSNotifyOpenTouPai\022\014\n\004open\030\001 \001(\010\"\020" +
-      "\n\016CSNotifyLogout*\224\006\n\016ENMessageError\022\024\n\020R" +
-      "ESPONSE_SUCCESS\020\001\022\021\n\rRESPONSE_FAIL\020\002\022\034\n\030" +
-      "RESPONSE_SEATINDEX_ERROR\020\003\022\032\n\026RESPONSE_A" +
-      "CTTYPE_ERROR\020\004\022\033\n\027RESPONSE_DESTCARD_ERRO",
-      "R\020\005\022\026\n\022RESPONSE_ROOM_FULL\020\006\022\035\n\031RESPONSE_" +
-      "ROOM_INEXISTENCE\020\007\022\032\n\026RESPONSE_ROOM_ID_E" +
-      "RROR\020\010\022\033\n\027RESPONSE_ROOMCARD_LIMIT\020\t\022\032\n\026R" +
-      "ESPONSE_IN_OTHER_ROOM\020\n\022\024\n\020RESPONSE_PLAY" +
-      "ING\020\013\022 \n\034RESPONSE_DEALER_CAN_NOT_QUIT\020\014\022" +
-      "-\n)RESPONSE_FIRST_DISSOLVE_ROOM_CHOICE_E" +
-      "RROR\020\r\022\032\n\026RESPONSE_ALREADY_READY\020\016\022\027\n\023RE" +
-      "SPONSE_IS_IN_ROOM\020\017\022\037\n\033RESPONSE_NOT_CAN_" +
-      "XIA_JIAO_7\020\020\022\031\n\025RESPONSE_CLUB_IS_NULL\020\021\022" +
-      "\035\n\031RESPONSE_CLUB_NOT_CREATOR\020\022\022\036\n\032RESPON",
-      "SE_CLUB_IN_THIS_CLUB\020\023\022#\n\037RESPONSE_CLUB_" +
-      "NOT_IN_APPLY_LIST\020\024\022\"\n\036RESPONSE_CLUB_NOT" +
-      "_IN_THIS_CLUB\020\025\022\033\n\027RESPONSE_CLUB_ROOM_FU" +
-      "LL\020\026\022\036\n\032RESPONSE_CLUB_NOT_IS_PROXY\020\027\022\036\n\032" +
-      "RESPONSE_CLUB_NAME_ISEMPTY\020\030\022\036\n\032RESPONSE" +
-      "_CLUB_NAME_ILLEGAL\020\031\022\031\n\025RESPONSE_CLUB_NU" +
-      "M_MAX\020\032*4\n\017ENOperationType\022\020\n\014LOGOUT_TAB" +
-      "LE\020\001\022\017\n\013OWNER_TIREN\020\002*\214\001\n\tENColType\022\023\n\017E" +
-      "N_COL_TYPE_TOU\020\001\022\024\n\020EN_COL_TYPE_PENG\020\002\022\023" +
-      "\n\017EN_COL_TYPE_CHI\020\003\022\024\n\020EN_COL_TYPE_ZHAO\020",
-      "\004\022\024\n\020EN_COL_TYPE_LONG\020\005\022\023\n\017EN_COL_TYPE_K" +
-      "OU\020\006*N\n\nENZhaoType\022\024\n\020EN_ZHAO_TYPE_CHI\020\001" +
-      "\022\024\n\020EN_ZHAO_TYPE_CHE\020\002\022\024\n\020EN_ZHAO_TYPE_A" +
-      "LL\020\003*\305\004\n\014ENActionType\022\025\n\021EN_ACTION_UNKNO" +
-      "WN\020\001\022\023\n\017EN_ACTION_NAPAI\020\002\022\024\n\020EN_ACTION_C" +
-      "HUPAI\020\003\022\021\n\rEN_ACTION_GUO\020\004\022\021\n\rEN_ACTION_" +
-      "TOU\020\005\022\022\n\016EN_ACTION_PENG\020\006\022\021\n\rEN_ACTION_C" +
-      "HI\020\007\022\020\n\014EN_ACTION_HU\020\010\022\022\n\016EN_ACTION_ZHAO" +
-      "\020\t\022\023\n\017EN_ACTION_SIGEN\020\n\022\021\n\rEN_ACTION_TUI" +
-      "\020\013\022\024\n\020EN_ACTION_NO_CHU\020\014\022\021\n\rEN_ACTION_KA",
-      "N\020\r\022\024\n\020EN_ACTION_XIATOU\020\016\022\024\n\020EN_ACTION_H" +
-      "UADUI\020\017\022\024\n\020EN_ACTION_CHIKAN\020\020\022\023\n\017EN_ACTI" +
-      "ON_DAKAN\020\021\022\027\n\023EN_ACTION_CHI_SIGEN\020\022\022\026\n\022E" +
-      "N_ACTION_HU_SIGEN\020\023\022\022\n\016EN_ACTION_PIAO\020\024\022" +
-      "\025\n\021EN_ACTION_NO_PIAO\020\025\022\022\n\016EN_ACTION_DANG" +
-      "\020\026\022\025\n\021EN_ACTION_NO_DANG\020\027\022\022\n\016EN_ACTION_N" +
-      "EXT\020\030\022\022\n\016EN_ACTION_DEAL\020\031\022\021\n\rEN_ACTION_K" +
-      "OU\020\032\022\026\n\022EN_ACTION_KOU_LIST\020\033*Z\n\nENChatTy" +
-      "pe\022\032\n\026EN_CHAT_TYPE_CHARACTER\020\000\022\030\n\024EN_CHA" +
-      "T_TYPE_BIGFACE\020\001\022\026\n\022EN_CHAT_TYPE_VOICE\020\002",
-      "*u\n\nENRoomType\022\023\n\017EN_ROOM_TYPE_GY\020\001\022\023\n\017E" +
-      "N_ROOM_TYPE_NC\020\002\022\023\n\017EN_ROOM_TYPE_XC\020\003\022\023\n" +
-      "\017EN_ROOM_TYPE_MY\020\004\022\023\n\017EN_ROOM_TYPE_CX\020\005"
+      "gResult\022\017\n\007ishuang\030\004 \001(\010\022\023\n\013creator_uid\030" +
+      "\005 \001(\t\022\021\n\tall_round\030\006 \001(\005\022\r\n\005round\030\007 \001(\005\022" +
+      "\022\n\ncreateTime\030\010 \001(\t\022\017\n\007room_id\030\t \001(\005\"\251\005\n" +
+      "\024CSResponseEnterTable\0220\n\006result\030\001 \001(\0162 ." +
+      "com.huinan.proto.ENMessageError\022-\n\tuser_" +
+      "info\030\002 \003(\0132\032.com.huinan.proto.UserInfo\0226" +
+      "\n\tgameStart\030\003 \001(\0132#.com.huinan.proto.CSN" +
+      "otifyGameStart\022:\n\ntable_info\030\004 \001(\0132&.com" +
+      ".huinan.proto.CSRequestCreateTable\022H\n\016di",
+      "ssolve_infos\030\005 \001(\01320.com.huinan.proto.CS" +
+      "NotifyDissolveTableOperation\0223\n\005flows\030\006 " +
+      "\003(\0132$.com.huinan.proto.CSNotifyActionFlo" +
+      "w\022=\n\006choice\030\007 \001(\0132-.com.huinan.proto.CSN" +
+      "otifySeatOperationChoice\0225\n\004next\030\010 \001(\0132\'" +
+      ".com.huinan.proto.CSNotifyNextOperation\022" +
+      "6\n\004deal\030\t \001(\0132(.com.huinan.proto.CSNotif" +
+      "yPlayerDealCard\0224\n\010gameOver\030\n \001(\0132\".com." +
+      "huinan.proto.CSNotifyGameOver\022\021\n\tdest_ca" +
+      "rd\030\013 \001(\005\022\022\n\nseat_index\030\014 \001(\005\022\r\n\005is_mo\030\r ",
+      "\001(\010\022\016\n\006is_fan\030\016 \001(\010\022\023\n\013table_state\030\017 \001(\005" +
+      "\"!\n\022CSRequestReconnect\022\013\n\003uid\030\001 \001(\t\"$\n\023C" +
+      "SResponseReconnect\022\r\n\005state\030\001 \001(\010\"!\n\022CSR" +
+      "equestHeartBeat\022\013\n\003uid\030\001 \001(\t\"$\n\023CSRespon" +
+      "seHeartBeat\022\r\n\005state\030\001 \001(\010\"x\n\rCSRequestC" +
+      "hat\022+\n\005ctype\030\001 \001(\0162\034.com.huinan.proto.EN" +
+      "ChatType\022\017\n\007message\030\002 \001(\t\022\026\n\016BigFaceChan" +
+      "nel\030\003 \001(\005\022\021\n\tBigFaceID\030\004 \001(\005\"B\n\016CSRespon" +
+      "seChat\0220\n\006result\030\001 \001(\0162 .com.huinan.prot" +
+      "o.ENMessageError\"\204\001\n\014CSNotifyChat\022\013\n\003uid",
+      "\030\001 \001(\t\022+\n\005ctype\030\002 \001(\0162\034.com.huinan.proto" +
+      ".ENChatType\022\017\n\007message\030\003 \001(\t\022\026\n\016BigFaceC" +
+      "hannel\030\004 \001(\005\022\021\n\tBigFaceID\030\005 \001(\005\"#\n\021CSReq" +
+      "uestIsOnline\022\016\n\006online\030\001 \001(\010\"V\n\022CSRespon" +
+      "seIsOnline\0220\n\006result\030\001 \001(\0162 .com.huinan." +
+      "proto.ENMessageError\022\016\n\006online\030\002 \001(\010\"6\n\020" +
+      "CSNotifyIsOnline\022\022\n\nseat_index\030\001 \001(\005\022\016\n\006" +
+      "online\030\002 \001(\010\"/\n\026CSNotifyRoomCardChange\022\025" +
+      "\n\rroom_card_num\030\001 \001(\005\":\n\016CSNotifyNotice\022" +
+      "\r\n\005title\030\001 \001(\t\022\013\n\003msg\030\002 \001(\t\022\014\n\004data\030\003 \001(",
+      "\t\"\242\002\n\022CSResponsePlayBack\0220\n\006result\030\001 \001(\016" +
+      "2 .com.huinan.proto.ENMessageError\0225\n\005ta" +
+      "ble\030\002 \001(\0132&.com.huinan.proto.CSRequestCr" +
+      "eateTable\0227\n\ngame_start\030\003 \001(\0132#.com.huin" +
+      "an.proto.CSNotifyGameStart\0223\n\005flows\030\004 \003(" +
+      "\0132$.com.huinan.proto.CSNotifyActionFlow\022" +
+      "5\n\tgame_over\030\005 \001(\0132\".com.huinan.proto.CS" +
+      "NotifyGameOver\"\"\n\022CSNotifyOpenTouPai\022\014\n\004" +
+      "open\030\001 \001(\010\"\020\n\016CSNotifyLogout*\224\006\n\016ENMessa" +
+      "geError\022\024\n\020RESPONSE_SUCCESS\020\001\022\021\n\rRESPONS",
+      "E_FAIL\020\002\022\034\n\030RESPONSE_SEATINDEX_ERROR\020\003\022\032" +
+      "\n\026RESPONSE_ACTTYPE_ERROR\020\004\022\033\n\027RESPONSE_D" +
+      "ESTCARD_ERROR\020\005\022\026\n\022RESPONSE_ROOM_FULL\020\006\022" +
+      "\035\n\031RESPONSE_ROOM_INEXISTENCE\020\007\022\032\n\026RESPON" +
+      "SE_ROOM_ID_ERROR\020\010\022\033\n\027RESPONSE_ROOMCARD_" +
+      "LIMIT\020\t\022\032\n\026RESPONSE_IN_OTHER_ROOM\020\n\022\024\n\020R" +
+      "ESPONSE_PLAYING\020\013\022 \n\034RESPONSE_DEALER_CAN" +
+      "_NOT_QUIT\020\014\022-\n)RESPONSE_FIRST_DISSOLVE_R" +
+      "OOM_CHOICE_ERROR\020\r\022\032\n\026RESPONSE_ALREADY_R" +
+      "EADY\020\016\022\027\n\023RESPONSE_IS_IN_ROOM\020\017\022\037\n\033RESPO",
+      "NSE_NOT_CAN_XIA_JIAO_7\020\020\022\031\n\025RESPONSE_CLU" +
+      "B_IS_NULL\020\021\022\035\n\031RESPONSE_CLUB_NOT_CREATOR" +
+      "\020\022\022\036\n\032RESPONSE_CLUB_IN_THIS_CLUB\020\023\022#\n\037RE" +
+      "SPONSE_CLUB_NOT_IN_APPLY_LIST\020\024\022\"\n\036RESPO" +
+      "NSE_CLUB_NOT_IN_THIS_CLUB\020\025\022\033\n\027RESPONSE_" +
+      "CLUB_ROOM_FULL\020\026\022\036\n\032RESPONSE_CLUB_NOT_IS" +
+      "_PROXY\020\027\022\036\n\032RESPONSE_CLUB_NAME_ISEMPTY\020\030" +
+      "\022\036\n\032RESPONSE_CLUB_NAME_ILLEGAL\020\031\022\031\n\025RESP" +
+      "ONSE_CLUB_NUM_MAX\020\032*4\n\017ENOperationType\022\020" +
+      "\n\014LOGOUT_TABLE\020\001\022\017\n\013OWNER_TIREN\020\002*\214\001\n\tEN",
+      "ColType\022\023\n\017EN_COL_TYPE_TOU\020\001\022\024\n\020EN_COL_T" +
+      "YPE_PENG\020\002\022\023\n\017EN_COL_TYPE_CHI\020\003\022\024\n\020EN_CO" +
+      "L_TYPE_ZHAO\020\004\022\024\n\020EN_COL_TYPE_LONG\020\005\022\023\n\017E" +
+      "N_COL_TYPE_KOU\020\006*N\n\nENZhaoType\022\024\n\020EN_ZHA" +
+      "O_TYPE_CHI\020\001\022\024\n\020EN_ZHAO_TYPE_CHE\020\002\022\024\n\020EN" +
+      "_ZHAO_TYPE_ALL\020\003*\305\004\n\014ENActionType\022\025\n\021EN_" +
+      "ACTION_UNKNOWN\020\001\022\023\n\017EN_ACTION_NAPAI\020\002\022\024\n" +
+      "\020EN_ACTION_CHUPAI\020\003\022\021\n\rEN_ACTION_GUO\020\004\022\021" +
+      "\n\rEN_ACTION_TOU\020\005\022\022\n\016EN_ACTION_PENG\020\006\022\021\n" +
+      "\rEN_ACTION_CHI\020\007\022\020\n\014EN_ACTION_HU\020\010\022\022\n\016EN",
+      "_ACTION_ZHAO\020\t\022\023\n\017EN_ACTION_SIGEN\020\n\022\021\n\rE" +
+      "N_ACTION_TUI\020\013\022\024\n\020EN_ACTION_NO_CHU\020\014\022\021\n\r" +
+      "EN_ACTION_KAN\020\r\022\024\n\020EN_ACTION_XIATOU\020\016\022\024\n" +
+      "\020EN_ACTION_HUADUI\020\017\022\024\n\020EN_ACTION_CHIKAN\020" +
+      "\020\022\023\n\017EN_ACTION_DAKAN\020\021\022\027\n\023EN_ACTION_CHI_" +
+      "SIGEN\020\022\022\026\n\022EN_ACTION_HU_SIGEN\020\023\022\022\n\016EN_AC" +
+      "TION_PIAO\020\024\022\025\n\021EN_ACTION_NO_PIAO\020\025\022\022\n\016EN" +
+      "_ACTION_DANG\020\026\022\025\n\021EN_ACTION_NO_DANG\020\027\022\022\n" +
+      "\016EN_ACTION_NEXT\020\030\022\022\n\016EN_ACTION_DEAL\020\031\022\021\n" +
+      "\rEN_ACTION_KOU\020\032\022\026\n\022EN_ACTION_KOU_LIST\020\033",
+      "*Z\n\nENChatType\022\032\n\026EN_CHAT_TYPE_CHARACTER" +
+      "\020\000\022\030\n\024EN_CHAT_TYPE_BIGFACE\020\001\022\026\n\022EN_CHAT_" +
+      "TYPE_VOICE\020\002*u\n\nENRoomType\022\023\n\017EN_ROOM_TY" +
+      "PE_GY\020\001\022\023\n\017EN_ROOM_TYPE_NC\020\002\022\023\n\017EN_ROOM_" +
+      "TYPE_XC\020\003\022\023\n\017EN_ROOM_TYPE_MY\020\004\022\023\n\017EN_ROO" +
+      "M_TYPE_CX\020\005"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -52860,7 +53603,7 @@ public final class CpMsgCs {
     internal_static_com_huinan_proto_CSNotifyGameOver_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_huinan_proto_CSNotifyGameOver_descriptor,
-        new java.lang.String[] { "UserScoreInfo", "SmallResult", "BigResult", "Ishuang", });
+        new java.lang.String[] { "UserScoreInfo", "SmallResult", "BigResult", "Ishuang", "CreatorUid", "AllRound", "Round", "CreateTime", "RoomId", });
     internal_static_com_huinan_proto_CSResponseEnterTable_descriptor =
       getDescriptor().getMessageTypes().get(38);
     internal_static_com_huinan_proto_CSResponseEnterTable_fieldAccessorTable = new
