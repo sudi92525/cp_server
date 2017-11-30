@@ -56,7 +56,7 @@ public class Login extends AbsAction {
 			user.setPic_url(requestBody.getPicUrl());
 			user.setNick(requestBody.getNick());
 			user.setOnline(true);
-			user.setIp(request.getClient().getIp());
+			// user.setIp(request.getClient().getIp());
 			GamePlayer player = bindUidWithGamePlayer(request, user.getUuid());
 			player.setToken(token);
 
