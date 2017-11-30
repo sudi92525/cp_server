@@ -61,6 +61,11 @@ public class Room implements Serializable {
 	private long startDissolveTime;
 	/** 上次进入房间的时间 */
 	private long lastEnterTime;
+	/** 俱乐部 */
+	private int clubId;
+
+	private long createTime;
+
 	// -------------------------创房选项----------------------------------
 	/** GY:是否有包翻的功能 */
 	private boolean baoFan;
@@ -219,6 +224,7 @@ public class Room implements Serializable {
 		}
 
 		this.lastEnterTime = System.currentTimeMillis();
+		this.createTime = System.currentTimeMillis();
 	}
 
 	public int getFirstCard() {
@@ -899,6 +905,22 @@ public class Room implements Serializable {
 
 	public void setChe7Seat(int che7Seat) {
 		this.che7Seat = che7Seat;
+	}
+
+	public int getClubId() {
+		return clubId;
+	}
+
+	public void setClubId(int clubId) {
+		this.clubId = clubId;
+	}
+
+	public long getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(long createTime) {
+		this.createTime = createTime;
 	}
 
 }

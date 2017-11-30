@@ -56,8 +56,7 @@ public class RabbitMQManager {
 		factory.setPassword(password);
 		factory.setVirtualHost(virtual_host);
 		factory.setPort(port);
-		
-		
+
 		Connection connection;
 		try {
 			connection = factory.newConnection();
@@ -95,6 +94,12 @@ public class RabbitMQManager {
 						} else if (PushType == 3) {
 							// 解锁房间
 							RoomManager.unlockRoom(String.valueOf(uid));
+						} else if (PushType == 5) {// 创建俱乐部
+//							int clubId = (int) jsonOBJ.get("ClubId");
+//							ClubManager.createClub(clubId, "club_name", uid);
+						} else if (PushType == 6) {// 申请加入俱乐部
+//							int clubId = (int) jsonOBJ.get("ClubId");
+//							ClubManager.applyClub(uid, clubId);
 						}
 					}
 				}

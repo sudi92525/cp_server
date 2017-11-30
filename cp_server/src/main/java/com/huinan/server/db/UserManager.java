@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
@@ -38,7 +39,7 @@ public class UserManager {
 		return instance;
 	}
 
-	private Map<String, User> users = new ConcurrentHashMap<>();
+	private ConcurrentMap<String, User> users = new ConcurrentHashMap<>();
 
 	private static ExecutorService EXECUTOR = Executors.newFixedThreadPool(2,
 			new ThreadFactory() {
@@ -245,7 +246,7 @@ public class UserManager {
 
 						sta.executeUpdate();
 					}
-					//LOGGER.info("update rank data:" + sta.toString());
+					// LOGGER.info("update rank data:" + sta.toString());
 				}
 			} catch (SQLException e) {
 				LOGGER.error("user db error:", e);
@@ -257,6 +258,33 @@ public class UserManager {
 			RoomManager.removeRoom(room);
 		});
 	}
+
+	public boolean checkIsProxy(String uid) {
+		Connection conn = null;
+		PreparedStatement sta = null;
+		ResultSet rs = null;
+		boolean isProxy = false;
+		try {
+			conn = DBManager.getInstance().getConnection();
+			sta = conn.prepareStatement(SELECT_PROXY_SQL_BY_UID);
+
+			sta.setInt(1, Integer.parseInt(uid));
+			sta.setInt(2, 1);
+			rs = sta.executeQuery();
+			if (rs.next()) {
+				isProxy = true;
+			}
+		} catch (SQLException e) {
+			LOGGER.error("checkIsProxy db error:", e);
+		} finally {
+			DBManager.getInstance().closeConnection(conn);
+			DBManager.getInstance().closeStatement(sta);
+			DBManager.getInstance().closeResultSet(rs);
+		}
+		return isProxy;
+	}
+
+	private static final String SELECT_PROXY_SQL_BY_UID = "SELECT * FROM `sys_gameproxy` WHERE `PId`=? AND `ProxyStatus`=?";
 
 	private static final String SELECT_SQL_BY_UID = "SELECT * FROM `sys_players` WHERE `PId`=?";
 	public static final String UPDATE_SQL = "UPDATE `sys_players` SET RoomCardCount=RoomCardCount-? WHERE PId=?";

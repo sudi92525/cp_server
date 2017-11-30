@@ -7,6 +7,7 @@ import com.huinan.proto.CpMsgCs.CSResponseCreateTable;
 import com.huinan.proto.CpMsgCs.ENMessageError;
 import com.huinan.proto.CpMsgCs.ENRoomType;
 import com.huinan.proto.CpMsgCs.UserInfo;
+import com.huinan.server.db.ClubDAO;
 import com.huinan.server.db.UserManager;
 import com.huinan.server.net.ClientRequest;
 import com.huinan.server.service.AbsAction;
@@ -15,6 +16,9 @@ import com.huinan.server.service.data.ERoomCardCost;
 import com.huinan.server.service.data.ERoomCardType;
 import com.huinan.server.service.data.Room;
 import com.huinan.server.service.data.User;
+import com.huinan.server.service.data.club.Club;
+import com.huinan.server.service.data.club.ClubRoom;
+import com.huinan.server.service.manager.ClubManager;
 import com.huinan.server.service.manager.ProtoBuilder;
 import com.huinan.server.service.manager.RoomManager;
 
@@ -84,11 +88,20 @@ public class RoomCreate extends AbsAction {
 				creator.setIsFanSanHei(room.isSanKanHeiIsFan());
 			}
 			creator.setPlayerNum(room.getUserNum());
+			if (room.getClubId() != 0) {
+				creator.setClubId(room.getClubId());
+				Club club = ClubDAO.getInstance().getClub(room.getClubId());
+				ClubRoom clubRoom = new ClubRoom(room.getClubId(),
+						room.getTid());
+				club.getRooms().put(room.getTid(), clubRoom);
+				ClubDAO.getInstance().insertClubRoom(clubRoom);
+			}
 
 			response.setTableInfo(creator);
 			room.setRoomTable(creator.build());
 
 			response.setResult(ENMessageError.RESPONSE_SUCCESS);
+
 		}
 		msg.setCsResponseCreateTable(response);
 		request.getClient().sendMessage(
@@ -106,30 +119,48 @@ public class RoomCreate extends AbsAction {
 			return ENMessageError.RESPONSE_FAIL.getNumber();
 		}
 		if (request.hasPlayerNum()
-				&& (request.getPlayerNum() != Constant.PLAYER_NUM_THREE || request
+				&& (request.getPlayerNum() != Constant.PLAYER_NUM_THREE && request
 						.getPlayerNum() != Constant.PLAYER_NUM_FOUR)) {
 			return ENMessageError.RESPONSE_FAIL.getNumber();
 		}
 		UserManager.getInstance().getRoomCard(user);
 		int useCardType = request.getUseCardType();
 		int cardNum = ERoomCardCost.getRoomCardCost(roundNum);
-		if (useCardType == ERoomCardType.CREATOR.getValue()) {
-			if (request.getRoomType() == ENRoomType.EN_ROOM_TYPE_MY
-					|| request.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX) {
-				return 0;
+		if (request.getClubId() != 0) {
+			Club club = ClubDAO.getInstance().getClub(request.getClubId());
+			if (club == null) {
+				return ENMessageError.RESPONSE_CLUB_IS_NULL_VALUE;
 			}
-			if (user.getRoomCardNum() < cardNum) {
-				// 房主付
-				return ENMessageError.RESPONSE_ROOMCARD_LIMIT.getNumber();
+			if (!club.getMembers().contains(user.getUuid())) {
+				return ENMessageError.RESPONSE_CLUB_NOT_IN_THIS_CLUB_VALUE;
 			}
-		} else if (useCardType == ERoomCardType.AA.getValue()) {
-			// 均摊
-			float need = cardNum / Constant.PLAYER_NUM * 1F;// TODO:传人数
-			if (user.getRoomCardNum() < Math.ceil(need)) {
-				return ENMessageError.RESPONSE_ROOMCARD_LIMIT.getNumber();
+			if (club.getRooms().size() >= Constant.CLUB_MAX_ROOM_NUM) {
+				return ENMessageError.RESPONSE_CLUB_ROOM_FULL_VALUE;
+			}
+			User creator = ClubManager.getClubOwner(request.getClubId());
+			int orderCard = ClubManager.getClubOrderCard(request.getClubId());
+			if (orderCard + cardNum > creator.getRoomCardNum()) {
+				return ENMessageError.RESPONSE_ROOMCARD_LIMIT_VALUE;
+			}
+
+		} else {
+			if (useCardType == ERoomCardType.CREATOR.getValue()) {
+				if (request.getRoomType() == ENRoomType.EN_ROOM_TYPE_MY
+						|| request.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX) {
+					return 0;
+				}
+				if (user.getRoomCardNum() < cardNum) {
+					// 房主付
+					return ENMessageError.RESPONSE_ROOMCARD_LIMIT.getNumber();
+				}
+			} else if (useCardType == ERoomCardType.AA.getValue()) {
+				// 均摊
+				float need = cardNum / Constant.PLAYER_NUM * 1F;// TODO:传人数
+				if (user.getRoomCardNum() < Math.ceil(need)) {
+					return ENMessageError.RESPONSE_ROOMCARD_LIMIT.getNumber();
+				}
 			}
 		}
 		return 0;
 	}
-
 }

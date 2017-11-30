@@ -428,7 +428,13 @@ public class GameAction extends AbsAction {
 		user.getChiCardOfHolds().add(chiCard);
 		CardManager.removeCardOfHold(user, chiCard);
 		CardManager.removeDeathCard(chiCard, user);
-
+		if (user.getDoubleZhuiCards().contains(chiCard)) {
+			user.getDoubleZhuiCards().remove(chiCard);
+			// 将一对七从死牌列表删除
+			user.getNoChuCards().remove(chiCard);
+			user.getNoChuCards().remove(chiCard);
+			NotifyHandler.notifyDeathCardList(user);
+		}
 		// 将前面能吃的玩家加入不能吃的列表
 		for (Integer canChiSeat : room.getCanChiSeatTemp()) {
 			if (canChiSeat != user.getSeatIndex()

@@ -59,14 +59,15 @@ public class RedisDAO {
 				byte[] value = userBytes.get(bs);
 				String uuid = new String(bs);
 				User user = (User) RedisManager.unserialize(value);
+				LOGGER.info("-------loadFromRedis--------user UId:" + uuid);
 				UserManager.getInstance().getUsers().put(uuid, user);
 				if (user.getRoomId() != 0) {
 					Room room = RoomManager.getRooms().get(
 							Integer.valueOf(user.getRoomId()));
-					if (room.getRoomTable() == null) {
+					if (room != null && room.getRoomTable() == null) {
 						user.clear();
 						room.setStart(false);
-					} else {
+					} else if (room != null) {
 						room.getUsers().put(user.getSeatIndex(), user);
 					}
 				}
@@ -86,11 +87,13 @@ public class RedisDAO {
 		redis.del(userKey);
 		redis.del(roomKey);
 		for (User user : UserManager.getInstance().getUsers().values()) {
-			redis.hset(userKey.getBytes(), user.getUuid().getBytes(),
-					RedisManager.serialize(user));
-			LOGGER.info("-------insert user--------uid=" + user.getUuid());
-			LOGGER.info("-------insert user--------uid roomTid="
-					+ user.getRoomId());
+			if (user.getRoomId() != 0) {
+				redis.hset(userKey.getBytes(), user.getUuid().getBytes(),
+						RedisManager.serialize(user));
+				LOGGER.info("-------insert user--------uid=" + user.getUuid());
+				LOGGER.info("-------insert user--------uid roomTid="
+						+ user.getRoomId());
+			}
 		}
 		for (Room room : RoomManager.getRooms().values()) {
 			String str = String.valueOf(room.getTid());

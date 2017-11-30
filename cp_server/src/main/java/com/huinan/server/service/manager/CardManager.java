@@ -649,7 +649,7 @@ public class CardManager {
 				&& fan > room.getRoomTable().getHighTimes()) {
 			fan = room.getRoomTable().getHighTimes();
 			log.info("超出最大番数=" + fan);
-		} 
+		}
 		log.info("最终番数=" + fan);
 		return fan;
 	}
@@ -904,7 +904,7 @@ public class CardManager {
 				if (getCardValue(integer) + card.getCardValue() == 14
 						&& !chiList.contains(integer)
 						&& !user.getDouble7s().contains(integer)
-						&& !user.getDoubleZhuiCards().contains(integer)) {
+						&& checkZhuiCardChaiDui(user, integer, card.getNum())) {
 					chiList.add(integer);
 				}
 			}
@@ -980,7 +980,7 @@ public class CardManager {
 		for (Integer integer : user.getHold()) {
 			if (getCardValue(integer) + card.getCardValue() == 14
 					&& !user.getDouble7s().contains(integer)
-					&& !user.getDoubleZhuiCards().contains(integer)) {
+					&& checkZhuiCardChaiDui(user, integer, card.getNum())) {
 				return true;
 			}
 		}
@@ -1067,6 +1067,11 @@ public class CardManager {
 				log.info("isHu,false:西充小家有扯不能割！！！");
 				return false;
 			}
+		}
+		if (!user.isFive() && room.isDiaoZhui()
+				&& zhuiCards.contains(card.getNum())) {
+			log.info("isHu,false:南充吊追不能割追牌！！！");
+			return false;
 		}
 		log.info("==========is Hu=true============");
 		return true;
@@ -1302,6 +1307,42 @@ public class CardManager {
 		return tui;
 	}
 
+	public static boolean checkZhuiCardChaiDui(User user, Integer chaiDuiCard,
+			Integer destCard) {
+		Room room = RoomManager.getInstance().getRoom(user.getRoomId());
+		if (!room.isDiaoZhui()) {
+			return true;
+		}
+		Map<Integer, Integer> holdMap = toMap(user.getHold());
+		Integer chaiCount = holdMap.get(chaiDuiCard);
+		Integer destCount = holdMap.get(destCard);
+		if (chaiCount == destCount) {// 斗成十四的不能拆开吃和打
+			return false;
+		}
+		// 要吃的牌，成对
+		for (int i = 0; i < zhuiCards.size(); i++) {
+			int zhuiCard = zhuiCards.get(i);
+			Integer count = holdMap.get(zhuiCard);
+			if (count != null) {
+				if (count == 1
+						&& destCount == null
+						&& chaiCount != null
+						&& getCardValue(zhuiCard) + getCardValue(chaiDuiCard) != 14
+						&& zhuiCard != chaiDuiCard) {
+					// 有其他单牌，不能拆对
+					return false;
+				} else if (chaiCount != null
+						&& chaiCount == 2
+						&& count == 2
+						&& getCardValue(zhuiCard) + getCardValue(chaiDuiCard) == 14) {
+					// 有背靠背两对不能拆
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
 	/**
 	 * 南充西充同点数可以相互吃退
 	 * 
@@ -1319,6 +1360,7 @@ public class CardManager {
 		for (Integer integer : user.getNoChuCards()) {
 			if (getCardValue(integer) == cardValue
 					&& !user.getDouble7s().contains(integer)
+					&& !zhuiCards.contains(integer)
 					&& !user.getDoubleZhuiCards().contains(integer)) {
 				tui = true;
 				break;
@@ -1971,6 +2013,25 @@ public class CardManager {
 
 				user.getDoubleZhuiCards().add(Integer.valueOf(12));
 			}
+
+			// 斗成十四的天地丁斧不能拆开打和吃
+			if (tpCount != null && dPCount != null && dPCount == tpCount) {
+				for (int i = 0; i < dPCount; i++) {
+					user.getNoChuCards().add(Integer.valueOf(66));
+					user.getNoChuCards().add(Integer.valueOf(11));
+				}
+				user.getNoChiCards().add(dPCount);
+				user.getNoChiCards().add(tpCount);
+			}
+			if (ftCount != null && ddCount != null && ftCount == ddCount) {
+				for (int i = 0; i < ddCount; i++) {
+					user.getNoChuCards().add(Integer.valueOf(56));
+					user.getNoChuCards().add(Integer.valueOf(12));
+				}
+				user.getNoChiCards().add(ftCount);
+				user.getNoChiCards().add(ddCount);
+			}
+
 		}
 		if (!isDealCard) {// send && 发牌先不发该通知，发完后再通知
 			// 发送不能出牌的通知消息

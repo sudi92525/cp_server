@@ -66,6 +66,9 @@ public class RoomPleaseOut extends AbsAction {
 		if (outUser == null) {
 			return ENMessageError.RESPONSE_FAIL_VALUE;
 		}
+		if (!user.getUuid().equals(room.getRoomTable().getCreatorUid())) {
+			return ENMessageError.RESPONSE_FAIL_VALUE;
+		}
 		if (outUser.getRoomId() != room.getTid()) {
 			return ENMessageError.RESPONSE_FAIL_VALUE;
 		}

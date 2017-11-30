@@ -1,6 +1,7 @@
 package com.huinan.server.service.manager;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -9,12 +10,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.alibaba.fastjson.JSON;
 import com.huinan.proto.CpMsg.CpMsgData;
+import com.huinan.proto.CpMsgClub.ClubRoomProto;
 import com.huinan.proto.CpMsgCs.BigResult;
 import com.huinan.proto.CpMsgCs.CSNotifyGameOver;
 import com.huinan.proto.CpMsgCs.CSNotifyGameStart;
@@ -30,6 +33,7 @@ import com.huinan.proto.CpMsgCs.PBColumnInfo;
 import com.huinan.proto.CpMsgCs.PBColumnInfo.Builder;
 import com.huinan.proto.CpMsgCs.SmallResult;
 import com.huinan.proto.CpMsgCs.UserBrand;
+import com.huinan.server.db.ClubDAO;
 import com.huinan.server.db.GYcpInfoDAO;
 import com.huinan.server.db.UserManager;
 import com.huinan.server.net.GamePlayer;
@@ -42,6 +46,8 @@ import com.huinan.server.service.data.Room;
 import com.huinan.server.service.data.User;
 import com.huinan.server.service.data.UserInfoDto;
 import com.huinan.server.service.data.UserScoreRecord;
+import com.huinan.server.service.data.club.Club;
+import com.huinan.server.service.data.club.ClubRoom;
 
 /**
  *
@@ -58,7 +64,7 @@ public class RoomManager {
 	/**
 	 * 房间信息缓存，临时存储，届时会切入redis
 	 */
-	public Map<Integer, Room> rooms = new ConcurrentHashMap<>();
+	public ConcurrentMap<Integer, Room> rooms = new ConcurrentHashMap<>();
 
 	public static Map<Integer, Room> getRooms() {
 		return getInstance().rooms;
@@ -115,6 +121,9 @@ public class RoomManager {
 		}
 		if (requestBody.hasPlayerNum()) {
 			room.setUserNum(requestBody.getPlayerNum());
+		}
+		if (requestBody.hasClubId() && requestBody.getClubId() > 0) {
+			room.setClubId(requestBody.getClubId());
 		}
 		getRooms().put(tid, room);// 存放游戏房间信息
 		return room;
@@ -384,25 +393,25 @@ public class RoomManager {
 	public static void shuffle(Room room) {
 		List<Integer> cards = new ArrayList<>();
 		// if (room.getRound() > 1) {
-		for (int card : CardManager.allPais) {
-			for (int k = 0; k < 4; k++) {
-				cards.add(card);
-			}
-		}
+		// for (int card : CardManager.allPais) {
+		// for (int k = 0; k < 4; k++) {
+		// cards.add(card);
+		// }
+		// }
 		// }
 
 		// TODO 写死牌
 		// if (room.getRound() == 1) {
 		// cards.add(14);
-		// for (int i = 0; i < 6; i++) {// 84
-		// cards.add(34);
-		// cards.add(34);
-		// cards.add(15);
-		// cards.add(15);
-		// cards.add(15);
-		// cards.add(15);
-		// cards.add(15);
-		// }
+		for (int i = 0; i < 6; i++) {// 84
+			cards.add(12);
+			// cards.add(34);
+			// cards.add(15);
+			// cards.add(15);
+			// cards.add(15);
+			// cards.add(15);
+			// cards.add(15);
+		}
 		// cards.add(22);
 		// cards.add(22);
 		// cards.add(22);
@@ -415,6 +424,13 @@ public class RoomManager {
 		// cards.add(26);
 		// cards.add(34);
 		// }
+		Collections.shuffle(cards);
+		Collections.shuffle(cards);
+		Collections.shuffle(cards);
+		Collections.shuffle(cards);
+		Collections.shuffle(cards);
+		Collections.shuffle(cards);
+		Collections.shuffle(cards);
 		Collections.shuffle(cards);
 		Collections.shuffle(cards);
 		Collections.shuffle(cards);
@@ -464,6 +480,12 @@ public class RoomManager {
 	public static void startDealCard(Room room) {
 		if (room.getRound() == 1) {
 			room.setStart(true);
+			if (room.getClubId() != 0) {
+				ClubRoom clubRoom = ClubDAO.getInstance().getClubRoom(
+						room.getClubId(), room.getTid());
+				clubRoom.setStatus(1);
+				ClubDAO.getInstance().updateClubRoom(clubRoom);
+			}
 		}
 		// 洗牌
 		shuffle(room);
@@ -476,25 +498,25 @@ public class RoomManager {
 
 		// TODO 写死牌
 		// if (room.getRound() > 1) {
-		for (int i = 0; i < room.getUserNum(); i++) {
-			int num = CardManager.BRAND_NUMFOUR[i];
-			User user = room.getUsers().get(seat);
-			user.setReady(false);
-			for (int j = 0; j < num; j++) {
-				int card = room.getFirstCard();
-				user.getHold().add(card);
-			}
-			if (!user.isFive()) {
-				user.getCanChiHoldCards().clear();
-				user.getCanChiHoldCards().addAll(user.getHold());
-			}
-			CardManager.noChuDouble7AndDiaoZhui(room, user, true);
-			seat = RoomManager.getNextSeat(room, seat);
-		}
+		// for (int i = 0; i < room.getUserNum(); i++) {
+		// int num = CardManager.BRAND_NUMFOUR[i];
+		// User user = room.getUsers().get(seat);
+		// user.setReady(false);
+		// for (int j = 0; j < num; j++) {
+		// int card = room.getFirstCard();
+		// user.getHold().add(card);
+		// }
+		// if (!user.isFive()) {
+		// user.getCanChiHoldCards().clear();
+		// user.getCanChiHoldCards().addAll(user.getHold());
+		// }
+		// CardManager.noChuDouble7AndDiaoZhui(room, user, true);
+		// seat = RoomManager.getNextSeat(room, seat);
+		// }
 		// }
 		// TODO 写死牌
 		// if (room.getRound() == 1) {
-		// dealSiPai(room, seat);
+		dealSiPai(room, seat);
 		// }
 
 		room.setFirstCard(true);
@@ -548,7 +570,7 @@ public class RoomManager {
 		for (int i = 0; i < room.getUserNum(); i++) {
 			User user = room.getUsers().get(seat);
 			if (i == 0) {
-				int card1 = 66;
+				int card1 = 11;
 				user.getHold().add(card1);
 				int card2 = 12;
 				user.getHold().add(card2);
@@ -574,7 +596,7 @@ public class RoomManager {
 				user.getHold().add(card12);
 				int card13 = 16;
 				user.getHold().add(card13);
-				int card14 = 35;
+				int card14 = 44;
 				user.getHold().add(card14);
 				int card15 = 45;
 				user.getHold().add(card15);
@@ -615,9 +637,9 @@ public class RoomManager {
 				user.getHold().add(card14);
 				int card15 = 25;
 				user.getHold().add(card15);
-				int card16 = 16;
+				int card16 = 66;
 				user.getHold().add(card16);
-				int card17 = 14;
+				int card17 = 66;
 				user.getHold().add(card17);
 			} else if (i == 2) {
 				int card1 = 12;
@@ -1547,17 +1569,21 @@ public class RoomManager {
 	public static void totalRoomCard(Room room) {
 		if (room.getRound() == 1) {
 			int userType = room.getRoomTable().getUseCardType();
-			int allRoomCardNum = 0;
-			if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX_VALUE) {
-				allRoomCardNum = 0;
-			} else {
-				allRoomCardNum = ERoomCardCost.getRoomCardCost(room
-						.getRoomTable().getGameNum());
-			}
+			// if (room.getRoomType() == ENRoomType.EN_ROOM_TYPE_CX_VALUE) {
+			// allRoomCardNum = 0;
+			// } else {
+			int allRoomCardNum = ERoomCardCost.getRoomCardCost(room
+					.getRoomTable().getGameNum());
+			// }
 			int beforeRoomCard = 0;
 			if (userType == ERoomCardType.CREATOR.getValue()) {
-				String creatorUid = room.getRoomTable().getCreatorUid();
-				User user = UserManager.getInstance().getUser(creatorUid);
+				User user = null;
+				if (room.getClubId() != 0) {
+					user = ClubManager.getClubOwner(room.getClubId());
+				} else {
+					String creatorUid = room.getRoomTable().getCreatorUid();
+					user = UserManager.getInstance().getUser(creatorUid);
+				}
 				beforeRoomCard = user.getRoomCardNum();
 				// 扣内存房卡
 				UserManager.getInstance().updateRoomCard(user, allRoomCardNum);
@@ -1622,6 +1648,16 @@ public class RoomManager {
 				overNotify.setSmallResult(roundResult.build());
 			}
 			overNotify.setIshuang(huang);
+			overNotify.setCreatorUid(room.getRoomTable().getCreatorUid());
+			overNotify.setAllRound(room.getRoomTable().getGameNum());
+			overNotify.setRound(room.getRound() - 1);
+			overNotify.setRoomId(room.getTid());
+
+			SimpleDateFormat tempDate = new SimpleDateFormat(
+					"yyyy-MM-dd HH:mm:ss");
+			String datetime = tempDate.format(new java.util.Date());
+			overNotify.setCreateTime(datetime);
+
 			CpMsgData.Builder msg = CpMsgData.newBuilder();
 			msg.setCsNotifyGameOver(overNotify);
 			NotifyHandler.notifyOne(user.getUuid(),
@@ -1633,6 +1669,23 @@ public class RoomManager {
 				addFightRecord(false, room);
 			}
 			addFightRecord(bigTotal, room);
+
+			if (room.getClubId() != 0) {
+				ClubRoom clubRoom = ClubDAO.getInstance().getClubRoom(
+						room.getClubId(), room.getTid());
+				clubRoom.setStatus(2);
+				ClubRoomProto.Builder clubRoomProto = ClubRoomProto
+						.newBuilder();
+				clubRoomProto.setTableInfo(room.getRoomTable());
+				clubRoomProto.setTableState(clubRoom.getStatus());
+				for (User user : room.getUsers().values()) {
+					clubRoomProto.addUserInfo(ProtoBuilder.buildUserInfo(user));
+				}
+				clubRoomProto.setBigResult(overNotify);
+				clubRoom.setTotalData(clubRoomProto.build().toByteArray());
+				ClubDAO.getInstance().updateClubRoom(clubRoom);
+			}
+
 			UserManager.getInstance().updateRankData(room, dissolve);
 		} else {
 			addFightRecord(bigTotal, room);
@@ -1687,6 +1740,13 @@ public class RoomManager {
 	}
 
 	public static void removeRoom(Room room) {
+		if (room.getClubId() != 0 && !room.isStart()) {
+			ClubRoom clubRoom = ClubDAO.getInstance().getClubRoom(
+					room.getClubId(), room.getTid());
+			Club club = ClubDAO.getInstance().getClub(room.getClubId());
+			ClubDAO.getInstance().deleteClubRoom(club, clubRoom);
+		}
+
 		for (User user : room.getUsers().values()) {
 			user.clear();
 		}
