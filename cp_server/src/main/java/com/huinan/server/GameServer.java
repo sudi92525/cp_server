@@ -47,12 +47,12 @@ public class GameServer {
 			}
 			int tcpPort = Integer.parseInt(args[0]);
 			// init redis
-			RedisManager.init();
+//			RedisManager.init();
 			// init mysql
 			DBManager.init();
-			RedisDAO.loadFromRedis();
+//			RedisDAO.loadFromRedis();
 			// init rabbitMQ
-			RabbitMQManager.init();
+//			RabbitMQManager.init();
 
 			GYcpInfoDAO.loadHorseNotice();
 			stop();

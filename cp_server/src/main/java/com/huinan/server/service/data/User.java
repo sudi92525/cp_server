@@ -116,7 +116,7 @@ public class User implements Serializable {
 
 	// -------------------------------南充版本-----------------------------------
 	/** 用户授权码 */
-	private String ip;
+	private String ip = "";
 	/** 是否在线 */
 	private boolean online = true;
 	/** 房间id */
@@ -135,7 +135,7 @@ public class User implements Serializable {
 	private int changeCurrency;
 	/** 赢的次数 */
 	private int huTimes;
-	/** 点炮的次数 */
+	/** 点炮的次数 */ 
 	private int dianPaoTimes;
 	/** 自摸的次数 */
 	private int ziMoTimes;
@@ -153,8 +153,6 @@ public class User implements Serializable {
 	private List<ENActionType> actions = new ArrayList<>();
 	/** 是否是五张 */
 	private boolean five;
-	/** 是否是尾家 */
-	private boolean last;
 	/** 初始化手牌数量 */
 	private int initHoldSize;
 	/** 当前坨数 */
@@ -194,6 +192,8 @@ public class User implements Serializable {
 	private boolean huSiGen;
 	/** 本次出牌是否是追,是-出完后需要亮起其他牌 */
 	private boolean thisChuIsZhui;
+	
+	private boolean last;
 	// ------------玩家牌信息------------------------
 	/**
 	 * 手牌:手里的牌
@@ -330,7 +330,6 @@ public class User implements Serializable {
 		this.hu = false;
 		this.outFirstMj = true;
 		this.five = false;
-		this.last = false;
 		this.huCard = null;
 		this.huFanNum = 0;
 		this.huTuoNum = 0;
@@ -909,20 +908,20 @@ public class User implements Serializable {
 		this.numJiao = numJiao;
 	}
 
-	public boolean isLast() {
-		return last;
-	}
-
-	public void setLast(boolean last) {
-		this.last = last;
-	}
-
 	public List<Integer> getChiCardOfHolds() {
 		return chiCardOfHolds;
 	}
 
 	public void setChiCardOfHolds(List<Integer> chiCardOfHolds) {
 		this.chiCardOfHolds = chiCardOfHolds;
+	}
+
+	public boolean isLast() {
+		return last;
+	}
+
+	public void setLast(boolean last) {
+		this.last = last;
 	}
 
 }
