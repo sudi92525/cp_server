@@ -116,7 +116,7 @@ public class User implements Serializable {
 
 	// -------------------------------南充版本-----------------------------------
 	/** 用户授权码 */
-	private String ip;
+	private String ip = "";
 	/** 是否在线 */
 	private boolean online = true;
 	/** 房间id */
