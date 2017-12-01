@@ -133,8 +133,8 @@ public class GameSvrHandler extends ProtoHandler {
 			int index = 0;
 			if (cpHead.getCmd() == CpMsgData.CS_REQUEST_LOGIN_FIELD_NUMBER) {
 				index = Integer.valueOf(cpHead.getUid());
-			} else if (cpHead.getCmd() != CpMsgData.CS_REQUEST_INIT_FIELD_NUMBER
-					|| cpHead.getCmd() != CpMsgData.CS_REQUEST_WX_LOGIN_FIELD_NUMBER) {
+			} else if (cpHead.getCmd() == CpMsgData.CS_REQUEST_INIT_FIELD_NUMBER
+					|| cpHead.getCmd() == CpMsgData.CS_REQUEST_WX_LOGIN_FIELD_NUMBER) {
 				index = RandomUtils.nextInt(LogicQueueManager.getInstance()
 						.getLuanchQueueCount());
 			} else {

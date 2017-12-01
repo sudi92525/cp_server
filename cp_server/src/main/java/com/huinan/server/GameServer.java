@@ -22,7 +22,6 @@ public class GameServer {
 		Runtime.getRuntime().addShutdownHook(
 				new Thread(() -> {
 					LogicQueueManager.getInstance().stop();
-					GameSvrPlayerManager.logoutAllPlayer();
 					// GameSvrStatusThread.getInstance().stop();
 					// GameSvrHandler.shutdonw();
 						try {
@@ -33,6 +32,7 @@ public class GameServer {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
+						GameSvrPlayerManager.logoutAllPlayer();
 						RedisDAO.insertToRedis();
 						LogManager.getLogger(GameServer.class).info(
 								"GameServer Shutdown!!!");

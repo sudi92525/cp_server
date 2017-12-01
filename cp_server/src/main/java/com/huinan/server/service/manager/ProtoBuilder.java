@@ -201,7 +201,7 @@ public class ProtoBuilder {
 		userInfo.setIsReady(user.isReady());
 		userInfo.setSex(user.getSex());
 		userInfo.setOnline(user.isOnline());
-		userInfo.setAddIp(user.getIp());
+		userInfo.setAddIp("");
 		return userInfo.build();
 	}
 
