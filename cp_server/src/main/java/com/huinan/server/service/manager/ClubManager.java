@@ -82,11 +82,23 @@ public class ClubManager {
 			Room room = RoomManager.getInstance().getRoom(clubRoom.getRoomId());
 			if (!room.isStart() || room.getRound() == 1) {// 未开始的，才第一局的
 				int allRoomCardNum = ERoomCardCost.getRoomCardCost(room
-						.getRoomTable().getGameNum());
+						.getRoomTable().getGameNum(), room.getRoomTable()
+						.getPlayerNum());
 				allCard += allRoomCardNum;
 			}
 		}
 		return allCard;
+	}
+
+	public static int getMyClubNum(String uid) {
+		int num = 0;
+		Map<Integer, Club> clubs = ClubDAO.getInstance().getClubs();
+		for (Club club : clubs.values()) {
+			if (club.getMembers().contains(uid)) {
+				num++;
+			}
+		}
+		return num;
 	}
 
 	public static User getClubOwner(int clubId) {

@@ -7347,6 +7347,23 @@ public final class CpMsgClub {
      * </pre>
      */
     boolean getHaveApply();
+
+    /**
+     * <code>optional int32 room_card_num = 4;</code>
+     *
+     * <pre>
+     *剩余房卡数
+     * </pre>
+     */
+    boolean hasRoomCardNum();
+    /**
+     * <code>optional int32 room_card_num = 4;</code>
+     *
+     * <pre>
+     *剩余房卡数
+     * </pre>
+     */
+    int getRoomCardNum();
   }
   /**
    * Protobuf type {@code com.huinan.proto.CSResponseClubRoom}
@@ -7422,6 +7439,11 @@ public final class CpMsgClub {
             case 24: {
               bitField0_ |= 0x00000002;
               haveApply_ = input.readBool();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000004;
+              roomCardNum_ = input.readInt32();
               break;
             }
           }
@@ -7568,10 +7590,34 @@ public final class CpMsgClub {
       return haveApply_;
     }
 
+    public static final int ROOM_CARD_NUM_FIELD_NUMBER = 4;
+    private int roomCardNum_;
+    /**
+     * <code>optional int32 room_card_num = 4;</code>
+     *
+     * <pre>
+     *剩余房卡数
+     * </pre>
+     */
+    public boolean hasRoomCardNum() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional int32 room_card_num = 4;</code>
+     *
+     * <pre>
+     *剩余房卡数
+     * </pre>
+     */
+    public int getRoomCardNum() {
+      return roomCardNum_;
+    }
+
     private void initFields() {
       result_ = com.huinan.proto.CpMsgCs.ENMessageError.RESPONSE_SUCCESS;
       clubRoom_ = java.util.Collections.emptyList();
       haveApply_ = false;
+      roomCardNum_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -7595,6 +7641,9 @@ public final class CpMsgClub {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeBool(3, haveApply_);
       }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(4, roomCardNum_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -7615,6 +7664,10 @@ public final class CpMsgClub {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(3, haveApply_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, roomCardNum_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -7744,6 +7797,8 @@ public final class CpMsgClub {
         }
         haveApply_ = false;
         bitField0_ = (bitField0_ & ~0x00000004);
+        roomCardNum_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
 
@@ -7789,6 +7844,10 @@ public final class CpMsgClub {
           to_bitField0_ |= 0x00000002;
         }
         result.haveApply_ = haveApply_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.roomCardNum_ = roomCardNum_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -7836,6 +7895,9 @@ public final class CpMsgClub {
         }
         if (other.hasHaveApply()) {
           setHaveApply(other.getHaveApply());
+        }
+        if (other.hasRoomCardNum()) {
+          setRoomCardNum(other.getRoomCardNum());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -8271,6 +8333,54 @@ public final class CpMsgClub {
       public Builder clearHaveApply() {
         bitField0_ = (bitField0_ & ~0x00000004);
         haveApply_ = false;
+        onChanged();
+        return this;
+      }
+
+      private int roomCardNum_ ;
+      /**
+       * <code>optional int32 room_card_num = 4;</code>
+       *
+       * <pre>
+       *剩余房卡数
+       * </pre>
+       */
+      public boolean hasRoomCardNum() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional int32 room_card_num = 4;</code>
+       *
+       * <pre>
+       *剩余房卡数
+       * </pre>
+       */
+      public int getRoomCardNum() {
+        return roomCardNum_;
+      }
+      /**
+       * <code>optional int32 room_card_num = 4;</code>
+       *
+       * <pre>
+       *剩余房卡数
+       * </pre>
+       */
+      public Builder setRoomCardNum(int value) {
+        bitField0_ |= 0x00000008;
+        roomCardNum_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 room_card_num = 4;</code>
+       *
+       * <pre>
+       *剩余房卡数
+       * </pre>
+       */
+      public Builder clearRoomCardNum() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        roomCardNum_ = 0;
         onChanged();
         return this;
       }
@@ -15339,32 +15449,32 @@ public final class CpMsgClub {
       "nseClubInfo\0220\n\006result\030\001 \001(\0162 .com.huinan" +
       ".proto.ENMessageError\022)\n\004club\030\002 \003(\0132\033.co" +
       "m.huinan.proto.ClubProto\"$\n\021CSRequestClu" +
-      "bRoom\022\017\n\007club_id\030\001 \002(\005\"\216\001\n\022CSResponseClu" +
+      "bRoom\022\017\n\007club_id\030\001 \002(\005\"\245\001\n\022CSResponseClu" +
       "bRoom\0220\n\006result\030\001 \001(\0162 .com.huinan.proto" +
       ".ENMessageError\0222\n\tclub_room\030\002 \003(\0132\037.com" +
       ".huinan.proto.ClubRoomProto\022\022\n\nhave_appl" +
-      "y\030\003 \001(\010\"&\n\023CSRequestClubMember\022\017\n\007club_i" +
-      "d\030\001 \002(\005\"\200\001\n\024CSResponseClubMember\0220\n\006resu",
-      "lt\030\001 \001(\0162 .com.huinan.proto.ENMessageErr" +
-      "or\0226\n\013club_member\030\002 \003(\0132!.com.huinan.pro" +
-      "to.ClubMemberProto\"\'\n\024CSRequestClubMessa" +
-      "ge\022\017\n\007club_id\030\001 \002(\005\"y\n\025CSResponseClubMes" +
-      "sage\0220\n\006result\030\001 \001(\0162 .com.huinan.proto." +
-      "ENMessageError\022.\n\napply_user\030\002 \003(\0132\032.com" +
-      ".huinan.proto.UserInfo\"2\n\021CSNotifyClubAp" +
-      "ply\022\017\n\007club_id\030\001 \002(\005\022\014\n\004have\030\002 \002(\010\";\n\027CS" +
-      "RequestClubRemoveRoom\022\017\n\007club_id\030\001 \002(\005\022\017" +
-      "\n\007room_id\030\002 \002(\005\"L\n\030CSResponseClubRemoveR",
-      "oom\0220\n\006result\030\001 \001(\0162 .com.huinan.proto.E" +
-      "NMessageError\"1\n\021CSRequestClubKick\022\017\n\007cl" +
-      "ub_id\030\001 \002(\005\022\013\n\003uid\030\002 \002(\t\"F\n\022CSResponseCl" +
-      "ubKick\0220\n\006result\030\001 \001(\0162 .com.huinan.prot" +
-      "o.ENMessageError\"C\n\024CSRequestClubIsAgree" +
-      "\022\017\n\007club_id\030\001 \002(\005\022\013\n\003uid\030\002 \002(\t\022\r\n\005agree\030" +
-      "\003 \002(\010\"I\n\025CSResponseClubIsAgree\0220\n\006result" +
-      "\030\001 \001(\0162 .com.huinan.proto.ENMessageError" +
-      "\"\025\n\023CSNotifyClubRefresh* \n\016ENClubGameTyp" +
-      "e\022\006\n\002CP\020\001\022\006\n\002MJ\020\002"
+      "y\030\003 \001(\010\022\025\n\rroom_card_num\030\004 \001(\005\"&\n\023CSRequ" +
+      "estClubMember\022\017\n\007club_id\030\001 \002(\005\"\200\001\n\024CSRes",
+      "ponseClubMember\0220\n\006result\030\001 \001(\0162 .com.hu" +
+      "inan.proto.ENMessageError\0226\n\013club_member" +
+      "\030\002 \003(\0132!.com.huinan.proto.ClubMemberProt" +
+      "o\"\'\n\024CSRequestClubMessage\022\017\n\007club_id\030\001 \002" +
+      "(\005\"y\n\025CSResponseClubMessage\0220\n\006result\030\001 " +
+      "\001(\0162 .com.huinan.proto.ENMessageError\022.\n" +
+      "\napply_user\030\002 \003(\0132\032.com.huinan.proto.Use" +
+      "rInfo\"2\n\021CSNotifyClubApply\022\017\n\007club_id\030\001 " +
+      "\002(\005\022\014\n\004have\030\002 \002(\010\";\n\027CSRequestClubRemove" +
+      "Room\022\017\n\007club_id\030\001 \002(\005\022\017\n\007room_id\030\002 \002(\005\"L",
+      "\n\030CSResponseClubRemoveRoom\0220\n\006result\030\001 \001" +
+      "(\0162 .com.huinan.proto.ENMessageError\"1\n\021" +
+      "CSRequestClubKick\022\017\n\007club_id\030\001 \002(\005\022\013\n\003ui" +
+      "d\030\002 \002(\t\"F\n\022CSResponseClubKick\0220\n\006result\030" +
+      "\001 \001(\0162 .com.huinan.proto.ENMessageError\"" +
+      "C\n\024CSRequestClubIsAgree\022\017\n\007club_id\030\001 \002(\005" +
+      "\022\013\n\003uid\030\002 \002(\t\022\r\n\005agree\030\003 \002(\010\"I\n\025CSRespon" +
+      "seClubIsAgree\0220\n\006result\030\001 \001(\0162 .com.huin" +
+      "an.proto.ENMessageError\"\025\n\023CSNotifyClubR" +
+      "efresh* \n\016ENClubGameType\022\006\n\002CP\020\001\022\006\n\002MJ\020\002"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -15444,7 +15554,7 @@ public final class CpMsgClub {
     internal_static_com_huinan_proto_CSResponseClubRoom_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_huinan_proto_CSResponseClubRoom_descriptor,
-        new java.lang.String[] { "Result", "ClubRoom", "HaveApply", });
+        new java.lang.String[] { "Result", "ClubRoom", "HaveApply", "RoomCardNum", });
     internal_static_com_huinan_proto_CSRequestClubMember_descriptor =
       getDescriptor().getMessageTypes().get(11);
     internal_static_com_huinan_proto_CSRequestClubMember_fieldAccessorTable = new

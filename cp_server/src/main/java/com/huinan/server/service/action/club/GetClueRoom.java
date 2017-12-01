@@ -6,9 +6,11 @@ import com.huinan.proto.CpMsgClub.CSRequestClubRoom;
 import com.huinan.proto.CpMsgClub.CSResponseClubRoom;
 import com.huinan.proto.CpMsgCs.ENMessageError;
 import com.huinan.server.db.ClubDAO;
+import com.huinan.server.db.UserManager;
 import com.huinan.server.net.ClientRequest;
 import com.huinan.server.service.AbsAction;
 import com.huinan.server.service.data.Room;
+import com.huinan.server.service.data.User;
 import com.huinan.server.service.data.club.Club;
 import com.huinan.server.service.data.club.ClubRoom;
 import com.huinan.server.service.manager.ClubManager;
@@ -39,6 +41,10 @@ public class GetClueRoom extends AbsAction {
 						room));
 			}
 			response.setHaveApply(!club.getApplys().isEmpty());
+			User creator = UserManager.getInstance().getUser(
+					club.getCreatorId());
+			int orderCard = ClubManager.getClubOrderCard(clubId);
+			response.setRoomCardNum(creator.getRoomCardNum() - orderCard);
 		}
 		msg.setCsResponseClubRoom(response);
 		request.getClient().sendMessage(

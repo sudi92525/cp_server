@@ -114,7 +114,8 @@ public class RoomCreate extends AbsAction {
 			return ENMessageError.RESPONSE_IN_OTHER_ROOM.getNumber();
 		}
 		int roundNum = request.getGameNum();
-		int cost = ERoomCardCost.getRoomCardCost(roundNum);
+		int playerNum = request.getPlayerNum();
+		int cost = ERoomCardCost.getRoomCardCost(roundNum, playerNum);
 		if (roundNum <= 0 || cost == 0) {
 			return ENMessageError.RESPONSE_FAIL.getNumber();
 		}
@@ -125,7 +126,7 @@ public class RoomCreate extends AbsAction {
 		}
 		UserManager.getInstance().getRoomCard(user);
 		int useCardType = request.getUseCardType();
-		int cardNum = ERoomCardCost.getRoomCardCost(roundNum);
+		int cardNum = ERoomCardCost.getRoomCardCost(roundNum, playerNum);
 		if (request.getClubId() != 0) {
 			Club club = ClubDAO.getInstance().getClub(request.getClubId());
 			if (club == null) {
@@ -140,9 +141,8 @@ public class RoomCreate extends AbsAction {
 			User creator = ClubManager.getClubOwner(request.getClubId());
 			int orderCard = ClubManager.getClubOrderCard(request.getClubId());
 			if (orderCard + cardNum > creator.getRoomCardNum()) {
-				return ENMessageError.RESPONSE_ROOMCARD_LIMIT_VALUE;
+				return ENMessageError.RESPONSE_CLUB_CARD_LIMIT_VALUE;
 			}
-
 		} else {
 			if (useCardType == ERoomCardType.CREATOR.getValue()) {
 				if (request.getRoomType() == ENRoomType.EN_ROOM_TYPE_MY

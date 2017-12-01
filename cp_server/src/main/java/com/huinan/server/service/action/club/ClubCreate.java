@@ -9,7 +9,9 @@ import com.huinan.proto.CpMsgClub.CSResponseClubCreate;
 import com.huinan.proto.CpMsgClub.ENClubGameType;
 import com.huinan.proto.CpMsgCs.ENMessageError;
 import com.huinan.server.db.ClubDAO;
+import com.huinan.server.db.UserManager;
 import com.huinan.server.net.ClientRequest;
+import com.huinan.server.server.net.config.ServerConfig;
 import com.huinan.server.service.AbsAction;
 import com.huinan.server.service.data.club.Club;
 import com.huinan.server.service.manager.ClubManager;
@@ -49,10 +51,13 @@ public class ClubCreate extends AbsAction {
 
 	private int check(String name, ENClubGameType type, String uid) {
 		// 检查是否是代理
-//		if (!UserManager.getInstance().checkIsProxy(uid)) {
-//			return ENMessageError.RESPONSE_CLUB_NOT_IS_PROXY_VALUE;
-//		}
-		// TODO
+		// if (!UserManager.getInstance().checkIsProxy(uid)) {
+		// return ENMessageError.RESPONSE_CLUB_NOT_IS_PROXY_VALUE;
+		// }
+		if (ClubManager.getMyClubNum(uid) >= ServerConfig.getInstance()
+				.getClubNumMax()) {
+			return ENMessageError.RESPONSE_CLUB_NUM_MAX_VALUE;
+		}
 		// 俱乐部上限
 		return checkClubName(name);
 	}

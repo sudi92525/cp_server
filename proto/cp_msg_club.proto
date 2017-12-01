@@ -79,6 +79,7 @@ message CSResponseClubRoom {
 	optional ENMessageError result = 1; 				//结果
 	repeated ClubRoomProto club_room = 2;				//房间列表
 	optional bool have_apply = 3;						//是否有申请消息
+	optional int32 room_card_num = 4;					//剩余房卡数
 }
 
 

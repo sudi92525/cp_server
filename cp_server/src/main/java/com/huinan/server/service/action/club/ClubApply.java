@@ -7,6 +7,7 @@ import com.huinan.proto.CpMsgClub.CSResponseClubApply;
 import com.huinan.proto.CpMsgCs.ENMessageError;
 import com.huinan.server.db.ClubDAO;
 import com.huinan.server.net.ClientRequest;
+import com.huinan.server.server.net.config.ServerConfig;
 import com.huinan.server.service.AbsAction;
 import com.huinan.server.service.data.club.Club;
 import com.huinan.server.service.manager.ClubManager;
@@ -31,8 +32,7 @@ public class ClubApply extends AbsAction {
 			response.setResult(ENMessageError.RESPONSE_SUCCESS);
 			ClubManager.addApplyer(club, String.valueOf(uid));
 			ClubDAO.getInstance().insertClubUser(club.getId(), uid,
-					club.getCreatorId(), 0);// TODO 0
-			// ClubManager.addMemeber(club, String.valueOf(uid));// TODO shanchu
+					club.getCreatorId(), 0);
 		}
 		msg.setCsResponseClubApply(response);
 		request.getClient().sendMessage(
@@ -46,6 +46,10 @@ public class ClubApply extends AbsAction {
 		}
 		if (club.getMembers().contains(uid)) {
 			return ENMessageError.RESPONSE_CLUB_IN_THIS_CLUB_VALUE;
+		}
+		if (ClubManager.getMyClubNum(uid) >= ServerConfig.getInstance()
+				.getClubNumMax()) {
+			return ENMessageError.RESPONSE_CLUB_NUM_MAX_VALUE;
 		}
 		return 0;
 	}

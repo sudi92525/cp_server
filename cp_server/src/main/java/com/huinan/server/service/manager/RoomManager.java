@@ -1573,7 +1573,8 @@ public class RoomManager {
 			// allRoomCardNum = 0;
 			// } else {
 			int allRoomCardNum = ERoomCardCost.getRoomCardCost(room
-					.getRoomTable().getGameNum());
+					.getRoomTable().getGameNum(), room.getRoomTable()
+					.getPlayerNum());
 			// }
 			int beforeRoomCard = 0;
 			if (userType == ERoomCardType.CREATOR.getValue()) {

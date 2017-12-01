@@ -35,5 +35,6 @@
 <!-- 		<GameCode>xiaonanqipai</GameCode> -->
 		<GameCode>xnsccp</GameCode>
 <!-- 		<GameCode>xiaonanqipai_4567</GameCode> -->
+		<ClubMax>5</ClubMax>
 	</GameServer>
 </game>
