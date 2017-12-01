@@ -153,6 +153,31 @@ message CSNotifyClubRefresh{
 }
 
 
+//协议十二：刷新俱乐部房间信息
+message CSNotifyClubRefreshRoom{
+	required int32 club_id = 1;							//俱乐部id
+	repeated ClubRoomProto club_room = 2;				//房间列表
+	optional bool have_apply = 3;						//是否有申请消息
+	optional int32 room_card_num = 4;					//剩余房卡数
+}
+
+
+//协议十三：退出俱乐部
+message CSRequestOutClub{
+	
+}
+
+message CSResponseOutClub{
+	optional ENMessageError result = 1; 				//结果
+}
+
+
+
+
+
+
+
+
 
 
 

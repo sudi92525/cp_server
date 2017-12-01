@@ -11,6 +11,7 @@ import com.huinan.proto.CpMsgCs.CSResponseEnterTable;
 import com.huinan.proto.CpMsgCs.ENMessageError;
 import com.huinan.proto.CpMsgCs.PBTableSeat;
 import com.huinan.proto.CpMsgCs.UserInfo;
+import com.huinan.server.db.ClubDAO;
 import com.huinan.server.db.UserManager;
 import com.huinan.server.net.ClientRequest;
 import com.huinan.server.net.GamePlayer;
@@ -20,6 +21,7 @@ import com.huinan.server.service.data.Card;
 import com.huinan.server.service.data.Constant;
 import com.huinan.server.service.data.Room;
 import com.huinan.server.service.data.User;
+import com.huinan.server.service.data.club.Club;
 import com.huinan.server.service.manager.NotifyHandler;
 import com.huinan.server.service.manager.ProtoBuilder;
 import com.huinan.server.service.manager.RoomManager;
@@ -100,6 +102,11 @@ public class RoomJoin extends AbsAction {
 				CpMsgData.CS_RESPONSE_ENTER_TABLE_FIELD_NUMBER, user.getUuid(),
 				(CpHead) request.getHeadLite(), msg.build());
 
+		if (room.getClubId() != 0) {
+			user.setInClubId(0);
+			Club club = ClubDAO.getInstance().getClub(room.getClubId());
+			NotifyHandler.notifyClubRefreshRoom(club);
+		}
 	}
 
 	/**

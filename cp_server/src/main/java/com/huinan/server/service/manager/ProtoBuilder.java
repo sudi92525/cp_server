@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.huinan.proto.CpMsg.CpHead;
+import com.huinan.proto.CpMsgClub.CSNotifyClubRefreshRoom;
 import com.huinan.proto.CpMsgClub.ClubMemberProto;
 import com.huinan.proto.CpMsgClub.ClubProto;
 import com.huinan.proto.CpMsgClub.ClubRoomProto;
@@ -26,6 +27,7 @@ import com.huinan.proto.CpMsgCs.PBColumnInfo;
 import com.huinan.proto.CpMsgCs.PBColumnInfo.Builder;
 import com.huinan.proto.CpMsgCs.PBTableSeat;
 import com.huinan.proto.CpMsgCs.UserInfo;
+import com.huinan.server.db.UserManager;
 import com.huinan.server.service.data.Card;
 import com.huinan.server.service.data.Constant;
 import com.huinan.server.service.data.Room;
@@ -40,6 +42,24 @@ import com.huinan.server.service.data.club.ClubRoom;
 public class ProtoBuilder {
 
 	// ------------------------club-------------------------
+
+	public static CSNotifyClubRefreshRoom.Builder buildClubNotifyRefreshRoom(
+			Club club) {
+		CSNotifyClubRefreshRoom.Builder clubProto = CSNotifyClubRefreshRoom
+				.newBuilder();
+		clubProto.setClubId(club.getId());
+		for (ClubRoom clubRoom : club.getRooms().values()) {
+			Room room = RoomManager.getInstance().getRoom(clubRoom.getRoomId());
+			clubProto.addClubRoom(ProtoBuilder.buildClubRoomProto(clubRoom,
+					room));
+		}
+		clubProto.setHaveApply(!club.getApplys().isEmpty());
+		User creator = UserManager.getInstance().getUser(club.getCreatorId());
+		int orderCard = ClubManager.getClubOrderCard(club.getId());
+		clubProto.setRoomCardNum(creator.getRoomCardNum() - orderCard);
+		return clubProto;
+	}
+
 	public static ClubProto.Builder buildClubProto(Club club) {
 		ClubProto.Builder clubProto = ClubProto.newBuilder();
 		clubProto.setId(club.getId());

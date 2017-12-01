@@ -18,10 +18,11 @@ import com.huinan.server.service.action.club.ClubApply;
 import com.huinan.server.service.action.club.ClubCreate;
 import com.huinan.server.service.action.club.ClubIsAgree;
 import com.huinan.server.service.action.club.ClubKick;
+import com.huinan.server.service.action.club.ClubOut;
 import com.huinan.server.service.action.club.GetClubApplyMessage;
 import com.huinan.server.service.action.club.GetClubList;
 import com.huinan.server.service.action.club.GetClubMember;
-import com.huinan.server.service.action.club.GetClueRoom;
+import com.huinan.server.service.action.club.GetClubRoom;
 import com.huinan.server.service.action.club.RemoveClubRoom;
 import com.huinan.server.service.action.luanch.LuanchInit;
 import com.huinan.server.service.action.luanch.LuanchWXLogin;
@@ -78,7 +79,9 @@ public class ActionMapper {
 		case CpMsgData.CS_REQUEST_CLUB_RE_ROOM_FIELD_NUMBER:
 			return new RemoveClubRoom();
 		case CpMsgData.CS_REQUEST_CLUB_ROOM_FIELD_NUMBER:
-			return new GetClueRoom();
+			return new GetClubRoom();
+		case CpMsgData.CS_REQUEST_OUT_CLUB_FIELD_NUMBER:
+			return new ClubOut();
 
 		case CpMsgData.CS_REQUEST_INIT_FIELD_NUMBER:
 			return new LuanchInit();

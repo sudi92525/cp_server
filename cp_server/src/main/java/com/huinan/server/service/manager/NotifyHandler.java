@@ -29,6 +29,7 @@ import com.huinan.server.net.GameSvrPlayerManager;
 import com.huinan.server.service.data.Card;
 import com.huinan.server.service.data.Room;
 import com.huinan.server.service.data.User;
+import com.huinan.server.service.data.club.Club;
 
 /**
  *
@@ -39,7 +40,20 @@ public class NotifyHandler {
 	public static void sendResponse(String uid, int cmd, Object msg) {
 		notifyOne(uid, cmd, msg);
 	}
-	
+
+	public static void notifyClubRefreshRoom(Club club) {
+		CpMsgData.Builder msg = CpMsgData.newBuilder();
+		msg.setCsNotifyClubRefreshRoom(ProtoBuilder
+				.buildClubNotifyRefreshRoom(club));
+		for (String _uid : club.getMembers()) {
+			User user = UserManager.getInstance().getUser(_uid);
+			if (user.getInClubId() == club.getId()) {
+				notifyOne(_uid,
+						CpMsgData.CS_NOTIFY_CLUB_REFRESH_ROOM_FIELD_NUMBER,
+						msg.build());
+			}
+		}
+	}
 
 	public static void notifyLogout(GamePlayer player) {
 		CpMsgData.Builder msg = CpMsgData.newBuilder();

@@ -88,20 +88,19 @@ public class RoomCreate extends AbsAction {
 				creator.setIsFanSanHei(room.isSanKanHeiIsFan());
 			}
 			creator.setPlayerNum(room.getUserNum());
+
+			response.setTableInfo(creator);
+			room.setRoomTable(creator.build());
+			response.setResult(ENMessageError.RESPONSE_SUCCESS);
+
 			if (room.getClubId() != 0) {
 				creator.setClubId(room.getClubId());
 				Club club = ClubDAO.getInstance().getClub(room.getClubId());
 				ClubRoom clubRoom = new ClubRoom(room.getClubId(),
 						room.getTid());
 				club.getRooms().put(room.getTid(), clubRoom);
-				ClubDAO.getInstance().insertClubRoom(clubRoom);
+				ClubDAO.getInstance().insertClubRoom(club, clubRoom);
 			}
-
-			response.setTableInfo(creator);
-			room.setRoomTable(creator.build());
-
-			response.setResult(ENMessageError.RESPONSE_SUCCESS);
-
 		}
 		msg.setCsResponseCreateTable(response);
 		request.getClient().sendMessage(

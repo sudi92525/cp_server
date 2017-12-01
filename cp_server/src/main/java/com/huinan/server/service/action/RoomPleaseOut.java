@@ -6,11 +6,13 @@ import com.huinan.proto.CpMsgCs.CSNotifyOwnerTiren;
 import com.huinan.proto.CpMsgCs.CSRequestOwnerTiren;
 import com.huinan.proto.CpMsgCs.CSResponseOwnerTiren;
 import com.huinan.proto.CpMsgCs.ENMessageError;
+import com.huinan.server.db.ClubDAO;
 import com.huinan.server.db.UserManager;
 import com.huinan.server.net.ClientRequest;
 import com.huinan.server.service.AbsAction;
 import com.huinan.server.service.data.Room;
 import com.huinan.server.service.data.User;
+import com.huinan.server.service.data.club.Club;
 import com.huinan.server.service.manager.NotifyHandler;
 import com.huinan.server.service.manager.RoomManager;
 
@@ -52,6 +54,11 @@ public class RoomPleaseOut extends AbsAction {
 			}
 			room.getUsers().remove(Integer.valueOf(outUser.getSeatIndex()));
 			outUser.clear();
+			
+			if (room.getClubId() != 0) {
+				Club club = ClubDAO.getInstance().getClub(room.getClubId());
+				NotifyHandler.notifyClubRefreshRoom(club);
+			}
 		}
 		msg.setCsResponseOwnerTiren(response);
 		request.getClient().sendMessage(

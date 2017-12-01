@@ -194,6 +194,7 @@ public class User implements Serializable {
 	private boolean thisChuIsZhui;
 	
 	private boolean last;
+	private int inClubId;
 	// ------------玩家牌信息------------------------
 	/**
 	 * 手牌:手里的牌
@@ -922,6 +923,14 @@ public class User implements Serializable {
 
 	public void setLast(boolean last) {
 		this.last = last;
+	}
+
+	public int getInClubId() {
+		return inClubId;
+	}
+
+	public void setInClubId(int inClubId) {
+		this.inClubId = inClubId;
 	}
 
 }

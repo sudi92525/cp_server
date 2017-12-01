@@ -22,6 +22,7 @@ import com.huinan.server.service.data.Room;
 import com.huinan.server.service.data.club.Club;
 import com.huinan.server.service.data.club.ClubRoom;
 import com.huinan.server.service.manager.ClubManager;
+import com.huinan.server.service.manager.NotifyHandler;
 import com.huinan.server.service.manager.RoomManager;
 
 public class ClubDAO {
@@ -131,7 +132,7 @@ public class ClubDAO {
 		return club;
 	}
 
-	public void insertClubRoom(ClubRoom clubRoom) {
+	public void insertClubRoom(Club club, ClubRoom clubRoom) {
 		// EXECUTOR.execute(() -> {
 		Connection conn = null;
 		PreparedStatement sta = null;
@@ -143,6 +144,7 @@ public class ClubDAO {
 			sta.setInt(2, clubRoom.getRoomId());
 			sta.setInt(3, clubRoom.getStatus());
 			sta.executeUpdate();
+			NotifyHandler.notifyClubRefreshRoom(club);
 		} catch (SQLException e) {
 			LOGGER.error("insertClubRoom error:", e);
 		} finally {
@@ -208,7 +210,7 @@ public class ClubDAO {
 		});
 	}
 
-	public void updateClubRoom(ClubRoom clubRoom) {
+	public void updateClubRoom(Club club, ClubRoom clubRoom) {
 		EXECUTOR.execute(() -> {
 			Connection conn = null;
 			PreparedStatement sta = null;
@@ -221,6 +223,7 @@ public class ClubDAO {
 				sta.setInt(3, clubRoom.getClubId());
 				sta.setInt(4, clubRoom.getRoomId());
 				sta.executeUpdate();
+				NotifyHandler.notifyClubRefreshRoom(club);
 			} catch (SQLException e) {
 				LOGGER.error("updateClubRoom error:", e);
 			} finally {
@@ -244,6 +247,7 @@ public class ClubDAO {
 				if (row > 0) {
 					club.getRooms().remove(
 							Integer.valueOf(clubRoom.getRoomId()));
+					NotifyHandler.notifyClubRefreshRoom(club);
 				}
 			} catch (SQLException e) {
 				LOGGER.error("deleteClubRoom error:", e);

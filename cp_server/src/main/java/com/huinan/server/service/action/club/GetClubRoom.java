@@ -17,7 +17,7 @@ import com.huinan.server.service.manager.ClubManager;
 import com.huinan.server.service.manager.ProtoBuilder;
 import com.huinan.server.service.manager.RoomManager;
 
-public class GetClueRoom extends AbsAction {
+public class GetClubRoom extends AbsAction {
 
 	@Override
 	public void Action(ClientRequest request) throws Exception {
@@ -33,6 +33,8 @@ public class GetClueRoom extends AbsAction {
 		if (error != 0) {
 			response.setResult(ENMessageError.valueOf(error));
 		} else {
+			User user = UserManager.getInstance().getUser(uid);
+			user.setInClubId(clubId);
 			response.setResult(ENMessageError.RESPONSE_SUCCESS);
 			for (ClubRoom clubRoom : club.getRooms().values()) {
 				Room room = RoomManager.getInstance().getRoom(

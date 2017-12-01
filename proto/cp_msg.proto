@@ -123,7 +123,9 @@ message CpMsgData
 		CSNotifyClubApply cs_notify_club_apply = 63;				//推送：俱乐部申请消息
 		
 		CSNotifyClubRefresh cs_notify_club_refresh = 64;			//推送：俱乐部刷新俱乐部列表
-		
+		CSNotifyClubRefreshRoom cs_notify_club_refresh_room = 65;	//推送：俱乐部刷新俱乐部房间
+		CSRequestOutClub cs_request_out_club = 66;					//请求：退出俱乐部
+		CSResponseOutClub cs_response_out_club = 67;				//响应：退出俱乐部
 		
 		CSNotifyLogout cs_notify_logout = 100;					//登录推送
 		

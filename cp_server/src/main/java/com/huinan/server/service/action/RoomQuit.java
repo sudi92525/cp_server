@@ -7,11 +7,13 @@ import com.huinan.proto.CpMsg.CpMsgData;
 import com.huinan.proto.CpMsgCs.CSNotifyLogoutTable;
 import com.huinan.proto.CpMsgCs.CSResponseLogoutTable;
 import com.huinan.proto.CpMsgCs.ENMessageError;
+import com.huinan.server.db.ClubDAO;
 import com.huinan.server.db.UserManager;
 import com.huinan.server.net.ClientRequest;
 import com.huinan.server.service.AbsAction;
 import com.huinan.server.service.data.Room;
 import com.huinan.server.service.data.User;
+import com.huinan.server.service.data.club.Club;
 import com.huinan.server.service.manager.NotifyHandler;
 import com.huinan.server.service.manager.RoomManager;
 
@@ -49,6 +51,10 @@ public class RoomQuit extends AbsAction {
 				user.clear();
 			}
 			response.setResult(ENMessageError.RESPONSE_SUCCESS);
+			if (room.getClubId() != 0) {
+				Club club = ClubDAO.getInstance().getClub(room.getClubId());
+				NotifyHandler.notifyClubRefreshRoom(club);
+			}
 		} else {
 			response.setResult(ENMessageError.valueOf(error));
 		}

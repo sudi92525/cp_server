@@ -9,7 +9,6 @@ import com.huinan.proto.CpMsgClub.CSResponseClubCreate;
 import com.huinan.proto.CpMsgClub.ENClubGameType;
 import com.huinan.proto.CpMsgCs.ENMessageError;
 import com.huinan.server.db.ClubDAO;
-import com.huinan.server.db.UserManager;
 import com.huinan.server.net.ClientRequest;
 import com.huinan.server.server.net.config.ServerConfig;
 import com.huinan.server.service.AbsAction;

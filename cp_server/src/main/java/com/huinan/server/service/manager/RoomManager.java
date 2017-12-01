@@ -484,7 +484,8 @@ public class RoomManager {
 				ClubRoom clubRoom = ClubDAO.getInstance().getClubRoom(
 						room.getClubId(), room.getTid());
 				clubRoom.setStatus(1);
-				ClubDAO.getInstance().updateClubRoom(clubRoom);
+				Club club = ClubDAO.getInstance().getClub(room.getClubId());
+				ClubDAO.getInstance().updateClubRoom(club, clubRoom);
 			}
 			room.clearRound();
 		}
@@ -1685,7 +1686,8 @@ public class RoomManager {
 				}
 				clubRoomProto.setBigResult(overNotify);
 				clubRoom.setTotalData(clubRoomProto.build().toByteArray());
-				ClubDAO.getInstance().updateClubRoom(clubRoom);
+				Club club = ClubDAO.getInstance().getClub(room.getClubId());
+				ClubDAO.getInstance().updateClubRoom(club, clubRoom);
 			}
 
 			UserManager.getInstance().updateRankData(room, dissolve);

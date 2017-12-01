@@ -33,7 +33,7 @@ public class ClubManager {
 	 * @param name
 	 * @param creatorUid
 	 */
-	public static void createClub(int clubId, String name, int creatorUid) {
+	public static void adminCreateClub(int clubId, String name, int creatorUid) {
 		log.info("createClub,clubId=" + clubId + ",name=" + name);
 		Club club = new Club(clubId, String.valueOf(creatorUid), name, 1);
 		club.getMembers().add(String.valueOf(creatorUid));
@@ -41,14 +41,52 @@ public class ClubManager {
 		allClubs.put(clubId, club);
 	}
 
-	public static void applyClub(int uid, int clubId) {
+	public static void adminApplyClub(int uid, int clubId) {
 		Club club = ClubDAO.getInstance().getClub(clubId);
 		if (club == null) {
-			log.info("applyClub,club is null,clubId=" + clubId + ",uid=" + uid);
+			log.info("adminApplyClub,club is null,clubId=" + clubId + ",uid="
+					+ uid);
 			return;
 		}
 		ClubManager.addApplyer(club, String.valueOf(uid));
-		log.info("applyClub,clubId=" + clubId + ",uid=" + uid);
+		log.info("adminApplyClub,clubId=" + clubId + ",uid=" + uid);
+	}
+
+	public static void adminAgreeApply(int uid, int clubId, boolean agree) {
+		Club club = ClubDAO.getInstance().getClub(clubId);
+		if (club == null) {
+			log.info("adminAgreeApply,club is null,clubId=" + clubId + ",uid="
+					+ uid);
+			return;
+		}
+		if (agree) {
+			ClubManager.addMemeber(club, String.valueOf(uid));
+		} else {
+			ClubManager.deleteApplyer(club, String.valueOf(uid));
+		}
+		log.info("adminAgreeApply,clubId=" + clubId + ",uid=" + uid);
+	}
+
+	public static void adminKickMember(int uid, int clubId) {
+		Club club = ClubDAO.getInstance().getClub(clubId);
+		if (club == null) {
+			log.info("adminKickMember,club is null,clubId=" + clubId + ",uid="
+					+ uid);
+			return;
+		}
+		ClubManager.deleteMemeber(club, String.valueOf(uid));
+		log.info("adminKickMember,clubId=" + clubId + ",uid=" + uid);
+	}
+
+	public static void adminOutClub(int uid, int clubId) {
+		Club club = ClubDAO.getInstance().getClub(clubId);
+		if (club == null) {
+			log.info("adminOutClub,club is null,clubId=" + clubId + ",uid="
+					+ uid);
+			return;
+		}
+		ClubManager.deleteMemeber(club, String.valueOf(uid));
+		log.info("adminOutClub,clubId=" + clubId + ",uid=" + uid);
 	}
 
 	public static void deleteMemeber(Club club, String uid) {
@@ -60,6 +98,12 @@ public class ClubManager {
 	public static void addMemeber(Club club, String uid) {
 		if (!club.getMembers().contains(uid)) {
 			club.getMembers().add(uid);
+		}
+	}
+
+	public static void deleteApplyer(Club club, String uid) {
+		if (club.getApplys().contains(uid)) {
+			club.getApplys().remove(uid);
 		}
 	}
 

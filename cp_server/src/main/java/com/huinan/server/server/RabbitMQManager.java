@@ -11,6 +11,7 @@ import org.json.JSONObject;
 import com.huinan.server.db.GYcpInfoDAO;
 import com.huinan.server.db.UserManager;
 import com.huinan.server.server.net.config.ServerConfig;
+import com.huinan.server.service.manager.ClubManager;
 import com.huinan.server.service.manager.NotifyHandler;
 import com.huinan.server.service.manager.RoomManager;
 import com.rabbitmq.client.AMQP;
@@ -95,11 +96,18 @@ public class RabbitMQManager {
 							// 解锁房间
 							RoomManager.unlockRoom(String.valueOf(uid));
 						} else if (PushType == 5) {// 创建俱乐部
-//							int clubId = (int) jsonOBJ.get("ClubId");
-//							ClubManager.createClub(clubId, "club_name", uid);
+							int clubId = (int) jsonOBJ.get("ClubId");
+							ClubManager.adminCreateClub(clubId, "club_name",
+									uid);
 						} else if (PushType == 6) {// 申请加入俱乐部
-//							int clubId = (int) jsonOBJ.get("ClubId");
-//							ClubManager.applyClub(uid, clubId);
+							int clubId = (int) jsonOBJ.get("ClubId");
+							ClubManager.adminApplyClub(uid, clubId);
+						} else if (PushType == 7) {// 审核
+
+						} else if (PushType == 8) {// 踢人
+
+						} else if (PushType == 9) {// 退出
+
 						}
 					}
 				}
