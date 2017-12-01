@@ -151,8 +151,8 @@ public class GameSvrHandler extends ProtoHandler {
 			AbsAction actor = ActionMapper.getActor((int) cpHead.getCmd());
 			if (actor != null) {
 				actor.setClientRequest(request);
-				if (cpHead.getCmd() != CpMsgData.CS_REQUEST_INIT_FIELD_NUMBER
-						|| cpHead.getCmd() != CpMsgData.CS_REQUEST_WX_LOGIN_FIELD_NUMBER) {
+				if (cpHead.getCmd() == CpMsgData.CS_REQUEST_INIT_FIELD_NUMBER
+						|| cpHead.getCmd() == CpMsgData.CS_REQUEST_WX_LOGIN_FIELD_NUMBER) {
 					LogicQueueManager.getInstance().addLuanchJob(index, actor);
 				} else {
 					int _index = index
