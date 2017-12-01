@@ -486,6 +486,7 @@ public class RoomManager {
 				clubRoom.setStatus(1);
 				ClubDAO.getInstance().updateClubRoom(clubRoom);
 			}
+			room.clearRound();
 		}
 		// 洗牌
 		shuffle(room);

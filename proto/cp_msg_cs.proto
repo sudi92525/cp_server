@@ -566,3 +566,39 @@ message CSNotifyOpenTouPai{
 message CSNotifyLogout{
 	
 }
+
+
+	
+//------------------------后台接口移植到游戏服	------------------------
+
+//初始化，热更新
+message CSRequestInit{
+	required string init_request_json = 1;						//初始化json串
+}
+
+message CSResponseInit{
+	optional ENMessageError result = 1;							//成功状态
+	required string init_reaponse_json = 2;						//初始化json串
+}
+
+
+//微信登录
+message CSRequestWeiChatLogin{
+	required string request_json = 1;							//微信登录json串
+}
+
+message CSResponseWeiChatLogin{
+	optional ENMessageError result = 1;							//成功状态
+	required string reaponse_json = 2;							//微信登录json串
+}
+
+
+
+
+
+
+
+
+
+
+

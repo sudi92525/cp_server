@@ -92,7 +92,6 @@ message CpMsgData
 		CSNotifyNotice cs_notify_notice = 42;						//跑马灯，公告通知
 		CSNotifyOpenTouPai cs_notify_open_tou_pai = 43;				//推送翻开偷牌
 		
-
 		//--------------俱乐部-------------------------
 		CSRequestClubInfo cs_request_club_info = 44;			//获取俱乐部:列表
 		CSResponseClubInfo cs_response_club_info = 45;			//响应俱乐部:列表
@@ -127,5 +126,11 @@ message CpMsgData
 		
 		
 		CSNotifyLogout cs_notify_logout = 100;					//登录推送
+		
+		CSRequestInit cs_request_init = 101;					//登录初始化请求(热跟新)
+		CSResponseInit cs_response_init = 102;					//登录初始化响应
+		
+		CSRequestWeiChatLogin cs_request_wx_login = 103;		//登录微信请求
+		CSResponseWeiChatLogin cs_response_wx_login = 104;		//登录微信响应
 	}
 }

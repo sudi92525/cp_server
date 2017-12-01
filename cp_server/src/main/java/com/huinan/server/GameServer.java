@@ -4,13 +4,10 @@ import org.apache.logging.log4j.LogManager;
 
 import com.huinan.server.db.ClubDAO;
 import com.huinan.server.db.GYcpInfoDAO;
-import com.huinan.server.db.RedisDAO;
 import com.huinan.server.net.GameSvrPlayerManager;
 import com.huinan.server.net.socket.TcpServerThread;
 import com.huinan.server.server.LogicQueueManager;
-import com.huinan.server.server.RabbitMQManager;
 import com.huinan.server.server.db.DBManager;
-import com.huinan.server.server.db.RedisManager;
 import com.huinan.server.service.manager.TimerTaskManager;
 
 /**
@@ -23,17 +20,17 @@ public class GameServer {
 		Runtime.getRuntime().addShutdownHook(
 				new Thread(() -> {
 					LogicQueueManager.getInstance().stop();
-					GameSvrPlayerManager.logoutAllPlayer();
 					// GameSvrStatusThread.getInstance().stop();
 					// GameSvrHandler.shutdonw();
 						try {
 							LogManager.getLogger(GameServer.class).info(
 									"wait: logic queue deal over......");
-							Thread.sleep(1000);
+							Thread.sleep(5000);
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
+						GameSvrPlayerManager.logoutAllPlayer();
 						// RedisDAO.insertToRedis();
 						LogManager.getLogger(GameServer.class).info(
 								"GameServer Shutdown!!!");

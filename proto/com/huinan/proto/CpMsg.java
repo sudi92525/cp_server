@@ -4339,6 +4339,106 @@ public final class CpMsg {
      * </pre>
      */
     com.huinan.proto.CpMsgCs.CSNotifyLogoutOrBuilder getCsNotifyLogoutOrBuilder();
+
+    /**
+     * <code>optional .com.huinan.proto.CSRequestInit cs_request_init = 101;</code>
+     *
+     * <pre>
+     *登录初始化请求(热跟新)
+     * </pre>
+     */
+    boolean hasCsRequestInit();
+    /**
+     * <code>optional .com.huinan.proto.CSRequestInit cs_request_init = 101;</code>
+     *
+     * <pre>
+     *登录初始化请求(热跟新)
+     * </pre>
+     */
+    com.huinan.proto.CpMsgCs.CSRequestInit getCsRequestInit();
+    /**
+     * <code>optional .com.huinan.proto.CSRequestInit cs_request_init = 101;</code>
+     *
+     * <pre>
+     *登录初始化请求(热跟新)
+     * </pre>
+     */
+    com.huinan.proto.CpMsgCs.CSRequestInitOrBuilder getCsRequestInitOrBuilder();
+
+    /**
+     * <code>optional .com.huinan.proto.CSResponseInit cs_response_init = 102;</code>
+     *
+     * <pre>
+     *登录初始化响应
+     * </pre>
+     */
+    boolean hasCsResponseInit();
+    /**
+     * <code>optional .com.huinan.proto.CSResponseInit cs_response_init = 102;</code>
+     *
+     * <pre>
+     *登录初始化响应
+     * </pre>
+     */
+    com.huinan.proto.CpMsgCs.CSResponseInit getCsResponseInit();
+    /**
+     * <code>optional .com.huinan.proto.CSResponseInit cs_response_init = 102;</code>
+     *
+     * <pre>
+     *登录初始化响应
+     * </pre>
+     */
+    com.huinan.proto.CpMsgCs.CSResponseInitOrBuilder getCsResponseInitOrBuilder();
+
+    /**
+     * <code>optional .com.huinan.proto.CSRequestWeiChatLogin cs_request_wx_login = 103;</code>
+     *
+     * <pre>
+     *登录微信请求
+     * </pre>
+     */
+    boolean hasCsRequestWxLogin();
+    /**
+     * <code>optional .com.huinan.proto.CSRequestWeiChatLogin cs_request_wx_login = 103;</code>
+     *
+     * <pre>
+     *登录微信请求
+     * </pre>
+     */
+    com.huinan.proto.CpMsgCs.CSRequestWeiChatLogin getCsRequestWxLogin();
+    /**
+     * <code>optional .com.huinan.proto.CSRequestWeiChatLogin cs_request_wx_login = 103;</code>
+     *
+     * <pre>
+     *登录微信请求
+     * </pre>
+     */
+    com.huinan.proto.CpMsgCs.CSRequestWeiChatLoginOrBuilder getCsRequestWxLoginOrBuilder();
+
+    /**
+     * <code>optional .com.huinan.proto.CSResponseWeiChatLogin cs_response_wx_login = 104;</code>
+     *
+     * <pre>
+     *登录微信响应
+     * </pre>
+     */
+    boolean hasCsResponseWxLogin();
+    /**
+     * <code>optional .com.huinan.proto.CSResponseWeiChatLogin cs_response_wx_login = 104;</code>
+     *
+     * <pre>
+     *登录微信响应
+     * </pre>
+     */
+    com.huinan.proto.CpMsgCs.CSResponseWeiChatLogin getCsResponseWxLogin();
+    /**
+     * <code>optional .com.huinan.proto.CSResponseWeiChatLogin cs_response_wx_login = 104;</code>
+     *
+     * <pre>
+     *登录微信响应
+     * </pre>
+     */
+    com.huinan.proto.CpMsgCs.CSResponseWeiChatLoginOrBuilder getCsResponseWxLoginOrBuilder();
   }
   /**
    * Protobuf type {@code com.huinan.proto.CpMsgData}
@@ -4380,6 +4480,7 @@ public final class CpMsg {
       initFields();
       int mutable_bitField0_ = 0;
       int mutable_bitField1_ = 0;
+      int mutable_bitField2_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
@@ -5229,6 +5330,58 @@ public final class CpMsg {
               msgUnionCase_ = 100;
               break;
             }
+            case 810: {
+              com.huinan.proto.CpMsgCs.CSRequestInit.Builder subBuilder = null;
+              if (msgUnionCase_ == 101) {
+                subBuilder = ((com.huinan.proto.CpMsgCs.CSRequestInit) msgUnion_).toBuilder();
+              }
+              msgUnion_ = input.readMessage(com.huinan.proto.CpMsgCs.CSRequestInit.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom((com.huinan.proto.CpMsgCs.CSRequestInit) msgUnion_);
+                msgUnion_ = subBuilder.buildPartial();
+              }
+              msgUnionCase_ = 101;
+              break;
+            }
+            case 818: {
+              com.huinan.proto.CpMsgCs.CSResponseInit.Builder subBuilder = null;
+              if (msgUnionCase_ == 102) {
+                subBuilder = ((com.huinan.proto.CpMsgCs.CSResponseInit) msgUnion_).toBuilder();
+              }
+              msgUnion_ = input.readMessage(com.huinan.proto.CpMsgCs.CSResponseInit.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom((com.huinan.proto.CpMsgCs.CSResponseInit) msgUnion_);
+                msgUnion_ = subBuilder.buildPartial();
+              }
+              msgUnionCase_ = 102;
+              break;
+            }
+            case 826: {
+              com.huinan.proto.CpMsgCs.CSRequestWeiChatLogin.Builder subBuilder = null;
+              if (msgUnionCase_ == 103) {
+                subBuilder = ((com.huinan.proto.CpMsgCs.CSRequestWeiChatLogin) msgUnion_).toBuilder();
+              }
+              msgUnion_ = input.readMessage(com.huinan.proto.CpMsgCs.CSRequestWeiChatLogin.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom((com.huinan.proto.CpMsgCs.CSRequestWeiChatLogin) msgUnion_);
+                msgUnion_ = subBuilder.buildPartial();
+              }
+              msgUnionCase_ = 103;
+              break;
+            }
+            case 834: {
+              com.huinan.proto.CpMsgCs.CSResponseWeiChatLogin.Builder subBuilder = null;
+              if (msgUnionCase_ == 104) {
+                subBuilder = ((com.huinan.proto.CpMsgCs.CSResponseWeiChatLogin) msgUnion_).toBuilder();
+              }
+              msgUnion_ = input.readMessage(com.huinan.proto.CpMsgCs.CSResponseWeiChatLogin.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom((com.huinan.proto.CpMsgCs.CSResponseWeiChatLogin) msgUnion_);
+                msgUnion_ = subBuilder.buildPartial();
+              }
+              msgUnionCase_ = 104;
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -5270,6 +5423,7 @@ public final class CpMsg {
 
     private int bitField0_;
     private int bitField1_;
+    private int bitField2_;
     private int msgUnionCase_ = 0;
     private java.lang.Object msgUnion_;
     public enum MsgUnionCase
@@ -5338,6 +5492,10 @@ public final class CpMsg {
       CS_NOTIFY_CLUB_APPLY(63),
       CS_NOTIFY_CLUB_REFRESH(64),
       CS_NOTIFY_LOGOUT(100),
+      CS_REQUEST_INIT(101),
+      CS_RESPONSE_INIT(102),
+      CS_REQUEST_WX_LOGIN(103),
+      CS_RESPONSE_WX_LOGIN(104),
       MSGUNION_NOT_SET(0);
       private int value = 0;
       private MsgUnionCase(int value) {
@@ -5409,6 +5567,10 @@ public final class CpMsg {
           case 63: return CS_NOTIFY_CLUB_APPLY;
           case 64: return CS_NOTIFY_CLUB_REFRESH;
           case 100: return CS_NOTIFY_LOGOUT;
+          case 101: return CS_REQUEST_INIT;
+          case 102: return CS_RESPONSE_INIT;
+          case 103: return CS_REQUEST_WX_LOGIN;
+          case 104: return CS_RESPONSE_WX_LOGIN;
           case 0: return MSGUNION_NOT_SET;
           default: throw new java.lang.IllegalArgumentException(
             "Value is undefined for this oneof enum.");
@@ -7857,6 +8019,158 @@ public final class CpMsg {
       return com.huinan.proto.CpMsgCs.CSNotifyLogout.getDefaultInstance();
     }
 
+    public static final int CS_REQUEST_INIT_FIELD_NUMBER = 101;
+    /**
+     * <code>optional .com.huinan.proto.CSRequestInit cs_request_init = 101;</code>
+     *
+     * <pre>
+     *登录初始化请求(热跟新)
+     * </pre>
+     */
+    public boolean hasCsRequestInit() {
+      return msgUnionCase_ == 101;
+    }
+    /**
+     * <code>optional .com.huinan.proto.CSRequestInit cs_request_init = 101;</code>
+     *
+     * <pre>
+     *登录初始化请求(热跟新)
+     * </pre>
+     */
+    public com.huinan.proto.CpMsgCs.CSRequestInit getCsRequestInit() {
+      if (msgUnionCase_ == 101) {
+         return (com.huinan.proto.CpMsgCs.CSRequestInit) msgUnion_;
+      }
+      return com.huinan.proto.CpMsgCs.CSRequestInit.getDefaultInstance();
+    }
+    /**
+     * <code>optional .com.huinan.proto.CSRequestInit cs_request_init = 101;</code>
+     *
+     * <pre>
+     *登录初始化请求(热跟新)
+     * </pre>
+     */
+    public com.huinan.proto.CpMsgCs.CSRequestInitOrBuilder getCsRequestInitOrBuilder() {
+      if (msgUnionCase_ == 101) {
+         return (com.huinan.proto.CpMsgCs.CSRequestInit) msgUnion_;
+      }
+      return com.huinan.proto.CpMsgCs.CSRequestInit.getDefaultInstance();
+    }
+
+    public static final int CS_RESPONSE_INIT_FIELD_NUMBER = 102;
+    /**
+     * <code>optional .com.huinan.proto.CSResponseInit cs_response_init = 102;</code>
+     *
+     * <pre>
+     *登录初始化响应
+     * </pre>
+     */
+    public boolean hasCsResponseInit() {
+      return msgUnionCase_ == 102;
+    }
+    /**
+     * <code>optional .com.huinan.proto.CSResponseInit cs_response_init = 102;</code>
+     *
+     * <pre>
+     *登录初始化响应
+     * </pre>
+     */
+    public com.huinan.proto.CpMsgCs.CSResponseInit getCsResponseInit() {
+      if (msgUnionCase_ == 102) {
+         return (com.huinan.proto.CpMsgCs.CSResponseInit) msgUnion_;
+      }
+      return com.huinan.proto.CpMsgCs.CSResponseInit.getDefaultInstance();
+    }
+    /**
+     * <code>optional .com.huinan.proto.CSResponseInit cs_response_init = 102;</code>
+     *
+     * <pre>
+     *登录初始化响应
+     * </pre>
+     */
+    public com.huinan.proto.CpMsgCs.CSResponseInitOrBuilder getCsResponseInitOrBuilder() {
+      if (msgUnionCase_ == 102) {
+         return (com.huinan.proto.CpMsgCs.CSResponseInit) msgUnion_;
+      }
+      return com.huinan.proto.CpMsgCs.CSResponseInit.getDefaultInstance();
+    }
+
+    public static final int CS_REQUEST_WX_LOGIN_FIELD_NUMBER = 103;
+    /**
+     * <code>optional .com.huinan.proto.CSRequestWeiChatLogin cs_request_wx_login = 103;</code>
+     *
+     * <pre>
+     *登录微信请求
+     * </pre>
+     */
+    public boolean hasCsRequestWxLogin() {
+      return msgUnionCase_ == 103;
+    }
+    /**
+     * <code>optional .com.huinan.proto.CSRequestWeiChatLogin cs_request_wx_login = 103;</code>
+     *
+     * <pre>
+     *登录微信请求
+     * </pre>
+     */
+    public com.huinan.proto.CpMsgCs.CSRequestWeiChatLogin getCsRequestWxLogin() {
+      if (msgUnionCase_ == 103) {
+         return (com.huinan.proto.CpMsgCs.CSRequestWeiChatLogin) msgUnion_;
+      }
+      return com.huinan.proto.CpMsgCs.CSRequestWeiChatLogin.getDefaultInstance();
+    }
+    /**
+     * <code>optional .com.huinan.proto.CSRequestWeiChatLogin cs_request_wx_login = 103;</code>
+     *
+     * <pre>
+     *登录微信请求
+     * </pre>
+     */
+    public com.huinan.proto.CpMsgCs.CSRequestWeiChatLoginOrBuilder getCsRequestWxLoginOrBuilder() {
+      if (msgUnionCase_ == 103) {
+         return (com.huinan.proto.CpMsgCs.CSRequestWeiChatLogin) msgUnion_;
+      }
+      return com.huinan.proto.CpMsgCs.CSRequestWeiChatLogin.getDefaultInstance();
+    }
+
+    public static final int CS_RESPONSE_WX_LOGIN_FIELD_NUMBER = 104;
+    /**
+     * <code>optional .com.huinan.proto.CSResponseWeiChatLogin cs_response_wx_login = 104;</code>
+     *
+     * <pre>
+     *登录微信响应
+     * </pre>
+     */
+    public boolean hasCsResponseWxLogin() {
+      return msgUnionCase_ == 104;
+    }
+    /**
+     * <code>optional .com.huinan.proto.CSResponseWeiChatLogin cs_response_wx_login = 104;</code>
+     *
+     * <pre>
+     *登录微信响应
+     * </pre>
+     */
+    public com.huinan.proto.CpMsgCs.CSResponseWeiChatLogin getCsResponseWxLogin() {
+      if (msgUnionCase_ == 104) {
+         return (com.huinan.proto.CpMsgCs.CSResponseWeiChatLogin) msgUnion_;
+      }
+      return com.huinan.proto.CpMsgCs.CSResponseWeiChatLogin.getDefaultInstance();
+    }
+    /**
+     * <code>optional .com.huinan.proto.CSResponseWeiChatLogin cs_response_wx_login = 104;</code>
+     *
+     * <pre>
+     *登录微信响应
+     * </pre>
+     */
+    public com.huinan.proto.CpMsgCs.CSResponseWeiChatLoginOrBuilder getCsResponseWxLoginOrBuilder() {
+      if (msgUnionCase_ == 104) {
+         return (com.huinan.proto.CpMsgCs.CSResponseWeiChatLogin) msgUnion_;
+      }
+      return com.huinan.proto.CpMsgCs.CSResponseWeiChatLogin.getDefaultInstance();
+    }
+
     private void initFields() {
     }
     private byte memoizedIsInitialized = -1;
@@ -7915,6 +8229,30 @@ public final class CpMsg {
       }
       if (hasCsNotifyClubApply()) {
         if (!getCsNotifyClubApply().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      if (hasCsRequestInit()) {
+        if (!getCsRequestInit().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      if (hasCsResponseInit()) {
+        if (!getCsResponseInit().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      if (hasCsRequestWxLogin()) {
+        if (!getCsRequestWxLogin().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      if (hasCsResponseWxLogin()) {
+        if (!getCsResponseWxLogin().isInitialized()) {
           memoizedIsInitialized = 0;
           return false;
         }
@@ -8117,6 +8455,18 @@ public final class CpMsg {
       }
       if (msgUnionCase_ == 100) {
         output.writeMessage(100, (com.huinan.proto.CpMsgCs.CSNotifyLogout) msgUnion_);
+      }
+      if (msgUnionCase_ == 101) {
+        output.writeMessage(101, (com.huinan.proto.CpMsgCs.CSRequestInit) msgUnion_);
+      }
+      if (msgUnionCase_ == 102) {
+        output.writeMessage(102, (com.huinan.proto.CpMsgCs.CSResponseInit) msgUnion_);
+      }
+      if (msgUnionCase_ == 103) {
+        output.writeMessage(103, (com.huinan.proto.CpMsgCs.CSRequestWeiChatLogin) msgUnion_);
+      }
+      if (msgUnionCase_ == 104) {
+        output.writeMessage(104, (com.huinan.proto.CpMsgCs.CSResponseWeiChatLogin) msgUnion_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -8383,6 +8733,22 @@ public final class CpMsg {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(100, (com.huinan.proto.CpMsgCs.CSNotifyLogout) msgUnion_);
       }
+      if (msgUnionCase_ == 101) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(101, (com.huinan.proto.CpMsgCs.CSRequestInit) msgUnion_);
+      }
+      if (msgUnionCase_ == 102) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(102, (com.huinan.proto.CpMsgCs.CSResponseInit) msgUnion_);
+      }
+      if (msgUnionCase_ == 103) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(103, (com.huinan.proto.CpMsgCs.CSRequestWeiChatLogin) msgUnion_);
+      }
+      if (msgUnionCase_ == 104) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(104, (com.huinan.proto.CpMsgCs.CSResponseWeiChatLogin) msgUnion_);
+      }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
       return size;
@@ -8534,8 +8900,10 @@ public final class CpMsg {
         com.huinan.proto.CpMsg.CpMsgData result = new com.huinan.proto.CpMsg.CpMsgData(this);
         int from_bitField0_ = bitField0_;
         int from_bitField1_ = bitField1_;
+        int from_bitField2_ = bitField2_;
         int to_bitField0_ = 0;
         int to_bitField1_ = 0;
+        int to_bitField2_ = 0;
         if (msgUnionCase_ == 1) {
           if (csRequestLoginBuilder_ == null) {
             result.msgUnion_ = msgUnion_;
@@ -8984,8 +9352,37 @@ public final class CpMsg {
             result.msgUnion_ = csNotifyLogoutBuilder_.build();
           }
         }
+        if (msgUnionCase_ == 101) {
+          if (csRequestInitBuilder_ == null) {
+            result.msgUnion_ = msgUnion_;
+          } else {
+            result.msgUnion_ = csRequestInitBuilder_.build();
+          }
+        }
+        if (msgUnionCase_ == 102) {
+          if (csResponseInitBuilder_ == null) {
+            result.msgUnion_ = msgUnion_;
+          } else {
+            result.msgUnion_ = csResponseInitBuilder_.build();
+          }
+        }
+        if (msgUnionCase_ == 103) {
+          if (csRequestWxLoginBuilder_ == null) {
+            result.msgUnion_ = msgUnion_;
+          } else {
+            result.msgUnion_ = csRequestWxLoginBuilder_.build();
+          }
+        }
+        if (msgUnionCase_ == 104) {
+          if (csResponseWxLoginBuilder_ == null) {
+            result.msgUnion_ = msgUnion_;
+          } else {
+            result.msgUnion_ = csResponseWxLoginBuilder_.build();
+          }
+        }
         result.bitField0_ = to_bitField0_;
         result.bitField1_ = to_bitField1_;
+        result.bitField2_ = to_bitField2_;
         result.msgUnionCase_ = msgUnionCase_;
         onBuilt();
         return result;
@@ -9259,6 +9656,22 @@ public final class CpMsg {
             mergeCsNotifyLogout(other.getCsNotifyLogout());
             break;
           }
+          case CS_REQUEST_INIT: {
+            mergeCsRequestInit(other.getCsRequestInit());
+            break;
+          }
+          case CS_RESPONSE_INIT: {
+            mergeCsResponseInit(other.getCsResponseInit());
+            break;
+          }
+          case CS_REQUEST_WX_LOGIN: {
+            mergeCsRequestWxLogin(other.getCsRequestWxLogin());
+            break;
+          }
+          case CS_RESPONSE_WX_LOGIN: {
+            mergeCsResponseWxLogin(other.getCsResponseWxLogin());
+            break;
+          }
           case MSGUNION_NOT_SET: {
             break;
           }
@@ -9322,6 +9735,30 @@ public final class CpMsg {
             return false;
           }
         }
+        if (hasCsRequestInit()) {
+          if (!getCsRequestInit().isInitialized()) {
+            
+            return false;
+          }
+        }
+        if (hasCsResponseInit()) {
+          if (!getCsResponseInit().isInitialized()) {
+            
+            return false;
+          }
+        }
+        if (hasCsRequestWxLogin()) {
+          if (!getCsRequestWxLogin().isInitialized()) {
+            
+            return false;
+          }
+        }
+        if (hasCsResponseWxLogin()) {
+          if (!getCsResponseWxLogin().isInitialized()) {
+            
+            return false;
+          }
+        }
         return true;
       }
 
@@ -9359,6 +9796,7 @@ public final class CpMsg {
 
       private int bitField0_;
       private int bitField1_;
+      private int bitField2_;
 
       private com.google.protobuf.SingleFieldBuilder<
           com.huinan.proto.CpMsgCs.CSRequestLogin, com.huinan.proto.CpMsgCs.CSRequestLogin.Builder, com.huinan.proto.CpMsgCs.CSRequestLoginOrBuilder> csRequestLoginBuilder_;
@@ -20304,6 +20742,690 @@ public final class CpMsg {
         return csNotifyLogoutBuilder_;
       }
 
+      private com.google.protobuf.SingleFieldBuilder<
+          com.huinan.proto.CpMsgCs.CSRequestInit, com.huinan.proto.CpMsgCs.CSRequestInit.Builder, com.huinan.proto.CpMsgCs.CSRequestInitOrBuilder> csRequestInitBuilder_;
+      /**
+       * <code>optional .com.huinan.proto.CSRequestInit cs_request_init = 101;</code>
+       *
+       * <pre>
+       *登录初始化请求(热跟新)
+       * </pre>
+       */
+      public boolean hasCsRequestInit() {
+        return msgUnionCase_ == 101;
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSRequestInit cs_request_init = 101;</code>
+       *
+       * <pre>
+       *登录初始化请求(热跟新)
+       * </pre>
+       */
+      public com.huinan.proto.CpMsgCs.CSRequestInit getCsRequestInit() {
+        if (csRequestInitBuilder_ == null) {
+          if (msgUnionCase_ == 101) {
+            return (com.huinan.proto.CpMsgCs.CSRequestInit) msgUnion_;
+          }
+          return com.huinan.proto.CpMsgCs.CSRequestInit.getDefaultInstance();
+        } else {
+          if (msgUnionCase_ == 101) {
+            return csRequestInitBuilder_.getMessage();
+          }
+          return com.huinan.proto.CpMsgCs.CSRequestInit.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSRequestInit cs_request_init = 101;</code>
+       *
+       * <pre>
+       *登录初始化请求(热跟新)
+       * </pre>
+       */
+      public Builder setCsRequestInit(com.huinan.proto.CpMsgCs.CSRequestInit value) {
+        if (csRequestInitBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          msgUnion_ = value;
+          onChanged();
+        } else {
+          csRequestInitBuilder_.setMessage(value);
+        }
+        msgUnionCase_ = 101;
+        return this;
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSRequestInit cs_request_init = 101;</code>
+       *
+       * <pre>
+       *登录初始化请求(热跟新)
+       * </pre>
+       */
+      public Builder setCsRequestInit(
+          com.huinan.proto.CpMsgCs.CSRequestInit.Builder builderForValue) {
+        if (csRequestInitBuilder_ == null) {
+          msgUnion_ = builderForValue.build();
+          onChanged();
+        } else {
+          csRequestInitBuilder_.setMessage(builderForValue.build());
+        }
+        msgUnionCase_ = 101;
+        return this;
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSRequestInit cs_request_init = 101;</code>
+       *
+       * <pre>
+       *登录初始化请求(热跟新)
+       * </pre>
+       */
+      public Builder mergeCsRequestInit(com.huinan.proto.CpMsgCs.CSRequestInit value) {
+        if (csRequestInitBuilder_ == null) {
+          if (msgUnionCase_ == 101 &&
+              msgUnion_ != com.huinan.proto.CpMsgCs.CSRequestInit.getDefaultInstance()) {
+            msgUnion_ = com.huinan.proto.CpMsgCs.CSRequestInit.newBuilder((com.huinan.proto.CpMsgCs.CSRequestInit) msgUnion_)
+                .mergeFrom(value).buildPartial();
+          } else {
+            msgUnion_ = value;
+          }
+          onChanged();
+        } else {
+          if (msgUnionCase_ == 101) {
+            csRequestInitBuilder_.mergeFrom(value);
+          }
+          csRequestInitBuilder_.setMessage(value);
+        }
+        msgUnionCase_ = 101;
+        return this;
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSRequestInit cs_request_init = 101;</code>
+       *
+       * <pre>
+       *登录初始化请求(热跟新)
+       * </pre>
+       */
+      public Builder clearCsRequestInit() {
+        if (csRequestInitBuilder_ == null) {
+          if (msgUnionCase_ == 101) {
+            msgUnionCase_ = 0;
+            msgUnion_ = null;
+            onChanged();
+          }
+        } else {
+          if (msgUnionCase_ == 101) {
+            msgUnionCase_ = 0;
+            msgUnion_ = null;
+          }
+          csRequestInitBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSRequestInit cs_request_init = 101;</code>
+       *
+       * <pre>
+       *登录初始化请求(热跟新)
+       * </pre>
+       */
+      public com.huinan.proto.CpMsgCs.CSRequestInit.Builder getCsRequestInitBuilder() {
+        return getCsRequestInitFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSRequestInit cs_request_init = 101;</code>
+       *
+       * <pre>
+       *登录初始化请求(热跟新)
+       * </pre>
+       */
+      public com.huinan.proto.CpMsgCs.CSRequestInitOrBuilder getCsRequestInitOrBuilder() {
+        if ((msgUnionCase_ == 101) && (csRequestInitBuilder_ != null)) {
+          return csRequestInitBuilder_.getMessageOrBuilder();
+        } else {
+          if (msgUnionCase_ == 101) {
+            return (com.huinan.proto.CpMsgCs.CSRequestInit) msgUnion_;
+          }
+          return com.huinan.proto.CpMsgCs.CSRequestInit.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSRequestInit cs_request_init = 101;</code>
+       *
+       * <pre>
+       *登录初始化请求(热跟新)
+       * </pre>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.huinan.proto.CpMsgCs.CSRequestInit, com.huinan.proto.CpMsgCs.CSRequestInit.Builder, com.huinan.proto.CpMsgCs.CSRequestInitOrBuilder> 
+          getCsRequestInitFieldBuilder() {
+        if (csRequestInitBuilder_ == null) {
+          if (!(msgUnionCase_ == 101)) {
+            msgUnion_ = com.huinan.proto.CpMsgCs.CSRequestInit.getDefaultInstance();
+          }
+          csRequestInitBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.huinan.proto.CpMsgCs.CSRequestInit, com.huinan.proto.CpMsgCs.CSRequestInit.Builder, com.huinan.proto.CpMsgCs.CSRequestInitOrBuilder>(
+                  (com.huinan.proto.CpMsgCs.CSRequestInit) msgUnion_,
+                  getParentForChildren(),
+                  isClean());
+          msgUnion_ = null;
+        }
+        msgUnionCase_ = 101;
+        return csRequestInitBuilder_;
+      }
+
+      private com.google.protobuf.SingleFieldBuilder<
+          com.huinan.proto.CpMsgCs.CSResponseInit, com.huinan.proto.CpMsgCs.CSResponseInit.Builder, com.huinan.proto.CpMsgCs.CSResponseInitOrBuilder> csResponseInitBuilder_;
+      /**
+       * <code>optional .com.huinan.proto.CSResponseInit cs_response_init = 102;</code>
+       *
+       * <pre>
+       *登录初始化响应
+       * </pre>
+       */
+      public boolean hasCsResponseInit() {
+        return msgUnionCase_ == 102;
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSResponseInit cs_response_init = 102;</code>
+       *
+       * <pre>
+       *登录初始化响应
+       * </pre>
+       */
+      public com.huinan.proto.CpMsgCs.CSResponseInit getCsResponseInit() {
+        if (csResponseInitBuilder_ == null) {
+          if (msgUnionCase_ == 102) {
+            return (com.huinan.proto.CpMsgCs.CSResponseInit) msgUnion_;
+          }
+          return com.huinan.proto.CpMsgCs.CSResponseInit.getDefaultInstance();
+        } else {
+          if (msgUnionCase_ == 102) {
+            return csResponseInitBuilder_.getMessage();
+          }
+          return com.huinan.proto.CpMsgCs.CSResponseInit.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSResponseInit cs_response_init = 102;</code>
+       *
+       * <pre>
+       *登录初始化响应
+       * </pre>
+       */
+      public Builder setCsResponseInit(com.huinan.proto.CpMsgCs.CSResponseInit value) {
+        if (csResponseInitBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          msgUnion_ = value;
+          onChanged();
+        } else {
+          csResponseInitBuilder_.setMessage(value);
+        }
+        msgUnionCase_ = 102;
+        return this;
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSResponseInit cs_response_init = 102;</code>
+       *
+       * <pre>
+       *登录初始化响应
+       * </pre>
+       */
+      public Builder setCsResponseInit(
+          com.huinan.proto.CpMsgCs.CSResponseInit.Builder builderForValue) {
+        if (csResponseInitBuilder_ == null) {
+          msgUnion_ = builderForValue.build();
+          onChanged();
+        } else {
+          csResponseInitBuilder_.setMessage(builderForValue.build());
+        }
+        msgUnionCase_ = 102;
+        return this;
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSResponseInit cs_response_init = 102;</code>
+       *
+       * <pre>
+       *登录初始化响应
+       * </pre>
+       */
+      public Builder mergeCsResponseInit(com.huinan.proto.CpMsgCs.CSResponseInit value) {
+        if (csResponseInitBuilder_ == null) {
+          if (msgUnionCase_ == 102 &&
+              msgUnion_ != com.huinan.proto.CpMsgCs.CSResponseInit.getDefaultInstance()) {
+            msgUnion_ = com.huinan.proto.CpMsgCs.CSResponseInit.newBuilder((com.huinan.proto.CpMsgCs.CSResponseInit) msgUnion_)
+                .mergeFrom(value).buildPartial();
+          } else {
+            msgUnion_ = value;
+          }
+          onChanged();
+        } else {
+          if (msgUnionCase_ == 102) {
+            csResponseInitBuilder_.mergeFrom(value);
+          }
+          csResponseInitBuilder_.setMessage(value);
+        }
+        msgUnionCase_ = 102;
+        return this;
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSResponseInit cs_response_init = 102;</code>
+       *
+       * <pre>
+       *登录初始化响应
+       * </pre>
+       */
+      public Builder clearCsResponseInit() {
+        if (csResponseInitBuilder_ == null) {
+          if (msgUnionCase_ == 102) {
+            msgUnionCase_ = 0;
+            msgUnion_ = null;
+            onChanged();
+          }
+        } else {
+          if (msgUnionCase_ == 102) {
+            msgUnionCase_ = 0;
+            msgUnion_ = null;
+          }
+          csResponseInitBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSResponseInit cs_response_init = 102;</code>
+       *
+       * <pre>
+       *登录初始化响应
+       * </pre>
+       */
+      public com.huinan.proto.CpMsgCs.CSResponseInit.Builder getCsResponseInitBuilder() {
+        return getCsResponseInitFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSResponseInit cs_response_init = 102;</code>
+       *
+       * <pre>
+       *登录初始化响应
+       * </pre>
+       */
+      public com.huinan.proto.CpMsgCs.CSResponseInitOrBuilder getCsResponseInitOrBuilder() {
+        if ((msgUnionCase_ == 102) && (csResponseInitBuilder_ != null)) {
+          return csResponseInitBuilder_.getMessageOrBuilder();
+        } else {
+          if (msgUnionCase_ == 102) {
+            return (com.huinan.proto.CpMsgCs.CSResponseInit) msgUnion_;
+          }
+          return com.huinan.proto.CpMsgCs.CSResponseInit.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSResponseInit cs_response_init = 102;</code>
+       *
+       * <pre>
+       *登录初始化响应
+       * </pre>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.huinan.proto.CpMsgCs.CSResponseInit, com.huinan.proto.CpMsgCs.CSResponseInit.Builder, com.huinan.proto.CpMsgCs.CSResponseInitOrBuilder> 
+          getCsResponseInitFieldBuilder() {
+        if (csResponseInitBuilder_ == null) {
+          if (!(msgUnionCase_ == 102)) {
+            msgUnion_ = com.huinan.proto.CpMsgCs.CSResponseInit.getDefaultInstance();
+          }
+          csResponseInitBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.huinan.proto.CpMsgCs.CSResponseInit, com.huinan.proto.CpMsgCs.CSResponseInit.Builder, com.huinan.proto.CpMsgCs.CSResponseInitOrBuilder>(
+                  (com.huinan.proto.CpMsgCs.CSResponseInit) msgUnion_,
+                  getParentForChildren(),
+                  isClean());
+          msgUnion_ = null;
+        }
+        msgUnionCase_ = 102;
+        return csResponseInitBuilder_;
+      }
+
+      private com.google.protobuf.SingleFieldBuilder<
+          com.huinan.proto.CpMsgCs.CSRequestWeiChatLogin, com.huinan.proto.CpMsgCs.CSRequestWeiChatLogin.Builder, com.huinan.proto.CpMsgCs.CSRequestWeiChatLoginOrBuilder> csRequestWxLoginBuilder_;
+      /**
+       * <code>optional .com.huinan.proto.CSRequestWeiChatLogin cs_request_wx_login = 103;</code>
+       *
+       * <pre>
+       *登录微信请求
+       * </pre>
+       */
+      public boolean hasCsRequestWxLogin() {
+        return msgUnionCase_ == 103;
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSRequestWeiChatLogin cs_request_wx_login = 103;</code>
+       *
+       * <pre>
+       *登录微信请求
+       * </pre>
+       */
+      public com.huinan.proto.CpMsgCs.CSRequestWeiChatLogin getCsRequestWxLogin() {
+        if (csRequestWxLoginBuilder_ == null) {
+          if (msgUnionCase_ == 103) {
+            return (com.huinan.proto.CpMsgCs.CSRequestWeiChatLogin) msgUnion_;
+          }
+          return com.huinan.proto.CpMsgCs.CSRequestWeiChatLogin.getDefaultInstance();
+        } else {
+          if (msgUnionCase_ == 103) {
+            return csRequestWxLoginBuilder_.getMessage();
+          }
+          return com.huinan.proto.CpMsgCs.CSRequestWeiChatLogin.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSRequestWeiChatLogin cs_request_wx_login = 103;</code>
+       *
+       * <pre>
+       *登录微信请求
+       * </pre>
+       */
+      public Builder setCsRequestWxLogin(com.huinan.proto.CpMsgCs.CSRequestWeiChatLogin value) {
+        if (csRequestWxLoginBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          msgUnion_ = value;
+          onChanged();
+        } else {
+          csRequestWxLoginBuilder_.setMessage(value);
+        }
+        msgUnionCase_ = 103;
+        return this;
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSRequestWeiChatLogin cs_request_wx_login = 103;</code>
+       *
+       * <pre>
+       *登录微信请求
+       * </pre>
+       */
+      public Builder setCsRequestWxLogin(
+          com.huinan.proto.CpMsgCs.CSRequestWeiChatLogin.Builder builderForValue) {
+        if (csRequestWxLoginBuilder_ == null) {
+          msgUnion_ = builderForValue.build();
+          onChanged();
+        } else {
+          csRequestWxLoginBuilder_.setMessage(builderForValue.build());
+        }
+        msgUnionCase_ = 103;
+        return this;
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSRequestWeiChatLogin cs_request_wx_login = 103;</code>
+       *
+       * <pre>
+       *登录微信请求
+       * </pre>
+       */
+      public Builder mergeCsRequestWxLogin(com.huinan.proto.CpMsgCs.CSRequestWeiChatLogin value) {
+        if (csRequestWxLoginBuilder_ == null) {
+          if (msgUnionCase_ == 103 &&
+              msgUnion_ != com.huinan.proto.CpMsgCs.CSRequestWeiChatLogin.getDefaultInstance()) {
+            msgUnion_ = com.huinan.proto.CpMsgCs.CSRequestWeiChatLogin.newBuilder((com.huinan.proto.CpMsgCs.CSRequestWeiChatLogin) msgUnion_)
+                .mergeFrom(value).buildPartial();
+          } else {
+            msgUnion_ = value;
+          }
+          onChanged();
+        } else {
+          if (msgUnionCase_ == 103) {
+            csRequestWxLoginBuilder_.mergeFrom(value);
+          }
+          csRequestWxLoginBuilder_.setMessage(value);
+        }
+        msgUnionCase_ = 103;
+        return this;
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSRequestWeiChatLogin cs_request_wx_login = 103;</code>
+       *
+       * <pre>
+       *登录微信请求
+       * </pre>
+       */
+      public Builder clearCsRequestWxLogin() {
+        if (csRequestWxLoginBuilder_ == null) {
+          if (msgUnionCase_ == 103) {
+            msgUnionCase_ = 0;
+            msgUnion_ = null;
+            onChanged();
+          }
+        } else {
+          if (msgUnionCase_ == 103) {
+            msgUnionCase_ = 0;
+            msgUnion_ = null;
+          }
+          csRequestWxLoginBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSRequestWeiChatLogin cs_request_wx_login = 103;</code>
+       *
+       * <pre>
+       *登录微信请求
+       * </pre>
+       */
+      public com.huinan.proto.CpMsgCs.CSRequestWeiChatLogin.Builder getCsRequestWxLoginBuilder() {
+        return getCsRequestWxLoginFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSRequestWeiChatLogin cs_request_wx_login = 103;</code>
+       *
+       * <pre>
+       *登录微信请求
+       * </pre>
+       */
+      public com.huinan.proto.CpMsgCs.CSRequestWeiChatLoginOrBuilder getCsRequestWxLoginOrBuilder() {
+        if ((msgUnionCase_ == 103) && (csRequestWxLoginBuilder_ != null)) {
+          return csRequestWxLoginBuilder_.getMessageOrBuilder();
+        } else {
+          if (msgUnionCase_ == 103) {
+            return (com.huinan.proto.CpMsgCs.CSRequestWeiChatLogin) msgUnion_;
+          }
+          return com.huinan.proto.CpMsgCs.CSRequestWeiChatLogin.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSRequestWeiChatLogin cs_request_wx_login = 103;</code>
+       *
+       * <pre>
+       *登录微信请求
+       * </pre>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.huinan.proto.CpMsgCs.CSRequestWeiChatLogin, com.huinan.proto.CpMsgCs.CSRequestWeiChatLogin.Builder, com.huinan.proto.CpMsgCs.CSRequestWeiChatLoginOrBuilder> 
+          getCsRequestWxLoginFieldBuilder() {
+        if (csRequestWxLoginBuilder_ == null) {
+          if (!(msgUnionCase_ == 103)) {
+            msgUnion_ = com.huinan.proto.CpMsgCs.CSRequestWeiChatLogin.getDefaultInstance();
+          }
+          csRequestWxLoginBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.huinan.proto.CpMsgCs.CSRequestWeiChatLogin, com.huinan.proto.CpMsgCs.CSRequestWeiChatLogin.Builder, com.huinan.proto.CpMsgCs.CSRequestWeiChatLoginOrBuilder>(
+                  (com.huinan.proto.CpMsgCs.CSRequestWeiChatLogin) msgUnion_,
+                  getParentForChildren(),
+                  isClean());
+          msgUnion_ = null;
+        }
+        msgUnionCase_ = 103;
+        return csRequestWxLoginBuilder_;
+      }
+
+      private com.google.protobuf.SingleFieldBuilder<
+          com.huinan.proto.CpMsgCs.CSResponseWeiChatLogin, com.huinan.proto.CpMsgCs.CSResponseWeiChatLogin.Builder, com.huinan.proto.CpMsgCs.CSResponseWeiChatLoginOrBuilder> csResponseWxLoginBuilder_;
+      /**
+       * <code>optional .com.huinan.proto.CSResponseWeiChatLogin cs_response_wx_login = 104;</code>
+       *
+       * <pre>
+       *登录微信响应
+       * </pre>
+       */
+      public boolean hasCsResponseWxLogin() {
+        return msgUnionCase_ == 104;
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSResponseWeiChatLogin cs_response_wx_login = 104;</code>
+       *
+       * <pre>
+       *登录微信响应
+       * </pre>
+       */
+      public com.huinan.proto.CpMsgCs.CSResponseWeiChatLogin getCsResponseWxLogin() {
+        if (csResponseWxLoginBuilder_ == null) {
+          if (msgUnionCase_ == 104) {
+            return (com.huinan.proto.CpMsgCs.CSResponseWeiChatLogin) msgUnion_;
+          }
+          return com.huinan.proto.CpMsgCs.CSResponseWeiChatLogin.getDefaultInstance();
+        } else {
+          if (msgUnionCase_ == 104) {
+            return csResponseWxLoginBuilder_.getMessage();
+          }
+          return com.huinan.proto.CpMsgCs.CSResponseWeiChatLogin.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSResponseWeiChatLogin cs_response_wx_login = 104;</code>
+       *
+       * <pre>
+       *登录微信响应
+       * </pre>
+       */
+      public Builder setCsResponseWxLogin(com.huinan.proto.CpMsgCs.CSResponseWeiChatLogin value) {
+        if (csResponseWxLoginBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          msgUnion_ = value;
+          onChanged();
+        } else {
+          csResponseWxLoginBuilder_.setMessage(value);
+        }
+        msgUnionCase_ = 104;
+        return this;
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSResponseWeiChatLogin cs_response_wx_login = 104;</code>
+       *
+       * <pre>
+       *登录微信响应
+       * </pre>
+       */
+      public Builder setCsResponseWxLogin(
+          com.huinan.proto.CpMsgCs.CSResponseWeiChatLogin.Builder builderForValue) {
+        if (csResponseWxLoginBuilder_ == null) {
+          msgUnion_ = builderForValue.build();
+          onChanged();
+        } else {
+          csResponseWxLoginBuilder_.setMessage(builderForValue.build());
+        }
+        msgUnionCase_ = 104;
+        return this;
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSResponseWeiChatLogin cs_response_wx_login = 104;</code>
+       *
+       * <pre>
+       *登录微信响应
+       * </pre>
+       */
+      public Builder mergeCsResponseWxLogin(com.huinan.proto.CpMsgCs.CSResponseWeiChatLogin value) {
+        if (csResponseWxLoginBuilder_ == null) {
+          if (msgUnionCase_ == 104 &&
+              msgUnion_ != com.huinan.proto.CpMsgCs.CSResponseWeiChatLogin.getDefaultInstance()) {
+            msgUnion_ = com.huinan.proto.CpMsgCs.CSResponseWeiChatLogin.newBuilder((com.huinan.proto.CpMsgCs.CSResponseWeiChatLogin) msgUnion_)
+                .mergeFrom(value).buildPartial();
+          } else {
+            msgUnion_ = value;
+          }
+          onChanged();
+        } else {
+          if (msgUnionCase_ == 104) {
+            csResponseWxLoginBuilder_.mergeFrom(value);
+          }
+          csResponseWxLoginBuilder_.setMessage(value);
+        }
+        msgUnionCase_ = 104;
+        return this;
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSResponseWeiChatLogin cs_response_wx_login = 104;</code>
+       *
+       * <pre>
+       *登录微信响应
+       * </pre>
+       */
+      public Builder clearCsResponseWxLogin() {
+        if (csResponseWxLoginBuilder_ == null) {
+          if (msgUnionCase_ == 104) {
+            msgUnionCase_ = 0;
+            msgUnion_ = null;
+            onChanged();
+          }
+        } else {
+          if (msgUnionCase_ == 104) {
+            msgUnionCase_ = 0;
+            msgUnion_ = null;
+          }
+          csResponseWxLoginBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSResponseWeiChatLogin cs_response_wx_login = 104;</code>
+       *
+       * <pre>
+       *登录微信响应
+       * </pre>
+       */
+      public com.huinan.proto.CpMsgCs.CSResponseWeiChatLogin.Builder getCsResponseWxLoginBuilder() {
+        return getCsResponseWxLoginFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSResponseWeiChatLogin cs_response_wx_login = 104;</code>
+       *
+       * <pre>
+       *登录微信响应
+       * </pre>
+       */
+      public com.huinan.proto.CpMsgCs.CSResponseWeiChatLoginOrBuilder getCsResponseWxLoginOrBuilder() {
+        if ((msgUnionCase_ == 104) && (csResponseWxLoginBuilder_ != null)) {
+          return csResponseWxLoginBuilder_.getMessageOrBuilder();
+        } else {
+          if (msgUnionCase_ == 104) {
+            return (com.huinan.proto.CpMsgCs.CSResponseWeiChatLogin) msgUnion_;
+          }
+          return com.huinan.proto.CpMsgCs.CSResponseWeiChatLogin.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>optional .com.huinan.proto.CSResponseWeiChatLogin cs_response_wx_login = 104;</code>
+       *
+       * <pre>
+       *登录微信响应
+       * </pre>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.huinan.proto.CpMsgCs.CSResponseWeiChatLogin, com.huinan.proto.CpMsgCs.CSResponseWeiChatLogin.Builder, com.huinan.proto.CpMsgCs.CSResponseWeiChatLoginOrBuilder> 
+          getCsResponseWxLoginFieldBuilder() {
+        if (csResponseWxLoginBuilder_ == null) {
+          if (!(msgUnionCase_ == 104)) {
+            msgUnion_ = com.huinan.proto.CpMsgCs.CSResponseWeiChatLogin.getDefaultInstance();
+          }
+          csResponseWxLoginBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.huinan.proto.CpMsgCs.CSResponseWeiChatLogin, com.huinan.proto.CpMsgCs.CSResponseWeiChatLogin.Builder, com.huinan.proto.CpMsgCs.CSResponseWeiChatLoginOrBuilder>(
+                  (com.huinan.proto.CpMsgCs.CSResponseWeiChatLogin) msgUnion_,
+                  getParentForChildren(),
+                  isClean());
+          msgUnion_ = null;
+        }
+        msgUnionCase_ = 104;
+        return csResponseWxLoginBuilder_;
+      }
+
       // @@protoc_insertion_point(builder_scope:com.huinan.proto.CpMsgData)
     }
 
@@ -20342,7 +21464,7 @@ public final class CpMsg {
       "\006 \001(\t\022\020\n\010mac_addr\030\007 \001(\t\022\n\n\002os\030\010 \001(\t\022\013\n\003o" +
       "sv\030\t \001(\t\022\014\n\004band\030\n \001(\t\022\014\n\004imei\030\013 \001(\t\022\013\n\003" +
       "cmd\030\014 \001(\003\022\023\n\013json_msg_id\030\r \001(\005\022\020\n\010json_m" +
-      "sg\030\016 \001(\t\022\013\n\003uid\030\017 \001(\t\"\314$\n\tCpMsgData\022<\n\020c" +
+      "sg\030\016 \001(\t\022\013\n\003uid\030\017 \001(\t\"\330&\n\tCpMsgData\022<\n\020c" +
       "s_request_login\030\001 \001(\0132 .com.huinan.proto",
       ".CSRequestLoginH\000\022>\n\021cs_response_login\030\002" +
       " \001(\0132!.com.huinan.proto.CSResponseLoginH" +
@@ -20459,7 +21581,14 @@ public final class CpMsg {
       "\022G\n\026cs_notify_club_refresh\030@ \001(\0132%.com.h" +
       "uinan.proto.CSNotifyClubRefreshH\000\022<\n\020cs_" +
       "notify_logout\030d \001(\0132 .com.huinan.proto.C" +
-      "SNotifyLogoutH\000B\013\n\tmsg_union"
+      "SNotifyLogoutH\000\022:\n\017cs_request_init\030e \001(\013" +
+      "2\037.com.huinan.proto.CSRequestInitH\000\022<\n\020c" +
+      "s_response_init\030f \001(\0132 .com.huinan.proto" +
+      ".CSResponseInitH\000\022F\n\023cs_request_wx_login" +
+      "\030g \001(\0132\'.com.huinan.proto.CSRequestWeiCh",
+      "atLoginH\000\022H\n\024cs_response_wx_login\030h \001(\0132" +
+      "(.com.huinan.proto.CSResponseWeiChatLogi" +
+      "nH\000B\013\n\tmsg_union"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -20486,7 +21615,7 @@ public final class CpMsg {
     internal_static_com_huinan_proto_CpMsgData_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_huinan_proto_CpMsgData_descriptor,
-        new java.lang.String[] { "CsRequestLogin", "CsResponseLogin", "CsRequestCreateTable", "CsResponseCreateTable", "CsRequestEnterTable", "CsResponseEnterTable", "CsNotifyEnterTable", "CsRequestLogoutTable", "CsResponseLogoutTable", "CsNotifyLogoutTable", "CsRequestOwnerTiren", "CsResponseOwnerTiren", "CsNotifyOwnerTiren", "CsRequestDissolveTable", "CsResponseDissolveTable", "CsNotifyDissolveTableOperation", "CsNotifyTableDissolved", "CsRequestReadyForGame", "CsResponseReadyForGame", "CsNotifyReadyForGame", "CsNotifyGameStart", "CsNotifySeatOperationChoice", "CsRequestDoAction", "CsResponseDoAction", "CsNotifyActionFlow", "CsNotifyPlayerDealCard", "CsNotifyNextOperation", "CsNotifyGameOver", "CsRequestReconnect", "CsResponseReconnect", "CsRequestHeartBeat", "CsResponseHeartBeat", "CsRequestChat", "CsResponseChat", "CsNotifyChat", "CsRequestIsOnline", "CsResponseIsOnline", "CsNotifyIsOnline", "CsNotifyRoomCardChange", "CsRequestPalyBack", "CsResponsePalyBack", "CsNotifyNotice", "CsNotifyOpenTouPai", "CsRequestClubInfo", "CsResponseClubInfo", "CsRequestClubRoom", "CsResponseClubRoom", "CsRequestClubMember", "CsResponseClubMember", "CsRequestClubMessage", "CsResponseClubMessage", "CsRequestClubReRoom", "CsResponseClubReRoom", "CsRequestClubKick", "CsResponseClubKick", "CsRequestClubIsAgree", "CsResponseClubIsAgree", "CsRequestClubCreate", "CsResponseClubCreate", "CsRequestClubApply", "CsResponseClubApply", "CsNotifyClubApply", "CsNotifyClubRefresh", "CsNotifyLogout", "MsgUnion", });
+        new java.lang.String[] { "CsRequestLogin", "CsResponseLogin", "CsRequestCreateTable", "CsResponseCreateTable", "CsRequestEnterTable", "CsResponseEnterTable", "CsNotifyEnterTable", "CsRequestLogoutTable", "CsResponseLogoutTable", "CsNotifyLogoutTable", "CsRequestOwnerTiren", "CsResponseOwnerTiren", "CsNotifyOwnerTiren", "CsRequestDissolveTable", "CsResponseDissolveTable", "CsNotifyDissolveTableOperation", "CsNotifyTableDissolved", "CsRequestReadyForGame", "CsResponseReadyForGame", "CsNotifyReadyForGame", "CsNotifyGameStart", "CsNotifySeatOperationChoice", "CsRequestDoAction", "CsResponseDoAction", "CsNotifyActionFlow", "CsNotifyPlayerDealCard", "CsNotifyNextOperation", "CsNotifyGameOver", "CsRequestReconnect", "CsResponseReconnect", "CsRequestHeartBeat", "CsResponseHeartBeat", "CsRequestChat", "CsResponseChat", "CsNotifyChat", "CsRequestIsOnline", "CsResponseIsOnline", "CsNotifyIsOnline", "CsNotifyRoomCardChange", "CsRequestPalyBack", "CsResponsePalyBack", "CsNotifyNotice", "CsNotifyOpenTouPai", "CsRequestClubInfo", "CsResponseClubInfo", "CsRequestClubRoom", "CsResponseClubRoom", "CsRequestClubMember", "CsResponseClubMember", "CsRequestClubMessage", "CsResponseClubMessage", "CsRequestClubReRoom", "CsResponseClubReRoom", "CsRequestClubKick", "CsResponseClubKick", "CsRequestClubIsAgree", "CsResponseClubIsAgree", "CsRequestClubCreate", "CsResponseClubCreate", "CsRequestClubApply", "CsResponseClubApply", "CsNotifyClubApply", "CsNotifyClubRefresh", "CsNotifyLogout", "CsRequestInit", "CsResponseInit", "CsRequestWxLogin", "CsResponseWxLogin", "MsgUnion", });
     com.huinan.proto.CpMsgCs.getDescriptor();
     com.huinan.proto.CpMsgClub.getDescriptor();
   }

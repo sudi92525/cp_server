@@ -65,6 +65,16 @@ public class ServerConfig {
 		return config;
 	}
 
+	public String getAdminInitUrl() {
+		return config.getString("GameServer.GameInitUrl",
+				"http://192.168.1.4:8081/api/GetInitData");
+	}
+
+	public String getAdminLoginUrl() {
+		return config.getString("GameServer.LoginApiUrl",
+				"http://192.168.1.4:8081/api/Account/Logon");
+	}
+
 	public String getGameCode() {
 		return config.getString("GameServer.GameCode", "xiaonanmj");
 	}

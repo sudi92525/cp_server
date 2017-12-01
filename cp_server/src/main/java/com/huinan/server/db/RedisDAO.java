@@ -70,6 +70,8 @@ public class RedisDAO {
 					} else if (room != null) {
 						room.getUsers().put(user.getSeatIndex(), user);
 					}
+				}else{
+					user.clear();
 				}
 			}
 		}
@@ -88,11 +90,11 @@ public class RedisDAO {
 		redis.del(roomKey);
 		for (User user : UserManager.getInstance().getUsers().values()) {
 			if (user.getRoomId() != 0) {
-				redis.hset(userKey.getBytes(), user.getUuid().getBytes(),
-						RedisManager.serialize(user));
 				LOGGER.info("-------insert user--------uid=" + user.getUuid());
 				LOGGER.info("-------insert user--------uid roomTid="
 						+ user.getRoomId());
+				redis.hset(userKey.getBytes(), user.getUuid().getBytes(),
+						RedisManager.serialize(user));
 			}
 		}
 		for (Room room : RoomManager.getRooms().values()) {

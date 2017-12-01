@@ -23,6 +23,8 @@ import com.huinan.server.service.action.club.GetClubList;
 import com.huinan.server.service.action.club.GetClubMember;
 import com.huinan.server.service.action.club.GetClueRoom;
 import com.huinan.server.service.action.club.RemoveClubRoom;
+import com.huinan.server.service.action.luanch.LuanchInit;
+import com.huinan.server.service.action.luanch.LuanchWXLogin;
 
 /**
  *
@@ -77,6 +79,11 @@ public class ActionMapper {
 			return new RemoveClubRoom();
 		case CpMsgData.CS_REQUEST_CLUB_ROOM_FIELD_NUMBER:
 			return new GetClueRoom();
+
+		case CpMsgData.CS_REQUEST_INIT_FIELD_NUMBER:
+			return new LuanchInit();
+		case CpMsgData.CS_REQUEST_WX_LOGIN_FIELD_NUMBER:
+			return new LuanchWXLogin();
 		default:
 			return null;
 		}
