@@ -30,6 +30,7 @@ enum ENMessageError
 	RESPONSE_CLUB_NAME_ILLEGAL = 25;				//俱乐部名字含有非法字符
 	RESPONSE_CLUB_NUM_MAX = 26;						//创建的俱乐部达到上限
 	RESPONSE_CLUB_CARD_LIMIT = 27;					//俱乐部房卡不足
+	RESPONSE_CLUB_APLLYER_NUM_MAX = 28;				//申请者的俱乐部达到上限
 	
 }
 

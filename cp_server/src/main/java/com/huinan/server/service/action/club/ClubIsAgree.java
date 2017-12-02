@@ -7,6 +7,7 @@ import com.huinan.proto.CpMsgClub.CSResponseClubIsAgree;
 import com.huinan.proto.CpMsgCs.ENMessageError;
 import com.huinan.server.db.ClubDAO;
 import com.huinan.server.net.ClientRequest;
+import com.huinan.server.server.net.config.ServerConfig;
 import com.huinan.server.service.AbsAction;
 import com.huinan.server.service.data.club.Club;
 import com.huinan.server.service.manager.ClubManager;
@@ -62,6 +63,11 @@ public class ClubIsAgree extends AbsAction {
 			return ENMessageError.RESPONSE_CLUB_NOT_IN_APPLY_LIST_VALUE;
 		}
 		if (agree) {
+			if (ClubManager.getMyClubNum(applyUId) >= ServerConfig
+					.getInstance().getClubNumMax()) {
+				ClubManager.deleteApplyer(club, applyUId);
+				return ENMessageError.RESPONSE_CLUB_APLLYER_NUM_MAX_VALUE;
+			}
 			if (club.getMembers().contains(applyUId)) {
 				return ENMessageError.RESPONSE_CLUB_IN_THIS_CLUB_VALUE;
 			}

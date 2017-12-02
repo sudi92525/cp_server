@@ -33,7 +33,7 @@ public class User implements Serializable {
 	/**
 	 * 用户头像
 	 */
-	private String pic_url;
+	private String pic_url = "";
 	/**
 	 * 性别
 	 */
@@ -135,7 +135,7 @@ public class User implements Serializable {
 	private int changeCurrency;
 	/** 赢的次数 */
 	private int huTimes;
-	/** 点炮的次数 */ 
+	/** 点炮的次数 */
 	private int dianPaoTimes;
 	/** 自摸的次数 */
 	private int ziMoTimes;
@@ -192,7 +192,7 @@ public class User implements Serializable {
 	private boolean huSiGen;
 	/** 本次出牌是否是追,是-出完后需要亮起其他牌 */
 	private boolean thisChuIsZhui;
-	
+
 	private boolean last;
 	private int inClubId;
 	// ------------玩家牌信息------------------------
@@ -331,6 +331,7 @@ public class User implements Serializable {
 		this.hu = false;
 		this.outFirstMj = true;
 		this.five = false;
+		this.last = false;
 		this.huCard = null;
 		this.huFanNum = 0;
 		this.huTuoNum = 0;

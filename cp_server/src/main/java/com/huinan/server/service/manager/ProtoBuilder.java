@@ -55,7 +55,7 @@ public class ProtoBuilder {
 		}
 		clubProto.setHaveApply(!club.getApplys().isEmpty());
 		User creator = UserManager.getInstance().getUser(club.getCreatorId());
-		int orderCard = ClubManager.getClubOrderCard(club.getId());
+		int orderCard = ClubManager.getClubOrderCard(club.getCreatorId());
 		clubProto.setRoomCardNum(creator.getRoomCardNum() - orderCard);
 		return clubProto;
 	}

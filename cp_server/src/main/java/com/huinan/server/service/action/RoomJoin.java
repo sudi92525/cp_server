@@ -1,10 +1,13 @@
 package com.huinan.server.service.action;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.huinan.proto.CpMsg.CpHead;
 import com.huinan.proto.CpMsg.CpMsgData;
 import com.huinan.proto.CpMsgCs.CSNotifyGameStart.Builder;
+import com.huinan.proto.CpMsgCs.CSNotifyGameStart;
 import com.huinan.proto.CpMsgCs.CSNottifyEnterTable;
 import com.huinan.proto.CpMsgCs.CSRequestEnterTable;
 import com.huinan.proto.CpMsgCs.CSResponseEnterTable;
@@ -96,17 +99,17 @@ public class RoomJoin extends AbsAction {
 							msgNotify.build());
 				}
 			}
+			if (room.getClubId() != 0) {
+				user.setInClubId(0);
+				Club club = ClubDAO.getInstance().getClub(room.getClubId());
+				NotifyHandler.notifyClubRefreshRoom(club);
+			}
 		}
 		msg.setCsResponseEnterTable(response);
 		request.getClient().sendMessage(
 				CpMsgData.CS_RESPONSE_ENTER_TABLE_FIELD_NUMBER, user.getUuid(),
 				(CpHead) request.getHeadLite(), msg.build());
 
-		if (room.getClubId() != 0) {
-			user.setInClubId(0);
-			Club club = ClubDAO.getInstance().getClub(room.getClubId());
-			NotifyHandler.notifyClubRefreshRoom(club);
-		}
 	}
 
 	/**
@@ -155,13 +158,22 @@ public class RoomJoin extends AbsAction {
 		} else {
 			join.setTableState(Constant.cp_status_started);
 			Builder gameStart = ProtoBuilder.buildGameStart(room);
-			for (PBTableSeat pbTableSeat : gameStart.getSeatsList()) {
+			CSNotifyGameStart.Builder newGameStart = CSNotifyGameStart
+					.newBuilder(gameStart.build());
+			List<PBTableSeat> seatList = gameStart.getSeatsList();
+			List<PBTableSeat> newSeats = new ArrayList<>();
+			for (PBTableSeat pbTableSeat : seatList) {
 				if (pbTableSeat.getSeatIndex() != user.getSeatIndex()) {
 					PBTableSeat.Builder seat = pbTableSeat.toBuilder();
 					seat.clearTilesOnHand();
+					newSeats.add(seat.build());
+				} else {
+					newSeats.add(pbTableSeat);
 				}
 			}
-			join.setGameStart(gameStart);
+			newGameStart.clearSeats();
+			newGameStart.addAllSeats(newSeats);
+			join.setGameStart(newGameStart);
 		}
 		// 房间正在解散
 		if (room.getLaunch_uuid() != null) {

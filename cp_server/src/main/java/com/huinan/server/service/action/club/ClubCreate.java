@@ -9,6 +9,7 @@ import com.huinan.proto.CpMsgClub.CSResponseClubCreate;
 import com.huinan.proto.CpMsgClub.ENClubGameType;
 import com.huinan.proto.CpMsgCs.ENMessageError;
 import com.huinan.server.db.ClubDAO;
+import com.huinan.server.db.UserManager;
 import com.huinan.server.net.ClientRequest;
 import com.huinan.server.server.net.config.ServerConfig;
 import com.huinan.server.service.AbsAction;
@@ -29,14 +30,14 @@ public class ClubCreate extends AbsAction {
 		CpMsgData.Builder msg = CpMsgData.newBuilder();
 		CSResponseClubCreate.Builder response = CSResponseClubCreate
 				.newBuilder();
-
-		int error = check(name, type, uid);
+		Club club = ClubDAO.getInstance().createClub(uid, name,
+				type.getNumber());
+		int error = check(name, type, uid, club);
 		if (error != 0) {
 			response.setResult(ENMessageError.valueOf(error));
 		} else {
 			response.setResult(ENMessageError.RESPONSE_SUCCESS);
-			Club club = ClubDAO.getInstance().createClub(uid, name,
-					type.getNumber());
+
 			ClubManager.addMemeber(club, String.valueOf(uid));
 			ClubDAO.getInstance().insertClubUser(club.getId(), uid, uid, 1);
 
@@ -48,7 +49,7 @@ public class ClubCreate extends AbsAction {
 				(CpHead) request.getHeadLite(), msg.build());
 	}
 
-	private int check(String name, ENClubGameType type, String uid) {
+	private int check(String name, ENClubGameType type, String uid, Club club) {
 		// 检查是否是代理
 		// if (!UserManager.getInstance().checkIsProxy(uid)) {
 		// return ENMessageError.RESPONSE_CLUB_NOT_IS_PROXY_VALUE;

@@ -45,7 +45,7 @@ public class GetClubRoom extends AbsAction {
 			response.setHaveApply(!club.getApplys().isEmpty());
 			User creator = UserManager.getInstance().getUser(
 					club.getCreatorId());
-			int orderCard = ClubManager.getClubOrderCard(clubId);
+			int orderCard = ClubManager.getClubOrderCard(uid);
 			response.setRoomCardNum(creator.getRoomCardNum() - orderCard);
 		}
 		msg.setCsResponseClubRoom(response);

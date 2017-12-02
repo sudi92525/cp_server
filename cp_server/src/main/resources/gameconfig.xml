@@ -30,13 +30,13 @@
 			<PlayerMaxTotal>30000</PlayerMaxTotal>
 			<PlayerMaxIdle>20000</PlayerMaxIdle>
 			<PlayerMinIdle>5000</PlayerMinIdle>
-	<!-- <ClientClass>com.joker.game.player.GateClient</ClientClass> xiaonanqipai-->
+	<!-- <ClientClass>com.joker.game.player.GateClient</ClientClass> -->
 		</PlayerPoolConfig>
+<!-- 		<GameCode>xiaonanqipai_4567</GameCode> -->
 <!-- 		<GameCode>xiaonanqipai</GameCode> -->
 		<GameCode>xnsccp</GameCode>
-		<GameInitUrl>http://192.168.0.100:8081/api/GetInitData</GameInitUrl>
-		<LoginApiUrl>http://192.168.0.100:8081/api/Account/Logon</LoginApiUrl>
-<!-- 		<GameCode>xiaonanqipai_4567</GameCode> -->
+		<GameInitUrl>http://192.168.1.4:8081/api/GetInitData</GameInitUrl>
+		<LoginApiUrl>http://192.168.1.4:8081/api/Account/Logon</LoginApiUrl>
 		<ClubMax>5</ClubMax>
 	</GameServer>
 </game>

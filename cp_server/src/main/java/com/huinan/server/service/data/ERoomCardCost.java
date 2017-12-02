@@ -5,22 +5,19 @@ package com.huinan.server.service.data;
  * renchao
  */
 public enum ERoomCardCost {
-	four(8, 4, 3), eight(12, 4, 4), sixteen(16, 4, 5), three_four(8, 3, 2), three_eight(
-			12, 3, 3), three_sixteen(16, 3, 4);
+	four(8, 3), eight(12, 4), sixteen(16, 5);
 
 	public int round;
-	public int playerNum;
 	public int num;
 
-	private ERoomCardCost(int round, int playerNum, int num) {
+	private ERoomCardCost(int round, int num) {
 		this.round = round;
-		this.playerNum = playerNum;
 		this.num = num;
 	}
 
-	public static int getRoomCardCost(int round, int playerNum) {
+	public static int getRoomCardCost(int round) {
 		for (ERoomCardCost be : ERoomCardCost.values()) {
-			if (be.getRound() == round && be.getPlayerNum() == playerNum) {
+			if (be.getRound() == round) {
 				return be.getNum();
 			}
 		}
@@ -41,14 +38,6 @@ public enum ERoomCardCost {
 
 	public void setNum(int num) {
 		this.num = num;
-	}
-
-	public int getPlayerNum() {
-		return playerNum;
-	}
-
-	public void setPlayerNum(int playerNum) {
-		this.playerNum = playerNum;
 	}
 
 }

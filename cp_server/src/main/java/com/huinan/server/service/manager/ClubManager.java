@@ -1,5 +1,6 @@
 package com.huinan.server.service.manager;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
@@ -49,6 +50,7 @@ public class ClubManager {
 			return;
 		}
 		ClubManager.addApplyer(club, String.valueOf(uid));
+		ClubManager.notifyClubApply(club.getCreatorId(), clubId);
 		log.info("adminApplyClub,clubId=" + clubId + ",uid=" + uid);
 	}
 
@@ -61,6 +63,7 @@ public class ClubManager {
 		}
 		if (agree) {
 			ClubManager.addMemeber(club, String.valueOf(uid));
+			ClubManager.notifyClubRefresh(String.valueOf(uid), club);
 		} else {
 			ClubManager.deleteApplyer(club, String.valueOf(uid));
 		}
@@ -75,6 +78,7 @@ public class ClubManager {
 			return;
 		}
 		ClubManager.deleteMemeber(club, String.valueOf(uid));
+		ClubManager.notifyClubRefresh(String.valueOf(uid), club);
 		log.info("adminKickMember,clubId=" + clubId + ",uid=" + uid);
 	}
 
@@ -86,6 +90,7 @@ public class ClubManager {
 			return;
 		}
 		ClubManager.deleteMemeber(club, String.valueOf(uid));
+		ClubManager.notifyClubRefresh(String.valueOf(uid), club);
 		log.info("adminOutClub,clubId=" + clubId + ",uid=" + uid);
 	}
 
@@ -119,16 +124,18 @@ public class ClubManager {
 	 * @param clubId
 	 * @return
 	 */
-	public static int getClubOrderCard(int clubId) {
+	public static int getClubOrderCard(String uid) {
 		int allCard = 0;
-		Club club = ClubDAO.getInstance().getClub(clubId);
-		for (ClubRoom clubRoom : club.getRooms().values()) {
-			Room room = RoomManager.getInstance().getRoom(clubRoom.getRoomId());
-			if (!room.isStart() || room.getRound() == 1) {// 未开始的，才第一局的
-				int allRoomCardNum = ERoomCardCost.getRoomCardCost(room
-						.getRoomTable().getGameNum(), room.getRoomTable()
-						.getPlayerNum());
-				allCard += allRoomCardNum;
+		List<Club> clubs = ClubDAO.getInstance().getMyClub(uid);
+		for (Club club : clubs) {
+			for (ClubRoom clubRoom : club.getRooms().values()) {
+				Room room = RoomManager.getInstance().getRoom(
+						clubRoom.getRoomId());
+				if (room != null && (!room.isStart() || room.getRound() == 1)) {// 未开始的，才第一局的
+					int allRoomCardNum = ERoomCardCost.getRoomCardCost(room
+							.getRoomTable().getGameNum());
+					allCard += allRoomCardNum;
+				}
 			}
 		}
 		return allCard;

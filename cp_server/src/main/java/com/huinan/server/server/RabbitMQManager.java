@@ -97,17 +97,21 @@ public class RabbitMQManager {
 							RoomManager.unlockRoom(String.valueOf(uid));
 						} else if (PushType == 5) {// 创建俱乐部
 							int clubId = (int) jsonOBJ.get("ClubId");
-							ClubManager.adminCreateClub(clubId, "club_name",
-									uid);
+							String clubName = (String) jsonOBJ.get("ClubName");
+							ClubManager.adminCreateClub(clubId, clubName, uid);
 						} else if (PushType == 6) {// 申请加入俱乐部
 							int clubId = (int) jsonOBJ.get("ClubId");
 							ClubManager.adminApplyClub(uid, clubId);
-						} else if (PushType == 7) {// 审核
-
-						} else if (PushType == 8) {// 踢人
-
-						} else if (PushType == 9) {// 退出
-
+						} else if (PushType == 7) {// 俱乐部审核
+							int clubId = (int) jsonOBJ.get("ClubId");
+							boolean agree = (boolean) jsonOBJ.get("Agree");
+							ClubManager.adminAgreeApply(uid, clubId, agree);
+						} else if (PushType == 8) {// 俱乐部踢人
+							int clubId = (int) jsonOBJ.get("ClubId");
+							ClubManager.adminKickMember(uid, clubId);
+						} else if (PushType == 9) {// 俱乐部退出
+							// int clubId = (int) jsonOBJ.get("ClubId");
+							// ClubManager.adminOutClub(uid, clubId);
 						}
 					}
 				}

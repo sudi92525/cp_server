@@ -33,6 +33,7 @@ public class ClubKick extends AbsAction {
 			ClubManager.deleteMemeber(club, String.valueOf(kickUId));
 			ClubDAO.getInstance().deleteClubUser(clubId,
 					Integer.valueOf(kickUId));
+			ClubManager.notifyClubRefresh(String.valueOf(kickUId), club);
 		}
 		msg.setCsResponseClubKick(response);
 		request.getClient().sendMessage(
