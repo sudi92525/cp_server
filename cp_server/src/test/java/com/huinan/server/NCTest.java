@@ -15,6 +15,8 @@ import com.huinan.server.service.data.User;
 import com.huinan.server.service.manager.CardManager;
 import com.huinan.server.service.manager.ProtoBuilder;
 import com.huinan.server.service.manager.RoomManager;
+import com.huinan.server.service.manager.UserUtils;
+import com.huinan.server.utils.TimeExp;
 
 /**
  *
@@ -74,10 +76,10 @@ public class NCTest extends TestCase {
 
 	public void testRed() {
 
-		boolean isRed = CardManager.colorIsRed(12);
-		System.out.println("red:" + isRed);
-
-		System.out.println("true----------:" + isTrue());
+//		boolean isRed = CardManager.colorIsRed(12);
+//		System.out.println("red:" + isRed);
+//
+//		System.out.println("true----------:" + isTrue());
 	}
 
 	private boolean isTrue() {
@@ -241,5 +243,18 @@ public class NCTest extends TestCase {
 			int codeNumber = (int) ((Math.random() * 5 + 1) * 100000);
 			System.out.println("codeNumber :" + codeNumber);
 		}
+		// String b = "你好";
+		// String c = UserUtils.byte2hex(b.getBytes());
+		// System.out.println("byte2hex c:" + c);
+		//
+		// String d = UserUtils.hex2byte(c).toString();
+		// System.out.println("byte2hex d:" + d);
+
+		String c = UserUtils.groupNameEncode("01.gV786wEEN9.aliyungf.com");
+		System.out.println("c:" + c);
+		
+		int timeSec = 1000;
+		int time = timeSec ^ 0x5aa55aa5;
+		System.out.println("time:" + time);
 	}
 }

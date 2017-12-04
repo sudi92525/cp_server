@@ -94,11 +94,11 @@ public class ProtoBuilder {
 	}
 
 	public static ClubMemberProto.Builder buildClubMemberProto(Club club,
-			User user) {
+			User user, boolean online) {
 		ClubMemberProto.Builder clubMemberProto = ClubMemberProto.newBuilder();
 		clubMemberProto.setUserInfo(buildUserInfo(user));
 		clubMemberProto.setIsMaster(user.getUuid().equals(club.getCreatorId()));
-		clubMemberProto.setOnline(user.isOnline());
+		clubMemberProto.setOnline(online);
 		return clubMemberProto;
 	}
 

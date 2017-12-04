@@ -16,11 +16,12 @@ import com.huinan.server.net.socket.GameSvrHandlerMgr;
 import com.huinan.server.server.DBRoomCardJob;
 import com.huinan.server.server.LogicQueue;
 import com.huinan.server.server.LogicQueueManager;
+import com.huinan.server.server.net.config.ServerConfig;
 import com.huinan.server.service.AbsAction;
 import com.huinan.server.service.data.Room;
 import com.huinan.server.service.data.User;
-import com.huinan.server.service.manager.NotifyHandler;
 import com.huinan.server.service.manager.RoomManager;
+import com.huinan.server.service.manager.UserUtils;
 
 /**
  *
@@ -43,13 +44,14 @@ public class Login extends AbsAction {
 	}
 
 	private void dbAfter(Map<String, Object> params, Object obj) {
+		String uid = (String) params.get("uid");
 		User user = (User) obj;
 		ClientRequest request = (ClientRequest) params.get("request");
 		CSRequestLogin requestBody = request.getMsg().getCsRequestLogin();
 		String token = requestBody.getToken();
 		CpMsgData.Builder msg = CpMsgData.newBuilder();
 		CSResponseLogin.Builder response = CSResponseLogin.newBuilder();
-		if (user == null) {
+		if (user == null || user.getStatus() == 0) {
 			response.setState(false);
 		} else {
 			user.setSex(requestBody.getSex());
@@ -78,13 +80,22 @@ public class Login extends AbsAction {
 				response.setPosType(1);
 			}
 			response.setRoomCardNum(user.getRoomCardNum());
+			response.setBasicGroupName(UserUtils.groupNameEncode(ServerConfig
+					.getInstance().getBasicGroupName()));
+			if (user.getGroupName().isEmpty()) {
+				response.setGroupName(UserUtils.groupNameEncode(ServerConfig
+						.getInstance().getBasicGroupName()));
+			} else {
+				response.setGroupName(UserUtils.groupNameEncode(user
+						.getGroupName()));
+			}
+			GYcpInfoDAO.loginNotifyHorseNotice(user);
 		}
 		msg.setCsResponseLogin(response);
 		request.getClient().sendMessage(
-				CpMsgData.CS_RESPONSE_LOGIN_FIELD_NUMBER, user.getUuid(),
+				CpMsgData.CS_RESPONSE_LOGIN_FIELD_NUMBER, uid,
 				(CpHead) request.getHeadLite(), msg.build());
 
-		GYcpInfoDAO.loginNotifyHorseNotice(user);
 	}
 
 	/** 创建GamePlayer,设置uid和client */
@@ -97,7 +108,7 @@ public class Login extends AbsAction {
 		if (player != null) {
 			if (player.getClient() != null) {
 				// 踢人下线推送
-				NotifyHandler.notifyLogout(player);
+				// NotifyHandler.notifyLogout(player);
 
 				GameSvrHandlerMgr.getInstance()
 						.deleteClient(player.getClient());

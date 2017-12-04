@@ -51,9 +51,9 @@ public class ClubCreate extends AbsAction {
 
 	private int check(String name, ENClubGameType type, String uid, Club club) {
 		// 检查是否是代理
-		// if (!UserManager.getInstance().checkIsProxy(uid)) {
-		// return ENMessageError.RESPONSE_CLUB_NOT_IS_PROXY_VALUE;
-		// }
+		if (!UserManager.getInstance().checkIsProxy(uid)) {
+			return ENMessageError.RESPONSE_CLUB_NOT_IS_PROXY_VALUE;
+		}
 		if (ClubManager.getMyClubNum(uid) >= ServerConfig.getInstance()
 				.getClubNumMax()) {
 			return ENMessageError.RESPONSE_CLUB_NUM_MAX_VALUE;

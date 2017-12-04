@@ -578,7 +578,7 @@ public class RoomManager {
 				user.getHold().add(card2);
 				int card3 = 56;
 				user.getHold().add(card3);
-				int card4 = 66;
+				int card4 = 15;
 				user.getHold().add(card4);
 				int card5 = 15;
 				user.getHold().add(card5);
@@ -609,13 +609,13 @@ public class RoomManager {
 				int card18 = 13;
 				user.getHold().add(card18);
 			} else if (i == 1) {
-				int card1 = 56;
+				int card1 = 13;
 				user.getHold().add(card1);
 				int card2 = 46;
 				user.getHold().add(card2);
 				int card3 = 55;
 				user.getHold().add(card3);
-				int card4 = 56;
+				int card4 = 13;
 				user.getHold().add(card4);
 				int card5 = 55;
 				user.getHold().add(card5);
@@ -641,7 +641,7 @@ public class RoomManager {
 				user.getHold().add(card15);
 				int card16 = 66;
 				user.getHold().add(card16);
-				int card17 = 66;
+				int card17 = 56;
 				user.getHold().add(card17);
 			} else if (i == 2) {
 				int card1 = 12;
@@ -1675,20 +1675,22 @@ public class RoomManager {
 			if (room.getClubId() != 0) {
 				ClubRoom clubRoom = ClubDAO.getInstance().getClubRoom(
 						room.getClubId(), room.getTid());
-				clubRoom.setStatus(2);
-				ClubRoomProto.Builder clubRoomProto = ClubRoomProto
-						.newBuilder();
-				clubRoomProto.setTableInfo(room.getRoomTable());
-				clubRoomProto.setTableState(clubRoom.getStatus());
-				for (User user : room.getUsers().values()) {
-					clubRoomProto.addUserInfo(ProtoBuilder.buildUserInfo(user));
+				if (clubRoom != null) {
+					clubRoom.setStatus(2);
+					ClubRoomProto.Builder clubRoomProto = ClubRoomProto
+							.newBuilder();
+					clubRoomProto.setTableInfo(room.getRoomTable());
+					clubRoomProto.setTableState(clubRoom.getStatus());
+					for (User user : room.getUsers().values()) {
+						clubRoomProto.addUserInfo(ProtoBuilder
+								.buildUserInfo(user));
+					}
+					clubRoomProto.setBigResult(overNotify);
+					clubRoom.setTotalData(clubRoomProto.build().toByteArray());
+					Club club = ClubDAO.getInstance().getClub(room.getClubId());
+					ClubDAO.getInstance().updateClubRoom(club, clubRoom);
 				}
-				clubRoomProto.setBigResult(overNotify);
-				clubRoom.setTotalData(clubRoomProto.build().toByteArray());
-				Club club = ClubDAO.getInstance().getClub(room.getClubId());
-				ClubDAO.getInstance().updateClubRoom(club, clubRoom);
 			}
-
 			UserManager.getInstance().updateRankData(room, dissolve);
 		} else {
 			addFightRecord(bigTotal, room);

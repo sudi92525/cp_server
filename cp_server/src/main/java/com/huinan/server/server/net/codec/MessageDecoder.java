@@ -22,10 +22,10 @@ public class MessageDecoder extends LengthFieldBasedFrameDecoder {
 
 	/** default values **/
 	private static final int MAX_FRAME_LENGTH = 1048576;// 1024*1024
-	private static final int LENGHT_FIELD_OFFSET = 0;
-	private static final int LENTH_FIELD_LENGTH = 4;
+	private static final int LENGHT_FIELD_OFFSET = 0;//0
+	private static final int LENTH_FIELD_LENGTH = 4;//4
 	private static final int LENGTH_ADJUSTMENT = -4;// -4
-	private static final int INITIAL_BYTES_TO_STRIP = 0;
+	private static final int INITIAL_BYTES_TO_STRIP = 0;//0
 
 	public MessageDecoder(int headerLength) {
 		super(MAX_FRAME_LENGTH, LENGHT_FIELD_OFFSET, LENTH_FIELD_LENGTH,
@@ -67,8 +67,11 @@ public class MessageDecoder extends LengthFieldBasedFrameDecoder {
 
 			return frame;
 		} catch (TooLongFrameException e) {
+			// LogManager.getLogger(MessageDecoder.class).error(
+			// "lenght:" + in.readableBytes(),e);
 			LogManager.getLogger(MessageDecoder.class).error(
-					"lenght:" + in.readableBytes(),e);
+					"--------------------decode exception,lenght:"
+							+ in.readableBytes());
 			throw new IllegalArgumentException(e);
 		}
 	}

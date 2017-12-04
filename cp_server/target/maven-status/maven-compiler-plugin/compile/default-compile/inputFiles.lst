@@ -42,7 +42,6 @@ D:\xnqp.git\cp_server\src\main\java\com\huinan\server\server\db\DBManager.java
 D:\xnqp.git\cp_server\src\main\java\com\huinan\server\net\GamePlayerFactory.java
 D:\xnqp.git\cp_server\src\main\java\com\huinan\server\server\net\exception\IllegalException.java
 D:\xnqp.git\cp_server\src\main\java\com\huinan\server\service\data\ERoomCardType.java
-D:\xnqp.git\cp_server\src\main\java\com\huinan\server\service\action\club\GetClueRoom.java
 D:\xnqp.git\cp_server\src\main\java\com\huinan\server\service\data\User.java
 D:\xnqp.git\cp_server\src\main\java\com\huinan\server\net\handler\GameSvrHandler.java
 D:\xnqp.git\cp_server\src\main\java\com\huinan\server\server\net\handler\ProtoHandler.java
@@ -76,6 +75,7 @@ D:\xnqp.git\cp_server\src\main\java\com\huinan\server\service\manager\ProtoBuild
 D:\xnqp.git\cp_server\src\main\java\com\huinan\server\net\clientfsm\FSTransition.java
 D:\xnqp.git\cp_server\src\main\java\com\huinan\server\net\clientfsm\ClientStateTrans.java
 D:\xnqp.git\cp_server\src\main\java\com\huinan\server\server\net\codec\MessageDecoder.java
+D:\xnqp.git\cp_server\src\main\java\com\huinan\server\service\action\club\ClubOut.java
 D:\xnqp.git\cp_server\src\main\java\com\huinan\server\net\socket\GameSvrHandlerMgr.java
 D:\xnqp.git\cp_server\src\main\java\com\huinan\server\service\action\club\ClubApply.java
 D:\xnqp.git\cp_server\src\main\java\com\huinan\server\server\client\NettyClient.java
@@ -89,6 +89,7 @@ D:\xnqp.git\cp_server\src\main\java\com\huinan\server\server\net\NettyServer.jav
 D:\xnqp.git\cp_server\src\main\java\com\huinan\server\service\action\Online.java
 D:\xnqp.git\cp_server\src\main\java\com\huinan\server\server\db\DBThreadLocal.java
 D:\xnqp.git\cp_server\src\main\java\com\huinan\server\server\net\config\ServerConfig.java
+D:\xnqp.git\cp_server\src\main\java\com\huinan\server\service\action\club\GetClubRoom.java
 D:\xnqp.git\cp_server\src\main\java\com\huinan\server\server\net\handler\BaseHandler.java
 D:\xnqp.git\cp_server\src\main\java\com\huinan\server\server\net\NettyConfig.java
 D:\xnqp.git\cp_server\src\main\java\com\huinan\server\service\action\Login.java

@@ -53,7 +53,7 @@ public class GameServer {
 			DBManager.init();
 			// RedisDAO.loadFromRedis();
 			// init rabbitMQ
-			// RabbitMQManager.init();
+			RabbitMQManager.init();
 
 			GYcpInfoDAO.loadHorseNotice();
 			ClubDAO.getInstance().init();

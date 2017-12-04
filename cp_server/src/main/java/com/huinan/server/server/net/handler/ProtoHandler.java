@@ -16,10 +16,13 @@ import com.huinan.proto.CpMsg.CpHead;
 import com.huinan.proto.CpMsg.CpMsgData;
 import com.huinan.server.server.net.codec.ProtobufEncoder;
 import com.huinan.server.service.manager.ProtoBuilder;
+import com.huinan.server.utils.TimeExp;
 
 public abstract class ProtoHandler extends BaseHandler {
 	// 数据包总长度 4
 	protected final static int PACKAGE_LENGTH = 4;
+	// 时间戳长度 4
+	protected final static int TIME_LENGTH = 4;
 	// 标识头 4
 	protected final static int MARK_LENGTH = 4;
 	// 包头长度 4
@@ -28,6 +31,7 @@ public abstract class ProtoHandler extends BaseHandler {
 	protected final static int DATA_LENGTH = 4;
 
 	protected final static String MARK = "HNKJ";
+	protected final static int TIME_MARK = 0x5aa55aa5;
 
 	@Override
 	protected void channelRead0(ChannelHandlerContext ctx, ByteBuf frame)
@@ -40,6 +44,7 @@ public abstract class ProtoHandler extends BaseHandler {
 			LogManager.getLogger().info("mark error,mark:" + mark);
 			return;
 		}
+		// int time = frame.readInt();// 时间标识
 		int headerLength = frame.readInt();// 包头长度
 		ByteBuf headData = frame.readBytes(headerLength);// 包头数据
 		int dataLength = frame.readInt();// 包内容长度
@@ -80,11 +85,13 @@ public abstract class ProtoHandler extends BaseHandler {
 
 			// 总长度
 			sendBuf.writeInt(PACKAGE_LENGTH + MARK_LENGTH + HEADER_LENGTH
-					+ headLength + DATA_LENGTH + length);
+					+ headLength + DATA_LENGTH + length);// +
+															// TIME_LENGTH
 
 			byte[] markbyte = new byte[4];
 			markbyte = MARK.getBytes();
 			sendBuf.writeBytes(markbyte);// 标示
+			// sendBuf.writeInt(aliyunTimetamp());// 时间戳标识
 			sendBuf.writeInt(headLength);// 头长度
 			sendBuf.writeBytes(headBuf);// 头数据
 			sendBuf.writeInt(length);// 数据长度
@@ -99,6 +106,11 @@ public abstract class ProtoHandler extends BaseHandler {
 			ReferenceCountUtil.release(data);
 		}
 		return null;
+	}
+
+	private int aliyunTimetamp() {
+		int timeSec = TimeExp.timeSecond(System.currentTimeMillis());
+		return timeSec ^ TIME_MARK;
 	}
 
 	protected abstract void processByteBufMessage(ByteBuf headData,

@@ -11,22 +11,24 @@ import com.huinan.server.service.data.User;
 
 public class DBRoomCardJob extends AbsAction {
 
-	public DBRoomCardJob(LogicQueue callThread, Map<String, Object> params, ICallBack<Object> callBack) {
+	public DBRoomCardJob(LogicQueue callThread, Map<String, Object> params,
+			ICallBack<Object> callBack) {
 		this.callThread = callThread;
 		this.params = params;
 		this.callBack = callBack;
 	}
+
 	public final ICallBack<Object> callBack;
-	private Map<String,Object> params = new HashMap<>();
+	private Map<String, Object> params = new HashMap<>();
 	public final LogicQueue callThread;
-	
+
 	@Override
 	public void Action(ClientRequest request) throws Exception {
 		String uid = (String) params.get("uid");
 		User user = UserManager.getInstance().getDBUser(uid);
 		UserManager.getInstance().getRoomCard(user);
 		AbsAction callBackAction = new AbsAction() {
-			
+
 			@Override
 			public void Action(ClientRequest request) throws Exception {
 				DBRoomCardJob.this.callBack.callBack(params, user);

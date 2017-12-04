@@ -1,6 +1,7 @@
 package com.huinan.server.service.manager;
 
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 import com.huinan.proto.CpMsgCs.CSNotifyActionFlow;
@@ -13,6 +14,64 @@ import com.huinan.proto.CpMsgCs.PBColumnInfo;
 import com.huinan.server.service.data.User;
 
 public class UserUtils {
+
+	public static String groupNameEncode(String groupName) {
+		byte[] byte1 = Base64.getEncoder().encode((groupName + "H").getBytes());
+		String str1 = new String(byte1);
+//		System.out.println("1:" + str1);
+
+		byte[] byte2 = Base64.getEncoder().encode((str1 + "N").getBytes());
+		String str2 = new String(byte2);
+//		System.out.println("2:" + str2);
+
+		byte[] byte3 = Base64.getEncoder().encode((str2 + "K").getBytes());
+		String str3 = new String(byte3);
+//		System.out.println("3:" + str3);
+
+		byte[] byte4 = Base64.getEncoder().encode((str3 + "J").getBytes());
+		String str4 = new String(byte4);
+//		System.out.println("4:" + str4);
+		return str4;
+	}
+
+	/**
+	 * 二进制转为16进制字符串
+	 * 
+	 * @param b
+	 * @return
+	 */
+	public static String byte2hex(byte[] b) {
+		String hs = "";
+		String stmp = "";
+		for (int n = 0; n < b.length; n++) {
+			stmp = (java.lang.Integer.toHexString(b[n] & 0XFF));
+			if (stmp.length() == 1) {
+				hs = hs + "0" + stmp;
+			} else {
+				hs = hs + stmp;
+			}
+		}
+		return hs.toUpperCase();
+	}
+
+	public static byte[] hex2byte(String hex) {
+		byte[] ret = new byte[8];
+		byte[] tmp = hex.getBytes();
+		for (int i = 0; i < 8; i++) {
+			ret[i] = uniteBytes(tmp[i * 2], tmp[i * 2 + 1]);
+		}
+		return ret;
+	}
+
+	public static byte uniteBytes(byte src0, byte src1) {
+		byte _b0 = Byte.decode("0x" + new String(new byte[] { src0 }))
+				.byteValue();
+		_b0 = (byte) (_b0 << 4);
+		byte _b1 = Byte.decode("0x" + new String(new byte[] { src1 }))
+				.byteValue();
+		byte ret = (byte) (_b0 ^ _b1);
+		return ret;
+	}
 
 	/**
 	 * 回放数据缓存 添加actionFlow
@@ -37,7 +96,7 @@ public class UserUtils {
 						build.setIsFan(false);
 						build.setIsQishouTou(pbColumnInfo.getIsQishouTou());
 						newCols.add(build.build());
-					}else {
+					} else {
 						newCols.add(pbColumnInfo);
 					}
 				}

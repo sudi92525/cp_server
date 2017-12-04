@@ -185,6 +185,8 @@ message CSResponseLogin{
 	optional int32 pos_type = 3;					//1:大厅  2:游戏中
 	optional int32 table_id = 4;					//房间编号
 	optional int32 room_card_num = 5;				//房卡数
+	optional string basic_group_name = 6;			//默认初始分组L0
+	optional string group_name = 7;					//用户当前分组
 }
 
 //创建房间请求

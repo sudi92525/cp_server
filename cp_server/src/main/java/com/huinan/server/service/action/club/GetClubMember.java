@@ -33,9 +33,14 @@ public class GetClubMember extends AbsAction {
 		} else {
 			response.setResult(ENMessageError.RESPONSE_SUCCESS);
 			for (String _uid : club.getMembers()) {
-				User user = UserManager.getInstance().getUser(_uid);
+				User user = UserManager.getInstance().getUserByCache(_uid);
+				boolean online = true;
+				if (user == null) {
+					user = UserManager.getInstance().getDBUser(_uid);
+					online = false;
+				}
 				response.addClubMember(ProtoBuilder.buildClubMemberProto(club,
-						user));
+						user, online));
 			}
 		}
 		msg.setCsResponseClubMember(response);

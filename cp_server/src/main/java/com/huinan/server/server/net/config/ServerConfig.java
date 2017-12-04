@@ -65,6 +65,11 @@ public class ServerConfig {
 		return config;
 	}
 
+	public String getBasicGroupName() {
+		return config.getString("GameServer.BasicGroupName",
+				"01.gV786wEEN9.aliyungf.com");
+	}
+
 	public String getAdminInitUrl() {
 		return config.getString("GameServer.GameInitUrl",
 				"http://192.168.1.4:8081/api/GetInitData");

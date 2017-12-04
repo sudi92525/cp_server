@@ -118,9 +118,11 @@ public class RabbitMQManager {
 			};
 			channel.basicConsume(QUEUE_NAME, true, consumer);
 		} catch (JSONException e) {
-			LogManager.getLogger().error(" JSONException: '" + e);
+			LOGGER.error("JSONException: '" + e);
 		} catch (IOException e) {
-			LogManager.getLogger().error(" IOException: '" + e);
+			LOGGER.error("IOException: '" + e);
+		} catch (Exception e) {
+			LOGGER.error("Exception: '" + e);
 		}
 	}
 }

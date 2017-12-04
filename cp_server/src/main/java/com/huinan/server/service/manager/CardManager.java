@@ -1313,6 +1313,17 @@ public class CardManager {
 		if (!room.isDiaoZhui()) {
 			return true;
 		}
+		boolean isZhuiCard = false;
+		for (int i = 0; i < zhuiCards.size(); i++) {
+			int zhuiCard = zhuiCards.get(i);
+			if (zhuiCard == chaiDuiCard) {
+				isZhuiCard = true;
+				break;
+			}
+		}
+		if (!isZhuiCard) {
+			return true;
+		}
 		Map<Integer, Integer> holdMap = toMap(user.getHold());
 		Integer chaiCount = holdMap.get(chaiDuiCard);
 		Integer destCount = holdMap.get(destCard);
@@ -1327,6 +1338,7 @@ public class CardManager {
 				if (count == 1
 						&& destCount == null
 						&& chaiCount != null
+						&& chaiCount == 2
 						&& getCardValue(zhuiCard) + getCardValue(chaiDuiCard) != 14
 						&& zhuiCard != chaiDuiCard) {
 					// 有其他单牌，不能拆对

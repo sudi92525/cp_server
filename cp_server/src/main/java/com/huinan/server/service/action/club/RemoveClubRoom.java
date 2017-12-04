@@ -8,8 +8,10 @@ import com.huinan.proto.CpMsgCs.ENMessageError;
 import com.huinan.server.db.ClubDAO;
 import com.huinan.server.net.ClientRequest;
 import com.huinan.server.service.AbsAction;
+import com.huinan.server.service.data.Room;
 import com.huinan.server.service.data.club.Club;
 import com.huinan.server.service.data.club.ClubRoom;
+import com.huinan.server.service.manager.RoomManager;
 
 public class RemoveClubRoom extends AbsAction {
 
@@ -51,8 +53,12 @@ public class RemoveClubRoom extends AbsAction {
 		if (!club.getCreatorId().equals(uid)) {
 			return ENMessageError.RESPONSE_CLUB_NOT_CREATOR_VALUE;
 		}
+		Room room = RoomManager.getInstance().getRoom(roomId);
+		if (room != null) {
+			return ENMessageError.RESPONSE_FAIL_VALUE;
+		}
 		for (ClubRoom clubRoom : club.getRooms().values()) {
-			if (clubRoom.getRoomId() == roomId) {
+			if (clubRoom.getRoomId() == roomId && clubRoom.getStatus() == 2) {
 				return 0;
 			}
 		}

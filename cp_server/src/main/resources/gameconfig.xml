@@ -38,5 +38,6 @@
 		<GameInitUrl>http://192.168.1.4:8081/api/GetInitData</GameInitUrl>
 		<LoginApiUrl>http://192.168.1.4:8081/api/Account/Logon</LoginApiUrl>
 		<ClubMax>5</ClubMax>
+		<BasicGroupName>01.gV786wEEN9.aliyungf.com</BasicGroupName>
 	</GameServer>
 </game>

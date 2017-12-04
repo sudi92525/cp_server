@@ -50,71 +50,13 @@ public class User implements Serializable {
 	 * 用户连接信息
 	 */
 	private Socket socket;
+	/**
+	 * 用户封号状态
+	 */
+	private int status = 1;
 
-	public String getUuid() {
-		return uuid;
-	}
-
-	public void setUuid(String uuid) {
-		this.uuid = uuid;
-	}
-
-	public String getNick() {
-		return nick;
-	}
-
-	public void setNick(String nick) {
-		this.nick = nick;
-	}
-
-	public String getPic_url() {
-		return pic_url;
-	}
-
-	public void setPic_url(String pic_url) {
-		this.pic_url = pic_url;
-	}
-
-	public String getToken() {
-		return token;
-	}
-
-	public void setToken(String token) {
-		this.token = token;
-	}
-
-	public Socket getSocket() {
-		return socket;
-	}
-
-	public void setSocket(Socket socket) {
-		this.socket = socket;
-	}
-
-	public int getSex() {
-		return sex;
-	}
-
-	public void setSex(int sex) {
-		this.sex = sex;
-	}
-
-	public int getRoomCardNum() {
-		return roomCardNum;
-	}
-
-	public synchronized void setRoomCardNum(int roomCardNum) {
-		this.roomCardNum = roomCardNum;
-	}
-
-	public void decrRoomCardNum(int costNum) {
-		this.roomCardNum -= costNum;
-		if (this.roomCardNum < 0) {
-			this.roomCardNum = 0;
-		}
-	}
-
-	// -------------------------------南充版本-----------------------------------
+	/** 线路分组 */
+	private String groupName = "";
 	/** 用户授权码 */
 	private String ip = "";
 	/** 是否在线 */
@@ -392,6 +334,69 @@ public class User implements Serializable {
 
 	public boolean isOnline() {
 		return online;
+	}
+
+	public String getUuid() {
+		return uuid;
+	}
+
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
+	}
+
+	public String getNick() {
+		return nick;
+	}
+
+	public void setNick(String nick) {
+		this.nick = nick;
+	}
+
+	public String getPic_url() {
+		return pic_url;
+	}
+
+	public void setPic_url(String pic_url) {
+		this.pic_url = pic_url;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
+
+	public Socket getSocket() {
+		return socket;
+	}
+
+	public void setSocket(Socket socket) {
+		this.socket = socket;
+	}
+
+	public int getSex() {
+		return sex;
+	}
+
+	public void setSex(int sex) {
+		this.sex = sex;
+	}
+
+	public int getRoomCardNum() {
+		return roomCardNum;
+	}
+
+	public synchronized void setRoomCardNum(int roomCardNum) {
+		this.roomCardNum = roomCardNum;
+	}
+
+	public void decrRoomCardNum(int costNum) {
+		this.roomCardNum -= costNum;
+		if (this.roomCardNum < 0) {
+			this.roomCardNum = 0;
+		}
 	}
 
 	public void setOnline(boolean online) {
@@ -932,6 +937,22 @@ public class User implements Serializable {
 
 	public void setInClubId(int inClubId) {
 		this.inClubId = inClubId;
+	}
+
+	public String getGroupName() {
+		return groupName;
+	}
+
+	public void setGroupName(String groupName) {
+		this.groupName = groupName;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
 	}
 
 }

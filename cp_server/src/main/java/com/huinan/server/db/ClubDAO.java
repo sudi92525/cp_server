@@ -294,7 +294,7 @@ public class ClubDAO {
 				Room room = RoomManager.getInstance().getRoom(roomId);
 				if (room != null) {
 					ClubRoom e = new ClubRoom(cid, roomId);
-					e.setStatus(rs.getInt("State"));
+					e.setStatus(rs.getInt("Status"));
 					club.getRooms().put(roomId, e);
 				}
 			}
@@ -380,7 +380,7 @@ public class ClubDAO {
 				Room room = RoomManager.getInstance().getRoom(roomId);
 				if (room != null) {
 					ClubRoom e = new ClubRoom(cid, roomId);
-					e.setStatus(rs.getInt("State"));
+					e.setStatus(rs.getInt("Status"));
 					club.getRooms().put(roomId, e);
 				}
 			}

@@ -75,7 +75,7 @@ public class GameSvrHandler extends ProtoHandler {
 
 			LOGGER.info(msg);
 		} else {
-			// LOGGER.error(cause.getMessage(), cause);
+			LOGGER.error(cause.getMessage(), cause);
 		}
 		GamePlayer gamePlayer = GameSvrPlayerManager
 				.getPlayerByChannel(getChannel());

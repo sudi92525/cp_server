@@ -52,6 +52,10 @@ public class UserManager {
 		return users;
 	}
 
+	public User getUserByCache(String uid) {
+		return users.get(uid);
+	}
+
 	public User getUser(String uid) {
 		User user = users.get(uid);
 		if (user == null) {
@@ -68,7 +72,8 @@ public class UserManager {
 			if (user != null) {
 				users.put(uid, user);
 			} else {
-				user = getUser(uid);
+				LOGGER.error("DB User is NULL,uid=" + uid);
+				// user = getUser(uid);
 			}
 		}
 		return user;
@@ -81,6 +86,9 @@ public class UserManager {
 	public void getRoomCard(User user) {
 		User dbUser = loadFromDB(user.getUuid());
 		user.setRoomCardNum(dbUser.getRoomCardNum());
+		user.setGroupName(dbUser.getGroupName());
+		user.setStatus(dbUser.getStatus());
+		user.setPic_url(dbUser.getPic_url());
 	}
 
 	/**
@@ -113,7 +121,12 @@ public class UserManager {
 			if (rs.next()) {
 				user = new User(uid);
 				user.setRoomCardNum(rs.getInt("RoomCardCount"));// rs.getInt("RoomCardCount")
-				user.setNick(rs.getString("NickName"));
+				user.setNick(rs.getString("NickName"));// HeadimgUrl
+				user.setPic_url(rs.getString("HeadimgUrl"));
+				if (rs.getString("GroupName") != null) {
+					user.setGroupName(rs.getString("GroupName"));
+				}
+				user.setStatus(rs.getInt("Status"));
 			}
 		} catch (SQLException e) {
 			LOGGER.error("user db error:", e);
