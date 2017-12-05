@@ -8,6 +8,8 @@ import com.huinan.proto.CpMsgCs.ENMessageError;
 import com.huinan.server.db.ClubDAO;
 import com.huinan.server.db.UserManager;
 import com.huinan.server.net.ClientRequest;
+import com.huinan.server.net.GamePlayer;
+import com.huinan.server.net.GameSvrPlayerManager;
 import com.huinan.server.service.AbsAction;
 import com.huinan.server.service.data.User;
 import com.huinan.server.service.data.club.Club;
@@ -37,6 +39,11 @@ public class GetClubMember extends AbsAction {
 				boolean online = true;
 				if (user == null) {
 					user = UserManager.getInstance().getDBUser(_uid);
+				}
+				GamePlayer gamePlayer = GameSvrPlayerManager
+						.findPlayerByUID(_uid);
+				if (gamePlayer == null) {
+					user.setOnline(false);
 					online = false;
 				}
 				response.addClubMember(ProtoBuilder.buildClubMemberProto(club,
